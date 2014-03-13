@@ -28,7 +28,9 @@ if (fs.existsSync(configFile)) {
   configFile = fs.realpathSync(configFile);
   logger.info('using custom config file: ' + configFile);
 } else {
-  logger.error('Cannot find custom config file: ' + configFile);
+  if (configFile) {
+    logger.error('Cannot find custom config file: ' + configFile);
+  }
 }
 
 if (configFile) {
@@ -40,6 +42,9 @@ nconf.defaults({
   'http': {
     'port': '8080',
     'ip': '0.0.0.0' // interface to bind,
+  },
+  'debug': {
+    'middlewareDebug' : true
   }
 });
 

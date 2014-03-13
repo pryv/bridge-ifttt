@@ -15,7 +15,9 @@ module.exports = function setup(app) {
       oauthState: req.query.state
     };
 
-    res.json(parameters);
+
+    res.redirect('https://abcd.epfl.ch');
+
 
   });
 
