@@ -1,0 +1,18 @@
+{
+  "name": "pryv-bridge-ifttt",
+  "version": "0.0.1",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pryv/bridge-ifttt.git"
+  },
+  "dependencies": {
+    "express": "3.0.x",
+    "lodash": "2.4.x",
+    "winston": "~0.7.2",
+    "nconf": "~0.6.9"
+  },
+  "devDependencies": {
+    "mocha": "latest"
+  }
+}
