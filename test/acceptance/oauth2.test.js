@@ -1,9 +1,12 @@
 /*global describe, before, after, it */
 
+
+require('../../source/server');
+
 var request = require('superagent');
 
 
-var serverBasePath = 'http://localhost:9090';
+var serverBasePath = 'http://localhost:8080';
 var channelSlug = 'pryv'; // set on ifttt used in   https://ifttt.com/channels/{{channel-slug}}/
 var clientId = 'ifttt-all';
 
