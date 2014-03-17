@@ -1,11 +1,7 @@
-
-
 module.exports = function setup(app) {
 
-// Show them the "do you authorise xyz app to access your content?" page
+  // Show them the "do you authorise xyz app to access your content?" page
   app.get('/oauth2/authorise', function (req, res, next) {
-
-
     var parameters = {
       //sso: req.signedCookies.sso,
       requestingAppId: req.query.client_id,
@@ -15,10 +11,7 @@ module.exports = function setup(app) {
       oauthState: req.query.state
     };
 
-
     res.redirect('https://abcd.epfl.ch');
-
-
   });
 
 };
