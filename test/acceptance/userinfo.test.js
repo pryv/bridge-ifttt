@@ -5,8 +5,7 @@ var should = require('should'),
   request = require('superagent');
 
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port'),
-// set on ifttt used in   https://ifttt.com/channels/{{channel-slug}}/
-  channelSlug = 'pryv',
+  channelSlug = 'pryv', // set on ifttt used in   https://ifttt.com/channels/{{channel-slug}}/
   clientId = 'ifttt-all';
 
 describe('userinfo', function () {
