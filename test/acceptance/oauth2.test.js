@@ -11,6 +11,7 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 // https://ifttt.com/developers/docs/protocol_reference#authentication-flow
 describe('oauth2', function () {
 
+
   describe('/authorize', function () {
 
     it('GET /authorise should redirect to access.html page', function (done) {
@@ -65,5 +66,7 @@ describe('oauth2', function () {
     });
 
   });
+
+
 
 });
