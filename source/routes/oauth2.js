@@ -1,3 +1,6 @@
+var db = require('../storage/database.js');
+
+
 module.exports = function setup(app) {
 
   // Show them the "do you authorise xyz app to access your content?" page
