@@ -9,7 +9,7 @@ lib-cov
 *.iml
 
 .idea/
-
+redis-*
 pids
 logs
 results
