@@ -26,7 +26,7 @@ fi
 
 # database
 
-$SCRIPT_FOLDER/setup-database.bash
+$SCRIPT_FOLDER/../db/setup-database.bash
 EXIT_CODE=$?
 if [[ ${EXIT_CODE} -ne 0 ]]; then
   echo ""
