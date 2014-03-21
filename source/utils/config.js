@@ -39,6 +39,9 @@ if (configFile) {
 
 // Set default values
 nconf.defaults({
+  'pryv': {
+    'access' : 'https://reg.pryv.in/access'
+  },
   'http': {
     'port': '8080',
     'ip': '0.0.0.0' // interface to bind,

@@ -1,5 +1,8 @@
 var db = require('../storage/database.js');
+var config = require('../utils/config');
+var request = require('request');
 
+var accessUrl =  config.get('pryv:access');
 
 module.exports = function setup(app) {
 
@@ -14,7 +17,23 @@ module.exports = function setup(app) {
       oauthState: req.query.state
     };
 
-    res.redirect('https://abcd.epfl.ch');
+    console.log(parameters);
+
+    request.post(accessUrl, parameters,
+      function (error, response, body) {
+        if (! error && response.statusCode !== 201) {
+          error = new Error('Failed requesting access from register invalid statusCode:' +
+            response.statusCode + ' body:' + body);
+        }
+        if (! error && ! body.url) {
+          error = new Error('Invalid response, missing url:' + body);
+        }
+        if (error) {
+          return next(error); // TODO forge a JSON error
+        }
+        res.redirect(body.url);
+      }
+    );
   });
 
 
