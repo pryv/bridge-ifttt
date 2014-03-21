@@ -15,7 +15,8 @@
     "readyness": "~0.1.0",
     "semver": "~2.2.1",
     "async": "~0.2.10",
-    "request": "~2.34.0"
+    "request-json": "~0.4.8",
+    "hat": "0.0.3"
   },
   "devDependencies": {
     "mocha": "latest",

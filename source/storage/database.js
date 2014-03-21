@@ -89,24 +89,29 @@ function checkConnection() {
 /**
  * simply map redis.set
  */
-function set(key, callback) {
+exports.set = function set(key, callback) {
   redis.set(key, callback);
-}
-exports.set = set;
+};
 
 /**
  * simply map redis.get
  */
-function get(key, callback) {
+exports.get = function get(key, callback) {
   redis.get(key, callback);
-}
-exports.get = get;
+};
 
 /**
  * simply map redis.hgetall
  */
 exports.getSet = function getSet(key, callback) {
   redis.hgetall(key, callback);
+};
+
+/**
+ * simply map redis.hmset
+ */
+exports.setSet = function getSet(key, callback) {
+  redis.hmset(key, callback);
 };
 
 

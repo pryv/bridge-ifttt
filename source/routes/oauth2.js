@@ -1,10 +1,17 @@
 var db = require('../storage/database.js');
 var config = require('../utils/config');
-var request = require('request');
+var request = require('request-json');
+var hat = require('hat');
 
-var accessUrl =  config.get('pryv:access');
+
+var domain =  '.' + config.get('pryv:domain');
+var access =  request.newClient(config.get('pryv:access'));
+
 
 module.exports = function setup(app) {
+
+
+  //https://api.example-channel.org/oauth2/authorize?client_id=94b26e58a3a88d5c&response_type=code&redirect_uri=https%3A%2F%2Fifttt.com%2Fchannels%2Fexample-channel%2Fauthorize&scope=ifttt&state=a00caec8dbd08e50
 
   // Show them the "do you authorise xyz app to access your content?" page
   app.get('/oauth2/authorise', function (req, res, next) {
@@ -17,10 +24,9 @@ module.exports = function setup(app) {
       oauthState: req.query.state
     };
 
-    console.log(parameters);
-
-    request.post(accessUrl, parameters,
+    access.post('/access', parameters,
       function (error, response, body) {
+
         if (! error && response.statusCode !== 201) {
           error = new Error('Failed requesting access from register invalid statusCode:' +
             response.statusCode + ' body:' + body);
@@ -38,43 +44,68 @@ module.exports = function setup(app) {
 
 
   // Show them the exchange the bearer for a real token
-  app.get('/oauth2/token', function (req, res, next) {
-    var parameters = {
-      //sso: req.signedCookies.sso,
-      requestingAppId: req.query.client_id,
-      requestedPermissions: [ {streamId : '*', level: 'manage'} ], // TODO adapt to clientId
-      languageCode: 'en',
-      returnURL: req.query.redirect_uri + '?',
-      oauthState: req.query.state
-    };
+  app.post('/oauth2/token', function (req, res, next) {
+    var notValid = false;
 
-    res.redirect('https://abcd.epfl.ch');
+    //grant_type=authorization_code&code=67a8ad40341224c1&client_id=83465ab42&client_secret=c4f7defe91df9b23&redirect_uri=https%3A//ifttt.com/channels/channel-slug/authorize
+
+    /**
+     * TODO
+     * 1- check client_secret / client_id
+     * 2- get username / token from access
+     */
+    if (notValid) {
+      return res.send('Invalid credentials', 401);
+    }
+
+    access.get('/access/' + req.body.code,
+      function (error, response, body) {
+        console.log(body);
+
+        var credentials = { username: 'perkikiki', pryvToken: 'tototxx'};
+        var oauthToken = hat();
+
+        db.setSet(oauthToken, credentials);
+
+
+        res.json({token_type: 'Bearer', access_token: oauthToken});
+
+
+      }
+    );
+
+
+
+
   });
 
   // Return the user info
   app.get('/ifttt/v1/user/info', function (req, res, next) {
-    var response, status;
-    var token = req.get('Authorization').split(' ')[1];
+
+    var oauthToken = req.get('Authorization').split(' ')[1];
 
     // verify token..
-    if(token) {
-      var name = 'Walter White';
-      var id = 'heisenberg';
-
-      response = {
-        data: {
-          name: name,
-          id: id }
-      };
-      status  = 200;
-    } else {
-      response = {errors: [{message: 'Invalid token'}]};
-      status = 401;
+    if (! oauthToken) {
+      res.send('Invalid token', 401);
     }
 
-    res.set('Content-Type', 'application/json; charset=utf-8');
-    res.status(status);
-    res.send(JSON.stringify(response));
+
+    db.getSet(oauthToken, function (error, credentials) {
+
+      if (error) {
+        return res.send('Internal error', 500);
+      }
+
+      if (! credentials.username ) {
+        return res.send('Invalid token', 401);
+      }
+      res.json({ data : {
+        name: credentials.uid,
+        id: credentials.uid,
+        url: 'https://' + credentials.uid + domain
+      }});
+    });
+
   });
 
 

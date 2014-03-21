@@ -39,19 +39,20 @@ if (configFile) {
 
 // Set default values
 nconf.defaults({
-  'pryv': {
-    'access' : 'https://reg.pryv.in/access'
+  pryv: {
+    domain : 'pryv.in',
+    access : 'https://reglocal.rec.la:8443' // 'https://reg.pryv.in/access'
   },
-  'http': {
-    'port': '8080',
-    'ip': '0.0.0.0' // interface to bind,
+  http: {
+    port: '8080',
+    ip: '0.0.0.0' // interface to bind,
   },
-  'redis': {
-    'password': 'MyRecordedLife',
-    'port' : 7379
+  redis: {
+    password: 'MyRecordedLife',
+    port : 7379
   },
-  'debug': {
-    'middlewareDebug' : true
+  debug: {
+    middlewareDebug : true
   }
 });
 
