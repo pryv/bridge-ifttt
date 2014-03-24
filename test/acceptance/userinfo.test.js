@@ -3,6 +3,9 @@ var config = require('../../source/utils/config'),
   db = require('../../source/storage/database'),
   request = require('superagent');
 
+require('../../source/server');
+require('should');
+
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
 describe('userinfo', function () {
