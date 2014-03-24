@@ -1,4 +1,4 @@
-/*global describe, before, after, it */
+  /*global describe, before, after, it */
 var should = require('should'),
   server = require('../../source/server'),
   config = require('../../source/utils/config'),
