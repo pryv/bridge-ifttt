@@ -1,22 +1,21 @@
-  /*global describe, before, after, it */
-var should = require('should'),
-  server = require('../../source/server'),
-  config = require('../../source/utils/config'),
+  /*global describe, before, it */
+var config = require('../../source/utils/config'),
   db = require('../../source/storage/database'),
   request = require('superagent');
 
-var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port'),
-  channelSlug = 'pryv', // set on ifttt used in   https://ifttt.com/channels/{{channel-slug}}/
-  clientId = 'ifttt-all';
+require('../../source/server');
+require('should');
+
+var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
 describe('userinfo', function () {
 
   before(function () {
-    db.setSet('OI2O98AHF9Q', {username: 'perkikiki', pryvToken: 'ASDHUFOAW1234'});
+    db.setSet('OI2O98AHF9A', {username: 'perkikiki', pryvToken: 'ASDHUFOAW1234'});
   });
 
   describe('/ifttt/v1/user/info', function () {
-     /**
+
     it('GET /ifttt/v1/user/info - No Authorization header', function (done) {
       request.get(serverBasePath + '/ifttt/v1/user/info')
         .set('Authorization', 'Bearer')
@@ -67,14 +66,14 @@ describe('userinfo', function () {
           done();
         });
     });
-    **/
+
 
     it('GET /ifttt/v1/user/info - Valid token', function (done) {
       request.get(serverBasePath + '/ifttt/v1/user/info')
-        .set('Authorization', 'Bearer OI2O98AHF9Q')
+        .set('Authorization', 'Bearer OI2O98AHF9A')
         .end(function (res) {
           res.should.have.status(200);
-          res.header['content-type'].should.eql('application/json; charset=utf-8')
+          res.header['content-type'].should.eql('application/json; charset=utf-8');
           res.body.should.have.property('data');
           res.body.data.should.have.property('name');
           res.body.data.should.have.property('id');
@@ -82,7 +81,5 @@ describe('userinfo', function () {
           done();
         });
     });
-
-
   });
 });

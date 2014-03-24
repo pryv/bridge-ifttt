@@ -1,5 +1,8 @@
 var db = require('../../storage/database.js');
 
+var config = require('../../utils/config');
+var domain =  '.' + config.get('pryv:domain');
+
 module.exports = function setup(app) {
 
 // Return the user info
@@ -24,12 +27,14 @@ module.exports = function setup(app) {
     db.getSet(oauthToken, function (error, credentials) {
 
       if (error) {
+        console.log(error);
         return res.send('Internal database error', 500);
       }
 
-      if (! credentials.username) {
+      if (!credentials || !credentials.username) {
         return res.send('Invalid token', 401);
       }
+
       return res.json({ data : {
         name: credentials.username,
         id: credentials.username,

@@ -1,12 +1,3 @@
-var db = require('../storage/database.js');
-var config = require('../utils/config');
-var request = require('request-json');
-var hat = require('hat');
-
-
-var domain =  '.' + config.get('pryv:domain');
-var access =  request.newClient(config.get('pryv:access'));
-
 
 module.exports = function setup(app) {
 
