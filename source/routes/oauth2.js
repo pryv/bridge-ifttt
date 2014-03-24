@@ -59,13 +59,18 @@ module.exports = function setup(app) {
      * 2- get username / token from access
      */
     if (notValid) {
-      return res.send('Invalid credentials', 401);
+      return sendInvalidToken(res);
     }
 
     access.get('/access/' + req.body.code,
       function (error, response, body) {
 
         if (body.status === 'ACCEPTED') {
+
+          if (! body.username || ! body.token) {
+            return sendInternalError(res, 'invaling username / token from access');
+          }
+
           var credentials = { username: body.username, pryvToken: body.token};
           var oauthToken = hat();
 
@@ -73,6 +78,7 @@ module.exports = function setup(app) {
           return res.json({token_type: 'Bearer', access_token: oauthToken});
         }
 
+        return sendInvalidToken(res);
       }
     );
 
@@ -99,7 +105,7 @@ module.exports = function setup(app) {
       }
 
       if (! credentials.username) {
-        return res.send('Invalid token', 401);
+        return sendInvalidToken(res);
       }
       res.json({ data : {
         name: credentials.uid,
@@ -126,3 +132,12 @@ module.exports = function setup(app) {
   });
 
 };
+
+
+function sendInvalidToken(res) {
+  return res.send('Invalid token', 401);
+}
+
+function sendInternalError(res, message) {
+  return res.send('Internal Error:' + message, 500);
+}
