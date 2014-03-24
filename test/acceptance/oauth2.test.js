@@ -5,11 +5,16 @@ var should = require('should'),
   request = require('superagent'),
   querystring = require('querystring');
 
+var nock = require('nock');
+
 require('readyness/wait/mocha');
 
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port'),
   channelSlug = 'pryv',  // set on ifttt used in   https://ifttt.com/channels/{{channel-slug}}/
   clientId = 'ifttt-all';
+
+
+var accessUrl =  config.get('pryv:access');
 
 // https://ifttt.com/developers/docs/protocol_reference#authentication-flow
 describe('oauth2', function () {
@@ -39,7 +44,16 @@ describe('oauth2', function () {
 
   describe('/token', function () {
 
-    before( function(){ console.log('before'); });
+    before(function () {
+      nock(accessUrl)
+        .get('/oauth2/access/EeZiDfLkTPJJ7l3o')
+        .reply(200, {
+          status: 'ACCEPTED',
+          username: 'perkikiki',
+          token: 'chsow0uiu003dwxwko726x731',
+          code:  200
+        });
+    });
 
     it('POST /token : Token exchange', function (done) {
 
@@ -82,3 +96,6 @@ describe('oauth2', function () {
   });
 
 });
+
+
+
