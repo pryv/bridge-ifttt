@@ -4,16 +4,10 @@ var request = require('request-json');
 var hat = require('hat');
 
 
-var domain =  '.' + config.get('pryv:domain');
 var access =  request.newClient(config.get('pryv:access'));
 
 
 module.exports = function setup(app) {
-
-
-  //https://api.example-channel.org/oauth2/authorize?client_id=94b26e58a3a88d5c&response_type=code
-  // &redirect_uri=https%3A%2F%2Fifttt.com%2Fchannels%2Fexample-channel%2Fauthorize&scope=ifttt
-  // &state=a00caec8dbd08e50
 
   // Show them the "do you authorise xyz app to access your content?" page
   app.get('/oauth2/authorise', function (req, res, next) {
@@ -48,10 +42,6 @@ module.exports = function setup(app) {
   // Show them the exchange the bearer for a real token
   app.post('/oauth2/token', function (req, res /*, next*/) {
     var notValid = false;
-
-    //grant_type=authorization_code&code=67a8ad40341224c1&client_id=83465ab42&
-    // client_secret=c4f7defe91df9b23&
-    // redirect_uri=https%3A//ifttt.com/channels/channel-slug/authorize
 
     /**
      * TODO
