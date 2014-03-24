@@ -54,7 +54,34 @@ describe('oauth2', function () {
         });
     });
 
-    it('POST /token : Token exchange', function (done) {
+    it('POST /token : Valid Token exchange', function (done) {
+
+      var parameters = {
+        grant_type: 'authorization_code',
+        code: 'EeZiDfLkTPJJ7l3o',
+        state: 'tzsagast',
+        client_id: clientId,
+        client_secret: 'HelloToto',
+        redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'
+      };
+
+
+      request.post(serverBasePath + '/oauth2/token')
+        .send(parameters)
+        .redirects(0)
+        .end(function (res) {
+          console.log(res.status);
+          res.should.have.status(200);
+
+          res.body.token_type.should.eql('Bearer');
+          res.body.should.have.property('access_token');
+          res.body.should.not.have.property('refresh_token');
+          done();
+        });
+    });
+
+
+    it('POST /token : Invalid Token exchange', function (done) {
 
       var parameters = {
         grant_type: 'authorization_code',
