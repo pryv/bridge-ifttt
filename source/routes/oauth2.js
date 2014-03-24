@@ -20,8 +20,13 @@ module.exports = function setup(app) {
       oauthState: req.query.state
     };
 
+    console.log(access);
+
+
     access.post('/access', parameters,
       function (error, response, body) {
+
+        console.log(error);
 
         if (! error && response.statusCode !== 201) {
           error = new Error('Failed requesting access from register invalid statusCode:' +

@@ -55,7 +55,7 @@ describe('oauth2', function () {
     });
 
     it('POST /token : Valid Token exchange', function (done) {
-
+      this.timeout(5000);
       var parameters = {
         grant_type: 'authorization_code',
         code: 'EeZiDfLkTPJJ7l3o',

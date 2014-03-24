@@ -41,7 +41,7 @@ if (configFile) {
 nconf.defaults({
   pryv: {
     domain : 'pryv.in',
-    access : 'https://reglocal.rec.la:8443' // 'https://reg.pryv.in/access'
+    access : 'https://reg.pryv.in/access'
   },
   http: {
     port: '8080',
