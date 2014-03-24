@@ -1,9 +1,10 @@
-/*global describe, before, after, it */
+/*global describe, before, it */
 var should = require('should'),
-  server = require('../../source/server'),
   config = require('../../source/utils/config'),
   request = require('superagent'),
   querystring = require('querystring');
+
+require('../../source/server');
 
 var nock = require('nock');
 
@@ -19,8 +20,7 @@ var accessUrl =  config.get('pryv:access');
 // https://ifttt.com/developers/docs/protocol_reference#authentication-flow
 describe('oauth2', function () {
 
-  /**
-   describe('/authorize', function () {
+  describe('/authorize', function () {
 
     var queryString = querystring.stringify(
       { grant_type: 'authorization_code',
@@ -40,13 +40,12 @@ describe('oauth2', function () {
           done();
         });
     });
-  });   **/
-
+  });
   describe('/token', function () {
 
     before(function () {
       nock(accessUrl)
-        .get('/oauth2/access/EeZiDfLkTPJJ7l3o')
+        .get('/access/EeZiDfLkTPJJ7l3o')
         .reply(200, {
           status: 'ACCEPTED',
           username: 'perkikiki',
@@ -59,11 +58,12 @@ describe('oauth2', function () {
 
       var parameters = {
         grant_type: 'authorization_code',
-        code: 'testcode',
+        code: 'EeZiDfLkTPJJ7l3o',
         state: 'tzsagast',
         client_id: clientId,
         client_secret: 'HelloToto',
-        redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'};
+        redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'
+      };
 
 
       request.post(serverBasePath + '/oauth2/token')

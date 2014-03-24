@@ -11,7 +11,9 @@ var access =  request.newClient(config.get('pryv:access'));
 module.exports = function setup(app) {
 
 
-  //https://api.example-channel.org/oauth2/authorize?client_id=94b26e58a3a88d5c&response_type=code&redirect_uri=https%3A%2F%2Fifttt.com%2Fchannels%2Fexample-channel%2Fauthorize&scope=ifttt&state=a00caec8dbd08e50
+  //https://api.example-channel.org/oauth2/authorize?client_id=94b26e58a3a88d5c&response_type=code
+  // &redirect_uri=https%3A%2F%2Fifttt.com%2Fchannels%2Fexample-channel%2Fauthorize&scope=ifttt
+  // &state=a00caec8dbd08e50
 
   // Show them the "do you authorise xyz app to access your content?" page
   app.get('/oauth2/authorise', function (req, res, next) {
@@ -44,10 +46,12 @@ module.exports = function setup(app) {
 
 
   // Show them the exchange the bearer for a real token
-  app.post('/oauth2/token', function (req, res, next) {
+  app.post('/oauth2/token', function (req, res /*, next*/) {
     var notValid = false;
 
-    //grant_type=authorization_code&code=67a8ad40341224c1&client_id=83465ab42&client_secret=c4f7defe91df9b23&redirect_uri=https%3A//ifttt.com/channels/channel-slug/authorize
+    //grant_type=authorization_code&code=67a8ad40341224c1&client_id=83465ab42&
+    // client_secret=c4f7defe91df9b23&
+    // redirect_uri=https%3A//ifttt.com/channels/channel-slug/authorize
 
     /**
      * TODO
@@ -60,16 +64,14 @@ module.exports = function setup(app) {
 
     access.get('/access/' + req.body.code,
       function (error, response, body) {
-        console.log(body);
 
-        var credentials = { username: 'perkikiki', pryvToken: 'tototxx'};
-        var oauthToken = hat();
+        if (body.status === 'ACCEPTED') {
+          var credentials = { username: body.username, pryvToken: body.token};
+          var oauthToken = hat();
 
-        db.setSet(oauthToken, credentials);
-
-
-        res.json({token_type: 'Bearer', access_token: oauthToken});
-
+          db.setSet(oauthToken, credentials);
+          return res.json({token_type: 'Bearer', access_token: oauthToken});
+        }
 
       }
     );
@@ -80,7 +82,7 @@ module.exports = function setup(app) {
   });
 
   // Return the user info
-  app.get('/ifttt/v1/user/info', function (req, res, next) {
+  app.get('/ifttt/v1/user/info', function (req, res /*, next*/) {
 
     var oauthToken = req.get('Authorization').split(' ')[1];
 
@@ -96,7 +98,7 @@ module.exports = function setup(app) {
         return res.send('Internal error', 500);
       }
 
-      if (! credentials.username ) {
+      if (! credentials.username) {
         return res.send('Invalid token', 401);
       }
       res.json({ data : {
@@ -111,7 +113,7 @@ module.exports = function setup(app) {
 
 
   // Show the current server status
-  app.get('/ifttt/v1/status', function (req, res, next) {
+  app.get('/ifttt/v1/status', function (req, res /*, next*/) {
     var response = {
       data: {
         status: 'OK',
