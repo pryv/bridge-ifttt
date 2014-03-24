@@ -23,11 +23,10 @@ describe('oauth2', function () {
   describe('/authorize', function () {
 
     var queryString = querystring.stringify(
-      { grant_type: 'authorization_code',
+      { client_id: clientId,
         response_type: 'code',
+        scope: 'ifttt',
         state: 'tzsagast',
-        client_id: clientId,
-        client_secret: 'HelloToto',
         redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'});
 
     it('GET /authorise should redirect to access.html page', function (done) {
@@ -41,6 +40,7 @@ describe('oauth2', function () {
         });
     });
   });
+
   describe('/token', function () {
 
     before(function () {
@@ -59,7 +59,6 @@ describe('oauth2', function () {
       var parameters = {
         grant_type: 'authorization_code',
         code: 'EeZiDfLkTPJJ7l3o',
-        state: 'tzsagast',
         client_id: clientId,
         client_secret: 'HelloToto',
         redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'
@@ -72,7 +71,6 @@ describe('oauth2', function () {
         .end(function (res) {
           console.log(res.status);
           res.should.have.status(200);
-
           res.body.token_type.should.eql('Bearer');
           res.body.should.have.property('access_token');
           res.body.should.not.have.property('refresh_token');
@@ -80,13 +78,11 @@ describe('oauth2', function () {
         });
     });
 
-
     it('POST /token : Invalid Token exchange', function (done) {
-
+      this.timeout(20000);
       var parameters = {
         grant_type: 'authorization_code',
         code: 'EeZiDfLkTPJJ7l3o',
-        state: 'tzsagast',
         client_id: clientId,
         client_secret: 'HelloToto',
         redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'
@@ -101,19 +97,6 @@ describe('oauth2', function () {
           done();
         });
     });
-
-    /**
-     it('GET /token - Step 4: Token exchange - Failed', function (done) {
-      request.post(serverBasePath + '/oauth2/token?client_id=' + clientId +
-          '&response_type=code&scope=ifttt&state=FAKE' +
-          '&redirect_uri=https://ifttt.com/channels/' + channelSlug + '/authorize')
-        .redirects(0)
-        .end(function (res) {
-          res.should.have.status(401);
-          res.body.should.have.property('errors');
-          done();
-        });
-    });     **/
 
   });
 
