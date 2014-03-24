@@ -43,6 +43,10 @@ nconf.defaults({
     domain : 'pryv.in',
     access : 'https://reg.pryv.in/access'
   },
+  ifttt: {
+    clientId: 'ifttt-all',
+    secret: 'Lalalarecord4funPingPong1l1k2h34hg4'
+  },
   http: {
     port: '8080',
     ip: '0.0.0.0' // interface to bind,

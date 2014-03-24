@@ -12,7 +12,8 @@ require('readyness/wait/mocha');
 
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port'),
   channelSlug = 'pryv',  // set on ifttt used in   https://ifttt.com/channels/{{channel-slug}}/
-  clientId = 'ifttt-all';
+  clientId = config.get('ifttt:clientId'),
+  secret = config.get('ifttt:secret');
 
 
 var accessUrl =  config.get('pryv:access');
@@ -60,7 +61,7 @@ describe('oauth2', function () {
         grant_type: 'authorization_code',
         code: 'EeZiDfLkTPJJ7l3o',
         client_id: clientId,
-        client_secret: 'HelloToto',
+        client_secret: secret,
         redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'
       };
 
@@ -84,7 +85,7 @@ describe('oauth2', function () {
         grant_type: 'authorization_code',
         code: 'EeZiDfLkTPJJ7l3o',
         client_id: clientId,
-        client_secret: 'HelloToto',
+        client_secret: secret,
         redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'
       };
 

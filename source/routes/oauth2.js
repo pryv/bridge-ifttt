@@ -20,13 +20,8 @@ module.exports = function setup(app) {
       oauthState: req.query.state
     };
 
-    console.log(access);
-
-
     access.post('/access', parameters,
       function (error, response, body) {
-
-        console.log(error);
 
         if (! error && response.statusCode !== 201) {
           error = new Error('Failed requesting access from register invalid statusCode:' +
@@ -46,24 +41,38 @@ module.exports = function setup(app) {
 
   // Show them the exchange the bearer for a real token
   app.post('/oauth2/token', function (req, res /*, next*/) {
-    var notValid = false;
+    var code = req.body.code;
+    var client_id = req.body.client_id;
+    var client_secret = req.body.client_secret;
+    var redirect_uri = req.body.redirect_uri;
+
+    if (!client_id || client_id !== config.get('ifttt:clientId')) {
+      return sendContentError(res, 'Bad secret');
+    }
+    if (!client_secret || client_secret !== config.get('ifttt:secret')) {
+      return sendContentError(res, 'Bad secret');
+    }
+    if (!code) {
+      return sendContentError(res, 'Code missing');
+    }
+    if (!redirect_uri) {
+      return sendContentError(res, 'code parameter missing');
+    }
 
     /**
      * TODO
      * 1- check client_secret / client_id
      * 2- get username / token from access
      */
-    if (notValid) {
-      return sendInvalidToken(res);
-    }
 
-    access.get('/access/' + req.body.code,
+
+    access.get('/access/' + code,
       function (error, response, body) {
 
         if (body.status === 'ACCEPTED') {
 
           if (! body.username || ! body.token) {
-            return sendInternalError(res, 'invaling username / token from access');
+            return sendInternalError(res, 'invalid username / token from access');
           }
 
           var credentials = { username: body.username, pryvToken: body.token};
@@ -87,5 +96,10 @@ function sendInvalidToken(res) {
 
 function sendInternalError(res, message) {
   return res.send('Internal Error:' + message, 500);
+}
+
+function sendContentError(res, message) {
+  var response = { errors: [ {message: message} ] };
+  return res.send(JSON.stringify(response), 400);
 }
 
