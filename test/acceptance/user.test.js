@@ -23,6 +23,7 @@ describe('userinfo', function () {
         .set('Accept-Charset', 'utf-8')
         .set('Accept-Encoding', 'gzip, deflate')
         .end(function (res) {
+          console.log(res);
           res.should.have.status(400);
           res.body.should.have.property('errors');
           done();

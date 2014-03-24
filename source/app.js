@@ -11,6 +11,7 @@ module.exports = function () {
 
   //middleware
   app.use(require('./middleware/debug.js'));
+  app.use(require('./middleware/bearerAuth.js'));
 
   // routes
   require('./routes/oauth2.js')(app);
