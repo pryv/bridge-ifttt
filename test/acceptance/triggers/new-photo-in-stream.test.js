@@ -14,7 +14,7 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 describe('/triggers/new-photo-in-stream/', function () {
 
   before(function () {
-    db.setSet('OI2O98AHF9A', {username: 'perkikiki', pryvToken: 'cht8ntct90000m1wk8y20nr65'});
+    db.setSet('OI2O98AHF9A', {username: 'ifttttest', pryvToken: 'cht8va9t9001he943bk8o4dhu'});
   });
 
   describe('fields/stream/options', function () {
@@ -36,7 +36,7 @@ describe('/triggers/new-photo-in-stream/', function () {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-photo-in-stream')
         .set('Authorization', 'Bearer OI2O98AHF9A').send({
           triggerFields : {
-            stream: 'PVwkDEbXXM' // small diary
+            stream: 'diary'
           }
         })
         .end(function (res) {

@@ -3,7 +3,7 @@ var errorMessages = require('../../../utils/error-messages.js');
 var versionPath = '/ifttt/v1/';
 var triggerPath = versionPath + 'triggers/new-photo-in-stream';
 
-var debug = require('../../../utils/debug.js');
+//var debug = require('../../../utils/debug.js');
 
 module.exports = function setup(app) {
 
@@ -37,8 +37,6 @@ module.exports = function setup(app) {
 
         if (event.type === 'picture/attached' && event.attachments && event.attachments.length > 0)
         {
-
-
           lastFoundEvent = event.modifiedSince;
           data.push({
             ifttt: {id : event.id, timestamp: Math.round(event.time)}, //TODO can we keep microsecs
