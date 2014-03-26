@@ -12,7 +12,7 @@ exports.options = function (req, res /*, next*/) {
   function addStreams(level, streamsArray) {
     if (! streamsArray) { return; }
     var pad = '';
-    for (var i = 0; i <= level; i++) { pad += '&nbsp;'; }
+    for (var i = 0; i < level; i++) { pad += ' '; }
     streamsArray.forEach(function (stream) {
       result.data.push({label: pad + stream.name, value: stream.id});
       addStreams(level + 1, stream.children);
