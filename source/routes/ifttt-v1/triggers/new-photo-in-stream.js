@@ -48,6 +48,8 @@ module.exports = function setup(app) {
         }
       }
 
+      console.log(data);
+
       // TODO save lastFoundEvent into modifiedSince for this request for future usage
       res.send({data : data});
 

@@ -22,7 +22,6 @@ exports.options = function (req, res /*, next*/) {
     if (error) { return errorMessages.sendInternalError(res, 'Failed fetching streams'); }
     addStreams(0, streamsArray);
 
-
     res.json(result);
 
   });
