@@ -1,4 +1,8 @@
 
+exports.sendAuthentificationRequired = function (res) {
+  return res.send('Authentification required', 401);
+};
+
 exports.sendInvalidToken = function (res) {
   return res.send('Invalid token', 401);
 };
