@@ -3,7 +3,7 @@ TEST_FILES=test/acceptance/*.test.js
 TEST_TRIGGERS=test/acceptance/triggers/*.test.js
 
 test-triggers:
-	@$(MOCHA) --timeout 5000 --reporter spec $(TEST_TRIGGERS)
+	@$(MOCHA) --timeout 20000 --reporter spec $(TEST_TRIGGERS)
 
 test:
 	@$(MOCHA) --timeout 1000 --reporter spec $(TEST_FILES)
