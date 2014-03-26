@@ -18,5 +18,8 @@ module.exports = function () {
   require('./routes/ifttt-v1/status.js')(app);
   require('./routes/ifttt-v1/user.js')(app);
 
+
+  require('./routes/ifttt-v1/triggers/new-photo-in-stream.js')(app);
+
   return app;
 };

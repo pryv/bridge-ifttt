@@ -17,7 +17,8 @@
     "async": "~0.2.10",
     "request-json": "~0.4.8",
     "hat": "0.0.3",
-    "nock": "~0.27.2"
+    "nock": "~0.27.2",
+    "pryv": "git+ssh://git@github.com:pryv/lib-javascript.git#master"
   },
   "devDependencies": {
     "mocha": "latest",

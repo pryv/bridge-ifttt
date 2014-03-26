@@ -8,6 +8,8 @@ module.exports =  function (req, res, next) {
   if (! req.get('Authorization')) {
     return next();
   } else {
+
+
     var authorizarionHeader = req.get('Authorization').split(' ');
     if (authorizarionHeader.length !== 2) {
       return errorMessages.sendContentError(res, 'Authorization header too many arguments');

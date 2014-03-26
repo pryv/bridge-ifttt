@@ -5,6 +5,9 @@ var config = require('../../source/utils/config'),
 require('should');
 require('../../source/server');
 
+
+require('readyness/wait/mocha');
+
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
 describe('userinfo', function () {

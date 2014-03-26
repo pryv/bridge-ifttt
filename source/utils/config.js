@@ -40,6 +40,7 @@ if (configFile) {
 // Set default values
 nconf.defaults({
   pryv: {
+    staging : true,
     domain : 'pryv.in',
     access : 'https://reg.pryv.in/access'
   },
