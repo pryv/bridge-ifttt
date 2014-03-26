@@ -2,6 +2,8 @@
 var errorMessages = require('../utils/error-messages.js');
 var db = require('../storage/database.js');
 
+var pryv = require('pryv');
+var config = require('../utils/config');
 
 module.exports =  function (req, res, next) {
 
@@ -26,6 +28,14 @@ module.exports =  function (req, res, next) {
         return errorMessages.sendInvalidToken(res);
       }
       req.pryvCredentials = credentials;
+
+
+      req.pryvConnection = new pryv.Connection({
+        username: req.pryvCredentials.username,
+        auth: req.pryvCredentials.pryvToken,
+        staging: config.get('pryv:staging')
+      });
+
       next();
     });
   }
