@@ -1,7 +1,7 @@
 var errorMessages = require('../../../utils/error-messages.js');
 
 var versionPath = '/ifttt/v1/';
-var triggerPath = versionPath + 'triggers/new-photo-in-stream';
+var triggerPath = versionPath + 'triggers/new-photo';
 
 //var debug = require('../../../utils/debug.js');
 
