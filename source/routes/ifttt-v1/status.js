@@ -9,8 +9,6 @@ module.exports = function setup(app) {
         time: (new Date()).toISOString()
       }
     };
-    res.set('Content-Type', 'application/json; charset=utf-8');
-    res.status(200);
-    res.send(JSON.stringify(response));
+    res.json(response);
   });
 };
