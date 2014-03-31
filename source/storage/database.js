@@ -201,3 +201,25 @@ function doOnKeysValuesMatching(keyMask, valueMask, action, done) {
 }
 exports.doOnKeysValuesMatching = doOnKeysValuesMatching;
 
+
+//------------------- specific cache logic
+
+//------------------ access management ------------//
+
+exports.setJSONCachedValue = function setJSONCachedValue(key, value, ttl, callback) {
+  var multi = redis.multi();
+  var dbkey = key;
+  multi.set(dbkey, JSON.stringify(value));
+  multi.expire(dbkey, ttl);
+  multi.exec(function (error, result) {
+    if (error) { logger.error('Redis setJSONCachedValue: ' + key +
+      ' ' + value + ' e: ' + error, error);
+    }
+    callback(error, result); // callback anyway
+  });
+};
+
+exports.getJSONCachedValue = function getJSONCachedValue(key, callback) {
+  getJSON(key, callback);
+};
+

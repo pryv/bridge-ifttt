@@ -1,4 +1,5 @@
 var errorMessages = require('../utils/error-messages.js');
+var cache = require('../storage/cache.js');
 
 /**
  * output the streams options {data, value} array for this connection
@@ -18,11 +19,10 @@ exports.options = function (req, res /*, next*/) {
       addStreams(level + 1, stream.children);
     });
   }
-  req.pryvConnection.streams.get(null, function (error, streamsArray) {
+
+  cache.getStreams(req.pryvConnection, function (error, streamsArray) {
     if (error) { return errorMessages.sendInternalError(res, 'Failed fetching streams'); }
     addStreams(0, streamsArray);
-
     res.json(result);
-
   });
 };
