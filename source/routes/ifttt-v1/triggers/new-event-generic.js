@@ -1,10 +1,8 @@
 var errorMessages = require('../../../utils/error-messages.js');
+var constants = require('../../../utils/constants.js');
 var cache = require('../../../storage/cache.js');
 
-
 var versionPath = '/ifttt/v1/';
-
-
 
 /**
  * Generic wrapper for simple event-type based Triggers
@@ -21,11 +19,17 @@ module.exports = function setup(app, route, dataType, mapFunction) {
   app.post(triggerPath, function (req, res /*, next*/) {
     if (! req.pryvConnection) { return errorMessages.sendAuthentificationRequired(res); }
 
+
+
     var filterLike = {
-      streams : [req.body.triggerFields.stream],
       limit: req.body.limit || 50,
       types: [dataType]
     };
+
+    if (req.body.triggerFields.stream !== constants.ANY_STREAMS) {
+      filterLike.streams = [req.body.triggerFields.stream];
+    }
+
 
     // -- fetch the events
     req.pryvConnection.events.get(filterLike, function (error, eventsArray) {

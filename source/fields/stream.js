@@ -1,5 +1,6 @@
 var errorMessages = require('../utils/error-messages.js');
 var cache = require('../storage/cache.js');
+var constants =  require('../utils/constants.js');
 
 /**
  * output the streams options {data, value} array for this connection
@@ -7,7 +8,7 @@ var cache = require('../storage/cache.js');
 exports.options = function (req, res /*, next*/) {
   if (! req.pryvConnection) { return errorMessages.sendAuthentificationRequired(res); }
 
-  var result = { data : [] };
+  var result = { data : [ {label: '[ANY STREAM]', value: constants.ANY_STREAMS }] };
 
 
   function addStreams(level, streamsArray) {

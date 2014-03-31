@@ -1,7 +1,8 @@
 /*global describe, before, it */
 var config = require('../../../source/utils/config'),
   db = require('../../../source/storage/database'),
-  request = require('superagent');
+  request = require('superagent'),
+  constants = require('../../../source/utils/constants');
 
 require('../../../source/server');
 
@@ -45,6 +46,37 @@ describe('/triggers/new-note/', function () {
           res.body.data.should.be.an.instanceof(Array);
 
           res.body.data.forEach(function (event) { 
+            event.should.have.property('ifttt');
+            event.ifttt.should.have.property('id');
+            event.ifttt.should.have.property('timestamp');
+
+            event.should.have.property('StreamName');
+            event.should.have.property('At'); // TODO test iso format
+            event.should.have.property('Tags');
+            event.should.have.property('NoteContent');
+          });
+
+
+          console.log(res.body.data);
+          done();
+        });
+    });
+
+
+
+    it('POST Valid token ANY STREAMS', function (done) {
+      request.post(serverBasePath + '/ifttt/v1/triggers/new-note')
+        .set('Authorization', 'Bearer OI2O98AHF9A').send({
+          triggerFields : {
+            stream: constants.ANY_STREAMS
+          }
+        })
+        .end(function (res) {
+          res.should.have.status(200);
+          res.body.should.have.property('data');
+          res.body.data.should.be.an.instanceof(Array);
+
+          res.body.data.forEach(function (event) {
             event.should.have.property('ifttt');
             event.ifttt.should.have.property('id');
             event.ifttt.should.have.property('timestamp');
