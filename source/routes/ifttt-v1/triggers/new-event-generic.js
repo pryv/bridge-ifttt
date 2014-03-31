@@ -7,7 +7,7 @@ var versionPath = '/ifttt/v1/';
 
 
 /**
- *
+ * Generic wrapper for simple event-type based Triggers
  * @param app
  * @param {String} route '/new-note'
  * @param {String} dataType 'note/txt'
@@ -16,24 +16,25 @@ var versionPath = '/ifttt/v1/';
 module.exports = function setup(app, route, dataType, mapFunction) {
   var triggerPath = versionPath + 'triggers/' + route;
 
-  app.post(triggerPath + '/fields/stream/options',
-    require('../../../fields/stream').options);
+  app.post(triggerPath + '/fields/stream/options', require('../../../fields/stream').options);
 
   app.post(triggerPath, function (req, res /*, next*/) {
     if (! req.pryvConnection) { return errorMessages.sendAuthentificationRequired(res); }
 
     var filterLike = {
-      streams : [ req.body.triggerFields.stream],
+      streams : [req.body.triggerFields.stream],
       limit: req.body.limit || 50,
       types: [dataType]
     };
 
+    // -- fetch the events
     req.pryvConnection.events.get(filterLike, function (error, eventsArray) {
       if (error) { return errorMessages.sendInternalError(res, 'Failed fetching events'); }
 
+      // -- get the streamsMap for the names
       cache.getStreamsMap(req.pryvConnection, function (error, streamMap) {
 
-        var data = [];
+        var data = [];  // will be sent
 
         eventsArray.forEach(function (event) {
 
@@ -48,10 +49,9 @@ module.exports = function setup(app, route, dataType, mapFunction) {
             StreamName: streamName,
             At: (new Date(event.time * 1000)).toISOString()
           };
-          mapFunction(event, eventData);
 
+          mapFunction(event, eventData); //-- add extra informations
           data.push(eventData);
-
         });
 
         console.log(data);
