@@ -20,6 +20,7 @@ module.exports = function () {
 
 
   require('./routes/ifttt-v1/triggers/new-photo.js')(app);
+  require('./routes/ifttt-v1/triggers/new-note.js')(app);
 
   return app;
 };

@@ -11,7 +11,7 @@ require('should');
 
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
-describe('/triggers/new-photo-in-stream/', function () {
+describe('/triggers/new-note/', function () {
 
   before(function () {
     db.setSet('OI2O98AHF9A', {username: 'ifttttest', pryvToken: 'cht8va9t9001he943bk8o4dhu'});
@@ -19,7 +19,7 @@ describe('/triggers/new-photo-in-stream/', function () {
 
   describe('fields/stream/options', function () {
     it('POST Valid token', function (done) {
-      request.post(serverBasePath + '/ifttt/v1/triggers/new-photo-in-stream/fields/stream/options')
+      request.post(serverBasePath + '/ifttt/v1/triggers/new-note/fields/stream/options')
         .set('Authorization', 'Bearer OI2O98AHF9A')
         .end(function (res) {
           res.should.have.status(200);
@@ -33,7 +33,7 @@ describe('/triggers/new-photo-in-stream/', function () {
   describe('/', function () {
 
     it('POST Valid token', function (done) {
-      request.post(serverBasePath + '/ifttt/v1/triggers/new-photo-in-stream')
+      request.post(serverBasePath + '/ifttt/v1/triggers/new-note')
         .set('Authorization', 'Bearer OI2O98AHF9A').send({
           triggerFields : {
             stream: 'diary'
@@ -52,7 +52,7 @@ describe('/triggers/new-photo-in-stream/', function () {
             event.should.have.property('StreamName');
             event.should.have.property('At'); // TODO test iso format
             event.should.have.property('Tags');
-            event.should.have.property('ImageURL'); // TODO eventually check url
+            event.should.have.property('NoteContent');
           });
 
 
