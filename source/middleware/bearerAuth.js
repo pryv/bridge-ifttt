@@ -28,8 +28,6 @@ module.exports =  function (req, res, next) {
         return errorMessages.sendInvalidToken(res);
       }
       req.pryvCredentials = credentials;
-
-
       req.pryvConnection = new pryv.Connection({
         username: req.pryvCredentials.username,
         auth: req.pryvCredentials.pryvToken,

@@ -14,7 +14,7 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 describe('userinfo', function () {
 
   before(function () {
-    db.setSet('OI2O98AHF9A', {username: 'perkikiki', pryvToken: 'ASDHUFOAW1234'});
+    db.setSet('OI2O98AHF9R', {username: 'perkikiki', pryvToken: 'ASDHUFOAW1234'});
   });
 
   describe('/ifttt/v1/user/info', function () {
@@ -25,8 +25,8 @@ describe('userinfo', function () {
         .set('Accept', 'application/json')
         .set('Accept-Charset', 'utf-8')
         .set('Accept-Encoding', 'gzip, deflate')
+        .timeout(5000)
         .end(function (res) {
-          console.log(res);
           res.should.have.status(400);
           res.body.should.have.property('errors');
           done();
@@ -39,6 +39,7 @@ describe('userinfo', function () {
         .set('Accept', 'application/json')
         .set('Accept-Charset', 'utf-8')
         .set('Accept-Encoding', 'gzip, deflate')
+        .timeout(5000)
         .end(function (res) {
           res.should.have.status(400);
           res.body.should.have.property('errors');
@@ -52,6 +53,7 @@ describe('userinfo', function () {
         .set('Accept', 'application/json')
         .set('Accept-Charset', 'utf-8')
         .set('Accept-Encoding', 'gzip, deflate')
+        .timeout(5000)
         .end(function (res) {
           res.should.have.status(400);
           res.body.should.have.property('errors');
@@ -61,10 +63,11 @@ describe('userinfo', function () {
 
     it('GET /ifttt/v1/user/info - Invalid token', function (done) {
       request.get(serverBasePath + '/ifttt/v1/user/info')
-        .set('Authorization', 'Bearer OI2O98AHF9F')
+        .set('Authorization', 'Bearer OI2OPKL23HD3')
         .set('Accept', 'application/json')
         .set('Accept-Charset', 'utf-8')
         .set('Accept-Encoding', 'gzip, deflate')
+        .timeout(5000)
         .end(function (res) {
           res.should.have.status(401);
           done();
@@ -74,7 +77,8 @@ describe('userinfo', function () {
 
     it('GET /ifttt/v1/user/info - Valid token', function (done) {
       request.get(serverBasePath + '/ifttt/v1/user/info')
-        .set('Authorization', 'Bearer OI2O98AHF9A')
+        .set('Authorization', 'Bearer OI2O98AHF9R')
+        .timeout(5000)
         .end(function (res) {
           res.should.have.status(200);
           res.header['content-type'].should.eql('application/json; charset=utf-8');

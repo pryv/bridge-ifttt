@@ -9,8 +9,7 @@ module.exports = function setup(app) {
   app.get('/ifttt/v1/user/info', function (req, res /*, next*/) {
     if (!req.pryvCredentials) {
       errorMessages.sendContentError(res, 'No authorization token');
-    }
-    else {
+    } else {
       return res.json({ data : {
         name: req.pryvCredentials.username,
         id: req.pryvCredentials.username,
