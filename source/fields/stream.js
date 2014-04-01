@@ -4,12 +4,28 @@ var constants =  require('../utils/constants.js');
 
 /**
  * output the streams options {data, value} array for this connection
+ * with a "ANY stream option"
  */
-exports.options = function (req, res /*, next*/) {
+exports.options = function (req, res, next) {
+  streams(req, res, next, true);
+};
+
+/**
+ * output the streams options {data, value} array for this connection
+ */
+exports.optionsStrict = function (req, res, next) {
+  streams(req, res, next, true);
+};
+
+function streams(req, res, next, all) {
+  all = all || false;
+
   if (! req.pryvConnection) { return errorMessages.sendAuthentificationRequired(res); }
 
-  var result = { data : [ {label: '[ANY STREAM]', value: constants.ANY_STREAMS }] };
-
+  var result = { data : [ ] };
+  if (all) {
+    result.data.push({label: '[ANY STREAM]', value: constants.ANY_STREAMS });
+  }
 
   function addStreams(level, streamsArray) {
     if (! streamsArray) { return; }
