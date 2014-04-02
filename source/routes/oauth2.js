@@ -1,3 +1,4 @@
+var PYError = require('../errors/PYError.js');
 var db = require('../storage/database.js');
 var config = require('../utils/config');
 var request = require('request-json');
@@ -40,23 +41,23 @@ module.exports = function setup(app) {
 
 
   // Show them the exchange the bearer for a real token
-  app.post('/oauth2/token', function (req, res /*, next*/) {
+  app.post('/oauth2/token', function (req, res, next) {
     var code = req.body.code;
     var client_id = req.body.client_id;
     var client_secret = req.body.client_secret;
     var redirect_uri = req.body.redirect_uri;
 
     if (!client_id || client_id !== config.get('ifttt:clientId')) {
-      return sendContentError(res, 'Bad secret');
+      return next(PYError.contentError('Bad secret'));
     }
     if (!client_secret || client_secret !== config.get('ifttt:secret')) {
-      return sendContentError(res, 'Bad secret');
+      return next(PYError.contentError('Bad secret'));
     }
     if (!code) {
-      return sendContentError(res, 'Code missing');
+      return next(PYError.contentError('Code missing'));
     }
     if (!redirect_uri) {
-      return sendContentError(res, 'code parameter missing');
+      return next(PYError.contentError('code parameter missing'));
     }
 
     /**
@@ -72,7 +73,7 @@ module.exports = function setup(app) {
         if (body.status === 'ACCEPTED') {
 
           if (! body.username || ! body.token) {
-            return sendInternalError(res, 'invalid username / token from access');
+            return next(PYError.internalError('token from access'));
           }
 
           var credentials = { username: body.username, pryvToken: body.token};
@@ -82,24 +83,9 @@ module.exports = function setup(app) {
           return res.json({token_type: 'Bearer', access_token: oauthToken});
         }
 
-        return sendInvalidToken(res);
+        return next(PYError.invalidToken());
       }
     );
 
   });
 };
-
-
-function sendInvalidToken(res) {
-  return res.send('Invalid token', 401);
-}
-
-function sendInternalError(res, message) {
-  return res.send('Internal Error:' + message, 500);
-}
-
-function sendContentError(res, message) {
-  var response = { errors: [ {message: message} ] };
-  return res.send(JSON.stringify(response), 400);
-}
-

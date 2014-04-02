@@ -1,4 +1,4 @@
-var errorMessages = require('../utils/error-messages.js');
+var PYError = require('../errors/PYError.js');
 var cache = require('../storage/cache.js');
 var constants =  require('../utils/constants.js');
 
@@ -14,13 +14,13 @@ exports.options = function (req, res, next) {
  * output the streams options {data, value} array for this connection
  */
 exports.optionsStrict = function (req, res, next) {
-  streams(req, res, next, true);
+  streams(req, res, next, false);
 };
 
 function streams(req, res, next, all) {
   all = all || false;
 
-  if (! req.pryvConnection) { return errorMessages.sendAuthentificationRequired(res); }
+  if (! req.pryvConnection) { return next(PYError.authentificationRequired()); }
 
   var result = { data : [ ] };
   if (all) {
@@ -38,8 +38,8 @@ function streams(req, res, next, all) {
   }
 
   cache.getStreams(req.pryvConnection, function (error, streamsArray) {
-    if (error) { return errorMessages.sendInternalError(res, 'Failed fetching streams'); }
+    if (error) { return next(PYError.internalError('Failed fetching streams')); }
     addStreams(0, streamsArray);
     res.json(result);
   });
-};
+}

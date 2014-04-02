@@ -46,7 +46,7 @@ describe('userinfo', function () {
           done();
         });
     });
-
+     /*
     it('GET /ifttt/v1/user/info - Authorization header contains crap', function (done) {
       request.get(serverBasePath + '/ifttt/v1/user/info')
         .set('Authorization', 'lalal alsd hflas')
@@ -88,6 +88,6 @@ describe('userinfo', function () {
           res.body.data.should.have.property('url');
           done();
         });
-    });
+    });  */
   });
 });

@@ -1,4 +1,4 @@
-var errorMessages = require('../../../utils/error-messages.js');
+var PYError = require('../../../errors/PYError.js');
 var constants = require('../../../utils/constants.js');
 var cache = require('../../../storage/cache.js');
 
@@ -16,10 +16,8 @@ module.exports = function setup(app, route, dataType, mapFunction) {
 
   app.post(triggerPath + '/fields/stream/options', require('../../../fields/stream').options);
 
-  app.post(triggerPath, function (req, res /*, next*/) {
-    if (! req.pryvConnection) { return errorMessages.sendAuthentificationRequired(res); }
-
-
+  app.post(triggerPath, function (req, res, next) {
+    if (! req.pryvConnection) { return next(PYError.authentificationRequired()); }
 
     var filterLike = {
       limit: req.body.limit || 50,
@@ -33,7 +31,7 @@ module.exports = function setup(app, route, dataType, mapFunction) {
 
     // -- fetch the events
     req.pryvConnection.events.get(filterLike, function (error, eventsArray) {
-      if (error) { return errorMessages.sendInternalError(res, 'Failed fetching events'); }
+      if (error) { return next(PYError.internalError('Failed fetching events')); }
 
       // -- get the streamsMap for the names
       cache.getStreamsMap(req.pryvConnection, function (error, streamMap) {
