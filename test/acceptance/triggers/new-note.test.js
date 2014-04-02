@@ -26,6 +26,7 @@ describe('/triggers/new-note/', function () {
           res.should.have.status(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
+          res.body.data[0].value.should.equal(constants.ANY_STREAMS);
           done();
         });
     });

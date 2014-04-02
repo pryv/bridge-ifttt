@@ -1,3 +1,5 @@
+var pryv = require('pryv');
+
 var PYError = require('../../../errors/PYError.js');
 //var constants = require('../../../utils/constants.js');
 //var cache = require('../../../storage/cache.js');
@@ -22,9 +24,38 @@ module.exports = function setup(app, route, mapFunction) {
       return next(PYError.contentError('Cannot find actionFields'));
     }
 
-    mapFunction(req.body);
+    var actionFields = req.body.actionFields;
 
-    res.send(200);
+    if (! actionFields.streamId) {
+      return next(PYError.contentError('Cannot find actionFields'));
+    }
+
+    var streamId = actionFields.streamId; //TODO check it's valid
+
+
+
+    var eventData = {streamId: streamId};
+    if (actionFields.description) { eventData.description = actionFields.description; }
+    if (actionFields.tags) {
+      var tags = [];
+      actionFields.tags.split(',').forEach(function (tag) {
+        tags.push(tag.trim());
+      });
+      if (tags.length > 0) {
+        eventData.tags = tags;
+      }
+    }
+
+    var event = new pryv.Event(req.pryvConnection, eventData);
+    var mapError = mapFunction(event, actionFields);
+
+    if (mapError) { return next(mapError); }
+
+    req.pryvConnection.events.create(event, function (error) { 
+      if (error) { return next(PYError.internalError('Failed creating event on backend', error)); }
+      res.send(200);
+    });
+
   });
 };
 

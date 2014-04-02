@@ -8,10 +8,12 @@ module.exports = function () {
   var app = express();
   app.disable('x-powered-by');
   app.use(express.bodyParser());
+  app.use(app.router);
+  app.use(require('./middleware/errors.js'));
 
   //middleware
-  app.use(require('./middleware/debug.js'));
-  app.use(require('./middleware/bearerAuth.js'));
+  app.all('*', require('./middleware/debug.js'));
+  app.all('*', require('./middleware/bearerAuth.js'));
 
 
   // routes
@@ -27,7 +29,7 @@ module.exports = function () {
   require('./routes/ifttt-v1/actions/new-note.js')(app);
 
   // error handler
-  app.use(require('./middleware/errors.js'));
+
 
   return app;
 };
