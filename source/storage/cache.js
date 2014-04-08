@@ -44,6 +44,8 @@ function getStreams(pryvConnection, callback) {
           300 * 1000, function () {
             callback(error, streamsArray);
           });
+      } else {
+        callback(error, []);
       }
     });
   });
