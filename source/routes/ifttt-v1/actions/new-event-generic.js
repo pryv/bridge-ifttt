@@ -15,7 +15,8 @@ var versionPath = '/ifttt/v1/';
 module.exports = function setup(app, route, mapFunction) {
   var triggerPath = versionPath + 'actions/' + route;
 
-  app.post(triggerPath + '/fields/stream/options', require('../../../fields/stream').optionsStrict);
+  app.post(triggerPath + '/fields/streamId/options',
+    require('../../../fields/stream').optionsStrict);
 
   app.post(triggerPath, function (req, res, next) {
     if (! req.pryvConnection) { return next(PYError.authentificationRequired()); }

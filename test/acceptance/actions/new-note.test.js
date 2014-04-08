@@ -20,9 +20,9 @@ describe('/actions/new-note/', function () {
     db.setSet('OI2O98AHF9A', {username: 'ifttttest', pryvToken: 'cht8va9t9001he943bk8o4dhu'});
   });
 
-  describe('fields/stream/options', function () {
+  describe('fields/streamId/options', function () {
     it('POST Valid token', function (done) {
-      request.post(serverBasePath + '/ifttt/v1/actions/new-note/fields/stream/options')
+      request.post(serverBasePath + '/ifttt/v1/actions/new-note/fields/streamId/options')
         .set('Authorization', 'Bearer OI2O98AHF9A')
         .end(function (res) {
           res.should.have.status(200);
