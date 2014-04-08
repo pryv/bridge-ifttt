@@ -28,7 +28,7 @@ module.exports = function setup(app, route, mapFunction) {
     var actionFields = req.body.actionFields;
 
     if (! actionFields.streamId) {
-      return next(PYError.contentError('Cannot find actionFields'));
+      return next(PYError.contentError('Cannot find streamId'));
     }
 
     var streamId = actionFields.streamId; //TODO check it's valid
@@ -46,6 +46,9 @@ module.exports = function setup(app, route, mapFunction) {
         eventData.tags = tags;
       }
     }
+
+
+    console.log('creating event with data:', eventData);
 
     var event = new pryv.Event(req.pryvConnection, eventData);
     mapFunction(event, actionFields, function (error) {
