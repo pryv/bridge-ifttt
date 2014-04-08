@@ -47,15 +47,41 @@ module.exports = function setup(app, route, mapFunction) {
     }
 
     var event = new pryv.Event(req.pryvConnection, eventData);
-    var mapError = mapFunction(event, actionFields);
+    mapFunction(event, actionFields, function (error) {
+      if (error) { return next(error); }
 
-    if (mapError) { return next(mapError); }
 
-    req.pryvConnection.events.create(event, function (error) { 
-      if (error) { return next(PYError.internalError('Failed creating event on backend', error)); }
-      res.send(200);
+      if (event.toAttach) {
+        var attachmentData = { 
+          type : event.toAttach.type,
+          filename: event.toAttach.filename
+        };
+        var data = event.toAttach.data;
+        delete event.toAttach;
+
+        var formData = pryv.utility.forgeFormData('attachment0', data, attachmentData);
+
+        req.pryvConnection.events.createWithAttachment(event, formData, function (error) {
+          if (error) {
+
+            return next(PYError.internalError('Failed creating event on backend', error));
+          }
+          res.send(200);
+        });
+
+        return;
+      }
+
+
+
+      req.pryvConnection.events.create(event, function (error) {
+        if (error) {
+          return next(PYError.internalError('Failed creating event on backend', error));
+        }
+        res.send(200);
+      });
+
     });
-
   });
 };
 
