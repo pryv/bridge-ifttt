@@ -64,7 +64,7 @@ module.exports = function setup(app, route, mapFunction) {
         req.pryvConnection.events.createWithAttachment(event, formData, function (error) {
           if (error) {
 
-            return next(PYError.internalError('Failed creating event on backend', error));
+            return next(PYError.internalError('Failed creating event with att on backend', error));
           }
           res.send(200);
         });
