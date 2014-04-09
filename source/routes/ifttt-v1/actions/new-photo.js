@@ -7,7 +7,7 @@ module.exports = function setup(app) {
 
     var requestSettings = {
       method: 'GET',
-      url: actionFields.attachmentURL,
+      url: actionFields.attachmentUrl,
       encoding: null
     };
 
