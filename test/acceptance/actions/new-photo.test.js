@@ -1,8 +1,7 @@
 /*global describe, before, it */
 var config = require('../../../source/utils/config'),
   db = require('../../../source/storage/database'),
-  request = require('superagent'),
-  constants = require('../../../source/utils/constants');
+  request = require('superagent');
 
 require('../../../source/server');
 
@@ -37,7 +36,22 @@ describe('/actions/new-photo/', function () {
           done();
         });
     });
-
-
   });
+
+  describe('/', function () {
+
+    it('POST Valid new picture', function (done) {
+      request.post(serverBasePath + '/ifttt/v1/actions/new-photo')
+        .set('Authorization', 'Bearer OI2O98AHF9A').send(
+        { actionFields:
+        { streamId: 'diary',
+          attachmentUrl: 'https://locker.ifttt.com/f/d09e0ea0-5887-40ae-a27e-021a62b13e25',
+          description: 'New photo added to "Camera Roll"',
+          tags: 'IFTTT, iOS Photos' } }).end(function (res) {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
+
 });

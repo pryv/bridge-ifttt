@@ -8,11 +8,12 @@ module.exports = function setup(app) {
     var requestSettings = {
       method: 'GET',
       url: actionFields.attachmentUrl,
-      encoding: null
+      encoding: null,
+      strictSSL: false
     };
 
     console.log(requestSettings);
-    request.get(requestSettings,  function (error, response, body) {
+    request(requestSettings,  function (error, response, body) {
       if (error) { done(error); }
 
 
@@ -30,6 +31,8 @@ module.exports = function setup(app) {
         filename : 'attachment0',
         data : body
       };
+
+      console.log(type);
 
       return done();
     });
