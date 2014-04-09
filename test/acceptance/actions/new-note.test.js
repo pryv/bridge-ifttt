@@ -63,6 +63,23 @@ describe('/actions/new-note/', function () {
         });
     });
 
+
+    it('POST Valid new note 2', function (done) {
+      request.post(serverBasePath + '/ifttt/v1/actions/new-note')
+        .set('Authorization', 'Bearer OI2O98AHF9A').send(
+        { actionFields:
+        { description: 'Tweet by iftttpryv',
+          contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
+            'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
+          streamId: 'chtg78vkk00070i43s3q2kosv',
+          tags: 'IFTTT, Twitter'
+        }
+        }).end(function (res) {
+          res.should.have.status(200);
+          done();
+        });
+    });
+
     it('POST  new note with invalid stream id', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
         .set('Authorization', 'Bearer OI2O98AHF9A').send(

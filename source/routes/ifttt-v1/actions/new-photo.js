@@ -16,8 +16,17 @@ module.exports = function setup(app) {
       if (error) { done(error); }
 
 
+      var type = null;
+      if (! response) {
+        console.log('<WARNING> new-photo response is null', requestSettings);
+      } else if (! response.headers) {
+        console.log('<WARNING> new-photo response.heders is null', requestSettings);
+      } else {
+        type = response.headers['content-type'];
+      }
+
       event.toAttach = {
-        type : response.headers['content-type'],
+        type : type,
         filename : 'attachment0',
         data : body
       };

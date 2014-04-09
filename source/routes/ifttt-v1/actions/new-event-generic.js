@@ -56,6 +56,7 @@ module.exports = function setup(app, route, mapFunction) {
 
 
       if (event.toAttach) {
+
         var attachmentData = { 
           type : event.toAttach.type,
           filename: event.toAttach.filename
