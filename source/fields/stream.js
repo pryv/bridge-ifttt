@@ -38,7 +38,10 @@ function streams(req, res, next, all) {
   }
 
   cache.getStreams(req.pryvConnection, function (error, streamsArray) {
-    if (error) { return next(PYError.internalError('Failed fetching streams')); }
+    if (error) {
+      console.log('Error cache.getStreams', error);
+      return next(PYError.internalError('Failed fetching streams'));
+    }
     addStreams(0, streamsArray);
 
     console.log(result);
