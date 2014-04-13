@@ -59,6 +59,9 @@ describe('/actions/new-note/', function () {
         }
         }).end(function (res) {
           res.should.have.status(200);
+
+          res.body.should.have.property('data');
+          res.body.data.should.have.property('id');
           done();
         });
     });
@@ -76,6 +79,8 @@ describe('/actions/new-note/', function () {
         }
         }).end(function (res) {
           res.should.have.status(200);
+          res.body.should.have.property('data');
+          res.body.data.should.have.property('id');
           done();
         });
     });

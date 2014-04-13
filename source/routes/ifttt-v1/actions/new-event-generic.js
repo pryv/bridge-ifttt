@@ -71,7 +71,7 @@ module.exports = function setup(app, route, mapFunction) {
 
             return next(PYError.internalError('Failed creating event with att on backend', error));
           }
-          res.send(200);
+          res.json({data: { id: event.id }});
         });
 
         return;
@@ -83,7 +83,7 @@ module.exports = function setup(app, route, mapFunction) {
         if (error) {
           return next(PYError.internalError('Failed creating event on backend', error));
         }
-        res.send(200);
+        res.send({data: { id: event.id }});
       });
 
     });

@@ -33,6 +33,9 @@ describe('/actions/new-photo/', function () {
         }
         }).end(function (res) {
           res.should.have.status(200);
+
+          res.body.should.have.property('data');
+          res.body.data.should.have.property('id');
           done();
         });
     });
@@ -49,6 +52,9 @@ describe('/actions/new-photo/', function () {
           description: 'New photo added to "Camera Roll"',
           tags: 'IFTTT, iOS Photos' } }).end(function (res) {
           res.should.have.status(200);
+
+          res.body.should.have.property('data');
+          res.body.data.should.have.property('id');
           done();
         });
     });
