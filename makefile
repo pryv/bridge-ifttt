@@ -1,7 +1,7 @@
 MOCHA=./node_modules/.bin/mocha
 TEST_FILES=test/acceptance/*.test.js
 TEST_TRIGGERS=test/acceptance/triggers/*.test.js
-TEST_ACTIONS=test/acceptance/actions/*p*.test.js
+TEST_ACTIONS=test/acceptance/actions/*.test.js
 
 
 test-actions:

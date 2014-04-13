@@ -51,11 +51,25 @@ module.exports = function setup(app, route, mapFunction) {
     console.log('creating event with data:', eventData);
 
     var event = new pryv.Event(req.pryvConnection, eventData);
+
+    var detailMsg = '';
+
+    var sendResponse = function (error) {
+      if (error) {
+        return next(PYError.internalError('Failed creating event ' + detailMsg, error));
+      }
+      var data = {data: { id: event.id }};
+      console.log('OK creating event ' + detailMsg, data);
+      res.json(data);
+    };
+
+
     mapFunction(event, actionFields, function (error) {
       if (error) { return next(error); }
 
 
       if (event.toAttach) {
+        detailMsg = 'with attachment';
 
         var attachmentData = { 
           type : event.toAttach.type,
@@ -66,25 +80,11 @@ module.exports = function setup(app, route, mapFunction) {
 
         var formData = pryv.utility.forgeFormData('attachment0', data, attachmentData);
 
-        req.pryvConnection.events.createWithAttachment(event, formData, function (error) {
-          if (error) {
+        req.pryvConnection.events.createWithAttachment(event, formData, sendResponse);
 
-            return next(PYError.internalError('Failed creating event with att on backend', error));
-          }
-          res.json({data: { id: event.id }});
-        });
-
-        return;
+      } else {
+        req.pryvConnection.events.create(event, sendResponse);
       }
-
-
-
-      req.pryvConnection.events.create(event, function (error) {
-        if (error) {
-          return next(PYError.internalError('Failed creating event on backend', error));
-        }
-        res.send({data: { id: event.id }});
-      });
 
     });
   });
