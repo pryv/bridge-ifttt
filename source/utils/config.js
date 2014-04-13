@@ -46,10 +46,10 @@ nconf.defaults({
   },
   ifttt: {
     clientId: 'ifttt-all',
-    secret: 'Lalalarecord4funPingPong1l1k2h34hg4'
+    secret: 'setInProductionConfig'
   },
   oauth: {
-    secretPath: 'ijbzfxtfx'
+    secretPath: 'setElseWhere'
   },
   http: {
     port: '8080',

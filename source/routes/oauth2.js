@@ -12,7 +12,7 @@ var secretPath = config.get('oauth:secretPath');
 module.exports = function setup(app) {
 
   // Show them the "do you authorise xyz app to access your content?" page
-  app.get('/oauth2/' + secretPath + '/authorise', function (req, res, next) {
+  app.get('/oauth2/authorise', function (req, res, next) {
     var parameters = {
       //sso: req.signedCookies.sso,
       requestingAppId: req.query.client_id,
@@ -42,7 +42,7 @@ module.exports = function setup(app) {
 
 
   // Show them the exchange the bearer for a real token
-  app.post('/oauth2/' + secretPath + '/token', function (req, res, next) {
+  app.post('/oauth2' + secretPath + '/token', function (req, res, next) {
     var code = req.body.code;
     var client_id = req.body.client_id;
     var client_secret = req.body.client_secret;
