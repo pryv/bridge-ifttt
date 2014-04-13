@@ -11,6 +11,7 @@ var nock = require('nock');
 require('readyness/wait/mocha');
 
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port'),
+  secretPath =  config.get('oauth:secretPath'),
   channelSlug = 'pryv',  // set on ifttt used in   https://ifttt.com/channels/{{channel-slug}}/
   clientId = config.get('ifttt:clientId'),
   secret = config.get('ifttt:secret');
@@ -31,7 +32,7 @@ describe('oauth2', function () {
         redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'});
 
     it('GET /authorise should redirect to access.html page', function (done) {
-      request.get(serverBasePath + '/oauth2/authorise?' + queryString)
+      request.get(serverBasePath + '/oauth2/' + secretPath + '/authorise?' + queryString)
         .redirects(0)
         .end(function (res) {
           res.should.have.status(302);
@@ -66,7 +67,7 @@ describe('oauth2', function () {
       };
 
 
-      request.post(serverBasePath + '/oauth2/token')
+      request.post(serverBasePath + '/oauth2/' + secretPath + '/token')
         .send(parameters)
         .redirects(0)
         .end(function (res) {
@@ -89,7 +90,7 @@ describe('oauth2', function () {
         redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'
       };
 
-      request.post(serverBasePath + '/oauth2/token')
+      request.post(serverBasePath + '/oauth2/' + secretPath + '/token')
         .send(parameters)
         .redirects(0)
         .end(function (res) {
