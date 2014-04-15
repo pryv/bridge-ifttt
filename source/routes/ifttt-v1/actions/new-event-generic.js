@@ -1,9 +1,7 @@
 var pryv = require('pryv');
 
 var PYError = require('../../../errors/PYError.js');
-//var constants = require('../../../utils/constants.js');
-//var cache = require('../../../storage/cache.js');
-
+var request = require('request');
 var versionPath = '/ifttt/v1/';
 
 /**
@@ -31,12 +29,15 @@ module.exports = function setup(app, route, mapFunction) {
       return next(PYError.contentError('Cannot find streamId'));
     }
 
+
+    // --- streamId
     var streamId = actionFields.streamId; //TODO check it's valid
-
-
-
     var eventData = {streamId: streamId};
+
+    // --- description
     if (actionFields.description) { eventData.description = actionFields.description; }
+
+    // --- tags
     if (actionFields.tags) {
       var tags = [];
       actionFields.tags.split(',').forEach(function (tag) {
@@ -51,9 +52,7 @@ module.exports = function setup(app, route, mapFunction) {
     console.log('creating event with data:', eventData);
 
     var event = new pryv.Event(req.pryvConnection, eventData);
-
     var detailMsg = '';
-
     var sendResponse = function (error) {
       if (error) {
         return next(PYError.internalError('Failed creating event ' + detailMsg, error));
@@ -63,32 +62,79 @@ module.exports = function setup(app, route, mapFunction) {
       res.json(data);
     };
 
-
-    mapFunction(event, actionFields, function (error) {
-      if (error) { return next(error); }
-
-
-      if (event.toAttach) {
-        detailMsg = 'with attachment';
-
-        var attachmentData = { 
-          type : event.toAttach.type,
-          filename: event.toAttach.filename
-        };
-        var data = event.toAttach.data;
-        delete event.toAttach;
-
-        var formData = pryv.utility.forgeFormData('attachment0', data, attachmentData);
-
-        req.pryvConnection.events.createWithAttachment(event, formData, sendResponse);
-
-      } else {
-        req.pryvConnection.events.create(event, sendResponse);
+    // --- attachment (only supporting 1 for now)
+    fetchAttachment(actionFields, function (error, toAttach) {
+      if (error) {
+        detailMsg = ', cannot fetch attachment';
+        return sendResponse(error);
       }
 
+      event.toAttach = toAttach;
+
+      mapFunction(event, actionFields, function (error) {
+        if (error) { return sendResponse(error); }
+
+        if (event.toAttach) {
+          detailMsg = 'with attachment';
+
+          var attachmentData = {
+            type : event.toAttach.type,
+            filename: event.toAttach.filename
+          };
+          var data = event.toAttach.data;
+          delete event.toAttach;
+
+          var formData = pryv.utility.forgeFormData('attachment0', data, attachmentData);
+
+          req.pryvConnection.events.createWithAttachment(event, formData, sendResponse);
+
+        } else {
+          req.pryvConnection.events.create(event, sendResponse);
+        }
+
+      });
     });
   });
 };
+
+
+/**
+ * Helper to fetch attachments
+ * @param actionFields
+ * @param done
+ */
+function fetchAttachment(actionFields, done) {
+  if (! actionFields.attachmentUrl) {
+    done(null, null);
+  }
+
+  var requestSettings = {
+    method: 'GET',
+    url: actionFields.attachmentUrl,
+    encoding: null,
+    strictSSL: false
+  };
+
+  console.log(requestSettings);
+  request(requestSettings,  function (error, response, body) {
+    if (error) { done(error); }
+
+    var type = null;
+    if (! response) {
+      console.log('<WARNING> attachment fetching response is null', requestSettings);
+    } else if (! response.headers) {
+      console.log('<WARNING> attachment fetching response.headers is null', requestSettings);
+    } else {
+      type = response.headers['content-type'];
+    }
+
+    done(null, {
+      type : type,
+      filename : 'attachment0',
+      data : body
+    });
+  });
+}
 
 /*
  { actionFields:
