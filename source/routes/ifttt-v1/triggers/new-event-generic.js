@@ -14,7 +14,7 @@ var versionPath = '/ifttt/v1/';
 module.exports = function setup(app, route, dataType, mapFunction) {
   var triggerPath = versionPath + 'triggers/' + route;
 
-  app.post(triggerPath + '/fields/streamId/options', require('../../../fields/stream').options);
+  app.post(triggerPath + '/fields/StreamId/options', require('../../../fields/stream').options);
 
   app.post(triggerPath, function (req, res, next) {
     if (! req.pryvConnection) { return next(PYError.authentificationRequired()); }
@@ -24,8 +24,8 @@ module.exports = function setup(app, route, dataType, mapFunction) {
       types: [dataType]
     };
 
-    if (req.body.triggerFields.streamId !== constants.ANY_STREAMS) {
-      filterLike.streams = [req.body.triggerFields.streamId];
+    if (req.body.triggerFields.StreamId !== constants.ANY_STREAMS) {
+      filterLike.streams = [req.body.triggerFields.StreamId];
     }
 
 
