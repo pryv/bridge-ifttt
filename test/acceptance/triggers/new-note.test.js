@@ -18,9 +18,9 @@ describe('/triggers/new-note/', function () {
     db.setSet('OI2O98AHF9A', {username: 'ifttttest', pryvToken: 'cht8va9t9001he943bk8o4dhu'});
   });
 
-  describe('fields/streamId/options', function () {
+  describe('fields/StreamId/options', function () {
     it('POST Valid token', function (done) {
-      request.post(serverBasePath + '/ifttt/v1/triggers/new-note/fields/streamId/options')
+      request.post(serverBasePath + '/ifttt/v1/triggers/new-note/fields/StreamId/options')
         .set('Authorization', 'Bearer OI2O98AHF9A')
         .end(function (res) {
           res.should.have.status(200);
@@ -38,7 +38,7 @@ describe('/triggers/new-note/', function () {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-note')
         .set('Authorization', 'Bearer OI2O98AHF9A').send({
           triggerFields : {
-            streamId: 'diary'
+            StreamId: 'diary'
           }
         })
         .end(function (res) {
@@ -69,7 +69,7 @@ describe('/triggers/new-note/', function () {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-note')
         .set('Authorization', 'Bearer OI2O98AHF9A').send({
           triggerFields : {
-            streamId: constants.ANY_STREAMS
+            StreamId: constants.ANY_STREAMS
           }
         })
         .end(function (res) {
