@@ -4,13 +4,27 @@ var PYError = require('../../../errors/PYError.js');
 var request = require('request');
 var versionPath = '/ifttt/v1/';
 
+
+/**
+ * Generic extraOption Handler
+ * @param app
+ * @param {String} optionKey slug for this option
+ * @param {String} route 'new-note'
+ * @param {Function} doFunction function(req, res, next)
+ */
+exports.addOption = function (app, optionKey, route, doFunction) {
+  var optionPath = versionPath + 'actions/' + route + '/fields/' + optionKey + '/options';
+  console.log(optionPath);
+  app.post(optionPath, doFunction);
+};
+
 /**
  * Generic wrapper for simple event-type based Triggers
  * @param app
- * @param {String} route '/new-note'
+ * @param {String} route 'new-note'
  * @param {Function} map function(pryvConnection, responseBody)
  */
-module.exports = function setup(app, route, mapFunction) {
+exports.setup = function setup(app, route, mapFunction) {
   var triggerPath = versionPath + 'actions/' + route;
 
   app.post(triggerPath + '/fields/streamId/options',
@@ -49,12 +63,15 @@ module.exports = function setup(app, route, mapFunction) {
     }
 
 
-    console.log('creating event with data:', eventData);
+
 
     var event = new pryv.Event(req.pryvConnection, eventData);
     var detailMsg = '';
     var sendResponse = function (error) {
       if (error) {
+        if (error instanceof PYError) {
+          return next(error);
+        }
         return next(PYError.internalError('Failed creating event ' + detailMsg, error));
       }
       var data = {data: { id: event.id }};
@@ -86,9 +103,12 @@ module.exports = function setup(app, route, mapFunction) {
 
           var formData = pryv.utility.forgeFormData('attachment0', data, attachmentData);
 
+
+          console.log('creating event with attachment and data:', event.getData());
           req.pryvConnection.events.createWithAttachment(event, formData, sendResponse);
 
         } else {
+          console.log('creating event with data:', event.getData());
           req.pryvConnection.events.create(event, sendResponse);
         }
 
@@ -98,6 +118,7 @@ module.exports = function setup(app, route, mapFunction) {
 };
 
 
+
 /**
  * Helper to fetch attachments
  * @param actionFields
@@ -105,7 +126,7 @@ module.exports = function setup(app, route, mapFunction) {
  */
 function fetchAttachment(actionFields, done) {
   if (! actionFields.attachmentUrl) {
-    done(null, null);
+    return done(null, null);
   }
 
   var requestSettings = {

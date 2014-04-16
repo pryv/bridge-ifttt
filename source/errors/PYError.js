@@ -26,11 +26,11 @@ PYError.invalidToken = function (message, detail) {
 };
 
 PYError.internalError = function (message, detail) {
-  return new PYError(500, 'Internal Error' + message, detail);
+  return new PYError(500, 'Internal Error: ' + message, detail);
 };
 
 PYError.contentError = function (message, detail) {
-  return new PYError(400, 'Content Error' + message, detail);
+  return new PYError(400, 'Content Error: ' + message, detail);
 };
 
 

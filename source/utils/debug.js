@@ -12,4 +12,4 @@ exports.inspect = function inspect() {
   for (var i = 0; i < arguments.length; i++) {
     util.print('\n' + i + ' ' + util.inspect(arguments[i], true, 10, true) + '\n');
   }
-}
+};
