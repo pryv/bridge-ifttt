@@ -10,22 +10,22 @@ module.exports = function setup(app) {
 
 function addStaticRoute(app, route, dataTypesHandler) {
 
-  generic.addOption(app, 'eventType', route, dataTypesHandler);
+  generic.addOption(app, 'EventType', route, dataTypesHandler);
 
   generic.setup(app, route, function (event, actionFields, done) {
-    if (! actionFields.eventType) {
+    if (! actionFields.EventType) {
       return done(PYError.contentError('missing eventType'));
     }
-    event.type = actionFields.eventType;
+    event.type = actionFields.EventType;
 
-    if (typeof actionFields.numericalValue === 'undefined') {
+    if (typeof actionFields.NumericalValue === 'undefined') {
       return done(PYError.contentError('missing numericalValue'));
     }
 
     // cast string to number
-    event.content = actionFields.numericalValue * 1;
+    event.content = actionFields.NumericalValue * 1;
     if (isNaN(event.content)) {
-      return done(PYError.contentError('cannot cast value : "' + actionFields.numericalValue +
+      return done(PYError.contentError('cannot cast value : "' + actionFields.NumericalValue +
         '" to number'));
     }
 

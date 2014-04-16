@@ -30,11 +30,11 @@ describe('/actions/new-numerical-*', function () {
       request.post(serverBasePath + '/ifttt/v1/actions/new-numerical-basic')
         .set('Authorization', 'Bearer OI2O98AHF9A').send(
         { actionFields: {
-          description: 'Numerical Test',
-          eventType: 'mass/kg',
-          numericalValue: ' -34 ',
-          streamId: testStreamId,
-          tags: 'Test'
+          Title: 'Numerical Test',
+          EventType: 'mass/kg',
+          NumericalValue: ' -34 ',
+          StreamId: testStreamId,
+          Tags: 'Test'
         }
         }).end(function (res) {
           res.should.have.status(200);
@@ -46,14 +46,14 @@ describe('/actions/new-numerical-*', function () {
     });
 
 
-    it('POST Invalid new numerical value, missing eventType', function (done) {
+    it('POST Invalid new numerical value, missing EventType', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-numerical-basic')
         .set('Authorization', 'Bearer OI2O98AHF9A').send(
         { actionFields: {
-          description: 'Numerical Test',
-          numericalValue: ' -34 ',
-          streamId: testStreamId,
-          tags: 'Test'
+          Title: 'Numerical Test',
+          NumericalValue: ' -34 ',
+          StreamId: testStreamId,
+          Tags: 'Test'
         }
         }).end(function (res) {
           res.should.have.status(400);
@@ -63,14 +63,14 @@ describe('/actions/new-numerical-*', function () {
     });
 
 
-    it('POST Invalid new numerical value, missing numericalValue', function (done) {
+    it('POST Invalid new numerical value, missing NumericalValue', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-numerical-basic')
         .set('Authorization', 'Bearer OI2O98AHF9A').send(
         { actionFields: {
-          description: 'Numerical Test',
-          eventType: 'mass/kg',
-          streamId: testStreamId,
-          tags: 'Test'
+          Title: 'Numerical Test',
+          EventType: 'mass/kg',
+          StreamId: testStreamId,
+          Tags: 'Test'
         }
         }).end(function (res) {
           res.should.have.status(400);
@@ -83,11 +83,11 @@ describe('/actions/new-numerical-*', function () {
       request.post(serverBasePath + '/ifttt/v1/actions/new-numerical-basic')
         .set('Authorization', 'Bearer OI2O98AHF9A').send(
         { actionFields: {
-          description: 'Numerical Test',
-          eventType: 'mass/kg',
-          numericalValue: ' twenty ',
-          streamId: testStreamId,
-          tags: 'Test'
+          Title: 'Numerical Test',
+          EventType: 'mass/kg',
+          NumericalValue: ' twenty ',
+          StreamId: testStreamId,
+          Tags: 'Test'
         }
         }).end(function (res) {
           res.should.have.status(400);
@@ -102,8 +102,8 @@ describe('/actions/new-numerical-*', function () {
 
 
 function testEventTypeOption(slug) {
-  it(slug + '/fields/eventType/options', function (done) {
-    request.post(serverBasePath + '/ifttt/v1/actions/' + slug + '/fields/eventType/options')
+  it(slug + '/fields/EventType/options', function (done) {
+    request.post(serverBasePath + '/ifttt/v1/actions/' + slug + '/fields/EventType/options')
       .set('Authorization', 'Bearer OI2O98AHF9A')
       .end(function (res) {
         res.should.have.status(200);

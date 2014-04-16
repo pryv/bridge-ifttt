@@ -20,9 +20,9 @@ describe('/actions/new-note/', function () {
     db.setSet('OI2O98AHF9A', {username: 'ifttttest', pryvToken: 'cht8va9t9001he943bk8o4dhu'});
   });
 
-  describe('fields/streamId/options', function () {
+  describe('fields/StreamId/options', function () {
     it('POST Valid token', function (done) {
-      request.post(serverBasePath + '/ifttt/v1/actions/new-note/fields/streamId/options')
+      request.post(serverBasePath + '/ifttt/v1/actions/new-note/fields/StreamId/options')
         .set('Authorization', 'Bearer OI2O98AHF9A')
         .end(function (res) {
           res.should.have.status(200);
@@ -52,10 +52,10 @@ describe('/actions/new-note/', function () {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
         .set('Authorization', 'Bearer OI2O98AHF9A').send(
         { actionFields: {
-          description: 'Tweet by iftttpryv',
-          contentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
-          streamId: testStreamId,
-          tags: 'IFTTT, Twitter'
+          Title: 'Tweet by iftttpryv',
+          ContentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
+          StreamId: testStreamId,
+          Tags: 'IFTTT, Twitter'
         }
         }).end(function (res) {
           res.should.have.status(200);
@@ -71,11 +71,11 @@ describe('/actions/new-note/', function () {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
         .set('Authorization', 'Bearer OI2O98AHF9A').send(
         { actionFields:
-        { description: 'Tweet by iftttpryv',
-          contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
+        { Title: 'Tweet by iftttpryv',
+          ContentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
             'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
-          streamId: 'chtg78vkk00070i43s3q2kosv',
-          tags: 'IFTTT, Twitter'
+          StreamId: 'chtg78vkk00070i43s3q2kosv',
+          Tags: 'IFTTT, Twitter'
         }
         }).end(function (res) {
           res.should.have.status(200);
@@ -89,10 +89,10 @@ describe('/actions/new-note/', function () {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
         .set('Authorization', 'Bearer OI2O98AHF9A').send(
         { actionFields: {
-          description: 'Tweet by iftttpryv',
-          contentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
-          streamId: 'invalidStreamId',
-          tags: 'IFTTT, Twitter'
+          Title: 'Tweet by iftttpryv',
+          ContentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
+          StreamId: 'invalidStreamId',
+          Tags: 'IFTTT, Twitter'
         }
         }).end(function (res) {
           res.should.have.status(500);

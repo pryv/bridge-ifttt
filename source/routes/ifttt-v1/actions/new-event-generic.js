@@ -27,7 +27,7 @@ exports.addOption = function (app, optionKey, route, doFunction) {
 exports.setup = function setup(app, route, mapFunction) {
   var triggerPath = versionPath + 'actions/' + route;
 
-  app.post(triggerPath + '/fields/streamId/options',
+  app.post(triggerPath + '/fields/StreamId/options',
     require('../../../fields/stream').optionsStrict);
 
   app.post(triggerPath, function (req, res, next) {
@@ -39,22 +39,22 @@ exports.setup = function setup(app, route, mapFunction) {
 
     var actionFields = req.body.actionFields;
 
-    if (! actionFields.streamId) {
-      return next(PYError.contentError('Cannot find streamId'));
+    if (! actionFields.StreamId) {
+      return next(PYError.contentError('Cannot find StreamId'));
     }
 
 
     // --- streamId
-    var streamId = actionFields.streamId; //TODO check it's valid
+    var streamId = actionFields.StreamId; //TODO check it's valid
     var eventData = {streamId: streamId};
 
     // --- description
-    if (actionFields.description) { eventData.description = actionFields.description; }
+    if (actionFields.Title) { eventData.description = actionFields.Title; }
 
     // --- tags
-    if (actionFields.tags) {
+    if (actionFields.Tags) {
       var tags = [];
-      actionFields.tags.split(',').forEach(function (tag) {
+      actionFields.Tags.split(',').forEach(function (tag) {
         tags.push(tag.trim());
       });
       if (tags.length > 0) {
@@ -62,7 +62,10 @@ exports.setup = function setup(app, route, mapFunction) {
       }
     }
 
-
+    // --- CreatedAt
+    if (actionFields.CreatedAt) {
+      console.log('Action with At info:' + actionFields.CreatedAt);
+    }
 
 
     var event = new pryv.Event(req.pryvConnection, eventData);
@@ -125,13 +128,13 @@ exports.setup = function setup(app, route, mapFunction) {
  * @param done
  */
 function fetchAttachment(actionFields, done) {
-  if (! actionFields.attachmentUrl) {
+  if (! actionFields.AttachmentUrl) {
     return done(null, null);
   }
 
   var requestSettings = {
     method: 'GET',
-    url: actionFields.attachmentUrl,
+    url: actionFields.AttachmentUrl,
     encoding: null,
     strictSSL: false
   };
