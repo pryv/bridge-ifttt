@@ -27,7 +27,7 @@ exports.addOption = function (app, optionKey, route, doFunction) {
 exports.setup = function setup(app, route, mapFunction) {
   var triggerPath = versionPath + 'actions/' + route;
 
-  app.post(triggerPath + '/fields/StreamId/options',
+  app.post(triggerPath + '/fields/streamId/options',
     require('../../../fields/stream').optionsStrict);
 
   app.post(triggerPath, function (req, res, next) {
@@ -39,13 +39,13 @@ exports.setup = function setup(app, route, mapFunction) {
 
     var actionFields = req.body.actionFields;
 
-    if (! actionFields.StreamId) {
-      return next(PYError.contentError('Cannot find StreamId'));
+    if (! actionFields.streamId) {
+      return next(PYError.contentError('Cannot find streamId'));
     }
 
 
     // --- streamId
-    var streamId = actionFields.StreamId; //TODO check it's valid
+    var streamId = actionFields.streamId; //TODO check it's valid
     var eventData = {streamId: streamId};
 
     // --- description
@@ -62,10 +62,7 @@ exports.setup = function setup(app, route, mapFunction) {
       }
     }
 
-    // --- CreatedAt
-    if (actionFields.CreatedAt) {
-      console.log('Action with At info:' + actionFields.CreatedAt);
-    }
+
 
 
     var event = new pryv.Event(req.pryvConnection, eventData);
