@@ -49,12 +49,12 @@ exports.setup = function setup(app, route, mapFunction) {
     var eventData = {streamId: streamId};
 
     // --- description
-    if (actionFields.Title) { eventData.description = actionFields.Title; }
+    if (actionFields.description) { eventData.description = actionFields.description; }
 
     // --- tags
-    if (actionFields.Tags) {
+    if (actionFields.tags) {
       var tags = [];
-      actionFields.Tags.split(',').forEach(function (tag) {
+      actionFields.tags.split(',').forEach(function (tag) {
         tags.push(tag.trim());
       });
       if (tags.length > 0) {
@@ -125,13 +125,13 @@ exports.setup = function setup(app, route, mapFunction) {
  * @param done
  */
 function fetchAttachment(actionFields, done) {
-  if (! actionFields.AttachmentUrl) {
+  if (! actionFields.attachmentUrl) {
     return done(null, null);
   }
 
   var requestSettings = {
     method: 'GET',
-    url: actionFields.AttachmentUrl,
+    url: actionFields.attachmentUrl,
     encoding: null,
     strictSSL: false
   };

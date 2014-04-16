@@ -26,10 +26,10 @@ describe('/actions/new-photo/', function () {
       request.post(serverBasePath + '/ifttt/v1/actions/new-photo')
         .set('Authorization', 'Bearer OI2O98AHF9A').send(
         { actionFields: {
-          Title: 'Tweet by iftttpryv',
-          AttachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png',
-          StreamId: testStreamId,
-          Tags: 'IFTTT, Photo'
+          description: 'Tweet by iftttpryv',
+          attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png',
+          streamId: testStreamId,
+          tags: 'IFTTT, Photo'
         }
         }).end(function (res) {
           res.should.have.status(200);
@@ -47,10 +47,10 @@ describe('/actions/new-photo/', function () {
       request.post(serverBasePath + '/ifttt/v1/actions/new-photo')
         .set('Authorization', 'Bearer OI2O98AHF9A').send(
         { actionFields:
-        { StreamId: 'diary',
-          AttachmentUrl: 'https://locker.ifttt.com/f/d09e0ea0-5887-40ae-a27e-021a62b13e25',
-          Title: 'New photo added to "Camera Roll"',
-          Tags: 'IFTTT, iOS Photos' } }).end(function (res) {
+        { streamId: 'diary',
+          attachmentUrl: 'https://locker.ifttt.com/f/d09e0ea0-5887-40ae-a27e-021a62b13e25',
+          description: 'New photo added to "Camera Roll"',
+          tags: 'IFTTT, iOS Photos' } }).end(function (res) {
           res.should.have.status(200);
 
           res.body.should.have.property('data');
