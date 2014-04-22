@@ -5,7 +5,8 @@ exports.nameAndSymbolForKeys = function nameAndSymbolForKeys(typeKey, formatKey)
   var formatName = null;
   var formatSymbol = null;
   var extrasData = extras.extras[typeKey];
-  if (extrasData.formats && extrasData.formats[formatKey] &&
+
+  if (extrasData && extrasData.formats && extrasData.formats[formatKey] &&
     extrasData.formats[formatKey].name) {
     formatName = extrasData.formats[formatKey].name.en;
     formatSymbol = extrasData.formats[formatKey].symbol;

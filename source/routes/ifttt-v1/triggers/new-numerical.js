@@ -21,8 +21,6 @@ module.exports = function setup(app) {
       map.Value = event.content;
       var res = dataTypesUtils.nameAndSymbolForDataType(event.type);
 
-
-
       map.UnitName = res[0];
       map.UnitSymbol = res[1] || '';
     });

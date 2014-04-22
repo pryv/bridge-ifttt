@@ -18,8 +18,6 @@ describe('/triggers/new-numerical/', function () {
     db.setSet('OI2O98AHF9A', {username: 'ifttttest', pryvToken: 'cht8va9t9001he943bk8o4dhu'});
   });
 
-  /*
-
   describe('fields/streamId/options', function () {
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-numerical/fields/streamId/options')
@@ -42,17 +40,15 @@ describe('/triggers/new-numerical/', function () {
           res.should.have.status(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
+          console.log(res.body.data);
           done();
         });
     });
   });
 
-  */
-
   describe('/', function () {
 
-    /**
-     it('POST Missing dataType', function (done) {
+    it('POST Missing dataType', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-numerical')
         .set('Authorization', 'Bearer OI2O98AHF9A').send({
           triggerFields : {
@@ -61,8 +57,9 @@ describe('/triggers/new-numerical/', function () {
         })
         .end(function (res) {
           res.should.have.status(400);
+          done();
         });
-    });  **/
+    });
 
     it('POST Valid token and content', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-numerical')

@@ -1,7 +1,7 @@
 var PYError = require('../../../errors/PYError.js');
 var constants = require('../../../utils/constants.js');
 var cache = require('../../../storage/cache.js');
-
+var logger = require('winston');
 var versionPath = '/ifttt/v1/';
 
 
@@ -43,7 +43,6 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
       limit: req.body.limit || 50
     };
 
-
     if (typeof dataType === 'function') {
       filterLike.types = dataType(req.body.triggerFields);
       if (! filterLike.types) {
@@ -52,6 +51,7 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
     } else {
       filterLike.types = [dataType];
     }
+
 
 
     if (req.body.triggerFields.streamId !== constants.ANY_STREAMS) {
@@ -70,20 +70,25 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
 
         eventsArray.forEach(function (event) {
 
-          var streamName =  event.streamId;
-          if (streamMap[event.streamId] && streamMap[event.streamId].name) {
-            streamName = streamMap[event.streamId].name;
+          if (filterLike.types.indexOf(event.type) < 0) {
+            logger.error('trigger ' + route + ' get an event with type : ' + event.type);
+          }  else {
+
+            var streamName =  event.streamId;
+            if (streamMap[event.streamId] && streamMap[event.streamId].name) {
+              streamName = streamMap[event.streamId].name;
+            }
+
+            var eventData = {
+              ifttt: {id : event.id, timestamp: Math.round(event.time)},
+              Tags: event.tags ? event.tags.join(', ') : null,
+              StreamName: streamName,
+              At: (new Date(event.time * 1000)).toISOString()
+            };
+
+            mapFunction(event, eventData, req.body.triggerFields); //-- add extra informations
+            data.push(eventData);
           }
-
-          var eventData = {
-            ifttt: {id : event.id, timestamp: Math.round(event.time)},
-            Tags: event.tags ? event.tags.join(', ') : null,
-            StreamName: streamName,
-            At: (new Date(event.time * 1000)).toISOString()
-          };
-
-          mapFunction(event, eventData, req.body.triggerFields); //-- add extra informations
-          data.push(eventData);
         });
 
         console.log(data);
