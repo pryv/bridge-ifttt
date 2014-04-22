@@ -4,14 +4,31 @@ var cache = require('../../../storage/cache.js');
 
 var versionPath = '/ifttt/v1/';
 
+
+
+
+/**
+ * Generic extraOption Handler
+ * @param app
+ * @param {String} optionKey slug for this option
+ * @param {String} route 'new-note'
+ * @param {Function} doFunction function(req, res, next)
+ */
+exports.addOption = function (app, optionKey, route, doFunction) {
+  var optionPath = versionPath + 'triggers/' + route + '/fields/' + optionKey + '/options';
+  console.log(optionPath);
+  app.post(optionPath, doFunction);
+};
+
+
 /**
  * Generic wrapper for simple event-type based Triggers
  * @param app
  * @param {String} route '/new-note'
- * @param {String} dataType 'note/txt'
+ * @param {String | Function} dataType 'note/txt', if function it will return the required DataType
  * @param {Function} map function(event, eventData)
  */
-module.exports = function setup(app, route, dataType, mapFunction) {
+exports.setup = function setup(app, route, dataType, mapFunction) {
   var triggerPath = versionPath + 'triggers/' + route;
 
   app.post(triggerPath + '/fields/streamId/options', require('../../../fields/stream').options);
@@ -19,10 +36,23 @@ module.exports = function setup(app, route, dataType, mapFunction) {
   app.post(triggerPath, function (req, res, next) {
     if (! req.pryvConnection) { return next(PYError.authentificationRequired()); }
 
+
+    //---- construct the filter
+
     var filterLike = {
-      limit: req.body.limit || 50,
-      types: [dataType]
+      limit: req.body.limit || 50
     };
+
+
+    if (typeof dataType === 'function') {
+      filterLike.types = dataType(req.body.triggerFields);
+      if (! filterLike.types) {
+        return next(PYError.contentError('Cannot determine dataType (eventType)'));
+      }
+    } else {
+      filterLike.types = [dataType];
+    }
+
 
     if (req.body.triggerFields.streamId !== constants.ANY_STREAMS) {
       filterLike.streams = [req.body.triggerFields.streamId];
@@ -52,7 +82,7 @@ module.exports = function setup(app, route, dataType, mapFunction) {
             At: (new Date(event.time * 1000)).toISOString()
           };
 
-          mapFunction(event, eventData); //-- add extra informations
+          mapFunction(event, eventData, req.body.triggerFields); //-- add extra informations
           data.push(eventData);
         });
 

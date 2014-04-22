@@ -24,6 +24,7 @@ module.exports = function () {
   // triggers
   require('./routes/ifttt-v1/triggers/new-photo.js')(app);
   require('./routes/ifttt-v1/triggers/new-note.js')(app);
+  require('./routes/ifttt-v1/triggers/new-numerical.js')(app);
 
   // actions
   require('./routes/ifttt-v1/actions/new-note.js')(app);

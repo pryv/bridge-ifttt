@@ -1,7 +1,8 @@
 /*global describe, before, it */
 var config = require('../../../source/utils/config'),
   db = require('../../../source/storage/database'),
-  request = require('superagent');
+  request = require('superagent'),
+  testData = require('../../test-data.js');
 
 require('../../../source/server');
 
@@ -9,7 +10,6 @@ require('readyness/wait/mocha');
 
 require('should');
 
-var testStreamId = 'chtisiuo4000c0i43ys0czem0';
 
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
@@ -33,7 +33,7 @@ describe('/actions/new-numerical-*', function () {
           description: 'Numerical Test',
           eventType: 'mass/kg',
           numericalValue: ' -34 ',
-          streamId: testStreamId,
+          streamId: testData.streamId,
           tags: 'Test'
         }
         }).end(function (res) {
@@ -52,7 +52,7 @@ describe('/actions/new-numerical-*', function () {
         { actionFields: {
           description: 'Numerical Test',
           numericalValue: ' -34 ',
-          streamId: testStreamId,
+          streamId: testData.streamId,
           tags: 'Test'
         }
         }).end(function (res) {
@@ -69,7 +69,7 @@ describe('/actions/new-numerical-*', function () {
         { actionFields: {
           description: 'Numerical Test',
           eventType: 'mass/kg',
-          streamId: testStreamId,
+          streamId: testData.streamId,
           tags: 'Test'
         }
         }).end(function (res) {
@@ -86,7 +86,7 @@ describe('/actions/new-numerical-*', function () {
           description: 'Numerical Test',
           eventType: 'mass/kg',
           numericalValue: ' twenty ',
-          streamId: testStreamId,
+          streamId: testData.streamId,
           tags: 'Test'
         }
         }).end(function (res) {

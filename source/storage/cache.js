@@ -37,7 +37,9 @@ function getStreams(pryvConnection, callback) {
 
   db.getJSONCachedValue(key, function (error, cachedStreams) {
     if (error) { return callback(error, null); }
+
     if (cachedStreams) { return callback(null, cachedStreams); }
+
     pryvConnection.streams.get(null, function (error, streamsArray) {
       if (! error && streamsArray && streamsArray.length > 0) {
         db.setJSONCachedValue(key, pryvConnection.streams.toJSON(streamsArray),

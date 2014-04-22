@@ -9,9 +9,10 @@ var semver = require('semver');
 var exports = exports || {}; // just for IJ to present structure
 
 //redis error management
-redis.on('error', function (err) {
+/**
+ redis.on('error', function (err) {
   logger.error('Redis: ' + err.message);
-});
+});     **/
 
 var LASTEST_DB_VERSION = '0.0.1';
 var DBVERSION_KEY = 'dbversion';
@@ -56,14 +57,15 @@ function checkConnection() {
           logger.info('database init to version :' + dbversion);
           redis.set(DBVERSION_KEY, dbversion, nextStep);
         } else {
+          logger.info('database version :' + dbversion);
           nextStep();
         }
       });
     },
     function (nextStep) { // update db to version 1
       if (semver.lt(dbversion, LASTEST_DB_VERSION)) { return nextStep(); }
-      // convert all users to hashes
-      logger.info('updating db to version :' + LASTEST_DB_VERSION);
+
+      //logger.info('updating db to version :' + LASTEST_DB_VERSION);
 
       /**
        * HERE INSERT YOUR DB UPDATE CODE

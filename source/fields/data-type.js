@@ -1,6 +1,8 @@
 var extras = require('../assets/event-extras.json');
 //var eventTypes = require('../assets/event-types.json');
 
+var dataTypesUtils =  require('../assets/data-types-utils.js');
+
 var compiledSets = {};
 
 
@@ -24,15 +26,10 @@ function buildFromSets(compiledSetKey, selectedSets) {
 
       types[typeKey].forEach(function (formatKey) {
 
+        var res = dataTypesUtils.nameAndSymbolForKeys(typeKey, formatKey);
 
-        var formatName = null;
-        var formatSymbol = null;
-        if (extrasData.formats && extrasData.formats[formatKey] &&
-          extrasData.formats[formatKey].name) {
-          formatName = extrasData.formats[formatKey].name.en;
-          formatSymbol = extrasData.formats[formatKey].symbol;
-        }
-        formatName = formatName || formatKey;
+        var formatName = res[0];
+        var formatSymbol = res[1];
         if (formatSymbol) {
           formatSymbol = ' (' + formatSymbol + ')';
         } else {
