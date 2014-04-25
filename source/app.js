@@ -1,5 +1,4 @@
 var express = require('express');
-var logger = require('winston');
 
 module.exports = function () {
 
@@ -17,7 +16,6 @@ module.exports = function () {
       console.log('*23', req.headers['content-length']);
       if (+req.headers['content-length'] === 0) {
         req._body = true; // skip body parser
-        logger.warning('skipped body parser because of empty json POST');
       }
     }
     next();
