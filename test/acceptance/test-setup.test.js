@@ -21,7 +21,7 @@ describe('userinfo', function () {
       .end(function (res) {
         res.should.have.status(200);
         res.body.should.have.property('data');
-        res.body.data.should.have.property('sample');
+        res.body.data.should.have.property('samples');
         res.body.data.should.have.property('accessToken');
         done();
       });

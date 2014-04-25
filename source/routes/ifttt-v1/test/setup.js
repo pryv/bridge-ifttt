@@ -21,7 +21,7 @@ module.exports = function setup(app) {
     var response = {
       data: {
         accessToken: testData.oauthToken,
-        sample: {
+        samples: {
           triggers : {
             'new-note' : {
               streamId : {
