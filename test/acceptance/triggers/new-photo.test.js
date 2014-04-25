@@ -3,6 +3,10 @@ var config = require('../../../source/utils/config'),
   db = require('../../../source/storage/database'),
   request = require('superagent');
 
+
+var testData = require('../../test-data.js');
+
+
 require('../../../source/server');
 
 require('readyness/wait/mocha');
@@ -14,13 +18,13 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 describe('/triggers/new-photo/', function () {
 
   before(function () {
-    db.setSet('OI2O98AHF9A', {username: 'ifttttest', pryvToken: 'cht8va9t9001he943bk8o4dhu'});
+    db.setSet(testData.oauthToken, testData.userAccess);
   });
 
   describe('fields/streamId/options', function () {
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-photo/fields/streamId/options')
-        .set('Authorization', 'Bearer OI2O98AHF9A')
+        .set('Authorization', 'Bearer ' + testData.oauthToken)
         .end(function (res) {
           res.should.have.status(200);
           res.body.should.have.property('data');
@@ -34,7 +38,7 @@ describe('/triggers/new-photo/', function () {
 
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-photo')
-        .set('Authorization', 'Bearer OI2O98AHF9A').send({
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send({
           triggerFields : {
             streamId: 'diary'
           }

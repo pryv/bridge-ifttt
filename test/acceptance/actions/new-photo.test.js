@@ -3,32 +3,31 @@ var config = require('../../../source/utils/config'),
   db = require('../../../source/storage/database'),
   request = require('superagent');
 
+var testData = require('../../test-data.js');
+
 require('../../../source/server');
 
 require('readyness/wait/mocha');
 
 require('should');
 
-var testStreamId = 'chtisiuo4000c0i43ys0czem0';
-
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
 describe('/actions/new-photo/', function () {
 
   before(function () {
-    db.setSet('OI2O98AHF9A', {username: 'ifttttest', pryvToken: 'cht8va9t9001he943bk8o4dhu'});
+    db.setSet(testData.oauthToken, testData.userAccess);
   });
-
 
   describe('/', function () {
 
     it('POST Valid new picture', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-photo')
-        .set('Authorization', 'Bearer OI2O98AHF9A').send(
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
         { actionFields: {
           description: 'Tweet by iftttpryv',
           attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png',
-          streamId: testStreamId,
+          streamId: testData.streamId,
           tags: 'IFTTT, Photo'
         }
         }).end(function (res) {
@@ -45,7 +44,7 @@ describe('/actions/new-photo/', function () {
 
     it('POST Valid new picture', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-photo')
-        .set('Authorization', 'Bearer OI2O98AHF9A').send(
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
         { actionFields:
         { streamId: 'diary',
           attachmentUrl: 'https://locker.ifttt.com/f/d09e0ea0-5887-40ae-a27e-021a62b13e25',

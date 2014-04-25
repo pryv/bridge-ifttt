@@ -4,6 +4,9 @@ var config = require('../../../source/utils/config'),
   request = require('superagent'),
   constants = require('../../../source/utils/constants');
 
+
+var testData = require('../../test-data.js');
+
 require('../../../source/server');
 
 require('readyness/wait/mocha');
@@ -15,13 +18,13 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 describe('/triggers/new-note/', function () {
 
   before(function () {
-    db.setSet('OI2O98AHF9A', {username: 'ifttttest', pryvToken: 'cht8va9t9001he943bk8o4dhu'});
+    db.setSet(testData.oauthToken, testData.userAccess);
   });
 
   describe('fields/streamId/options', function () {
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-note/fields/streamId/options')
-        .set('Authorization', 'Bearer OI2O98AHF9A')
+        .set('Authorization', 'Bearer ' + testData.oauthToken)
         .end(function (res) {
           res.should.have.status(200);
           res.body.should.have.property('data');
@@ -36,7 +39,7 @@ describe('/triggers/new-note/', function () {
 
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-note')
-        .set('Authorization', 'Bearer OI2O98AHF9A').send({
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send({
           triggerFields : {
             streamId: 'diary'
           }
@@ -67,7 +70,7 @@ describe('/triggers/new-note/', function () {
 
     it('POST Valid token ANY STREAMS', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-note')
-        .set('Authorization', 'Bearer OI2O98AHF9A').send({
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send({
           triggerFields : {
             streamId: constants.ANY_STREAMS
           }

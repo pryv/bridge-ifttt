@@ -5,6 +5,9 @@ var db = require('../storage/database.js');
 var pryv = require('pryv');
 var config = require('../utils/config');
 
+
+var channelApiKey = config.get('ifttt:channelApiKey');
+
 module.exports =  function (req, res, next) {
 
   if (! req.get('Authorization')) {
@@ -20,6 +23,13 @@ module.exports =  function (req, res, next) {
     if (authorizarionHeader[0] !== 'Bearer' || !oauthToken) {
       return next(PYError.contentError('Authorization header bad content'));
     }
+
+    if (oauthToken === channelApiKey) { //-- route /ifttt/v1/test/setup
+      req.setupAuthorized = true;
+      return next(); // break
+    }
+
+
     db.getSet(oauthToken, function (error, credentials) {
       if (error) {
         return next(PYError.internalError('Database error'));

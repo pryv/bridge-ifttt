@@ -4,6 +4,8 @@ var config = require('../../../source/utils/config'),
   request = require('superagent'),
   testData = require('../../test-data.js');
 
+var testData = require('../../test-data.js');
+
 require('../../../source/server');
 
 require('readyness/wait/mocha');
@@ -16,7 +18,7 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 describe('/actions/new-numerical-*', function () {
 
   before(function () {
-    db.setSet('OI2O98AHF9A', {username: 'ifttttest', pryvToken: 'cht8va9t9001he943bk8o4dhu'});
+    db.setSet(testData.oauthToken, testData.userAccess);
   });
 
 
@@ -28,7 +30,7 @@ describe('/actions/new-numerical-*', function () {
 
     it('POST Valid new numerical value', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-numerical-basic')
-        .set('Authorization', 'Bearer OI2O98AHF9A').send(
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
         { actionFields: {
           description: 'Numerical Test',
           eventType: 'mass/kg',
@@ -48,7 +50,7 @@ describe('/actions/new-numerical-*', function () {
 
     it('POST Invalid new numerical value, missing eventType', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-numerical-basic')
-        .set('Authorization', 'Bearer OI2O98AHF9A').send(
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
         { actionFields: {
           description: 'Numerical Test',
           numericalValue: ' -34 ',
@@ -65,7 +67,7 @@ describe('/actions/new-numerical-*', function () {
 
     it('POST Invalid new numerical value, missing numericalValue', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-numerical-basic')
-        .set('Authorization', 'Bearer OI2O98AHF9A').send(
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
         { actionFields: {
           description: 'Numerical Test',
           eventType: 'mass/kg',
@@ -81,7 +83,7 @@ describe('/actions/new-numerical-*', function () {
 
     it('POST Invalid new numerical value, unparsable numericalValue', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-numerical-basic')
-        .set('Authorization', 'Bearer OI2O98AHF9A').send(
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
         { actionFields: {
           description: 'Numerical Test',
           eventType: 'mass/kg',
@@ -104,7 +106,7 @@ describe('/actions/new-numerical-*', function () {
 function testEventTypeOption(slug) {
   it(slug + '/fields/eventType/options', function (done) {
     request.post(serverBasePath + '/ifttt/v1/actions/' + slug + '/fields/eventType/options')
-      .set('Authorization', 'Bearer OI2O98AHF9A')
+      .set('Authorization', 'Bearer ' + testData.oauthToken)
       .end(function (res) {
         res.should.have.status(200);
         res.body.should.have.property('data');

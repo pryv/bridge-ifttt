@@ -3,6 +3,9 @@ var config = require('../../source/utils/config'),
   db = require('../../source/storage/database'),
   request = require('superagent');
 
+
+var testData = require('../test-data.js');
+
 require('../../source/server');
 
 require('readyness/wait/mocha');
@@ -14,7 +17,7 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 describe('userinfo', function () {
 
   before(function () {
-    db.setSet('OI2O98AHF9R', {username: 'perkikiki', pryvToken: 'ASDHUFOAW1234'});
+    db.setSet(testData.oauthToken, testData.userAccess);
   });
 
   describe('/ifttt/v1/user/info', function () {

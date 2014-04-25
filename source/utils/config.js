@@ -46,7 +46,8 @@ nconf.defaults({
   },
   ifttt: {
     clientId: 'ifttt-all',
-    secret: 'setInProductionConfig'
+    secret: 'setInHeadsetConfig',
+    channelApiKey: 'setInHeadsetConfig'
   },
   oauth: {
     secretPath: 'setElseWhere'
