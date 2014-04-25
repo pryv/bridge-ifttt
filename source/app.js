@@ -20,6 +20,7 @@ module.exports = function () {
   require('./routes/oauth2.js')(app);
   require('./routes/ifttt-v1/status.js')(app);
   require('./routes/ifttt-v1/user.js')(app);
+  require('./routes/ifttt-v1/test/setup.js')(app);
 
   // triggers
   require('./routes/ifttt-v1/triggers/new-photo.js')(app);

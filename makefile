@@ -1,6 +1,6 @@
 MOCHA=./node_modules/.bin/mocha
 TEST_FILES=test/acceptance/*.test.js
-TEST_TRIGGERS=test/acceptance/triggers/*l.test.js
+TEST_TRIGGERS=test/acceptance/triggers/*.test.js
 TEST_ACTIONS=test/acceptance/actions/*.test.js
 
 

@@ -77,10 +77,10 @@ describe('userinfo', function () {
         });
     });
 
-
+    */
     it('GET /ifttt/v1/user/info - Valid token', function (done) {
       request.get(serverBasePath + '/ifttt/v1/user/info')
-        .set('Authorization', 'Bearer OI2O98AHF9R')
+        .set('Authorization', 'Bearer ' + testData.oauthToken)
         .timeout(5000)
         .end(function (res) {
           res.should.have.status(200);
@@ -91,6 +91,6 @@ describe('userinfo', function () {
           res.body.data.should.have.property('url');
           done();
         });
-    });  */
+    });
   });
 });
