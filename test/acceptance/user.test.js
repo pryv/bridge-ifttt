@@ -30,7 +30,7 @@ describe('userinfo', function () {
         .set('Accept-Encoding', 'gzip, deflate')
         .timeout(5000)
         .end(function (res) {
-          res.should.have.status(400);
+          res.should.have.status(401);
           res.body.should.have.property('errors');
           done();
         });
