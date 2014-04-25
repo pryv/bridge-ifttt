@@ -5,8 +5,11 @@ var db = require('../storage/database.js');
 var pryv = require('pryv');
 var config = require('../utils/config');
 
+var testData = require('../../test/test-data');
 
 var channelApiKey = config.get('ifttt:channelApiKey');
+
+var staging = config.get('pryv:staging');
 
 module.exports =  function (req, res, next) {
 
@@ -24,11 +27,21 @@ module.exports =  function (req, res, next) {
       return next(PYError.authentificationRequired('Authorization header bad content'));
     }
 
+
+    var doIstage = staging;
+
+    //---- test related part
+
     if (oauthToken === channelApiKey) { //-- route /ifttt/v1/test/setup
       req.setupAuthorized = true;
       return next(); // break
     }
+    if (oauthToken === testData.oauthToken) {
+      doIstage = true;
+    }
 
+
+    //--- end of test related part
 
     db.getSet(oauthToken, function (error, credentials) {
       if (error) {
@@ -37,11 +50,12 @@ module.exports =  function (req, res, next) {
       if (!credentials || !credentials.username) {
         return next(PYError.invalidToken());
       }
+
       req.pryvCredentials = credentials;
       req.pryvConnection = new pryv.Connection({
         username: req.pryvCredentials.username,
         auth: req.pryvCredentials.pryvToken,
-        staging: config.get('pryv:staging')
+        staging: doIstage
       });
 
       next();
