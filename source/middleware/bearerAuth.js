@@ -17,7 +17,7 @@ module.exports =  function (req, res, next) {
 
     var authorizarionHeader = req.get('Authorization').split(' ');
     if (authorizarionHeader.length !== 2) {
-      return next(PYError.contentError('Authorization header too many arguments'));
+      return next(PYError.contentError('Authorization header bad number of arguments'));
     }
     var oauthToken = authorizarionHeader[1];
     if (authorizarionHeader[0] !== 'Bearer' || !oauthToken) {

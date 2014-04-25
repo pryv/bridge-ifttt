@@ -1,5 +1,5 @@
 var express = require('express');
-
+var logger = require('winston');
 
 module.exports = function () {
 
@@ -7,6 +7,23 @@ module.exports = function () {
 
   var app = express();
   app.disable('x-powered-by');
+
+
+
+
+  // support empty application/json request
+  app.use(function (req, res, next) {
+    if (req.headers['content-type'] === 'application/json') {
+      console.log('*23', req.headers['content-length']);
+      if (+req.headers['content-length'] === 0) {
+        req._body = true; // skip body parser
+        logger.warning('skipped body parser because of empty json POST');
+      }
+    }
+    next();
+  });
+
+
   app.use(express.bodyParser());
   app.use(app.router);
   app.use(require('./middleware/errors.js'));
