@@ -29,7 +29,7 @@ module.exports = function setup(app) {
                 invalid : 'blup'
               }
             },
-            'new-picture' : {
+            'new-photo' : {
               streamId : {
                 valid : testData.streamId,
                 invalid : 'blup'
@@ -51,19 +51,22 @@ module.exports = function setup(app) {
               description: 'Tweet by iftttpryv',
               contentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
               streamId: testData.streamId,
-              tags: 'IFTTT, Twitter'
+              tags: 'IFTTT, Twitter',
+              createdAt: 'April 25, 2014 at 12:09PM'
             },
-            'new-picture' : {
+            'new-photo' : {
               streamId: 'diary',
               attachmentUrl: 'https://locker.ifttt.com/f/d09e0ea0-5887-40ae-a27e-021a62b13e25',
               description: 'New photo added to "Camera Roll"',
-              tags: 'IFTTT, iOS Photos'
+              tags: 'IFTTT, iOS Photos',
+              createdAt: 'April 25, 2014 at 12:09PM'
             },
-            'new-numerical' : {
+            'new-numerical-basic' : {
               description: 'Numerical Test',
               numericalValue: ' -34 ',
               streamId: testData.streamId,
-              tags: 'Test'
+              tags: 'Test',
+              createdAt: 'April 25, 2014 at 12:09PM'
             }
           }
         }
