@@ -17,11 +17,11 @@ module.exports =  function (req, res, next) {
 
     var authorizarionHeader = req.get('Authorization').split(' ');
     if (authorizarionHeader.length !== 2) {
-      return next(PYError.contentError('Authorization header bad number of arguments'));
+      return next(PYError.authentificationRequired('Authorization header bad number of arguments'));
     }
     var oauthToken = authorizarionHeader[1];
     if (authorizarionHeader[0] !== 'Bearer' || !oauthToken) {
-      return next(PYError.contentError('Authorization header bad content'));
+      return next(PYError.authentificationRequired('Authorization header bad content'));
     }
 
     if (oauthToken === channelApiKey) { //-- route /ifttt/v1/test/setup

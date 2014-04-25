@@ -63,6 +63,7 @@ module.exports = function setup(app) {
             },
             'new-numerical-basic' : {
               description: 'Numerical Test',
+              eventType: 'mass/kg',
               numericalValue: ' -34 ',
               streamId: testData.streamId,
               tags: 'Test',
