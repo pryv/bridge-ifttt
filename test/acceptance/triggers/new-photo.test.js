@@ -54,7 +54,7 @@ describe('/triggers/new-photo/', function () {
             event.ifttt.should.have.property('timestamp');
 
             event.should.have.property('StreamName');
-            event.should.have.property('At'); // TODO test iso format
+            event.should.have.property('AtTime'); // TODO test iso format
             event.should.have.property('Tags');
             event.should.have.property('ImageURL'); // TODO eventually check url
           });

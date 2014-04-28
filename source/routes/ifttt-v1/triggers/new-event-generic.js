@@ -83,7 +83,7 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
               ifttt: {id : event.id, timestamp: Math.round(event.time)},
               Tags: event.tags ? event.tags.join(', ') : null,
               StreamName: streamName,
-              At: (new Date(event.time * 1000)).toISOString()
+              AtTime: (new Date(event.time * 1000)).toISOString()
             };
 
             mapFunction(event, eventData, req.body.triggerFields); //-- add extra informations
