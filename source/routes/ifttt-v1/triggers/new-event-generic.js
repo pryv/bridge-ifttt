@@ -105,8 +105,10 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
               AtTime: (new Date(event.time * 1000)).toISOString()
             };
 
-            mapFunction(event, eventData, req.body.triggerFields); //-- add extra informations
-            data.push(eventData);
+            //-- add extra informations
+            if (mapFunction(event, eventData, req.body.triggerFields)) {
+              data.push(eventData);
+            }
           }
         });
 

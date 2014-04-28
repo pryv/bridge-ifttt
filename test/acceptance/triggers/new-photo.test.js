@@ -40,7 +40,7 @@ describe('/triggers/new-photo/', function () {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-photo')
         .set('Authorization', 'Bearer ' + testData.oauthToken).send({
           triggerFields : {
-            streamId: 'diary'
+            streamId: testData.streamId
           }
         })
         .end(function (res) {

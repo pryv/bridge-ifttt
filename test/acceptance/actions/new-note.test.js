@@ -75,7 +75,7 @@ describe('/actions/new-note/', function () {
         { description: 'Tweet by iftttpryv',
           contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
             'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
-          streamId: 'chtg78vkk00070i43s3q2kosv',
+          streamId: testData.streamId,
           tags: 'IFTTT, Twitter'
         }
         }).end(function (res) {

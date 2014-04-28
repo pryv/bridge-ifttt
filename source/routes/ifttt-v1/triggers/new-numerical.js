@@ -23,6 +23,7 @@ module.exports = function setup(app) {
 
       map.UnitName = res[0];
       map.UnitSymbol = res[1] || '';
+      return true;
     });
 };
 

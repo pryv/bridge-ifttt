@@ -4,6 +4,13 @@ TEST_TRIGGERS=test/acceptance/triggers/*.test.js
 TEST_ACTIONS=test/acceptance/actions/*.test.js
 
 
+ifdef TEST
+	TEST_FILES=test/acceptance/$(TEST).test.js
+else
+	TEST_FILES=test/acceptance/*.test.js test/acceptance/*/*.test.js
+endif
+
+
 test-actions:
 	@$(MOCHA) --timeout 20000 --reporter spec $(TEST_ACTIONS)
 
