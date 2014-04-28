@@ -11,18 +11,6 @@ else
 endif
 
 
-test-actions:
-	@$(MOCHA) --timeout 20000 --reporter spec $(TEST_ACTIONS)
-
-test-actions-debug:
-	@$(MOCHA) --debug-brk --timeout 20000 --reporter spec $(TEST_ACTIONS)
-
-test-triggers:
-	@$(MOCHA) --timeout 20000 --reporter spec $(TEST_TRIGGERS)
-
-test-triggers-debug:
-	@$(MOCHA) --debug-brk --timeout 20000 --reporter spec $(TEST_TRIGGERS)
-
 test:
 	@$(MOCHA) --timeout 1000 --reporter spec $(TEST_FILES)
 

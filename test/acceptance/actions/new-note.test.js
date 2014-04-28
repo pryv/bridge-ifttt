@@ -103,7 +103,30 @@ describe('/actions/new-note/', function () {
         });
     });
 
-
+    it('POST  new note valid long content', function (done) {
+      request.post(serverBasePath + '/ifttt/v1/actions/new-note')
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        { actionFields:
+        { description: 'Les histoires du jeu vidéo d\'AHL : l\'Atari 2600',
+          streamId: testData.streamId,
+          contentText: 'Les histoires du jeu vidéo d\'AHL : l\'Atari 2600\nPREMIUM. ' +
+            'Amis rétrogamers, voici un nouvel épisode de la Saison 3 des Histoires du ' +
+            'Jeu Vidéo d\'AHL ! Et pour l\'occasion, place à une machine mythique : ' +
+            'l\'Atari 2600. L\'ami AHL revient donc sur Gameblog avec un retour dans ' +
+            'les années 70 avec une machine mythique de l\'histoire du jeu vidéo.\n' +
+            'http://ift.tt/1j4FtEK Tags:\nvia Pocket http://ift.tt/1j4FtEK\nApril 27, ' +
+            '2014 at 10:31PM http://ift.tt/1j4FtEK',
+          tags: 'Les histoires du jeu vidéo d\'AHL : l\'Atari 2600',
+          createdAt: ''
+        }
+        }).end(function (res) {
+          res.should.have.status(200);
+          res.body.should.have.property('data');
+          res.body.data.should.be.an.instanceof(Array);
+          res.body.data[0].should.have.property('id');
+          done();
+        });
+    });
 
   });
 });

@@ -13,7 +13,6 @@ module.exports = function () {
   // support empty application/json request
   app.use(function (req, res, next) {
     if (req.headers['content-type'] === 'application/json') {
-      console.log('*23', req.headers['content-length']);
       if (+req.headers['content-length'] === 0) {
         req._body = true; // skip body parser
       }
