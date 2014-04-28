@@ -52,7 +52,9 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
       filterLike.types = [dataType];
     }
 
-
+    if (! req.body.triggerFields.streamId) {
+      return next(PYError.contentError('No StreamId'));
+    }
 
     if (req.body.triggerFields.streamId !== constants.ANY_STREAMS) {
       filterLike.streams = [req.body.triggerFields.streamId];
