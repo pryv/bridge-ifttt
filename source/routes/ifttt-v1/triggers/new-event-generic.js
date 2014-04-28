@@ -40,8 +40,11 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
     //---- construct the filter
 
     var filterLike = {
-      limit: req.body.limit || 50
+      limit: 50
     };
+    if (req.body.limit || req.body.limit === 0) {
+      filterLike.limit = req.body.limit;
+    }
 
     if (typeof dataType === 'function') {
       filterLike.types = dataType(req.body.triggerFields);
