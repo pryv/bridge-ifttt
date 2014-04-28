@@ -24,25 +24,19 @@ module.exports = function setup(app) {
         samples: {
           triggers : {
             'new-note' : {
-              streamId : {
-                valid : testData.streamId,
-                invalid : 'blup'
-              }
+              streamId : testData.streamId
             },
             'new-photo' : {
               streamId : {
-                valid : testData.streamId,
-                invalid : 'blup'
+                valid : testData.streamId
               }
             },
             'new-numerical' : {
               streamId : {
-                valid : testData.streamId,
-                invalid : 'blup'
+                valid : testData.streamId
               },
               eventType : {
-                valid : 'mass/kg',
-                invalid : 'x'
+                valid : 'mass/kg'
               }
             }
           },
