@@ -40,9 +40,9 @@ describe('/actions/new-numerical-*', function () {
         }
         }).end(function (res) {
           res.should.have.status(200);
-
           res.body.should.have.property('data');
-          res.body.data.should.have.property('id');
+          res.body.data.should.be.an.instanceof(Array);
+          res.body.data[0].should.have.property('id');
           done();
         });
     });

@@ -16,7 +16,7 @@ require('should');
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
 describe('/triggers/new-note/', function () {
-
+  this.timeout(5000);
   before(function () {
     db.setSet(testData.oauthToken, testData.userAccess);
   });

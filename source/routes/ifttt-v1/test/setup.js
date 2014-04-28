@@ -43,8 +43,8 @@ module.exports = function setup(app) {
               createdAt: 'April 25, 2014 at 12:09PM'
             },
             'new-photo' : {
-              streamId: 'diary',
-              attachmentUrl: 'https://locker.ifttt.com/f/d09e0ea0-5887-40ae-a27e-021a62b13e25',
+              streamId: testData.streamId,
+              attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png',
               description: 'New photo added to "Camera Roll"',
               tags: 'IFTTT, iOS Photos',
               createdAt: 'April 25, 2014 at 12:09PM'

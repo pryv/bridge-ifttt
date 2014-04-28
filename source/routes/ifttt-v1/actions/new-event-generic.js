@@ -74,7 +74,7 @@ exports.setup = function setup(app, route, mapFunction) {
         }
         return next(PYError.internalError('Failed creating event ' + detailMsg, error));
       }
-      var data = {data: { id: event.id }};
+      var data = {data: [ {id: event.id} ]};
       console.log('OK creating event ' + detailMsg, data);
       res.json(data);
     };
