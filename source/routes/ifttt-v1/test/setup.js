@@ -36,7 +36,7 @@ module.exports = function setup(app) {
                 valid : testData.streamId
               },
               eventType : {
-                valid : 'mass/kg'
+                dataType : 'mass/kg'
               }
             }
           },

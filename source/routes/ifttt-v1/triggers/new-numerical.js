@@ -12,7 +12,7 @@ module.exports = function setup(app) {
 
   generic.setup(app, slug,
     function (triggerFields) { //--- dataType
-      if (triggerFields.eventType) {
+      if (triggerFields.eventType && typeof triggerFields.eventType === 'string') {
         return [triggerFields.eventType];
       }
       return null;

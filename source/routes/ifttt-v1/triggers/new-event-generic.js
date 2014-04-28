@@ -46,17 +46,19 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
       filterLike.limit = req.body.limit;
     }
 
+
+    if (! req.body.triggerFields) {
+      return next(PYError.contentError('No triggerFields'));
+    }
+
     if (typeof dataType === 'function') {
+
       filterLike.types = dataType(req.body.triggerFields);
       if (! filterLike.types) {
         return next(PYError.contentError('Cannot determine dataType (eventType)'));
       }
     } else {
       filterLike.types = [dataType];
-    }
-
-    if (! req.body.triggerFields) {
-      return next(PYError.contentError('No triggerFields'));
     }
 
 
