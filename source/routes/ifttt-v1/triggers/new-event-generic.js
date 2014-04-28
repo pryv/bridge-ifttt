@@ -60,6 +60,12 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
       filterLike.streams = [req.body.triggerFields.streamId];
     }
 
+    //-- skip
+    if (filterLike.limit === 0) {
+      console.log('limit === 0');
+      res.send({data : []});
+    }
+
 
     // -- fetch the events
     req.pryvConnection.events.get(filterLike, function (error, eventsArray) {
