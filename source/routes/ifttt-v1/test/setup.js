@@ -27,17 +27,11 @@ module.exports = function setup(app) {
               streamId : testData.streamId
             },
             'new-photo' : {
-              streamId : {
-                valid : testData.streamId
-              }
+              streamId : testData.streamId
             },
             'new-numerical' : {
-              streamId : {
-                valid : testData.streamId
-              },
-              eventType : {
-                dataType : 'mass/kg'
-              }
+              streamId : testData.streamId,
+              eventType : 'mass/kg'
             }
           },
           actions : {
