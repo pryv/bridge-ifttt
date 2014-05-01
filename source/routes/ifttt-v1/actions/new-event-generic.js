@@ -150,9 +150,19 @@ function fetchAttachment(actionFields, done) {
       type = response.headers['content-type'];
     }
 
+    // try to guess filename
+    var filename = requestSettings.url.split('/').pop().split('?')[0] || 'attachment0';
+
+    if (actionFields.filename) {
+      var filenameFromUser = actionFields.filename.trim().replace(/[^a-zA-Z0-9.\-]/gi, '_');
+      if (filenameFromUser.length > 5) {
+        filename = filenameFromUser;
+      }
+    }
+
     done(null, {
       type : type,
-      filename : 'attachment0',
+      filename : filename,
       data : body
     });
   });

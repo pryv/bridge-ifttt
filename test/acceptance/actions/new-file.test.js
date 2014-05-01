@@ -1,5 +1,4 @@
 /*global describe, before, it */
-
 var config = require('../../../source/utils/config'),
   db = require('../../../source/storage/database'),
   request = require('superagent');
@@ -14,8 +13,7 @@ require('should');
 
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
-/**
-describe('/actions/start-stop-activity', function () {
+describe('/actions/new-file/', function () {
   this.timeout(5000);
   before(function () {
     db.setSet(testData.oauthToken, testData.userAccess);
@@ -23,14 +21,15 @@ describe('/actions/start-stop-activity', function () {
 
   describe('/', function () {
 
-    it('Start new activity in stream', function (done) {
-      request.post(serverBasePath + '/ifttt/v1/actions/start-stop-activity')
+    it('POST Valid new file from Pryv', function (done) {
+      request.post(serverBasePath + '/ifttt/v1/actions/new-file')
         .set('Authorization', 'Bearer ' + testData.oauthToken).send(
         { actionFields: {
-          description: 'Na Na Nah',
+          description: 'File upload test',
+          attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png?125126',
           streamId: testData.streamId,
-          action: 'start',
-          tags: 'IFTTT'
+          filename: 'logoPry$à/v2.png',
+          tags: 'IFTTT, File'
         }
         }).end(function (res) {
           res.should.have.status(200);
@@ -40,25 +39,5 @@ describe('/actions/start-stop-activity', function () {
           done();
         });
     });
-
-    it('Stop any activity in stream', function (done) {
-      request.post(serverBasePath + '/ifttt/v1/actions/start-stop-activity')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
-        { actionFields: {
-          description: 'Na Na Nah',
-          streamId: testData.streamId,
-          action: 'stop',
-          tags: 'IFTTT'
-        }
-        }).end(function (res) {
-          res.should.have.status(200);
-          res.body.should.have.property('data');
-          res.body.data.should.be.an.instanceof(Array);
-          res.body.data[0].should.have.property('id');
-          done();
-        });
-    });
-
   });
 });
-**/

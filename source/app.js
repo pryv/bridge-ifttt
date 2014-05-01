@@ -45,6 +45,7 @@ module.exports = function () {
   require('./routes/ifttt-v1/actions/new-note.js')(app);
   require('./routes/ifttt-v1/actions/new-photo.js')(app);
   require('./routes/ifttt-v1/actions/new-numerical.js')(app);
+  require('./routes/ifttt-v1/actions/new-file.js')(app);
 
   // error handler
 
