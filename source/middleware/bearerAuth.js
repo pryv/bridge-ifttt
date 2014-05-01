@@ -14,32 +14,31 @@ var staging = config.get('pryv:staging');
 module.exports =  function (req, res, next) {
 
   if (! req.get('Authorization')) {
+    //---- test related part
+    if (req.get('IFTTT-Channel-Key')) {
+      if (req.get('IFTTT-Channel-Key') !== channelApiKey) { //-- route /ifttt/v1/test/setup
+        return next(PYError.authentificationRequired('IFTTT-Channel-Key header bad content'));
+      }
+      req.setupAuthorized = true;
+    }
     return next();
   } else {
-
-
-    var authorizarionHeader = req.get('Authorization').split(' ');
-    if (authorizarionHeader.length !== 2) {
+    var authorizationHeader = req.get('Authorization').split(' ');
+    if (authorizationHeader.length !== 2) {
       return next(PYError.authentificationRequired('Authorization header bad number of arguments'));
     }
-    var oauthToken = authorizarionHeader[1];
-    if (authorizarionHeader[0] !== 'Bearer' || !oauthToken) {
+    var oauthToken = authorizationHeader[1];
+
+
+    if (authorizationHeader[0] !== 'Bearer' || !oauthToken) {
       return next(PYError.authentificationRequired('Authorization header bad content'));
     }
 
-
     var doIstage = staging;
-
-    //---- test related part
-
-    if (oauthToken === channelApiKey) { //-- route /ifttt/v1/test/setup
-      req.setupAuthorized = true;
-      return next(); // break
-    }
+    //-- in testing scheme mode , switch to pryv.in
     if (oauthToken === testData.oauthToken) {
       doIstage = true;
     }
-
 
     //--- end of test related part
 

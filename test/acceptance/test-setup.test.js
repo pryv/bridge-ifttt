@@ -15,7 +15,7 @@ describe('userinfo', function () {
 
   it('POST /ifttt/v1/test/setup - Channel Test Setup', function (done) {
     request.post(serverBasePath + '/ifttt/v1/test/setup')
-      .set('Authorization', 'Bearer ' + config.get('ifttt:channelApiKey'))
+      .set('IFTTT-Channel-Key', config.get('ifttt:channelApiKey'))
       .set('Content-Type', 'application/json')
       .set('Content-Length', 0)
       .end(function (res) {
