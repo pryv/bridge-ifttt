@@ -49,6 +49,14 @@ module.exports = function setup(app) {
               tags: 'IFTTT, iOS Photos',
               createdAt: 'April 25, 2014 at 12:09PM'
             },
+            'new-file' : {
+              streamId: testData.streamId,
+              attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png',
+              description: 'New photo saved as file',
+              tags: 'IFTTT, File',
+              filename: 'logoPryvX.png',
+              createdAt: 'April 25, 2014 at 12:09PM'
+            },
             'new-numerical-basic' : {
               description: 'Numerical Test',
               eventType: 'mass/kg',
