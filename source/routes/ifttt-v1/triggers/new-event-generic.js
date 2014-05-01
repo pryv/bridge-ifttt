@@ -99,7 +99,7 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
             }
 
             var eventData = {
-              ifttt: {id : event.id, timestamp: Math.round(event.time)},
+              meta: {id : event.id, timestamp: Math.round(event.time)},
               Tags: event.tags ? event.tags.join(', ') : null,
               StreamName: streamName,
               AtTime: (new Date(event.time * 1000)).toISOString()

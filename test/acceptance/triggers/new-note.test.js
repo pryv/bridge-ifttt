@@ -50,9 +50,9 @@ describe('/triggers/new-note/', function () {
           res.body.data.should.be.an.instanceof(Array);
 
           res.body.data.forEach(function (event) { 
-            event.should.have.property('ifttt');
-            event.ifttt.should.have.property('id');
-            event.ifttt.should.have.property('timestamp');
+            event.should.have.property('meta');
+            event.meta.should.have.property('id');
+            event.meta.should.have.property('timestamp');
 
             event.should.have.property('StreamName');
             event.should.have.property('AtTime'); // TODO test iso format
@@ -81,9 +81,9 @@ describe('/triggers/new-note/', function () {
           res.body.data.should.be.an.instanceof(Array);
 
           res.body.data.forEach(function (event) {
-            event.should.have.property('ifttt');
-            event.ifttt.should.have.property('id');
-            event.ifttt.should.have.property('timestamp');
+            event.should.have.property('meta');
+            event.meta.should.have.property('id');
+            event.meta.should.have.property('timestamp');
 
             event.should.have.property('StreamName');
             event.should.have.property('AtTime'); // TODO test iso format
