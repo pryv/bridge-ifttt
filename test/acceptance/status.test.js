@@ -11,9 +11,9 @@ require('readyness/wait/mocha');
 
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
-describe('userinfo', function () {
+describe('status', function () {
 
-  it('GET /ifttt/v1/status - Channel Status test', function (done) {
+  it('valid auth', function (done) {
     request.get(serverBasePath + '/ifttt/v1/status')
       .set('Accept', 'application/json')
       .set('IFTTT-Channel-Key', config.get('ifttt:channelApiKey'))
@@ -22,9 +22,20 @@ describe('userinfo', function () {
       .set('Content-Type', 'application/json')
       .end(function (res) {
         res.should.have.status(200);
-        res.header['content-type'].should.eql('application/json; charset=utf-8');
-        res.body.should.have.property('data');
-        res.body.data.should.have.property('status', 'OK');
+        done();
+      });
+  });
+
+
+  it('invalid auth should fail', function (done) {
+    request.get(serverBasePath + '/ifttt/v1/status')
+      .set('Accept', 'application/json')
+      .set('IFTTT-Channel-Key', 'sss')
+      .set('Accept-Charset', 'utf-8')
+      .set('Accept-Encoding', 'gzip, deflate')
+      .set('Content-Type', 'application/json')
+      .end(function (res) {
+        res.should.have.status(401);
         done();
       });
   });

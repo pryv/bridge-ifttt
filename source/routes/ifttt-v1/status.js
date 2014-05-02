@@ -8,16 +8,9 @@ module.exports = function setup(app) {
   app.get('/ifttt/v1/status', function (req, res, next) {
 
     if (!req.iftttAuthorized) {
-      return next(PYError.contentError('No authorization token'));
+      return next(PYError.authentificationRequired('Auth key missing or invalid'));
     }
 
-
-    var response = {
-      data: {
-        status: 'OK',
-        time: (new Date()).toISOString()
-      }
-    };
-    res.json(response);
+    res.send('');
   });
 };

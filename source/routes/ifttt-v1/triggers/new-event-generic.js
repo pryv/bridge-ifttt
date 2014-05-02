@@ -102,7 +102,7 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
               meta: {id : event.id, timestamp: Math.round(event.time)},
               Tags: event.tags ? event.tags.join(', ') : null,
               StreamName: streamName,
-              AtTime: (new Date(event.time * 1000)).toISOString()
+              AtTime: (new Date(event.time * 1000)).toIFTTTISOString()
             };
 
             //-- add extra informations
@@ -119,3 +119,19 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
   });
 };
 
+function pad(number) {
+  if (number < 10) {
+    return '0' + number;
+  }
+  return number;
+}
+
+Date.prototype.toIFTTTISOString = function () {
+  return this.getUTCFullYear() +
+    '-' + pad(this.getUTCMonth() + 1) +
+    '-' + pad(this.getUTCDate()) +
+    'T' + pad(this.getUTCHours()) +
+    ':' + pad(this.getUTCMinutes()) +
+    ':' + pad(this.getUTCSeconds()) +
+    'Z';
+};
