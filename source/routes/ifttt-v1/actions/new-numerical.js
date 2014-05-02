@@ -14,7 +14,7 @@ function addStaticRoute(app, route, dataTypesHandler) {
 
   generic.setup(app, route, function (event, actionFields, done) {
     if (! actionFields.eventType) {
-      return done(PYError.contentError('missing eventType'));
+      return done(PYError.contentError('missing actionFields.eventType'));
     }
     event.type = actionFields.eventType;
 

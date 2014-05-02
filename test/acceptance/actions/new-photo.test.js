@@ -28,7 +28,8 @@ describe('/actions/new-photo/', function () {
           description: 'Tweet by iftttpryv',
           attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png',
           streamId: testData.streamId,
-          tags: 'IFTTT, Photo'
+          tags: 'IFTTT, Photo',
+          createdAt: ''
         }
         }).end(function (res) {
           res.should.have.status(200);

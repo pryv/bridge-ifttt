@@ -48,6 +48,70 @@ describe('/actions/new-note/', function () {
         });
     });
 
+    it('POST invalid with missing streamId', function (done) {
+      request.post(serverBasePath + '/ifttt/v1/actions/new-note')
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        { actionFields:
+        { description: '',
+          contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
+          'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
+          tags: 'IFTTT, Twitter',
+          createdAt: ''
+        }
+        }).end(function (res) {
+          res.should.have.status(400);
+          done();
+        });
+    });
+
+    it('POST invalid with missing description', function (done) {
+      request.post(serverBasePath + '/ifttt/v1/actions/new-note')
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        { actionFields:
+        { contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
+            'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
+          streamId: testData.streamId,
+          tags: 'IFTTT, Twitter',
+          createdAt: ''
+        }
+        }).end(function (res) {
+          res.should.have.status(400);
+          done();
+        });
+    });
+
+    it('POST invalid with missing tags', function (done) {
+      request.post(serverBasePath + '/ifttt/v1/actions/new-note')
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        { actionFields:
+        { description: 'sahshas',
+          contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
+          'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
+          streamId: testData.streamId,
+          createdAt: ''
+        }
+        }).end(function (res) {
+          res.should.have.status(400);
+          done();
+        });
+    });
+
+
+    it('POST invalid with missing createdAt', function (done) {
+      request.post(serverBasePath + '/ifttt/v1/actions/new-note')
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        { actionFields:
+        { description: 'sahshas',
+          contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
+            'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
+          streamId: testData.streamId
+        }
+        }).end(function (res) {
+          res.should.have.status(400);
+          done();
+        });
+    });
+
 
     it('POST Valid new note', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
@@ -56,7 +120,8 @@ describe('/actions/new-note/', function () {
           description: 'Tweet by iftttpryv',
           contentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
           streamId: testData.streamId,
-          tags: 'IFTTT, Twitter'
+          tags: 'IFTTT, Twitter',
+          createdAt: ''
         }
         }).end(function (res) {
           res.should.have.status(200);
@@ -76,7 +141,8 @@ describe('/actions/new-note/', function () {
           contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
             'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
           streamId: testData.streamId,
-          tags: 'IFTTT, Twitter'
+          tags: 'IFTTT, Twitter',
+          createdAt: ''
         }
         }).end(function (res) {
           res.should.have.status(200);
@@ -94,7 +160,8 @@ describe('/actions/new-note/', function () {
           description: 'Tweet by iftttpryv',
           contentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
           streamId: 'invalidStreamId',
-          tags: 'IFTTT, Twitter'
+          tags: 'IFTTT, Twitter',
+          createdAt: ''
         }
         }).end(function (res) {
           res.should.have.status(500);

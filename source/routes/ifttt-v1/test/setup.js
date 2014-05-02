@@ -11,7 +11,7 @@ module.exports = function setup(app) {
 
   // Show the current server status
   app.post('/ifttt/v1/test/setup', function (req, res, next) {
-    if (!req.setupAuthorized) {
+    if (!req.iftttAuthorized) {
       return next(PYError.contentError('No authorization token'));
     }
 

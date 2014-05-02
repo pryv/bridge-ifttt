@@ -19,7 +19,7 @@ module.exports =  function (req, res, next) {
       if (req.get('IFTTT-Channel-Key') !== channelApiKey) { //-- route /ifttt/v1/test/setup
         return next(PYError.authentificationRequired('IFTTT-Channel-Key header bad content'));
       }
-      req.setupAuthorized = true;
+      req.iftttAuthorized = true;
     }
     return next();
   } else {

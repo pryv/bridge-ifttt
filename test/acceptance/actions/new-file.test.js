@@ -29,7 +29,8 @@ describe('/actions/new-file/', function () {
           attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png?125126',
           streamId: testData.streamId,
           filename: 'logoPry$à/v2.png',
-          tags: 'IFTTT, File'
+          tags: 'IFTTT, File',
+          createdAt: ''
         }
         }).end(function (res) {
           res.should.have.status(200);

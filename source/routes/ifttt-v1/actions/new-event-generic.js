@@ -40,7 +40,7 @@ exports.setup = function setup(app, route, mapFunction) {
     var actionFields = req.body.actionFields;
 
     if (! actionFields.streamId) {
-      return next(PYError.contentError('Cannot find streamId'));
+      return next(PYError.contentError('Cannot find actionFields.streamId'));
     }
 
 
@@ -49,19 +49,30 @@ exports.setup = function setup(app, route, mapFunction) {
     var eventData = {streamId: streamId};
 
     // --- description
-    if (actionFields.description) { eventData.description = actionFields.description; }
-
-    // --- tags
-    if (actionFields.tags) {
-      var tags = [];
-      actionFields.tags.split(',').forEach(function (tag) {
-        tags.push(tag.trim());
-      });
-      if (tags.length > 0) {
-        eventData.tags = tags;
-      }
+    if (typeof actionFields.description === 'undefined') {
+      return next(PYError.contentError('Cannot find actionFields.description'));
+    }
+    actionFields.description = actionFields.description.trim();
+    if (actionFields.description.length > 0) {
+      eventData.description = actionFields.description;
     }
 
+    // --- tags
+    if (typeof actionFields.tags === 'undefined') {
+      return next(PYError.contentError('Cannot find actionFields.tags'));
+    }
+    var tags = [];
+    actionFields.tags.split(',').forEach(function (tag) {
+      tags.push(tag.trim());
+    });
+    if (tags.length > 0) {
+      eventData.tags = tags;
+    }
+
+    // --- createdAt
+    if (typeof actionFields.createdAt === 'undefined') {
+      return next(PYError.contentError('Cannot find actionFields.createdAt'));
+    }
 
 
 
