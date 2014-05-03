@@ -36,8 +36,7 @@ describe('/actions/new-numerical-*', function () {
           eventType: 'mass/kg',
           numericalValue: ' -34 ',
           streamId: testData.streamId,
-          tags: 'Test',
-          createdAt: ''
+          tags: 'Test'
         }
         }).end(function (res) {
           res.should.have.status(200);

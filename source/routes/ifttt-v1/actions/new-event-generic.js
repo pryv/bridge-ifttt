@@ -69,12 +69,6 @@ exports.setup = function setup(app, route, mapFunction) {
       eventData.tags = tags;
     }
 
-    // --- createdAt
-    if (typeof actionFields.createdAt === 'undefined') {
-      return next(PYError.contentError('Cannot find actionFields.createdAt'));
-    }
-
-
 
     var event = new pryv.Event(req.pryvConnection, eventData);
     var detailMsg = '';

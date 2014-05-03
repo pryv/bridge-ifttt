@@ -55,8 +55,7 @@ describe('/actions/new-note/', function () {
         { description: '',
           contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
           'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
-          tags: 'IFTTT, Twitter',
-          createdAt: ''
+          tags: 'IFTTT, Twitter'
         }
         }).end(function (res) {
           res.should.have.status(400);
@@ -71,8 +70,7 @@ describe('/actions/new-note/', function () {
         { contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
             'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
           streamId: testData.streamId,
-          tags: 'IFTTT, Twitter',
-          createdAt: ''
+          tags: 'IFTTT, Twitter'
         }
         }).end(function (res) {
           res.should.have.status(400);
@@ -87,23 +85,6 @@ describe('/actions/new-note/', function () {
         { description: 'sahshas',
           contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
           'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
-          streamId: testData.streamId,
-          createdAt: ''
-        }
-        }).end(function (res) {
-          res.should.have.status(400);
-          done();
-        });
-    });
-
-
-    it('POST invalid with missing createdAt', function (done) {
-      request.post(serverBasePath + '/ifttt/v1/actions/new-note')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
-        { actionFields:
-        { description: 'sahshas',
-          contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
-            'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
           streamId: testData.streamId
         }
         }).end(function (res) {
@@ -120,8 +101,7 @@ describe('/actions/new-note/', function () {
           description: 'Tweet by iftttpryv',
           contentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
           streamId: testData.streamId,
-          tags: 'IFTTT, Twitter',
-          createdAt: ''
+          tags: 'IFTTT, Twitter'
         }
         }).end(function (res) {
           res.should.have.status(200);
@@ -141,8 +121,7 @@ describe('/actions/new-note/', function () {
           contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
             'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
           streamId: testData.streamId,
-          tags: 'IFTTT, Twitter',
-          createdAt: ''
+          tags: 'IFTTT, Twitter'
         }
         }).end(function (res) {
           res.should.have.status(200);
@@ -160,8 +139,7 @@ describe('/actions/new-note/', function () {
           description: 'Tweet by iftttpryv',
           contentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
           streamId: 'invalidStreamId',
-          tags: 'IFTTT, Twitter',
-          createdAt: ''
+          tags: 'IFTTT, Twitter'
         }
         }).end(function (res) {
           res.should.have.status(500);
@@ -183,8 +161,7 @@ describe('/actions/new-note/', function () {
             'les années 70 avec une machine mythique de l\'histoire du jeu vidéo.\n' +
             'http://ift.tt/1j4FtEK Tags:\nvia Pocket http://ift.tt/1j4FtEK\nApril 27, ' +
             '2014 at 10:31PM http://ift.tt/1j4FtEK',
-          tags: 'Les histoires du jeu vidéo d\'AHL : l\'Atari 2600',
-          createdAt: ''
+          tags: 'Les histoires du jeu vidéo d\'AHL : l\'Atari 2600'
         }
         }).end(function (res) {
           res.should.have.status(200);

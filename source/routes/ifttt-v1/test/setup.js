@@ -39,31 +39,27 @@ module.exports = function setup(app) {
               description: 'Tweet by iftttpryv',
               contentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
               streamId: testData.streamId,
-              tags: 'IFTTT, Twitter',
-              createdAt: 'April 25, 2014 at 12:09PM'
+              tags: 'IFTTT, Twitter'
             },
             'new-photo' : {
               streamId: testData.streamId,
               attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png',
               description: 'New photo added to "Camera Roll"',
-              tags: 'IFTTT, iOS Photos',
-              createdAt: 'April 25, 2014 at 12:09PM'
+              tags: 'IFTTT, iOS Photos'
             },
             'new-file' : {
               streamId: testData.streamId,
               attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png',
               description: 'New photo saved as file',
               tags: 'IFTTT, File',
-              filename: 'logoPryvX.png',
-              createdAt: 'April 25, 2014 at 12:09PM'
+              filename: 'logoPryvX.png'
             },
             'new-numerical-basic' : {
               description: 'Numerical Test',
               eventType: 'mass/kg',
               numericalValue: ' -34 ',
               streamId: testData.streamId,
-              tags: 'Test',
-              createdAt: 'April 25, 2014 at 12:09PM'
+              tags: 'Test'
             }
           }
         }
