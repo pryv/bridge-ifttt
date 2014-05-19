@@ -1,7 +1,8 @@
 var PYError = require('../../errors/PYError.js');
 
 var config = require('../../utils/config');
-var domain =  '.' + config.get('pryv:domain');
+var domain =  '.';
+domain += (config.get('pryv:domain') === 'pryv.in') ? 'pryv.li' : 'pryv.me';
 
 module.exports = function setup(app) {
 
