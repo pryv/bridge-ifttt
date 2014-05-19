@@ -58,6 +58,7 @@ describe('/triggers/new-note/', function () {
             event.should.have.property('AtTime'); // TODO test iso format
             event.should.have.property('Tags');
             event.should.have.property('NoteContent');
+            event.should.have.property('description');
           });
 
 
