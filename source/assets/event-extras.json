@@ -1,2669 +1,2701 @@
 {
-  "version": "0.2.4",
+  "version": "0.2.6",
   "sets": {
-  "basic-measurements-metric": {
-    "name": {
-      "en": "Metric measures (basics)",
+    "basic-measurements-metric": {
+      "name": {
+        "en": "Metric measures (basics)",
         "fr": "Mesures métriques de base"
-    },
-    "description": {
-      "en": "Kg, m, Km, ... "
-    },
-    "types": {
-      "length": [
-        "cm",
-        "km",
-        "m",
-        "mm"
-      ],
+      },
+      "description": {
+        "en": "Kg, m, Km, ... "
+      },
+      "types": {
+        "count": [
+          "generic"
+        ],
+        "length": [
+          "cm",
+          "km",
+          "m",
+          "mm"
+        ],
         "mass": [
-        "kg",
-        "g",
-        "t"
-      ],
+          "kg",
+          "g",
+          "t"
+        ],
         "temperature": [
-        "c"
-      ],
+          "c"
+        ],
         "speed": [
-        "km-h",
-        "m-s"
-      ],
+          "km-h",
+          "m-s"
+        ],
         "volume": [
-        "l",
-        "m3",
-        "ml"
-      ]
-    }
-  },
-  "generic-measurements-metric": {
-    "name": {
-      "en": "Metric measures",
+          "l",
+          "m3",
+          "ml"
+        ]
+      }
+    },
+    "generic-measurements-metric": {
+      "name": {
+        "en": "Metric measures",
         "fr": "Mesures métriques"
-    },
-    "description": {
-      "en": "Kg, m, Km, ... "
-    },
-    "types": {
-      "area": [
-        "ha",
-        "km2",
-        "m2"
-      ],
-        "electric-current": [
-        "a"
-      ],
-        "electromotive-force": [
-        "v"
-      ],
-        "energy": [
-        "cal",
-        "j",
-        "kcal"
-      ],
-        "frequency": [
-        "hz",
-        "bpm",
-        "rpm"
-      ],
-        "length": [
-        "cm",
-        "km",
-        "m",
-        "mm"
-      ],
-        "mass": [
-        "kg",
-        "g",
-        "t"
-      ],
-        "power": [
-        "hp",
-        "kw",
-        "w"
-      ],
-        "pressure": [
-        "bar",
-        "kg-m2",
-        "pa",
-        "kpa"
-      ],
-        "temperature": [
-        "c"
-      ],
-        "speed": [
-        "km-h",
-        "m-s"
-      ],
-        "volume": [
-        "l",
-        "m3",
-        "ml"
-      ]
-    }
-  },
-  "basic-measurements-imperial": {
-    "name": {
-      "en": "Imperial measures (basics)",
-        "fr": "Mesures, système impérial (de base)"
-    },
-    "description": {
-      "en": "lb, in, ft, ..."
-    },
-    "types": {
-      "length": [
-        "ch",
-        "lea",
-        "ft",
-        "in",
-        "mi",
-        "fur",
-        "yd"
-      ],
-        "mass": [
-        "lb",
-        "oz",
-        "s-t",
-        "st"
-      ],
-        "temperature": [
-        "f"
-      ],
-        "speed": [
-        "ft-s",
-        "m-min",
-        "mph"
-      ],
-        "volume": [
-        "c",
-        "floz",
-        "galgb",
-        "pt",
-        "qt",
-        "tbs",
-        "tsp"
-      ]
-    }
-  },
-  "generic-measurements-imperial": {
-    "name": {
-      "en": "Imperial measures",
-        "fr": "Mesures, système impérial"
-    },
-    "description": {
-      "en": "lb, in, ft, ..."
-    },
-    "types": {
-      "area": [
-        "ac",
-        "ft2",
-        "in2",
-        "yd2",
-        "mi2"
-      ],
-        "electric-current": [
-        "a"
-      ],
-        "electromotive-force": [
-        "v"
-      ],
-        "energy": [
-        "btu",
-        "erg",
-        "ftlb",
-        "kcal"
-      ],
-        "force": [
-        "pdl"
-      ],
-        "length": [
-        "ch",
-        "lea",
-        "ft",
-        "in",
-        "mi",
-        "fur",
-        "yd"
-      ],
-        "mass": [
-        "lb",
-        "oz",
-        "s-t",
-        "st"
-      ],
-        "power": [
-        "hp"
-      ],
-        "pressure": [
-        "inhg",
-        "psi"
-      ],
-        "temperature": [
-        "f"
-      ],
-        "speed": [
-        "ft-s",
-        "m-min",
-        "mph"
-      ],
-        "volume": [
-        "c",
-        "floz",
-        "galgb",
-        "pt",
-        "qt",
-        "tbs",
-        "tsp"
-      ]
-    }
-  },
-  "basic-measurements-us": {
-    "name": {
-      "en": "US measures (basics)",
-        "fr": "Mesures USA (de base)"
-    },
-    "description": {
-      "en": "yd, mil, oz, ..."
-    },
-    "types": {
-      "length": [
-        "ch",
-        "ft",
-        "in",
-        "mil",
-        "mi",
-        "fur",
-        "p",
-        "pica",
-        "yd"
-      ],
-        "mass": [
-        "gr",
-        "dr",
-        "l-t",
-        "lb",
-        "oz"
-      ],
-        "temperature": [
-        "f"
-      ],
-        "speed": [
-        "ft-s",
-        "m-min",
-        "mph"
-      ],
-        "volume": [
-        "c",
-        "floz",
-        "ft3",
-        "galus",
-        "in3",
-        "yd3",
-        "pt",
-        "qt",
-        "bbloil",
-        "tbs",
-        "tsp"
-      ]
-    }
-  },
-  "generic-measurements-us": {
-    "name": {
-      "en": "US measures",
-        "fr": "Mesures USA"
-    },
-    "description": {
-      "en": "yd, mil, oz, ..."
-    },
-    "types": {
-      "area": [
-        "ac",
-        "ft2",
-        "in2",
-        "yd2"
-      ],
-        "electric-current": [
-        "a"
-      ],
-        "electromotive-force": [
-        "v"
-      ],
-        "length": [
-        "ch",
-        "ft",
-        "in",
-        "mil",
-        "mi",
-        "fur",
-        "p",
-        "pica",
-        "yd"
-      ],
-        "mass": [
-        "gr",
-        "dr",
-        "l-t",
-        "lb",
-        "oz"
-      ],
-        "power": [
-        "hp"
-      ],
-        "pressure": [
-        "inhg",
-        "psi"
-      ],
-        "temperature": [
-        "f"
-      ],
-        "speed": [
-        "ft-s",
-        "m-min",
-        "mph"
-      ],
-        "volume": [
-        "c",
-        "floz",
-        "ft3",
-        "galus",
-        "in3",
-        "yd3",
-        "pt",
-        "qt",
-        "bbloil",
-        "tbs",
-        "tsp"
-      ]
-    }
-  },
-  "money-most-used": {
-    "name": {
-      "en": "Most used currencies",
-        "fr": "Devises les plus utilisées"
-    },
-    "description": {
-      "en": "$, €, ¥, ..."
-    },
-    "types": {
-      "money": [
-        "eur",
-        "usd",
-        "cny",
-        "gbp",
-        "jpy",
-        "chf",
-        "cad"
-      ]
-    }
-  },
-  "money-europe": {
-    "name": {
-      "en": "Currencies Europe",
-        "fr": "Devises Europe"
-    },
-    "description": {
-      "en": "€, £, CHF, ..."
-    },
-    "types": {
-      "money": [
-        "all",
-        "byr",
-        "bam",
-        "bgn",
-        "hrk",
-        "czk",
-        "dkk",
-        "eek",
-        "eur",
-        "fkp",
-        "gip",
-        "ggp",
-        "huf",
-        "isk",
-        "irr",
-        "jep",
-        "lvl",
-        "ltl",
-        "mkd",
-        "ang",
-        "nok",
-        "pln",
-        "ron",
-        "rub",
-        "shp",
-        "rsd",
-        "sek",
-        "chf",
-        "try",
-        "trl",
-        "uah",
-        "gbp"
-      ]
-    }
-  },
-  "money-america": {
-    "name": {
-      "en": "Currencies Americas",
-        "fr": "Devises Amériques"
-    },
-    "description": {
-      "en": "$US, $CAD,  BRL, ..."
-    },
-    "types": {
-      "money": [
-        "ars",
-        "bsd",
-        "bbd",
-        "bzd",
-        "bmd",
-        "bob",
-        "brl",
-        "cad",
-        "kyd",
-        "clp",
-        "cop",
-        "crc",
-        "cup",
-        "dop",
-        "xcd",
-        "svc",
-        "fjd",
-        "gtq",
-        "gyd",
-        "jmd",
-        "mxn",
-        "nio",
-        "pab",
-        "pyg",
-        "pen",
-        "shp",
-        "srd",
-        "ttd",
-        "usd",
-        "uyu",
-        "vef"
-      ]
-    }
-  },
-  "money-asia": {
-    "name": {
-      "en": "Currencies Asia",
-        "fr": "Devises Asie"
-    },
-    "description": {
-      "en": "¥, 元, INR, ..."
-    },
-    "types": {
-      "money": [
-        "azn",
-        "khr",
-        "cny",
-        "hnl",
-        "inr",
-        "idr",
-        "jpy",
-        "kzt",
-        "kpw",
-        "krw",
-        "kgs",
-        "lak",
-        "myr",
-        "mur",
-        "mnt",
-        "npr",
-        "pkr",
-        "rub",
-        "scr",
-        "sgd",
-        "lkr",
-        "syp",
-        "twd",
-        "thb",
-        "try",
-        "trl",
-        "uzs",
-        "vnd"
-      ]
-    }
-  },
-  "money-africa": {
-    "name": {
-      "en": "Currencies Africa",
-        "fr": "Devises Afrique"
-    },
-    "description": {
-      "en": "BWP, EGP, GHC, ..."
-    },
-    "types": {
-      "money": [
-        "bwp",
-        "egp",
-        "ghc",
-        "mzn",
-        "nad",
-        "ngn",
-        "sos",
-        "zar",
-        "zwd"
-      ]
-    }
-  },
-  "money-indonesia-australia": {
-    "name": {
-      "en": "Currencies Oceania & Indonesia",
-        "fr": "Devises Océanie & Indonésie"
-    },
-    "description": {
-      "en": "$AU, $NZ, PHP, ... "
-    },
-    "types": {
-      "money": [
-        "aud",
-        "nzd",
-        "php",
-        "sbd",
-        "tvd"
-      ]
-    }
-  },
-  "money-middleeast": {
-    "name": {
-      "en": "Currencies Middle East",
-        "fr": "Devises Moyen-Orient"
-    },
-    "description": {
-      "en": "AFN, BND, OMR, ...."
-    },
-    "types": {
-      "money": [
-        "afn",
-        "bnd",
-        "egp",
-        "imp",
-        "lbp",
-        "omr",
-        "qar",
-        "sar",
-        "syp",
-        "yer"
-      ]
-    }
-  },
-  "generic-medical": {
-    "name": {
-      "en": "Common medical mesures",
-        "fr": "Mesures médicales courantes"
-    },
-    "description": {
-      "en": "mmhg, bpm, ..."
-    },
-    "types": {
-      "pressure": [
-        "mmhg"
-      ],
-        "frequency": [
-        "bpm"
-      ]
-    }
-  },
-  "navigation": {
-    "name": {
-      "en": "Navigation",
-        "fr": "Navigation"
-    },
-    "description": {
-      "en": "nmi, °, kt, ..."
-    },
-    "types": {
-      "angle": [
-        "deg",
-        "grad",
-        "rad"
-      ],
-        "length": [
-        "nmi",
-        "ftm",
-        "cb"
-      ],
-        "speed": [
-        "kt"
-      ]
-    }
-  },
-  "all-measures": {
-    "name": {
-      "en": "All measures",
-        "fr": "Toutes les mesures"
-    },
-    "types": {
-      "absorbed-dose": [
-        "gy"
-      ],
-        "absorbed-dose-equivalent": [
-        "sv"
-      ],
-        "absorbed-dose-rate": [
-        "gy-s"
-      ],
-        "mol": [
-        "mol"
-      ],
-        "angle": [
-        "deg",
-        "grad",
-        "rad"
-      ],
-        "angular-acceleration": [
-        "rad-s2"
-      ],
+      },
+      "description": {
+        "en": "Kg, m, Km, ... "
+      },
+      "types": {
         "area": [
-        "ac",
-        "ft2",
-        "ha",
-        "in2",
-        "km2",
-        "m2",
-        "mm2",
-        "yd2",
-        "mi2"
-      ],
-        "capacitance": [
-        "f"
-      ],
-        "catalytic-activity": [
-        "kat"
-      ],
-        "data-quantity": [
-        "b",
-        "bit",
-        "gb",
-        "gbit",
-        "kb",
-        "kbit",
-        "mb",
-        "mbit",
-        "tb"
-      ],
-        "density": [
-        "kg-m3"
-      ],
-        "time": [
-        "d",
-        "h",
-        "min",
-        "ms",
-        "s",
-        "yr"
-      ],
-        "dynamic-viscosity": [
-        "pa-s"
-      ],
-        "electric-charge": [
-        "c"
-      ],
-        "electric-charge-line-density": [
-        "c-m"
-      ],
+          "ha",
+          "km2",
+          "m2"
+        ],
         "electric-current": [
-        "a"
-      ],
-        "electrical-conductivity": [
-        "s"
-      ],
+          "a"
+        ],
         "electromotive-force": [
-        "v"
-      ],
+          "v"
+        ],
         "energy": [
-        "btu",
-        "cal",
-        "ev",
-        "erg",
-        "ftlb",
-        "j",
-        "kcal",
-        "ws",
-        "kwh",
-        "nm",
-        "wh"
-      ],
-        "force": [
-        "dyn",
-        "n",
-        "pdl"
-      ],
+          "cal",
+          "j",
+          "kcal"
+        ],
+        "frequency": [
+          "hz",
+          "bpm",
+          "rpm"
+        ],
         "length": [
-        "a",
-        "au",
-        "cm",
-        "ch",
-        "lea",
-        "ft",
-        "in",
-        "km",
-        "ly",
-        "m",
-        "mil",
-        "mi",
-        "fur",
-        "mm",
-        "nmi",
-        "p",
-        "pica",
-        "ftm",
-        "cb",
-        "um",
-        "yd"
-      ],
-        "luminous-intensity": [
-        "cd"
-      ],
+          "cm",
+          "km",
+          "m",
+          "mm"
+        ],
         "mass": [
-        "gr",
-        "dr",
-        "kg",
-        "g",
-        "l-t",
-        "lb",
-        "t",
-        "oz",
-        "s-t",
-        "st"
-      ],
+          "kg",
+          "g",
+          "t"
+        ],
         "power": [
-        "btu-min",
-        "ftlb-s",
-        "hp",
-        "kw",
-        "w"
-      ],
+          "hp",
+          "kw",
+          "w"
+        ],
         "pressure": [
-        "at",
-        "bar",
-        "cmhg",
-        "inhg",
-        "kg-m2",
-        "pa",
-        "kpa",
-        "psf",
-        "psi"
-      ],
+          "bar",
+          "kg-m2",
+          "pa",
+          "kpa"
+        ],
         "temperature": [
-        "c",
-        "f",
-        "k"
-      ],
+          "c"
+        ],
         "speed": [
-        "ft-m",
-        "ft-s",
-        "km-h",
-        "kt",
-        "m-min",
-        "m-s",
-        "mph"
-      ],
+          "km-h",
+          "m-s"
+        ],
         "volume": [
-        "c",
-        "cm3",
-        "floz",
-        "ft3",
-        "galgb",
-        "galus",
-        "in3",
-        "yd3",
-        "l",
-        "m3",
-        "ml",
-        "pt",
-        "qt",
-        "bbloil",
-        "tbs",
-        "tsp"
-      ]
+          "l",
+          "m3",
+          "ml"
+        ]
+      }
+    },
+    "basic-measurements-imperial": {
+      "name": {
+        "en": "Imperial measures (basics)",
+        "fr": "Mesures, système impérial (de base)"
+      },
+      "description": {
+        "en": "lb, in, ft, ..."
+      },
+      "types": {
+        "count": [
+          "generic"
+        ],
+        "length": [
+          "ch",
+          "lea",
+          "ft",
+          "in",
+          "mi",
+          "fur",
+          "yd"
+        ],
+        "mass": [
+          "lb",
+          "oz",
+          "s-t",
+          "st"
+        ],
+        "temperature": [
+          "f"
+        ],
+        "speed": [
+          "ft-s",
+          "m-min",
+          "mph"
+        ],
+        "volume": [
+          "c",
+          "floz",
+          "galgb",
+          "pt",
+          "qt",
+          "tbs",
+          "tsp"
+        ]
+      }
+    },
+    "generic-measurements-imperial": {
+      "name": {
+        "en": "Imperial measures",
+        "fr": "Mesures, système impérial"
+      },
+      "description": {
+        "en": "lb, in, ft, ..."
+      },
+      "types": {
+        "area": [
+          "ac",
+          "ft2",
+          "in2",
+          "yd2",
+          "mi2"
+        ],
+        "electric-current": [
+          "a"
+        ],
+        "electromotive-force": [
+          "v"
+        ],
+        "energy": [
+          "btu",
+          "erg",
+          "ftlb",
+          "kcal"
+        ],
+        "force": [
+          "pdl"
+        ],
+        "length": [
+          "ch",
+          "lea",
+          "ft",
+          "in",
+          "mi",
+          "fur",
+          "yd"
+        ],
+        "mass": [
+          "lb",
+          "oz",
+          "s-t",
+          "st"
+        ],
+        "power": [
+          "hp"
+        ],
+        "pressure": [
+          "inhg",
+          "psi"
+        ],
+        "temperature": [
+          "f"
+        ],
+        "speed": [
+          "ft-s",
+          "m-min",
+          "mph"
+        ],
+        "volume": [
+          "c",
+          "floz",
+          "galgb",
+          "pt",
+          "qt",
+          "tbs",
+          "tsp"
+        ]
+      }
+    },
+    "basic-measurements-us": {
+      "name": {
+        "en": "US measures (basics)",
+        "fr": "Mesures USA (de base)"
+      },
+      "description": {
+        "en": "yd, mil, oz, ..."
+      },
+      "types": {
+        "count": [
+          "generic"
+        ],
+        "length": [
+          "ch",
+          "ft",
+          "in",
+          "mil",
+          "mi",
+          "fur",
+          "p",
+          "pica",
+          "yd"
+        ],
+        "mass": [
+          "gr",
+          "dr",
+          "l-t",
+          "lb",
+          "oz"
+        ],
+        "temperature": [
+          "f"
+        ],
+        "speed": [
+          "ft-s",
+          "m-min",
+          "mph"
+        ],
+        "volume": [
+          "c",
+          "floz",
+          "ft3",
+          "galus",
+          "in3",
+          "yd3",
+          "pt",
+          "qt",
+          "bbloil",
+          "tbs",
+          "tsp"
+        ]
+      }
+    },
+    "generic-measurements-us": {
+      "name": {
+        "en": "US measures",
+        "fr": "Mesures USA"
+      },
+      "description": {
+        "en": "yd, mil, oz, ..."
+      },
+      "types": {
+        "area": [
+          "ac",
+          "ft2",
+          "in2",
+          "yd2"
+        ],
+        "electric-current": [
+          "a"
+        ],
+        "electromotive-force": [
+          "v"
+        ],
+        "length": [
+          "ch",
+          "ft",
+          "in",
+          "mil",
+          "mi",
+          "fur",
+          "p",
+          "pica",
+          "yd"
+        ],
+        "mass": [
+          "gr",
+          "dr",
+          "l-t",
+          "lb",
+          "oz"
+        ],
+        "power": [
+          "hp"
+        ],
+        "pressure": [
+          "inhg",
+          "psi"
+        ],
+        "temperature": [
+          "f"
+        ],
+        "speed": [
+          "ft-s",
+          "m-min",
+          "mph"
+        ],
+        "volume": [
+          "c",
+          "floz",
+          "ft3",
+          "galus",
+          "in3",
+          "yd3",
+          "pt",
+          "qt",
+          "bbloil",
+          "tbs",
+          "tsp"
+        ]
+      }
+    },
+    "money-most-used": {
+      "name": {
+        "en": "Most used currencies",
+        "fr": "Devises les plus utilisées"
+      },
+      "description": {
+        "en": "$, €, ¥, ..."
+      },
+      "types": {
+        "money": [
+          "eur",
+          "usd",
+          "cny",
+          "gbp",
+          "jpy",
+          "chf",
+          "cad"
+        ]
+      }
+    },
+    "money-europe": {
+      "name": {
+        "en": "Currencies Europe",
+        "fr": "Devises Europe"
+      },
+      "description": {
+        "en": "€, £, CHF, ..."
+      },
+      "types": {
+        "money": [
+          "all",
+          "byr",
+          "bam",
+          "bgn",
+          "hrk",
+          "czk",
+          "dkk",
+          "eek",
+          "eur",
+          "fkp",
+          "gip",
+          "ggp",
+          "huf",
+          "isk",
+          "irr",
+          "jep",
+          "lvl",
+          "ltl",
+          "mkd",
+          "ang",
+          "nok",
+          "pln",
+          "ron",
+          "rub",
+          "shp",
+          "rsd",
+          "sek",
+          "chf",
+          "try",
+          "trl",
+          "uah",
+          "gbp"
+        ]
+      }
+    },
+    "money-america": {
+      "name": {
+        "en": "Currencies Americas",
+        "fr": "Devises Amériques"
+      },
+      "description": {
+        "en": "$US, $CAD,  BRL, ..."
+      },
+      "types": {
+        "money": [
+          "ars",
+          "bsd",
+          "bbd",
+          "bzd",
+          "bmd",
+          "bob",
+          "brl",
+          "cad",
+          "kyd",
+          "clp",
+          "cop",
+          "crc",
+          "cup",
+          "dop",
+          "xcd",
+          "svc",
+          "fjd",
+          "gtq",
+          "gyd",
+          "jmd",
+          "mxn",
+          "nio",
+          "pab",
+          "pyg",
+          "pen",
+          "shp",
+          "srd",
+          "ttd",
+          "usd",
+          "uyu",
+          "vef"
+        ]
+      }
+    },
+    "money-asia": {
+      "name": {
+        "en": "Currencies Asia",
+        "fr": "Devises Asie"
+      },
+      "description": {
+        "en": "¥, 元, INR, ..."
+      },
+      "types": {
+        "money": [
+          "azn",
+          "khr",
+          "cny",
+          "hnl",
+          "inr",
+          "idr",
+          "jpy",
+          "kzt",
+          "kpw",
+          "krw",
+          "kgs",
+          "lak",
+          "myr",
+          "mur",
+          "mnt",
+          "npr",
+          "pkr",
+          "rub",
+          "scr",
+          "sgd",
+          "lkr",
+          "syp",
+          "twd",
+          "thb",
+          "try",
+          "trl",
+          "uzs",
+          "vnd"
+        ]
+      }
+    },
+    "money-africa": {
+      "name": {
+        "en": "Currencies Africa",
+        "fr": "Devises Afrique"
+      },
+      "description": {
+        "en": "BWP, EGP, GHC, ..."
+      },
+      "types": {
+        "money": [
+          "bwp",
+          "egp",
+          "ghc",
+          "mzn",
+          "nad",
+          "ngn",
+          "sos",
+          "zar",
+          "zwd"
+        ]
+      }
+    },
+    "money-indonesia-australia": {
+      "name": {
+        "en": "Currencies Oceania & Indonesia",
+        "fr": "Devises Océanie & Indonésie"
+      },
+      "description": {
+        "en": "$AU, $NZ, PHP, ... "
+      },
+      "types": {
+        "money": [
+          "aud",
+          "nzd",
+          "php",
+          "sbd",
+          "tvd"
+        ]
+      }
+    },
+    "money-middleeast": {
+      "name": {
+        "en": "Currencies Middle East",
+        "fr": "Devises Moyen-Orient"
+      },
+      "description": {
+        "en": "AFN, BND, OMR, ...."
+      },
+      "types": {
+        "money": [
+          "afn",
+          "bnd",
+          "egp",
+          "imp",
+          "lbp",
+          "omr",
+          "qar",
+          "sar",
+          "syp",
+          "yer"
+        ]
+      }
+    },
+    "generic-medical": {
+      "name": {
+        "en": "Common health mesures",
+        "fr": "Mesures de santé courantes"
+      },
+      "description": {
+        "en": "mmhg, bpm, ..."
+      },
+      "types": {
+        "count": [
+          "steps"
+        ],
+        "pressure": [
+          "mmhg"
+        ],
+        "frequency": [
+          "bpm"
+        ]
+      }
+    },
+    "navigation": {
+      "name": {
+        "en": "Navigation",
+        "fr": "Navigation"
+      },
+      "description": {
+        "en": "nmi, °, kt, ..."
+      },
+      "types": {
+        "angle": [
+          "deg",
+          "grad",
+          "rad"
+        ],
+        "length": [
+          "nmi",
+          "ftm",
+          "cb"
+        ],
+        "speed": [
+          "kt"
+        ]
+      }
+    },
+    "all-measures": {
+      "name": {
+        "en": "All measures",
+        "fr": "Toutes les mesures"
+      },
+      "types": {
+        "absorbed-dose": [
+          "gy"
+        ],
+        "absorbed-dose-equivalent": [
+          "sv"
+        ],
+        "absorbed-dose-rate": [
+          "gy-s"
+        ],
+        "mol": [
+          "mol"
+        ],
+        "angle": [
+          "deg",
+          "grad",
+          "rad"
+        ],
+        "angular-acceleration": [
+          "rad-s2"
+        ],
+        "area": [
+          "ac",
+          "ft2",
+          "ha",
+          "in2",
+          "km2",
+          "m2",
+          "mm2",
+          "yd2",
+          "mi2"
+        ],
+        "capacitance": [
+          "f"
+        ],
+        "catalytic-activity": [
+          "kat"
+        ],
+        "data-quantity": [
+          "b",
+          "bits",
+          "gb",
+          "gbits",
+          "kb",
+          "kbits",
+          "mb",
+          "mbits",
+          "tb"
+        ],
+        "density": [
+          "kg-m3"
+        ],
+        "time": [
+          "d",
+          "h",
+          "min",
+          "ms",
+          "s",
+          "y"
+        ],
+        "dynamic-viscosity": [
+          "pa-s"
+        ],
+        "electric-charge": [
+          "c"
+        ],
+        "electric-charge-line-density": [
+          "c-m"
+        ],
+        "electric-current": [
+          "a"
+        ],
+        "electrical-conductivity": [
+          "s"
+        ],
+        "electromotive-force": [
+          "v"
+        ],
+        "energy": [
+          "btu",
+          "cal",
+          "ev",
+          "erg",
+          "ftlb",
+          "j",
+          "kcal",
+          "ws",
+          "kwh",
+          "nm",
+          "wh"
+        ],
+        "force": [
+          "dyn",
+          "n",
+          "pdl"
+        ],
+        "length": [
+          "a",
+          "au",
+          "cm",
+          "ch",
+          "lea",
+          "ft",
+          "in",
+          "km",
+          "ly",
+          "m",
+          "mil",
+          "mi",
+          "fur",
+          "mm",
+          "nmi",
+          "p",
+          "pica",
+          "ftm",
+          "cb",
+          "um",
+          "yd"
+        ],
+        "luminous-intensity": [
+          "cd"
+        ],
+        "mass": [
+          "gr",
+          "dr",
+          "kg",
+          "g",
+          "l-t",
+          "lb",
+          "t",
+          "oz",
+          "s-t",
+          "st"
+        ],
+        "power": [
+          "btu-min",
+          "ftlb-s",
+          "hp",
+          "kw",
+          "w"
+        ],
+        "pressure": [
+          "at",
+          "bar",
+          "cmhg",
+          "inhg",
+          "kg-m2",
+          "pa",
+          "kpa",
+          "psf",
+          "psi"
+        ],
+        "temperature": [
+          "c",
+          "f",
+          "k"
+        ],
+        "speed": [
+          "ft-m",
+          "ft-s",
+          "km-h",
+          "kt",
+          "m-min",
+          "m-s",
+          "mph"
+        ],
+        "volume": [
+          "c",
+          "cm3",
+          "floz",
+          "ft3",
+          "galgb",
+          "galus",
+          "in3",
+          "yd3",
+          "l",
+          "m3",
+          "ml",
+          "pt",
+          "qt",
+          "bbloil",
+          "tbs",
+          "tsp"
+        ]
+      }
     }
-  }
-},
+  },
   "extras": {
-  "money": {
-    "name": {
-      "en": "Money",
-        "fr": "Argent"
-    },
-    "formats": {
-      "chf": {
-        "name": {
-          "en": "Switzerland Franc",
-            "fr": "Franc Suisse"
-        },
-        "symbol": "CHF"
+    "count": {
+      "name": {
+        "en": "Count",
+        "fr": "Compte"
       },
-      "cny": {
-        "name": {
-          "en": "China Yuan Renminbi",
-            "fr": "Yuan Ren-Min-Bi"
-        },
-        "symbol": "¥"
-      },
-      "eur": {
-        "symbol": "€",
+      "formats": {
+        "steps": {
           "name": {
-          "en": "Euro",
+            "en": "Steps",
+            "fr": "Nombre de pas"
+          }
+        },
+        "generic": {
+          "name": {
+            "en": "Units",
+            "fr": "Unités"
+          }
+        }
+      }
+    },
+    "money": {
+      "name": {
+        "en": "Money",
+        "fr": "Argent"
+      },
+      "formats": {
+        "chf": {
+          "name": {
+            "en": "Switzerland Franc",
+            "fr": "Franc Suisse"
+          },
+          "symbol": "CHF"
+        },
+        "cny": {
+          "name": {
+            "en": "China Yuan Renminbi",
+            "fr": "Yuan Ren-Min-Bi"
+          },
+          "symbol": "¥"
+        },
+        "eur": {
+          "symbol": "€",
+          "name": {
+            "en": "Euro",
             "fr": "Euro"
-        }
-      },
-      "gbp": {
-        "name": {
-          "en": "United Kingdom Pound",
+          }
+        },
+        "gbp": {
+          "name": {
+            "en": "United Kingdom Pound",
             "fr": "Livre"
+          },
+          "symbol": "£"
         },
-        "symbol": "£"
-      },
-      "jpy": {
-        "name": {
-          "en": "Japan Yen",
+        "jpy": {
+          "name": {
+            "en": "Japan Yen",
             "fr": "Yen japonais"
+          },
+          "symbol": "¥"
         },
-        "symbol": "¥"
-      },
-      "usd": {
-        "name": {
-          "en": "United States Dollar",
+        "usd": {
+          "name": {
+            "en": "United States Dollar",
             "fr": "Dollar des États-Unis"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "btc": {
-        "name": {
-          "en": "Bitcoin"
+        "btc": {
+          "name": {
+            "en": "Bitcoin"
+          },
+          "symbol": "฿"
         },
-        "symbol": "฿"
-      },
-      "all": {
-        "name": {
-          "en": "Albania Lek",
+        "all": {
+          "name": {
+            "en": "Albania Lek",
             "fr": "Lek Albanai"
+          },
+          "symbol": "Lek"
         },
-        "symbol": "Lek"
-      },
-      "afn": {
-        "name": {
-          "en": "Afghanistan Afghani",
+        "afn": {
+          "name": {
+            "en": "Afghanistan Afghani",
             "fr": "Afghani"
+          },
+          "symbol": "؋"
         },
-        "symbol": "؋"
-      },
-      "ars": {
-        "name": {
-          "en": "Argentina Peso",
+        "ars": {
+          "name": {
+            "en": "Argentina Peso",
             "fr": "Peso argentin"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "awg": {
-        "name": {
-          "en": "Aruba Guilder",
+        "awg": {
+          "name": {
+            "en": "Aruba Guilder",
             "fr": "Florin d'Aruba"
+          },
+          "symbol": "ƒ"
         },
-        "symbol": "ƒ"
-      },
-      "aud": {
-        "name": {
-          "en": "Australia Dollar",
+        "aud": {
+          "name": {
+            "en": "Australia Dollar",
             "fr": "Dollar australien"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "azn": {
-        "name": {
-          "en": "Azerbaijan New Manat",
+        "azn": {
+          "name": {
+            "en": "Azerbaijan New Manat",
             "fr": "Manat"
+          },
+          "symbol": "ман"
         },
-        "symbol": "ман"
-      },
-      "bsd": {
-        "name": {
-          "en": "Bahamas Dollar",
+        "bsd": {
+          "name": {
+            "en": "Bahamas Dollar",
             "fr": "Dollar des Bahamas"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "bbd": {
-        "name": {
-          "en": "Barbados Dollar",
+        "bbd": {
+          "name": {
+            "en": "Barbados Dollar",
             "fr": "Dollar de Barbade"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "byr": {
-        "name": {
-          "en": "Belarus Ruble",
+        "byr": {
+          "name": {
+            "en": "Belarus Ruble",
             "fr": "Rouble bélorusse"
+          },
+          "symbol": "p."
         },
-        "symbol": "p."
-      },
-      "bzd": {
-        "name": {
-          "en": "Belize Dollar",
+        "bzd": {
+          "name": {
+            "en": "Belize Dollar",
             "fr": "Dollar de Belize"
+          },
+          "symbol": "BZ$"
         },
-        "symbol": "BZ$"
-      },
-      "bmd": {
-        "name": {
-          "en": "Bermuda Dollar",
+        "bmd": {
+          "name": {
+            "en": "Bermuda Dollar",
             "fr": "Dollar des Bermudes"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "bob": {
-        "name": {
-          "en": "Bolivia Boliviano",
+        "bob": {
+          "name": {
+            "en": "Bolivia Boliviano",
             "fr": "Boliviano"
+          },
+          "symbol": "$b"
         },
-        "symbol": "$b"
-      },
-      "bam": {
-        "name": {
-          "en": "Bosnia and Herzegovina Convertible Marka"
+        "bam": {
+          "name": {
+            "en": "Bosnia and Herzegovina Convertible Marka"
+          },
+          "symbol": "KM"
         },
-        "symbol": "KM"
-      },
-      "bwp": {
-        "name": {
-          "en": "Botswana Pula"
+        "bwp": {
+          "name": {
+            "en": "Botswana Pula"
+          },
+          "symbol": "P"
         },
-        "symbol": "P"
-      },
-      "bgn": {
-        "name": {
-          "en": "Bulgaria Lev",
+        "bgn": {
+          "name": {
+            "en": "Bulgaria Lev",
             "fr": "Bulgarian Lev"
+          },
+          "symbol": "лв"
         },
-        "symbol": "лв"
-      },
-      "brl": {
-        "name": {
-          "en": "Brazil Real",
+        "brl": {
+          "name": {
+            "en": "Brazil Real",
             "fr": "Real"
+          },
+          "symbol": "R$"
         },
-        "symbol": "R$"
-      },
-      "bnd": {
-        "name": {
-          "en": "Brunei Darussalam Dollar",
+        "bnd": {
+          "name": {
+            "en": "Brunei Darussalam Dollar",
             "fr": "Dollar de Brunei"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "khr": {
-        "name": {
-          "en": "Cambodia Riel",
+        "khr": {
+          "name": {
+            "en": "Cambodia Riel",
             "fr": "Riel"
+          },
+          "symbol": "៛"
         },
-        "symbol": "៛"
-      },
-      "cad": {
-        "name": {
-          "en": "Canada Dollar",
+        "cad": {
+          "name": {
+            "en": "Canada Dollar",
             "fr": "Dollar canadien"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "kyd": {
-        "name": {
-          "en": "Cayman Islands Dollar",
+        "kyd": {
+          "name": {
+            "en": "Cayman Islands Dollar",
             "fr": "Dollar des Iles Caïmans"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "clp": {
-        "name": {
-          "en": "Chile Peso",
+        "clp": {
+          "name": {
+            "en": "Chile Peso",
             "fr": "Peso chilien"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "cop": {
-        "name": {
-          "en": "Colombia Peso",
+        "cop": {
+          "name": {
+            "en": "Colombia Peso",
             "fr": "Peso colombien"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "crc": {
-        "name": {
-          "en": "Costa Rica Colon",
+        "crc": {
+          "name": {
+            "en": "Costa Rica Colon",
             "fr": "Colon de Costa Rica"
+          },
+          "symbol": "₡"
         },
-        "symbol": "₡"
-      },
-      "hrk": {
-        "name": {
-          "en": "Croatia Kuna",
+        "hrk": {
+          "name": {
+            "en": "Croatia Kuna",
             "fr": "Kuna"
+          },
+          "symbol": "kn"
         },
-        "symbol": "kn"
-      },
-      "cup": {
-        "name": {
-          "en": "Cuba Peso",
+        "cup": {
+          "name": {
+            "en": "Cuba Peso",
             "fr": "Peso cubain"
+          },
+          "symbol": "₱"
         },
-        "symbol": "₱"
-      },
-      "czk": {
-        "name": {
-          "en": "Czech Republic Koruna"
+        "czk": {
+          "name": {
+            "en": "Czech Republic Koruna"
+          },
+          "symbol": "Kč"
         },
-        "symbol": "Kč"
-      },
-      "dkk": {
-        "name": {
-          "en": "Denmark Krone",
+        "dkk": {
+          "name": {
+            "en": "Denmark Krone",
             "fr": "Couronne danoise"
+          },
+          "symbol": "kr"
         },
-        "symbol": "kr"
-      },
-      "dop": {
-        "name": {
-          "en": "Dominican Republic Peso",
+        "dop": {
+          "name": {
+            "en": "Dominican Republic Peso",
             "fr": "Peso dominicain"
+          },
+          "symbol": "RD$"
         },
-        "symbol": "RD$"
-      },
-      "xcd": {
-        "name": {
-          "en": "East Caribbean Dollar",
+        "xcd": {
+          "name": {
+            "en": "East Caribbean Dollar",
             "fr": "Dollar des Caraïbes orientales"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "egp": {
-        "name": {
-          "en": "Egypt Pound",
+        "egp": {
+          "name": {
+            "en": "Egypt Pound",
             "fr": "Livre égyptienne"
+          },
+          "symbol": "£"
         },
-        "symbol": "£"
-      },
-      "svc": {
-        "name": {
-          "en": "El Salvador Colon",
+        "svc": {
+          "name": {
+            "en": "El Salvador Colon",
             "fr": "Colon du El Salvador"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "eek": {
-        "name": {
-          "en": "Estonia Kroon",
+        "eek": {
+          "name": {
+            "en": "Estonia Kroon",
             "fr": "Couronne estonienne"
+          },
+          "symbol": "kr"
         },
-        "symbol": "kr"
-      },
-      "fkp": {
-        "name": {
-          "en": "Falkland Islands (Malvinas) Pound"
+        "fkp": {
+          "name": {
+            "en": "Falkland Islands (Malvinas) Pound"
+          },
+          "symbol": "£"
         },
-        "symbol": "£"
-      },
-      "fjd": {
-        "name": {
-          "en": "Fiji Dollar"
+        "fjd": {
+          "name": {
+            "en": "Fiji Dollar"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "ghc": {
-        "name": {
-          "en": "Ghana Cedis"
+        "ghc": {
+          "name": {
+            "en": "Ghana Cedis"
+          },
+          "symbol": "¢"
         },
-        "symbol": "¢"
-      },
-      "gip": {
-        "name": {
-          "en": "Gibraltar Pound"
+        "gip": {
+          "name": {
+            "en": "Gibraltar Pound"
+          },
+          "symbol": "£"
         },
-        "symbol": "£"
-      },
-      "gtq": {
-        "name": {
-          "en": "Guatemala Quetzal"
+        "gtq": {
+          "name": {
+            "en": "Guatemala Quetzal"
+          },
+          "symbol": "Q"
         },
-        "symbol": "Q"
-      },
-      "ggp": {
-        "name": {
-          "en": "Guernsey Pound"
+        "ggp": {
+          "name": {
+            "en": "Guernsey Pound"
+          },
+          "symbol": "£"
         },
-        "symbol": "£"
-      },
-      "gyd": {
-        "name": {
-          "en": "Guyana Dollar"
+        "gyd": {
+          "name": {
+            "en": "Guyana Dollar"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "hnl": {
-        "name": {
-          "en": "Honduras Lempira"
+        "hnl": {
+          "name": {
+            "en": "Honduras Lempira"
+          },
+          "symbol": "L"
         },
-        "symbol": "L"
-      },
-      "hkd": {
-        "name": {
-          "en": "Hong Kong Dollar"
+        "hkd": {
+          "name": {
+            "en": "Hong Kong Dollar"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "huf": {
-        "name": {
-          "en": "Hungary Forint"
+        "huf": {
+          "name": {
+            "en": "Hungary Forint"
+          },
+          "symbol": "Ft"
         },
-        "symbol": "Ft"
-      },
-      "isk": {
-        "name": {
-          "en": "Iceland Krona"
+        "isk": {
+          "name": {
+            "en": "Iceland Krona"
+          },
+          "symbol": "kr"
         },
-        "symbol": "kr"
-      },
-      "inr": {
-        "name": {
-          "en": "India Rupee",
+        "inr": {
+          "name": {
+            "en": "India Rupee",
             "fr": "Rhoupie indienne"
-        }
-      },
-      "idr": {
-        "name": {
-          "en": "Indonesia Rupiah"
+          }
         },
-        "symbol": "Rp"
-      },
-      "irr": {
-        "name": {
-          "en": "Iran Rial"
+        "idr": {
+          "name": {
+            "en": "Indonesia Rupiah"
+          },
+          "symbol": "Rp"
         },
-        "symbol": "﷼"
-      },
-      "imp": {
-        "name": {
-          "en": "Isle of Man Pound"
+        "irr": {
+          "name": {
+            "en": "Iran Rial"
+          },
+          "symbol": "﷼"
         },
-        "symbol": "£"
-      },
-      "ils": {
-        "name": {
-          "en": "Israel Shekel"
+        "imp": {
+          "name": {
+            "en": "Isle of Man Pound"
+          },
+          "symbol": "£"
         },
-        "symbol": "₪"
-      },
-      "jmd": {
-        "name": {
-          "en": "Jamaica Dollar"
+        "ils": {
+          "name": {
+            "en": "Israel Shekel"
+          },
+          "symbol": "₪"
         },
-        "symbol": "J$"
-      },
-      "jep": {
-        "name": {
-          "en": "Jersey Pound"
+        "jmd": {
+          "name": {
+            "en": "Jamaica Dollar"
+          },
+          "symbol": "J$"
         },
-        "symbol": "£"
-      },
-      "kzt": {
-        "name": {
-          "en": "Kazakhstan Tenge"
+        "jep": {
+          "name": {
+            "en": "Jersey Pound"
+          },
+          "symbol": "£"
         },
-        "symbol": "лв"
-      },
-      "kpw": {
-        "name": {
-          "en": "Korea (North) Won",
+        "kzt": {
+          "name": {
+            "en": "Kazakhstan Tenge"
+          },
+          "symbol": "лв"
+        },
+        "kpw": {
+          "name": {
+            "en": "Korea (North) Won",
             "fr": "Won de la Corée du Nord"
+          },
+          "symbol": "₩"
         },
-        "symbol": "₩"
-      },
-      "krw": {
-        "name": {
-          "en": "Korea (South) Won",
+        "krw": {
+          "name": {
+            "en": "Korea (South) Won",
             "fr": "Won"
+          },
+          "symbol": "₩"
         },
-        "symbol": "₩"
-      },
-      "kgs": {
-        "name": {
-          "en": "Kyrgyzstan Som"
+        "kgs": {
+          "name": {
+            "en": "Kyrgyzstan Som"
+          },
+          "symbol": "лв"
         },
-        "symbol": "лв"
-      },
-      "lak": {
-        "name": {
-          "en": "Laos Kip"
+        "lak": {
+          "name": {
+            "en": "Laos Kip"
+          },
+          "symbol": "₭"
         },
-        "symbol": "₭"
-      },
-      "lvl": {
-        "name": {
-          "en": "Latvia Lat",
+        "lvl": {
+          "name": {
+            "en": "Latvia Lat",
             "fr": "Lat letton"
+          },
+          "symbol": "Ls"
         },
-        "symbol": "Ls"
-      },
-      "lbp": {
-        "name": {
-          "en": "Lebanon Pound"
+        "lbp": {
+          "name": {
+            "en": "Lebanon Pound"
+          },
+          "symbol": "£"
         },
-        "symbol": "£"
-      },
-      "lrd": {
-        "name": {
-          "en": "Liberia Dollar"
+        "lrd": {
+          "name": {
+            "en": "Liberia Dollar"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "ltl": {
-        "name": {
-          "en": "Lithuania Litas"
+        "ltl": {
+          "name": {
+            "en": "Lithuania Litas"
+          },
+          "symbol": "Lt"
         },
-        "symbol": "Lt"
-      },
-      "mkd": {
-        "name": {
-          "en": "Macedonia Denar"
+        "mkd": {
+          "name": {
+            "en": "Macedonia Denar"
+          },
+          "symbol": "ден"
         },
-        "symbol": "ден"
-      },
-      "myr": {
-        "name": {
-          "en": "Malaysia Ringgit"
+        "myr": {
+          "name": {
+            "en": "Malaysia Ringgit"
+          },
+          "symbol": "RM"
         },
-        "symbol": "RM"
-      },
-      "mur": {
-        "name": {
-          "en": "Mauritius Rupee"
+        "mur": {
+          "name": {
+            "en": "Mauritius Rupee"
+          },
+          "symbol": "₨"
         },
-        "symbol": "₨"
-      },
-      "mxn": {
-        "name": {
-          "en": "Mexico Peso"
+        "mxn": {
+          "name": {
+            "en": "Mexico Peso"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "mnt": {
-        "name": {
-          "en": "Mongolia Tughrik"
+        "mnt": {
+          "name": {
+            "en": "Mongolia Tughrik"
+          },
+          "symbol": "₮"
         },
-        "symbol": "₮"
-      },
-      "mzn": {
-        "name": {
-          "en": "Mozambique Metical"
+        "mzn": {
+          "name": {
+            "en": "Mozambique Metical"
+          },
+          "symbol": "MT"
         },
-        "symbol": "MT"
-      },
-      "nad": {
-        "name": {
-          "en": "Namibia Dollar"
+        "nad": {
+          "name": {
+            "en": "Namibia Dollar"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "npr": {
-        "name": {
-          "en": "Nepal Rupee"
+        "npr": {
+          "name": {
+            "en": "Nepal Rupee"
+          },
+          "symbol": "₨"
         },
-        "symbol": "₨"
-      },
-      "ang": {
-        "name": {
-          "en": "Netherlands Antilles Guilder",
+        "ang": {
+          "name": {
+            "en": "Netherlands Antilles Guilder",
             "fr": "Florin des Antilles"
+          },
+          "symbol": "ƒ"
         },
-        "symbol": "ƒ"
-      },
-      "nzd": {
-        "name": {
-          "en": "New Zealand Dollar",
+        "nzd": {
+          "name": {
+            "en": "New Zealand Dollar",
             "fr": "Dollar néo-zélandais"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "nio": {
-        "name": {
-          "en": "Nicaragua Cordoba"
+        "nio": {
+          "name": {
+            "en": "Nicaragua Cordoba"
+          },
+          "symbol": "C$"
         },
-        "symbol": "C$"
-      },
-      "ngn": {
-        "name": {
-          "en": "Nigeria Naira"
+        "ngn": {
+          "name": {
+            "en": "Nigeria Naira"
+          },
+          "symbol": "₦"
         },
-        "symbol": "₦"
-      },
-      "nok": {
-        "name": {
-          "en": "Norway Krone",
+        "nok": {
+          "name": {
+            "en": "Norway Krone",
             "fr": "Couronne norvégienne"
+          },
+          "symbol": "kr"
         },
-        "symbol": "kr"
-      },
-      "omr": {
-        "name": {
-          "en": "Oman Rial"
+        "omr": {
+          "name": {
+            "en": "Oman Rial"
+          },
+          "symbol": "﷼"
         },
-        "symbol": "﷼"
-      },
-      "pkr": {
-        "name": {
-          "en": "Pakistan Rupee"
+        "pkr": {
+          "name": {
+            "en": "Pakistan Rupee"
+          },
+          "symbol": "₨"
         },
-        "symbol": "₨"
-      },
-      "pab": {
-        "name": {
-          "en": "Panama Balboa"
+        "pab": {
+          "name": {
+            "en": "Panama Balboa"
+          },
+          "symbol": "B/."
         },
-        "symbol": "B/."
-      },
-      "pyg": {
-        "name": {
-          "en": "Paraguay Guarani"
+        "pyg": {
+          "name": {
+            "en": "Paraguay Guarani"
+          },
+          "symbol": "Gs"
         },
-        "symbol": "Gs"
-      },
-      "pen": {
-        "name": {
-          "en": "Peru Nuevo Sol"
+        "pen": {
+          "name": {
+            "en": "Peru Nuevo Sol"
+          },
+          "symbol": "S/."
         },
-        "symbol": "S/."
-      },
-      "php": {
-        "name": {
-          "en": "Philippines Peso"
+        "php": {
+          "name": {
+            "en": "Philippines Peso"
+          },
+          "symbol": "₱"
         },
-        "symbol": "₱"
-      },
-      "pln": {
-        "name": {
-          "en": "Poland Zloty"
+        "pln": {
+          "name": {
+            "en": "Poland Zloty"
+          },
+          "symbol": "zł"
         },
-        "symbol": "zł"
-      },
-      "qar": {
-        "name": {
-          "en": "Qatar Riyal"
+        "qar": {
+          "name": {
+            "en": "Qatar Riyal"
+          },
+          "symbol": "﷼"
         },
-        "symbol": "﷼"
-      },
-      "ron": {
-        "name": {
-          "en": "Romania New Leu"
+        "ron": {
+          "name": {
+            "en": "Romania New Leu"
+          },
+          "symbol": "lei"
         },
-        "symbol": "lei"
-      },
-      "rub": {
-        "name": {
-          "en": "Russia Ruble"
+        "rub": {
+          "name": {
+            "en": "Russia Ruble"
+          },
+          "symbol": "руб"
         },
-        "symbol": "руб"
-      },
-      "shp": {
-        "name": {
-          "en": "Saint Helena Pound"
+        "shp": {
+          "name": {
+            "en": "Saint Helena Pound"
+          },
+          "symbol": "£"
         },
-        "symbol": "£"
-      },
-      "sar": {
-        "name": {
-          "en": "Saudi Arabia Riyal",
+        "sar": {
+          "name": {
+            "en": "Saudi Arabia Riyal",
             "fr": "Riyal saoudien"
+          },
+          "symbol": "﷼"
         },
-        "symbol": "﷼"
-      },
-      "rsd": {
-        "name": {
-          "en": "Serbia Dinar"
+        "rsd": {
+          "name": {
+            "en": "Serbia Dinar"
+          },
+          "symbol": "Дин."
         },
-        "symbol": "Дин."
-      },
-      "scr": {
-        "name": {
-          "en": "Seychelles Rupee"
+        "scr": {
+          "name": {
+            "en": "Seychelles Rupee"
+          },
+          "symbol": "₨"
         },
-        "symbol": "₨"
-      },
-      "sgd": {
-        "name": {
-          "en": "Singapore Dollar"
+        "sgd": {
+          "name": {
+            "en": "Singapore Dollar"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "sbd": {
-        "name": {
-          "en": "Solomon Islands Dollar"
+        "sbd": {
+          "name": {
+            "en": "Solomon Islands Dollar"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "sos": {
-        "name": {
-          "en": "Somalia Shilling"
+        "sos": {
+          "name": {
+            "en": "Somalia Shilling"
+          },
+          "symbol": "S"
         },
-        "symbol": "S"
-      },
-      "zar": {
-        "name": {
-          "en": "South Africa Rand",
+        "zar": {
+          "name": {
+            "en": "South Africa Rand",
             "fr": "Rand"
+          },
+          "symbol": "R"
         },
-        "symbol": "R"
-      },
-      "lkr": {
-        "name": {
-          "en": "Sri Lanka Rupee"
+        "lkr": {
+          "name": {
+            "en": "Sri Lanka Rupee"
+          },
+          "symbol": "₨"
         },
-        "symbol": "₨"
-      },
-      "sek": {
-        "name": {
-          "en": "Sweden Krona"
+        "sek": {
+          "name": {
+            "en": "Sweden Krona"
+          },
+          "symbol": "kr"
         },
-        "symbol": "kr"
-      },
-      "srd": {
-        "name": {
-          "en": "Suriname Dollar"
+        "srd": {
+          "name": {
+            "en": "Suriname Dollar"
+          },
+          "symbol": "$"
         },
-        "symbol": "$"
-      },
-      "syp": {
-        "name": {
-          "en": "Syria Pound"
+        "syp": {
+          "name": {
+            "en": "Syria Pound"
+          },
+          "symbol": "£"
         },
-        "symbol": "£"
-      },
-      "twd": {
-        "name": {
-          "en": "Taiwan New Dollar"
+        "twd": {
+          "name": {
+            "en": "Taiwan New Dollar"
+          },
+          "symbol": "NT$"
         },
-        "symbol": "NT$"
-      },
-      "thb": {
-        "name": {
-          "en": "Thailand Baht"
+        "thb": {
+          "name": {
+            "en": "Thailand Baht"
+          },
+          "symbol": "฿"
         },
-        "symbol": "฿"
-      },
-      "ttd": {
-        "name": {
-          "en": "Trinidad and Tobago Dollar"
+        "ttd": {
+          "name": {
+            "en": "Trinidad and Tobago Dollar"
+          },
+          "symbol": "TT$"
         },
-        "symbol": "TT$"
+        "try": {
+          "name": {
+            "en": "Turkey Lira"
+          }
+        },
+        "trl": {
+          "name": {
+            "en": "Turkey Lira"
+          },
+          "symbol": "₤"
+        },
+        "tvd": {
+          "name": {
+            "en": "Tuvalu Dollar"
+          },
+          "symbol": "$"
+        },
+        "uah": {
+          "name": {
+            "en": "Ukraine Hryvna"
+          },
+          "symbol": "₴"
+        },
+        "uyu": {
+          "name": {
+            "en": "Uruguay Peso"
+          },
+          "symbol": "$U"
+        },
+        "uzs": {
+          "name": {
+            "en": "Uzbekistan Som"
+          },
+          "symbol": "лв"
+        },
+        "vef": {
+          "name": {
+            "en": "Venezuela Bolivar"
+          },
+          "symbol": "Bs"
+        },
+        "vnd": {
+          "name": {
+            "en": "Viet Nam Dong"
+          },
+          "symbol": "₫"
+        },
+        "yer": {
+          "name": {
+            "en": "Yemen Rial"
+          },
+          "symbol": "﷼"
+        },
+        "zwd": {
+          "name": {
+            "en": "Zimbabwe Dollar"
+          },
+          "symbol": "Z$"
+        }
+      }
+    },
+    "temperature": {
+      "name": {
+        "en": "Temperature",
+        "fr": "Température"
       },
-      "try": {
-        "name": {
-          "en": "Turkey Lira"
+      "formats": {
+        "c": {
+          "name": {
+            "en": "Degrees Celsius",
+            "fr": "Degrés Celsius"
+          },
+          "symbol": "°C"
+        },
+        "f": {
+          "name": {
+            "en": "Degrees Fahrenheit",
+            "fr": "Degrés Fahrenheit"
+          },
+          "symbol": "°F"
+        },
+        "k": {
+          "name": {
+            "en": "Degrees Kelvin",
+            "fr": "Degrés Kelvin"
+          },
+          "symbol": "°K"
+        }
+      }
+    },
+    "length": {
+      "name": {
+        "fr": "Longueur",
+        "en": "Length"
+      },
+      "formats": {
+        "cm": {
+          "name": {
+            "en": "Centimeters",
+            "fr": "Centimètres"
+          },
+          "symbol": "cm"
+        },
+        "km": {
+          "name": {
+            "en": "Kilometers",
+            "fr": "Kilomètres"
+          },
+          "symbol": "km"
+        },
+        "m": {
+          "name": {
+            "en": "Meters",
+            "fr": "Mètres"
+          },
+          "symbol": "m"
+        },
+        "mm": {
+          "name": {
+            "en": "Millimeters",
+            "fr": "Millimètres"
+          },
+          "symbol": "mm"
+        },
+        "a": {
+          "name": {
+            "en": "Ångströms",
+            "fr": "Ångströms"
+          },
+          "symbol": "Å"
+        },
+        "au": {
+          "name": {
+            "en": "Astronomical units",
+            "fr": "Unités astronomiques"
+          },
+          "symbol": "AU"
+        },
+        "ch": {
+          "name": {
+            "en": "Chains",
+            "fr": "Chaînes"
+          },
+          "symbol": "ch"
+        },
+        "lea": {
+          "name": {
+            "en": "Leagues",
+            "fr": "Lieues"
+          },
+          "symbol": "lea"
+        },
+        "ft": {
+          "name": {
+            "en": "Feet",
+            "fr": "Pieds"
+          },
+          "symbol": "ft"
+        },
+        "in": {
+          "name": {
+            "en": "Inches",
+            "fr": "Pouces"
+          },
+          "symbol": "In"
+        },
+        "ly": {
+          "name": {
+            "en": "Light-years",
+            "fr": "Années-lumière"
+          },
+          "symbol": "ly"
+        },
+        "mil": {
+          "name": {
+            "en": "Mils",
+            "fr": "Mils"
+          },
+          "symbol": "mil"
+        },
+        "mi": {
+          "name": {
+            "en": "Miles",
+            "fr": "Miles"
+          },
+          "symbol": "mi"
+        },
+        "fur": {
+          "name": {
+            "en": "Furlongs",
+            "fr": "Furlongs"
+          },
+          "symbol": "fur"
+        },
+        "nmi": {
+          "name": {
+            "en": "Miles (nautical)",
+            "fr": "Miles nautiques"
+          },
+          "symbol": "nmi"
+        },
+        "p": {
+          "name": {
+            "en": "Points",
+            "fr": "Points"
+          },
+          "symbol": "p"
+        },
+        "pica": {
+          "name": {
+            "en": "Picas",
+            "fr": "Picas"
+          },
+          "symbol": "P̸"
+        },
+        "ftm": {
+          "name": {
+            "en": "Fathoms",
+            "fr": "Fathoms"
+          },
+          "symbol": "ftm"
+        },
+        "cb": {
+          "name": {
+            "en": "Cables",
+            "fr": "Cables"
+          },
+          "symbol": "cb"
+        },
+        "um": {
+          "name": {
+            "en": "Microns",
+            "fr": "Microns"
+          },
+          "symbol": "µm"
+        },
+        "yd": {
+          "name": {
+            "en": "Yards",
+            "fr": "Verges"
+          },
+          "symbol": "yd"
+        }
+      }
+    },
+    "mass": {
+      "formats": {
+        "g": {
+          "name": {
+            "en": "Grams",
+            "fr": "Grammes"
+          },
+          "symbol": "g"
+        },
+        "kg": {
+          "name": {
+            "en": "Kilograms",
+            "fr": "Kilogrammes"
+          },
+          "symbol": "Kg"
+        },
+        "gr": {
+          "name": {
+            "en": "Grains",
+            "fr": "Grains"
+          },
+          "symbol": "gr"
+        },
+        "dr": {
+          "name": {
+            "en": "Drams",
+            "fr": "Drams"
+          },
+          "symbol": "dr"
+        },
+        "l-t": {
+          "name": {
+            "en": "Long tons",
+            "fr": "Tonnes longues"
+          },
+          "symbol": "L/T"
+        },
+        "lb": {
+          "name": {
+            "en": "Pounds",
+            "fr": "Livres"
+          },
+          "symbol": "lb"
+        },
+        "t": {
+          "name": {
+            "en": "Metric tons",
+            "fr": "Tonnes métriques"
+          },
+          "symbol": "Mg"
+        },
+        "oz": {
+          "name": {
+            "en": "Ounces",
+            "fr": "Onces"
+          },
+          "symbol": "oz"
+        },
+        "s-t": {
+          "name": {
+            "en": "Short tons",
+            "fr": "Tonnes courtes"
+          },
+          "symbol": "S/T"
+        },
+        "st": {
+          "name": {
+            "en": "Stones",
+            "fr": "Stones"
+          },
+          "symbol": "st"
         }
       },
-      "trl": {
-        "name": {
-          "en": "Turkey Lira"
-        },
-        "symbol": "₤"
-      },
-      "tvd": {
-        "name": {
-          "en": "Tuvalu Dollar"
-        },
-        "symbol": "$"
-      },
-      "uah": {
-        "name": {
-          "en": "Ukraine Hryvna"
-        },
-        "symbol": "₴"
-      },
-      "uyu": {
-        "name": {
-          "en": "Uruguay Peso"
-        },
-        "symbol": "$U"
-      },
-      "uzs": {
-        "name": {
-          "en": "Uzbekistan Som"
-        },
-        "symbol": "лв"
-      },
-      "vef": {
-        "name": {
-          "en": "Venezuela Bolivar"
-        },
-        "symbol": "Bs"
-      },
-      "vnd": {
-        "name": {
-          "en": "Viet Nam Dong"
-        },
-        "symbol": "₫"
-      },
-      "yer": {
-        "name": {
-          "en": "Yemen Rial"
-        },
-        "symbol": "﷼"
-      },
-      "zwd": {
-        "name": {
-          "en": "Zimbabwe Dollar"
-        },
-        "symbol": "Z$"
-      }
-    }
-  },
-  "temperature": {
-    "name": {
-      "en": "Temperature",
-        "fr": "Température"
-    },
-    "formats": {
-      "c": {
-        "name": {
-          "en": "Degrees Celsius",
-            "fr": "Degrés Celsius"
-        },
-        "symbol": "°C"
-      },
-      "f": {
-        "name": {
-          "en": "Degrees Fahrenheit",
-            "fr": "Degrés Fahrenheit"
-        },
-        "symbol": "°F"
-      },
-      "k": {
-        "name": {
-          "en": "Degrees Kelvin",
-            "fr": "Degrés Kelvin"
-        },
-        "symbol": "°K"
-      }
-    }
-  },
-  "length": {
-    "name": {
-      "fr": "Longueur",
-        "en": "Length"
-    },
-    "formats": {
-      "cm": {
-        "name": {
-          "en": "Centimeters",
-            "fr": "Centimètres"
-        },
-        "symbol": "cm"
-      },
-      "km": {
-        "name": {
-          "en": "Kilometers",
-            "fr": "Kilomètres"
-        },
-        "symbol": "km"
-      },
-      "m": {
-        "name": {
-          "en": "Meters",
-            "fr": "Mètres"
-        },
-        "symbol": "m"
-      },
-      "mm": {
-        "name": {
-          "en": "Millimeters",
-            "fr": "Millimètres"
-        },
-        "symbol": "mm"
-      },
-      "a": {
-        "name": {
-          "en": "Ångströms",
-            "fr": "Ångströms"
-        },
-        "symbol": "Å"
-      },
-      "au": {
-        "name": {
-          "en": "Astronomical units",
-            "fr": "Unités astronomiques"
-        },
-        "symbol": "AU"
-      },
-      "ch": {
-        "name": {
-          "en": "Chains",
-            "fr": "Chaînes"
-        },
-        "symbol": "ch"
-      },
-      "lea": {
-        "name": {
-          "en": "Leagues",
-            "fr": "Lieues"
-        },
-        "symbol": "lea"
-      },
-      "ft": {
-        "name": {
-          "en": "Feet",
-            "fr": "Pieds"
-        },
-        "symbol": "ft"
-      },
-      "in": {
-        "name": {
-          "en": "Inches",
-            "fr": "Pouces"
-        },
-        "symbol": "In"
-      },
-      "ly": {
-        "name": {
-          "en": "Light-years",
-            "fr": "Années-lumière"
-        },
-        "symbol": "ly"
-      },
-      "mil": {
-        "name": {
-          "en": "Mils",
-            "fr": "Mils"
-        },
-        "symbol": "mil"
-      },
-      "mi": {
-        "name": {
-          "en": "Miles",
-            "fr": "Miles"
-        },
-        "symbol": "mi"
-      },
-      "fur": {
-        "name": {
-          "en": "Furlongs",
-            "fr": "Furlongs"
-        },
-        "symbol": "fur"
-      },
-      "nmi": {
-        "name": {
-          "en": "Miles (nautical)",
-            "fr": "Miles nautiques"
-        },
-        "symbol": "nmi"
-      },
-      "p": {
-        "name": {
-          "en": "Points",
-            "fr": "Points"
-        },
-        "symbol": "p"
-      },
-      "pica": {
-        "name": {
-          "en": "Picas",
-            "fr": "Picas"
-        },
-        "symbol": "P̸"
-      },
-      "ftm": {
-        "name": {
-          "en": "Fathoms",
-            "fr": "Fathoms"
-        },
-        "symbol": "ftm"
-      },
-      "cb": {
-        "name": {
-          "en": "Cables",
-            "fr": "Cables"
-        },
-        "symbol": "cb"
-      },
-      "um": {
-        "name": {
-          "en": "Microns",
-            "fr": "Microns"
-        },
-        "symbol": "µm"
-      },
-      "yd": {
-        "name": {
-          "en": "Yards",
-            "fr": "Verges"
-        },
-        "symbol": "yd"
-      }
-    }
-  },
-  "mass": {
-    "formats": {
-      "g": {
-        "name": {
-          "en": "Grams",
-            "fr": "Grammes"
-        },
-        "symbol": "g"
-      },
-      "kg": {
-        "name": {
-          "en": "Kilograms",
-            "fr": "Kilogrammes"
-        },
-        "symbol": "Kg"
-      },
-      "gr": {
-        "name": {
-          "en": "Grains",
-            "fr": "Grains"
-        },
-        "symbol": "gr"
-      },
-      "dr": {
-        "name": {
-          "en": "Drams",
-            "fr": "Drams"
-        },
-        "symbol": "dr"
-      },
-      "l-t": {
-        "name": {
-          "en": "Long tons",
-            "fr": "Tonnes longues"
-        },
-        "symbol": "L/T"
-      },
-      "lb": {
-        "name": {
-          "en": "Pounds",
-            "fr": "Livres"
-        },
-        "symbol": "lb"
-      },
-      "t": {
-        "name": {
-          "en": "Metric tons",
-            "fr": "Tonnes métriques"
-        },
-        "symbol": "Mg"
-      },
-      "oz": {
-        "name": {
-          "en": "Ounces",
-            "fr": "Onces"
-        },
-        "symbol": "oz"
-      },
-      "s-t": {
-        "name": {
-          "en": "Short tons",
-            "fr": "Tonnes courtes"
-        },
-        "symbol": "S/T"
-      },
-      "st": {
-        "name": {
-          "en": "Stones",
-            "fr": "Stones"
-        },
-        "symbol": "st"
-      }
-    },
-    "name": {
-      "en": "Mass",
+      "name": {
+        "en": "Mass",
         "fr": "Masse"
-    }
-  },
-  "absorbed-dose": {
-    "formats": {
-      "gy": {
-        "name": {
-          "en": "Grays",
+      }
+    },
+    "absorbed-dose": {
+      "formats": {
+        "gy": {
+          "name": {
+            "en": "Grays",
             "fr": "Grays"
-        },
-        "symbol": "Gy"
-      }
-    },
-    "name": {
-      "en": "Absorbed dose",
+          },
+          "symbol": "Gy"
+        }
+      },
+      "name": {
+        "en": "Absorbed dose",
         "fr": "Dose absorbée"
-    }
-  },
-  "absorbed-dose-equivalent": {
-    "formats": {
-      "sv": {
-        "name": {
-          "en": "Sieverts",
+      }
+    },
+    "absorbed-dose-equivalent": {
+      "formats": {
+        "sv": {
+          "name": {
+            "en": "Sieverts",
             "fr": "Sieverts"
-        },
-        "symbol": "Sv"
-      }
-    },
-    "name": {
-      "en": "Dose equivalent",
+          },
+          "symbol": "Sv"
+        }
+      },
+      "name": {
+        "en": "Dose equivalent",
         "fr": "Dose équivalente"
-    }
-  },
-  "absorbed-dose-rate": {
-    "formats": {
-      "gy-s": {
-        "name": {
-          "en": "Grays/second",
+      }
+    },
+    "absorbed-dose-rate": {
+      "formats": {
+        "gy-s": {
+          "name": {
+            "en": "Grays/second",
             "fr": "Grays/seconde"
-        },
-        "symbol": "Gy/s"
-      }
-    },
-    "name": {
-      "en": "Absorbed dose rate",
+          },
+          "symbol": "Gy/s"
+        }
+      },
+      "name": {
+        "en": "Absorbed dose rate",
         "fr": "Débit de dose absorbée"
-    }
-  },
-  "angle": {
-    "formats": {
-      "deg": {
-        "name": {
-          "en": "Degrees",
+      }
+    },
+    "angle": {
+      "formats": {
+        "deg": {
+          "name": {
+            "en": "Degrees",
             "fr": "Degrés"
+          },
+          "symbol": "°"
         },
-        "symbol": "°"
-      },
-      "grad": {
-        "name": {
-          "en": "Gradians",
+        "grad": {
+          "name": {
+            "en": "Gradians",
             "fr": "Grades"
+          },
+          "symbol": "grad"
         },
-        "symbol": "grad"
-      },
-      "rad": {
-        "name": {
-          "en": "Radians",
+        "rad": {
+          "name": {
+            "en": "Radians",
             "fr": "Radians"
-        },
-        "symbol": "rad"
-      }
-    },
-    "name": {
-      "en": "Angle",
+          },
+          "symbol": "rad"
+        }
+      },
+      "name": {
+        "en": "Angle",
         "fr": "Angle"
-    }
-  },
-  "angular-acceleration": {
-    "formats": {
-      "rad-s2": {
-        "name": {
-          "en": "Radians/second squared",
+      }
+    },
+    "angular-acceleration": {
+      "formats": {
+        "rad-s2": {
+          "name": {
+            "en": "Radians/second squared",
             "fr": "Radians/seconde carrée"
-        },
-        "symbol": "rad/s²"
-      }
-    },
-    "name": {
-      "en": "Angular acceleration",
+          },
+          "symbol": "rad/s²"
+        }
+      },
+      "name": {
+        "en": "Angular acceleration",
         "fr": "Accélération angulaire"
-    }
-  },
-  "area": {
-    "formats": {
-      "ac": {
-        "name": {
-          "en": "Acres (imperial)",
+      }
+    },
+    "area": {
+      "formats": {
+        "ac": {
+          "name": {
+            "en": "Acres (imperial)",
             "fr": "Acres (anglo-saxon)"
+          },
+          "symbol": "ac"
         },
-        "symbol": "ac"
-      },
-      "ft2": {
-        "name": {
-          "en": "Square feet",
+        "ft2": {
+          "name": {
+            "en": "Square feet",
             "fr": "Pieds carrés"
+          },
+          "symbol": "ft²"
         },
-        "symbol": "ft²"
-      },
-      "ha": {
-        "name": {
-          "en": "Hectares",
+        "ha": {
+          "name": {
+            "en": "Hectares",
             "fr": "Hectares"
+          },
+          "symbol": "ha"
         },
-        "symbol": "ha"
-      },
-      "in2": {
-        "name": {
-          "en": "Square inches",
+        "in2": {
+          "name": {
+            "en": "Square inches",
             "fr": "Pouces carrés"
+          },
+          "symbol": "in²"
         },
-        "symbol": "in²"
-      },
-      "km2": {
-        "name": {
-          "en": "Square kilometers",
+        "km2": {
+          "name": {
+            "en": "Square kilometers",
             "fr": "Kilomètres carrés"
+          },
+          "symbol": "km²"
         },
-        "symbol": "km²"
-      },
-      "m2": {
-        "name": {
-          "en": "Square meters",
+        "m2": {
+          "name": {
+            "en": "Square meters",
             "fr": "Mètres carrés"
+          },
+          "symbol": "m²"
         },
-        "symbol": "m²"
-      },
-      "mm2": {
-        "name": {
-          "en": "Square millimeters",
+        "mm2": {
+          "name": {
+            "en": "Square millimeters",
             "fr": "Millimètres carrés"
+          },
+          "symbol": "mm²"
         },
-        "symbol": "mm²"
-      },
-      "yd2": {
-        "name": {
-          "en": "Square yards",
+        "yd2": {
+          "name": {
+            "en": "Square yards",
             "fr": "Verges carrées"
+          },
+          "symbol": "yd²"
         },
-        "symbol": "yd²"
-      },
-      "mi2": {
-        "name": {
-          "en": "Square miles",
+        "mi2": {
+          "name": {
+            "en": "Square miles",
             "fr": "Milles carrés"
-        },
-        "symbol": "mi²"
-      }
-    },
-    "name": {
-      "en": "Area",
+          },
+          "symbol": "mi²"
+        }
+      },
+      "name": {
+        "en": "Area",
         "fr": "Aire"
-    }
-  },
-  "capacitance": {
-    "formats": {
-      "f": {
-        "name": {
-          "en": "Farads",
+      }
+    },
+    "capacitance": {
+      "formats": {
+        "f": {
+          "name": {
+            "en": "Farads",
             "fr": "Farads"
-        },
-        "symbol": "F"
-      }
-    },
-    "name": {
-      "en": "Capacitance",
+          },
+          "symbol": "F"
+        }
+      },
+      "name": {
+        "en": "Capacitance",
         "fr": "Capacitance"
-    }
-  },
-  "catalytic-activity": {
-    "formats": {
-      "kat": {
-        "name": {
-          "en": "Katals",
+      }
+    },
+    "catalytic-activity": {
+      "formats": {
+        "kat": {
+          "name": {
+            "en": "Katals",
             "fr": "Katals"
-        },
-        "symbol": "kat"
-      }
-    },
-    "name": {
-      "en": "Catalytic activity",
+          },
+          "symbol": "kat"
+        }
+      },
+      "name": {
+        "en": "Catalytic activity",
         "fr": "Activité catalytique"
-    }
-  },
-  "data-quantity": {
-    "formats": {
-      "b": {
-        "name": {
-          "en": "Bytes",
+      }
+    },
+    "data-quantity": {
+      "formats": {
+        "b": {
+          "name": {
+            "en": "Bytes",
             "fr": "Octets"
+          },
+          "symbol": "B"
         },
-        "symbol": "B"
-      },
-      "bit": {
-        "name": {
-          "en": "Bits",
+        "bits": {
+          "name": {
+            "en": "Bits",
             "fr": "Bits"
+          },
+          "symbol": "bit"
         },
-        "symbol": "bit"
-      },
-      "gb": {
-        "name": {
-          "en": "Gigabytes",
+        "gb": {
+          "name": {
+            "en": "Gigabytes",
             "fr": "Gigaoctets"
+          },
+          "symbol": "Gb"
         },
-        "symbol": "Gb"
-      },
-      "gbit": {
-        "name": {
-          "en": "Gigabits",
+        "gbits": {
+          "name": {
+            "en": "Gigabits",
             "fr": "Gigabits"
+          },
+          "symbol": "Gbit"
         },
-        "symbol": "Gbit"
-      },
-      "kb": {
-        "name": {
-          "en": "Kilobytes",
+        "kb": {
+          "name": {
+            "en": "Kilobytes",
             "fr": "Kilooctets"
+          },
+          "symbol": "Kb"
         },
-        "symbol": "Kb"
-      },
-      "kbit": {
-        "name": {
-          "en": "Kilobits",
+        "kbits": {
+          "name": {
+            "en": "Kilobits",
             "fr": "Kilobits"
+          },
+          "symbol": "Kbit"
         },
-        "symbol": "Kbit"
-      },
-      "mb": {
-        "name": {
-          "en": "Megabytes",
+        "mb": {
+          "name": {
+            "en": "Megabytes",
             "fr": "Megaoctets"
+          },
+          "symbol": "Mb"
         },
-        "symbol": "Mb"
-      },
-      "mbit": {
-        "name": {
-          "en": "Megabits",
+        "mbits": {
+          "name": {
+            "en": "Megabits",
             "fr": "Megabits"
+          },
+          "symbol": "Mbit"
         },
-        "symbol": "Mbit"
-      },
-      "tb": {
-        "name": {
-          "en": "Terabytes",
+        "tb": {
+          "name": {
+            "en": "Terabytes",
             "fr": "Teraoctets"
-        },
-        "symbol": "Tb"
-      }
-    },
-    "name": {
-      "en": "Data quantity",
+          },
+          "symbol": "Tb"
+        }
+      },
+      "name": {
+        "en": "Data quantity",
         "fr": "Quantité de données"
-    }
-  },
-  "density": {
-    "formats": {
-      "kg-m3": {
-        "name": {
-          "en": "Kilograms/cubic meter",
-            "fr": "Kilogrammes/mètre cube"
-        },
-        "symbol": "kg/m³"
       }
     },
-    "name": {
-      "en": "Density",
+    "density": {
+      "formats": {
+        "kg-m3": {
+          "name": {
+            "en": "Kilograms/cubic meter",
+            "fr": "Kilogrammes/mètre cube"
+          },
+          "symbol": "kg/m³"
+        }
+      },
+      "name": {
+        "en": "Density",
         "fr": "Densité"
-    }
-  },
-  "dynamic-viscosity": {
-    "formats": {
-      "pa-s": {
-        "name": {
-          "en": "Pascals/second",
+      }
+    },
+    "dynamic-viscosity": {
+      "formats": {
+        "pa-s": {
+          "name": {
+            "en": "Pascals/second",
             "fr": "Pascals/seconde"
-        },
-        "symbol": "Pa/s"
-      }
-    },
-    "name": {
-      "en": "Dynamic viscosity",
+          },
+          "symbol": "Pa/s"
+        }
+      },
+      "name": {
+        "en": "Dynamic viscosity",
         "fr": "Viscosité dynamique"
-    }
-  },
-  "electric-charge": {
-    "formats": {
-      "c": {
-        "name": {
-          "en": "Coulombs",
+      }
+    },
+    "electric-charge": {
+      "formats": {
+        "c": {
+          "name": {
+            "en": "Coulombs",
             "fr": "Coulombs"
-        },
-        "symbol": "C"
-      }
-    },
-    "name": {
-      "en": "Electric charge",
+          },
+          "symbol": "C"
+        }
+      },
+      "name": {
+        "en": "Electric charge",
         "fr": "Charge électrique"
-    }
-  },
-  "electric-charge-line-density": {
-    "formats": {
-      "c-m": {
-        "name": {
-          "en": "Coulombs/meter",
+      }
+    },
+    "electric-charge-line-density": {
+      "formats": {
+        "c-m": {
+          "name": {
+            "en": "Coulombs/meter",
             "fr": "Coulombs/mètre"
-        },
-        "symbol": "C/m"
-      }
-    },
-    "name": {
-      "en": "Electric charge line density",
+          },
+          "symbol": "C/m"
+        }
+      },
+      "name": {
+        "en": "Electric charge line density",
         "fr": "Densité linéique de charge électrique"
-    }
-  },
-  "electric-current": {
-    "formats": {
-      "a": {
-        "name": {
-          "en": "Amperes",
+      }
+    },
+    "electric-current": {
+      "formats": {
+        "a": {
+          "name": {
+            "en": "Amperes",
             "fr": "Ampères"
-        },
-        "symbol": "A"
-      }
-    },
-    "name": {
-      "en": "Electric current",
+          },
+          "symbol": "A"
+        }
+      },
+      "name": {
+        "en": "Electric current",
         "fr": "Courant électrique"
-    }
-  },
-  "electrical-conductivity": {
-    "formats": {
-      "s": {
-        "name": {
-          "en": "Siemens",
+      }
+    },
+    "electrical-conductivity": {
+      "formats": {
+        "s": {
+          "name": {
+            "en": "Siemens",
             "fr": "Siemens"
-        },
-        "symbol": "S"
-      }
-    },
-    "name": {
-      "en": "Electrical conductivity",
+          },
+          "symbol": "S"
+        }
+      },
+      "name": {
+        "en": "Electrical conductivity",
         "fr": "Conductivité électrique"
-    }
-  },
-  "electromotive-force": {
-    "formats": {
-      "v": {
-        "name": {
-          "en": "Volts",
+      }
+    },
+    "electromotive-force": {
+      "formats": {
+        "v": {
+          "name": {
+            "en": "Volts",
             "fr": "Volts"
-        },
-        "symbol": "V"
-      }
-    },
-    "name": {
-      "en": "Electromotive force",
+          },
+          "symbol": "V"
+        }
+      },
+      "name": {
+        "en": "Electromotive force",
         "fr": "Force électromotrice"
-    }
-  },
-  "energy": {
-    "formats": {
-      "btu": {
-        "name": {
-          "en": "British thermal units",
+      }
+    },
+    "energy": {
+      "formats": {
+        "btu": {
+          "name": {
+            "en": "British thermal units",
             "fr": "British thermal units"
+          },
+          "symbol": "BTU"
         },
-        "symbol": "BTU"
-      },
-      "cal": {
-        "name": {
-          "en": "Calories",
+        "cal": {
+          "name": {
+            "en": "Calories",
             "fr": "Calories"
+          },
+          "symbol": "cal"
         },
-        "symbol": "cal"
-      },
-      "ev": {
-        "name": {
-          "en": "Electron-volts",
+        "ev": {
+          "name": {
+            "en": "Electron-volts",
             "fr": "Électron-volts"
+          },
+          "symbol": "eV"
         },
-        "symbol": "eV"
-      },
-      "erg": {
-        "name": {
-          "en": "Ergs",
+        "erg": {
+          "name": {
+            "en": "Ergs",
             "fr": "Ergs"
+          },
+          "symbol": "Erg"
         },
-        "symbol": "Erg"
-      },
-      "ftlb": {
-        "name": {
-          "en": "Foot-pounds",
+        "ftlb": {
+          "name": {
+            "en": "Foot-pounds",
             "fr": "Pied-livres"
+          },
+          "symbol": "ft·lb"
         },
-        "symbol": "ft·lb"
-      },
-      "j": {
-        "name": {
-          "en": "Joules",
+        "j": {
+          "name": {
+            "en": "Joules",
             "fr": "Joules"
+          },
+          "symbol": "J"
         },
-        "symbol": "J"
-      },
-      "kcal": {
-        "name": {
-          "en": "Kilogram-calories",
+        "kcal": {
+          "name": {
+            "en": "Kilogram-calories",
             "fr": "Kilocalories"
+          },
+          "symbol": "kg·cal"
         },
-        "symbol": "kg·cal"
-      },
-      "ws": {
-        "name": {
-          "en": "Watt-seconds",
+        "ws": {
+          "name": {
+            "en": "Watt-seconds",
             "fr": "Watt-secondes"
+          },
+          "symbol": "Ws"
         },
-        "symbol": "Ws"
-      },
-      "kwh": {
-        "name": {
-          "en": "Kilowatt-hours",
+        "kwh": {
+          "name": {
+            "en": "Kilowatt-hours",
             "fr": "Kilowatt-heures"
+          },
+          "symbol": "kW·h"
         },
-        "symbol": "kW·h"
-      },
-      "nm": {
-        "name": {
-          "en": "Newton-meters",
+        "nm": {
+          "name": {
+            "en": "Newton-meters",
             "fr": "Newton-mètres"
+          },
+          "symbol": "N·m"
         },
-        "symbol": "N·m"
-      },
-      "wh": {
-        "name": {
-          "en": "Watt-hours",
+        "wh": {
+          "name": {
+            "en": "Watt-hours",
             "fr": "Watt-heures"
-        },
-        "symbol": "W·h"
-      }
-    },
-    "name": {
-      "en": "Energy",
+          },
+          "symbol": "W·h"
+        }
+      },
+      "name": {
+        "en": "Energy",
         "fr": "Energie"
-    }
-  },
-  "force": {
-    "formats": {
-      "dyn": {
-        "name": {
-          "en": "Dynes",
+      }
+    },
+    "force": {
+      "formats": {
+        "dyn": {
+          "name": {
+            "en": "Dynes",
             "fr": "Dynes"
+          },
+          "symbol": "dyn"
         },
-        "symbol": "dyn"
-      },
-      "n": {
-        "name": {
-          "en": "Newtons",
+        "n": {
+          "name": {
+            "en": "Newtons",
             "fr": "Newtons"
+          },
+          "symbol": "N"
         },
-        "symbol": "N"
-      },
-      "pdl": {
-        "name": {
-          "en": "Poundals",
+        "pdl": {
+          "name": {
+            "en": "Poundals",
             "fr": "Poundals"
-        },
-        "symbol": "Pdl"
-      }
-    },
-    "name": {
-      "en": "Force",
+          },
+          "symbol": "Pdl"
+        }
+      },
+      "name": {
+        "en": "Force",
         "fr": "Force"
-    }
-  },
-  "frequency": {
-    "formats": {
-      "rpm": {
-        "name": {
-          "en": "Revolutions per minute",
+      }
+    },
+    "frequency": {
+      "formats": {
+        "rpm": {
+          "name": {
+            "en": "Revolutions per minute",
             "fr": "Rotations par minute"
+          },
+          "symbol": "rpm"
         },
-        "symbol": "rpm"
-      },
-      "hz": {
-        "name": {
-          "en": "Hertz",
+        "hz": {
+          "name": {
+            "en": "Hertz",
             "fr": "Hertz"
+          },
+          "symbol": "Hz"
         },
-        "symbol": "Hz"
-      },
-      "bpm": {
-        "name": {
-          "en": "Beats per minute",
+        "bpm": {
+          "name": {
+            "en": "Beats per minute",
             "fr": "Battements par minute"
-        },
-        "symbol": "bpm"
-      }
-    },
-    "name": {
-      "en": "Frequency",
+          },
+          "symbol": "bpm"
+        }
+      },
+      "name": {
+        "en": "Frequency",
         "fr": "Fréquence"
-    }
-  },
-  "luminous-intensity": {
-    "formats": {
-      "cd": {
-        "name": {
-          "en": "Candelas",
+      }
+    },
+    "luminous-intensity": {
+      "formats": {
+        "cd": {
+          "name": {
+            "en": "Candelas",
             "fr": "Candelas"
-        },
-        "symbol": "Cd"
-      }
-    },
-    "name": {
-      "en": "Luminous intensity",
+          },
+          "symbol": "Cd"
+        }
+      },
+      "name": {
+        "en": "Luminous intensity",
         "fr": "Intensité lumineuse"
-    }
-  },
-  "mol": {
-    "formats": {
-      "mol": {
-        "name": {
-          "en": "Moles",
+      }
+    },
+    "mol": {
+      "formats": {
+        "mol": {
+          "name": {
+            "en": "Moles",
             "fr": "Moles"
-        },
-        "symbol": "Mol"
-      }
-    },
-    "name": {
-      "en": "Amount of substance",
+          },
+          "symbol": "Mol"
+        }
+      },
+      "name": {
+        "en": "Amount of substance",
         "fr": "Quantité de matière"
-    }
-  },
-  "power": {
-    "formats": {
-      "btu-min": {
-        "name": {
-          "en": "BTUs/minute",
+      }
+    },
+    "power": {
+      "formats": {
+        "btu-min": {
+          "name": {
+            "en": "BTUs/minute",
             "fr": "BTUs/minute"
+          },
+          "symbol": "BTU/min"
         },
-        "symbol": "BTU/min"
-      },
-      "ftlb-s": {
-        "name": {
-          "en": "Foot-pounds/second",
+        "ftlb-s": {
+          "name": {
+            "en": "Foot-pounds/second",
             "fr": "Pied-livres/seconde"
+          },
+          "symbol": "ft·lb/s"
         },
-        "symbol": "ft·lb/s"
-      },
-      "hp": {
-        "name": {
-          "en": "Horsepower",
+        "hp": {
+          "name": {
+            "en": "Horsepower",
             "fr": "Chevaux"
+          },
+          "symbol": "hp"
         },
-        "symbol": "hp"
-      },
-      "kw": {
-        "name": {
-          "en": "Kilowatts",
+        "kw": {
+          "name": {
+            "en": "Kilowatts",
             "fr": "Kilowatts"
+          },
+          "symbol": "kW"
         },
-        "symbol": "kW"
-      },
-      "w": {
-        "name": {
-          "en": "Watts",
+        "w": {
+          "name": {
+            "en": "Watts",
             "fr": "Watts"
-        },
-        "symbol": "W"
-      }
-    },
-    "name": {
-      "en": "Power",
+          },
+          "symbol": "W"
+        }
+      },
+      "name": {
+        "en": "Power",
         "fr": "Puissance"
-    }
-  },
-  "pressure": {
-    "formats": {
-      "at": {
-        "name": {
-          "en": "Atmospheres",
+      }
+    },
+    "pressure": {
+      "formats": {
+        "at": {
+          "name": {
+            "en": "Atmospheres",
             "fr": "Atmosphères"
+          },
+          "symbol": "at"
         },
-        "symbol": "at"
-      },
-      "bar": {
-        "name": {
-          "en": "Bars",
+        "bar": {
+          "name": {
+            "en": "Bars",
             "fr": "Bars"
+          },
+          "symbol": "bar"
         },
-        "symbol": "bar"
-      },
-      "cmhg": {
-        "name": {
-          "en": "Centimeters of mercury",
+        "cmhg": {
+          "name": {
+            "en": "Centimeters of mercury",
             "fr": "Centimètres de mercure"
+          },
+          "symbol": "cmHg"
         },
-        "symbol": "cmHg"
-      },
-      "inhg": {
-        "name": {
-          "en": "Inches of mercury",
+        "inhg": {
+          "name": {
+            "en": "Inches of mercury",
             "fr": "Pouces de mercure"
+          },
+          "symbol": "inHg"
         },
-        "symbol": "inHg"
-      },
-      "kg-m2": {
-        "name": {
-          "en": "Kilograms/square meter",
+        "kg-m2": {
+          "name": {
+            "en": "Kilograms/square meter",
             "fr": "Kilogrammes/mètre cube"
+          },
+          "symbol": "kg/m²"
         },
-        "symbol": "kg/m²"
-      },
-      "mmhg": {
-        "name": {
-          "en": "Millimeters of mercury",
+        "mmhg": {
+          "name": {
+            "en": "Millimeters of mercury",
             "fr": "Millimètres de mercure"
+          },
+          "symbol": "mmHg"
         },
-        "symbol": "mmHg"
-      },
-      "pa": {
-        "name": {
-          "en": "Pascals",
+        "pa": {
+          "name": {
+            "en": "Pascals",
             "fr": "Pascals"
+          },
+          "symbol": "Pa"
         },
-        "symbol": "Pa"
-      },
-      "kpa": {
-        "name": {
-          "en": "Kilo Pascals",
+        "kpa": {
+          "name": {
+            "en": "Kilo Pascals",
             "fr": "Kilo Pascals"
+          },
+          "symbol": "kPa"
         },
-        "symbol": "kPa"
-      },
-      "psf": {
-        "name": {
-          "en": "Pounds/square foot",
+        "psf": {
+          "name": {
+            "en": "Pounds/square foot",
             "fr": "Livres/pied carré"
+          },
+          "symbol": "psf"
         },
-        "symbol": "psf"
-      },
-      "psi": {
-        "name": {
-          "en": "Pounds/square inch",
+        "psi": {
+          "name": {
+            "en": "Pounds/square inch",
             "fr": "Livres/pouce carré"
-        },
-        "symbol": "psi"
-      }
-    },
-    "name": {
-      "en": "Pressure",
+          },
+          "symbol": "psi"
+        }
+      },
+      "name": {
+        "en": "Pressure",
         "fr": "Pression"
-    }
-  },
-  "speed": {
-    "formats": {
-      "ft-m": {
-        "name": {
-          "en": "Feet/minute",
+      }
+    },
+    "speed": {
+      "formats": {
+        "ft-m": {
+          "name": {
+            "en": "Feet/minute",
             "fr": "Pieds/minute"
+          },
+          "symbol": "ft/m"
         },
-        "symbol": "ft/m"
-      },
-      "ft-s": {
-        "name": {
-          "en": "Feet/second",
+        "ft-s": {
+          "name": {
+            "en": "Feet/second",
             "fr": "Pieds/seconde"
+          },
+          "symbol": "ft/s"
         },
-        "symbol": "ft/s"
-      },
-      "km-h": {
-        "name": {
-          "en": "Kilometers/hour",
+        "km-h": {
+          "name": {
+            "en": "Kilometers/hour",
             "fr": "Kilomètres/heure"
+          },
+          "symbol": "km/h"
         },
-        "symbol": "km/h"
-      },
-      "kt": {
-        "name": {
-          "en": "Knots",
+        "kt": {
+          "name": {
+            "en": "Knots",
             "fr": "Noeuds"
+          },
+          "symbol": "kt"
         },
-        "symbol": "kt"
-      },
-      "m-min": {
-        "name": {
-          "en": "Miles/minute",
+        "m-min": {
+          "name": {
+            "en": "Miles/minute",
             "fr": "Miles/minute"
+          },
+          "symbol": "m/min"
         },
-        "symbol": "m/min"
-      },
-      "m-s": {
-        "name": {
-          "en": "Meters/second",
+        "m-s": {
+          "name": {
+            "en": "Meters/second",
             "fr": "Mètres/seconde"
+          },
+          "symbol": "m/s"
         },
-        "symbol": "m/s"
-      },
-      "mph": {
-        "name": {
-          "en": "Miles/hour",
+        "mph": {
+          "name": {
+            "en": "Miles/hour",
             "fr": "Miles/heure"
-        },
-        "symbol": "mph"
-      }
-    },
-    "name": {
-      "en": "Speed",
+          },
+          "symbol": "mph"
+        }
+      },
+      "name": {
+        "en": "Speed",
         "fr": "Vitesse"
-    }
-  },
-  "volume": {
-    "formats": {
-      "c": {
-        "name": {
-          "en": "Cups",
+      }
+    },
+    "volume": {
+      "formats": {
+        "c": {
+          "name": {
+            "en": "Cups",
             "fr": "Tasses"
+          },
+          "symbol": "c"
         },
-        "symbol": "c"
-      },
-      "cm3": {
-        "name": {
-          "en": "Cubic centimeters",
+        "cm3": {
+          "name": {
+            "en": "Cubic centimeters",
             "fr": "Centimètres cube"
+          },
+          "symbol": "cm³"
         },
-        "symbol": "cm³"
-      },
-      "floz": {
-        "name": {
-          "en": "Fluid ounces",
+        "floz": {
+          "name": {
+            "en": "Fluid ounces",
             "fr": "Onces liquides"
+          },
+          "symbol": "fl oz"
         },
-        "symbol": "fl oz"
-      },
-      "ft3": {
-        "name": {
-          "en": "Cubic feet",
+        "ft3": {
+          "name": {
+            "en": "Cubic feet",
             "fr": "Pieds cube"
+          },
+          "symbol": "cu ft"
         },
-        "symbol": "cu ft"
-      },
-      "galgb": {
-        "name": {
-          "en": "Gallons imperial",
+        "galgb": {
+          "name": {
+            "en": "Gallons imperial",
             "fr": "Gallons impériaux"
+          },
+          "symbol": "gal GB"
         },
-        "symbol": "gal GB"
-      },
-      "galus": {
-        "name": {
-          "en": "Gallons US",
+        "galus": {
+          "name": {
+            "en": "Gallons US",
             "fr": "Gallons US"
+          },
+          "symbol": "gal US"
         },
-        "symbol": "gal US"
-      },
-      "in3": {
-        "name": {
-          "en": "Cubic inches",
+        "in3": {
+          "name": {
+            "en": "Cubic inches",
             "fr": "Pouce cube"
+          },
+          "symbol": "cu in"
         },
-        "symbol": "cu in"
-      },
-      "yd3": {
-        "name": {
-          "en": "Cubic yards",
+        "yd3": {
+          "name": {
+            "en": "Cubic yards",
             "fr": "Verges cube"
+          },
+          "symbol": "cu yd"
         },
-        "symbol": "cu yd"
-      },
-      "l": {
-        "name": {
-          "en": "Liters",
+        "l": {
+          "name": {
+            "en": "Liters",
             "fr": "Litres"
+          },
+          "symbol": "L"
         },
-        "symbol": "L"
-      },
-      "m3": {
-        "name": {
-          "en": "Cubic meters",
+        "m3": {
+          "name": {
+            "en": "Cubic meters",
             "fr": "Mètres cube"
+          },
+          "symbol": "m³"
         },
-        "symbol": "m³"
-      },
-      "ml": {
-        "name": {
-          "en": "Milliliters",
+        "ml": {
+          "name": {
+            "en": "Milliliters",
             "fr": "Millilitres"
+          },
+          "symbol": "mL"
         },
-        "symbol": "mL"
-      },
-      "pt": {
-        "name": {
-          "en": "Pints",
+        "pt": {
+          "name": {
+            "en": "Pints",
             "fr": "Pintes"
+          },
+          "symbol": "pt"
         },
-        "symbol": "pt"
-      },
-      "qt": {
-        "name": {
-          "en": "Quarts",
+        "qt": {
+          "name": {
+            "en": "Quarts",
             "fr": "Quarts"
+          },
+          "symbol": "qt"
         },
-        "symbol": "qt"
-      },
-      "bbloil": {
-        "name": {
-          "en": "Barrels (oil)",
+        "bbloil": {
+          "name": {
+            "en": "Barrels (oil)",
             "fr": "Barils (pétrole)"
+          },
+          "symbol": "bbl (oil)"
         },
-        "symbol": "bbl (oil)"
-      },
-      "tbs": {
-        "name": {
-          "en": "Tablespoons",
+        "tbs": {
+          "name": {
+            "en": "Tablespoons",
             "fr": "Cuillères à soupe"
+          },
+          "symbol": "tbs"
         },
-        "symbol": "tbs"
-      },
-      "tsp": {
-        "name": {
-          "en": "Teaspoons",
+        "tsp": {
+          "name": {
+            "en": "Teaspoons",
             "fr": "Cuillères à café"
-        },
-        "symbol": "tsp"
-      }
-    },
-    "name": {
-      "en": "Volume",
+          },
+          "symbol": "tsp"
+        }
+      },
+      "name": {
+        "en": "Volume",
         "fr": "Volume"
-    }
-  },
-  "time": {
-    "formats": {
-      "d": {
-        "name": {
-          "en": "Days",
-            "fr": "Jours"
-        },
-        "symbol": "d"
-      },
-      "h": {
-        "name": {
-          "en": "Hours",
-            "fr": "Heures"
-        },
-        "symbol": "h"
-      },
-      "min": {
-        "name": {
-          "en": "Minutes",
-            "fr": "Minutes"
-        },
-        "symbol": "min"
-      },
-      "ms": {
-        "name": {
-          "en": "Milliseconds",
-            "fr": "Millisecondes"
-        },
-        "symbol": "ms"
-      },
-      "s": {
-        "name": {
-          "en": "Seconds",
-            "fr": "Secondes"
-        },
-        "symbol": "s"
-      },
-      "y": {
-        "name": {
-          "en": "Years (Julian)",
-            "fr": "Années (juliennes)"
-        },
-        "symbol": "yr"
       }
     },
-    "name": {
-      "en": "Time",
+    "time": {
+      "formats": {
+        "d": {
+          "name": {
+            "en": "Days",
+            "fr": "Jours"
+          },
+          "symbol": "d"
+        },
+        "h": {
+          "name": {
+            "en": "Hours",
+            "fr": "Heures"
+          },
+          "symbol": "h"
+        },
+        "min": {
+          "name": {
+            "en": "Minutes",
+            "fr": "Minutes"
+          },
+          "symbol": "min"
+        },
+        "ms": {
+          "name": {
+            "en": "Milliseconds",
+            "fr": "Millisecondes"
+          },
+          "symbol": "ms"
+        },
+        "s": {
+          "name": {
+            "en": "Seconds",
+            "fr": "Secondes"
+          },
+          "symbol": "s"
+        },
+        "y": {
+          "name": {
+            "en": "Years (Julian)",
+            "fr": "Années (juliennes)"
+          },
+          "symbol": "yr"
+        }
+      },
+      "name": {
+        "en": "Time",
         "fr": "Temps"
+      }
     }
   }
-}
 }
