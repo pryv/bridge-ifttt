@@ -57,9 +57,9 @@ function buildFromSets(compiledSetKey, selectedSets) {
 
 
 
-buildFromSets('basic', ['basic-measurements-metric',
+buildFromSets('basic', ['generic-medical', 'basic-measurements-metric',
   'basic-measurements-imperial', 'basic-measurements-us']);
-buildFromSets('common', ['generic-measurements-metric',
+buildFromSets('common', ['generic-medical', 'generic-measurements-metric',
   'generic-measurements-imperial', 'generic-measurements-us']);
 
 // TODO money & all
