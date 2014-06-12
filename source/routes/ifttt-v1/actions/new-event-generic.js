@@ -1,5 +1,5 @@
 var pryv = require('pryv');
-var md = require('html-md');
+
 
 var PYError = require('../../../errors/PYError.js');
 var request = require('request');

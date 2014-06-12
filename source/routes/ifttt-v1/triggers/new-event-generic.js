@@ -2,12 +2,7 @@ var PYError = require('../../../errors/PYError.js');
 var constants = require('../../../utils/constants.js');
 var cache = require('../../../storage/cache.js');
 var logger = require('winston');
-var marked = require('marked');
 var versionPath = '/ifttt/v1/';
-
-marked.setOptions({
-  sanitize: true
-});
 
 
 /**
