@@ -19,7 +19,9 @@
     "hat": "0.0.3",
     "nock": "~0.27.2",
     "pryv": "git+ssh://git@github.com:pryv/lib-javascript.git#master",
-    "request": "~2.34.0"
+    "request": "~2.34.0",
+    "html-md" : "~3.0.2",
+    "marked": "~0.3.2"
   },
   "devDependencies": {
     "mocha": "latest",

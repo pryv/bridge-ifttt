@@ -1,4 +1,5 @@
 var pryv = require('pryv');
+var md = require('html-md');
 
 var PYError = require('../../../errors/PYError.js');
 var request = require('request');
@@ -54,7 +55,7 @@ exports.setup = function setup(app, route, mapFunction) {
     }
     actionFields.description = actionFields.description.trim();
     if (actionFields.description.length > 0) {
-      eventData.description = actionFields.description;
+      eventData.description = md(actionFields.description); // Does HTML to md
     }
 
     // --- tags

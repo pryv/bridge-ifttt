@@ -2,9 +2,12 @@ var PYError = require('../../../errors/PYError.js');
 var constants = require('../../../utils/constants.js');
 var cache = require('../../../storage/cache.js');
 var logger = require('winston');
+var marked = require('marked');
 var versionPath = '/ifttt/v1/';
 
-
+marked.setOptions({
+  sanitize: true
+});
 
 
 /**
@@ -100,7 +103,7 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
 
             var eventData = {
               meta: {id : event.id, timestamp: Math.round(event.time)},
-              description : event.description || '',
+              description : event.description ? marked(event.description) : '', // Does md to HTML
               Tags: event.tags ? event.tags.join(', ') : null,
               StreamName: streamName,
               AtTime: (new Date(event.time * 1000)).toIFTTTISOString()

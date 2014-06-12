@@ -1,4 +1,5 @@
 var PYError = require('../../../errors/PYError.js');
+var md = require('html-md');
 
 module.exports = function setup(app) {
   require('./new-event-generic').setup(app, 'new-note', function (event, actionFields, done) {
@@ -7,7 +8,7 @@ module.exports = function setup(app) {
     }
 
     event.type = 'note/txt';
-    event.content = actionFields.contentText;
+    event.content = md(actionFields.contentText); // Does HTML to md
     return done();
   });
 };
