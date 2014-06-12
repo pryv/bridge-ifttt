@@ -55,7 +55,7 @@ exports.setup = function setup(app, route, mapFunction) {
     }
     actionFields.description = actionFields.description.trim();
     if (actionFields.description.length > 0) {
-      eventData.description = md(actionFields.description); // Does HTML to md
+      eventData.description = actionFields.description;
     }
 
     // --- tags
