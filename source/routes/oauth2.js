@@ -16,7 +16,10 @@ module.exports = function setup(app) {
     var parameters = {
       //sso: req.signedCookies.sso,
       requestingAppId: req.query.client_id,
-      requestedPermissions: [ {streamId : '*', level: 'manage'} ], // TODO adapt to clientId
+      requestedPermissions: [
+        {streamId : '*', level: 'manage'},
+        {streamId : 'ifttt', defaultName: 'IFTTT', level: 'manage'}
+      ], // TODO adapt to clientId
       languageCode: 'en',
       returnURL: req.query.redirect_uri + '?',
       oauthState: req.query.state
