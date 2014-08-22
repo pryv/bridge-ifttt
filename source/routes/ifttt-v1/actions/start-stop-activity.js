@@ -8,7 +8,7 @@ var versionPath = '/ifttt/v1/';
 // - stream list should display singleActivities indicators
 
 
-exports.setup = function setup(app) {
+module.exports = function setup(app) {
   var actionPath = versionPath + 'actions/start-stop-activity';
 
   app.post(actionPath + '/fields/streamId/options',

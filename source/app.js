@@ -40,12 +40,14 @@ module.exports = function () {
   require('./routes/ifttt-v1/triggers/new-photo.js')(app);
   require('./routes/ifttt-v1/triggers/new-note.js')(app);
   require('./routes/ifttt-v1/triggers/new-numerical.js')(app);
+  require('./routes/ifttt-v1/triggers/new-file.js')(app);
 
   // actions
   require('./routes/ifttt-v1/actions/new-note.js')(app);
   require('./routes/ifttt-v1/actions/new-photo.js')(app);
   require('./routes/ifttt-v1/actions/new-numerical.js')(app);
   require('./routes/ifttt-v1/actions/new-file.js')(app);
+  //require('./routes/ifttt-v1/actions/start-stop-activity.js')(app);
 
   // error handler
 
