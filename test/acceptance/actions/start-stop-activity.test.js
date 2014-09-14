@@ -14,7 +14,6 @@ require('should');
 
 var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
-/**
 describe('/actions/start-stop-activity', function () {
   this.timeout(5000);
   before(function () {
@@ -45,7 +44,7 @@ describe('/actions/start-stop-activity', function () {
       request.post(serverBasePath + '/ifttt/v1/actions/start-stop-activity')
         .set('Authorization', 'Bearer ' + testData.oauthToken).send(
         { actionFields: {
-          description: 'Na Na Nah',
+          description: 'Na Na Nah 2',
           streamId: testData.streamId,
           action: 'stop',
           tags: 'IFTTT'
@@ -61,4 +60,3 @@ describe('/actions/start-stop-activity', function () {
 
   });
 });
-**/
