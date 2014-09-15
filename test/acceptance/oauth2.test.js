@@ -72,7 +72,7 @@ describe('oauth2', function () {
         .send(parameters)
         .redirects(0)
         .end(function (res) {
-          console.log(res.status);
+          //console.log(res.status);
           res.should.have.status(200);
           res.body.token_type.should.eql('Bearer');
           res.body.should.have.property('access_token');
@@ -95,7 +95,7 @@ describe('oauth2', function () {
         .send(parameters)
         .redirects(0)
         .end(function (res) {
-          console.log(res.status);
+          //console.log(res.status);
           res.should.have.status(401);
           done();
         });

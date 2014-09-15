@@ -61,7 +61,14 @@ nconf.defaults({
     port : 7379
   },
   debug: {
-    middlewareDebug : true
+    middlewareDebug : false,
+    oauth: true,
+    fieldsStreams: false,
+    newEventTrigger: false,
+    newEventAction: true
+  },
+  airbrake: {
+    key: 'eae70e8971791110a3f13fb8fcea3d6b' // bridge-ifttt
   }
 });
 

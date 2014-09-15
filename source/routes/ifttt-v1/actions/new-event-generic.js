@@ -4,6 +4,7 @@ var pryv = require('pryv');
 var PYError = require('../../../errors/PYError.js');
 var request = require('request');
 var versionPath = '/ifttt/v1/';
+var config = require('../../../utils/config.js');
 
 
 /**
@@ -15,7 +16,7 @@ var versionPath = '/ifttt/v1/';
  */
 exports.addOption = function (app, optionKey, route, doFunction) {
   var optionPath = versionPath + 'actions/' + route + '/fields/' + optionKey + '/options';
-  console.log(optionPath);
+  //console.log(optionPath);
   app.post(optionPath, doFunction);
 };
 
@@ -82,7 +83,9 @@ exports.setup = function setup(app, route, mapFunction) {
         return next(PYError.internalError('Failed creating event ' + detailMsg));
       }
       var data = {data: [ {id: event.id} ]};
-      console.log('OK creating event ' + detailMsg, data);
+      if (config.get('debug:newEventAction')) {
+        console.log('OK creating event ' + detailMsg, data);
+      }
       res.json(data);
     };
 
@@ -110,12 +113,15 @@ exports.setup = function setup(app, route, mapFunction) {
 
           var formData = pryv.utility.forgeFormData('attachment0', data, attachmentData);
 
-
-          console.log('creating event with attachment and data:', event.getData());
+          if (config.get('debug:newEventAction')) {
+            console.log('creating event with attachment and data:', event.getData());
+          }
           req.pryvConnection.events.createWithAttachment(event, formData, sendResponse);
 
         } else {
-          console.log('creating event with data:', event.getData());
+          if (config.get('debug:newEventAction')) {
+            console.log('creating event with data:', event.getData());
+          }
           req.pryvConnection.events.create(event, sendResponse);
         }
 
@@ -143,7 +149,9 @@ function fetchAttachment(actionFields, done) {
     strictSSL: false
   };
 
-  console.log(requestSettings);
+  if (config.get('debug:newEventAction')) {
+    console.log(requestSettings);
+  }
   request(requestSettings,  function (error, response, body) {
     if (error) { done(error); }
 
