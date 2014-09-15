@@ -2,6 +2,11 @@ var config = require('./utils/config'),
     logger = require('winston'),
     version = require('../package.json').version;
 
+// send crashes to Airbrake service
+if (config.get('airbrake:disable') !== true) {
+  var airbrake = require('airbrake').createClient(config.get('airbrake:key'));
+  airbrake.handleExceptions();
+}
 
 var ready = require('readyness');
 ready.setLogger(logger.info);

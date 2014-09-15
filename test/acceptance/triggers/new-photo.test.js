@@ -60,7 +60,7 @@ describe('/triggers/new-photo/', function () {
           });
 
 
-          console.log(res.body.data);
+          //console.log(res.body.data);
           done();
         });
     });

@@ -62,7 +62,7 @@ describe('/triggers/new-note/', function () {
           });
 
 
-          console.log(res.body.data);
+          //console.log(res.body.data);
           done();
         });
     });
@@ -93,7 +93,7 @@ describe('/triggers/new-note/', function () {
           });
 
 
-          console.log(res.body.data);
+          //console.log(res.body.data);
           done();
         });
     });

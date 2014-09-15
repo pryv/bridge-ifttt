@@ -3,7 +3,7 @@ var constants = require('../../../utils/constants.js');
 var cache = require('../../../storage/cache.js');
 var logger = require('winston');
 var versionPath = '/ifttt/v1/';
-
+var config = require('../../../utils/config.js');
 
 /**
  * Generic extraOption Handler
@@ -110,8 +110,9 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
             }
           }
         });
-
-        console.log(data);
+        if (config.get('debug:newEventTrigger')) {
+          console.log(data);
+        }
         res.send({data : data});
       });
     });
