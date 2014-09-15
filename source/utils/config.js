@@ -65,7 +65,7 @@ nconf.defaults({
     oauth: true,
     fieldsStreams: false,
     newEventTrigger: false,
-    newEventAction: true
+    newEventAction: false
   },
   airbrake: {
     key: 'eae70e8971791110a3f13fb8fcea3d6b' // bridge-ifttt
