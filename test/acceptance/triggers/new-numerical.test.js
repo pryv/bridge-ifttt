@@ -44,7 +44,7 @@ describe('/triggers/new-numerical/', function () {
           res.should.have.status(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
-          console.log(res.body.data);
+          //console.log(res.body.data);
           done();
         });
     });
@@ -94,7 +94,7 @@ describe('/triggers/new-numerical/', function () {
 
           });
 
-          console.log(res.body.data);
+          //console.log(res.body.data);
           done();
         });
     });

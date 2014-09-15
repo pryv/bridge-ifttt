@@ -1,6 +1,7 @@
 var PYError = require('../errors/PYError.js');
 var cache = require('../storage/cache.js');
 var constants =  require('../utils/constants.js');
+var config = require('../utils/config.js');
 
 /**
  * output the streams options {data, value} array for this connection
@@ -44,7 +45,9 @@ function streams(req, res, next, all) {
     }
     addStreams(0, streamsArray);
 
-    console.log(result);
+    if (config.get('debug:fieldsStreams')) {
+      console.log(result);
+    }
     res.json(result);
   });
 }
