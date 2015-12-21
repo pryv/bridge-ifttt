@@ -41,8 +41,8 @@ if (configFile) {
 nconf.defaults({
   pryv: {
     staging : true,
-    domain : 'pryv.in',
-    access : 'https://reg.pryv.in/access'
+    domain : 'pryv.io',
+    access : 'https://reg.pryv.io/access'
   },
   ifttt: {
     clientId: 'ifttt-all',
