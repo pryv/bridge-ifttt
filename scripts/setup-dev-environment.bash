@@ -3,6 +3,7 @@
 # Sets up the dev environment on a 64-bit OSX system.
 # Re-run to update e.g. the node version (from the new default) or the JSHint config (from the master).
 
+#
 # working dir fix
 SCRIPT_FOLDER=$(cd $(dirname "$0"); pwd)
 cd $SCRIPT_FOLDER/..
