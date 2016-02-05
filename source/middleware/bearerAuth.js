@@ -36,9 +36,10 @@ module.exports =  function (req, res, next) {
 
     var doIstage = staging;
     //-- in testing scheme mode , switch to pryv.in
-    if (oauthToken === testData.oauthToken) {
-      doIstage = true;
-    }
+    /*if (oauthToken === testData.oauthToken) {
+      // doIstage = true;
+      // Not anymore (since dec 2015 no staging operational)
+    } */
 
     //--- end of test related part
 

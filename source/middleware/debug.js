@@ -6,6 +6,8 @@ var config = require('../utils/config.js');
  */
 module.exports = function (req, res, next) {
 
+  console.log(new Date().toString(), req.url);
+
   if (config.get('debug:middlewareDebug')) {
     debug.inspect({ url: req.url, method: req.method, head: req.headers, body: req.body});
   }

@@ -41,8 +41,8 @@ if (configFile) {
 nconf.defaults({
   pryv: {
     staging : true,
-    domain : 'pryv.in',
-    access : 'https://reg.pryv.in/access'
+    domain : 'pryv.io',
+    access : 'https://reg.pryv.io/access'
   },
   ifttt: {
     clientId: 'ifttt-all',
@@ -65,7 +65,7 @@ nconf.defaults({
     oauth: true,
     fieldsStreams: false,
     newEventTrigger: false,
-    newEventAction: true
+    newEventAction: false
   },
   airbrake: {
     key: 'eae70e8971791110a3f13fb8fcea3d6b' // bridge-ifttt
