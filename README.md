@@ -4,7 +4,7 @@ bridge-ifttt
 
 IFTTT gateway
 
-# setup
+# Setup
 
 run
 ```
