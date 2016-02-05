@@ -12,7 +12,7 @@ module.exports = function handleError(error, req, res, next) {
   if (error instanceof PYError) {
     pyError = error;
   } else {
-    pyError = PYError.internalError(' xx');
+    pyError = PYError.internalError(' xx', '', error);
   }
   logger.error(pyError, pyError.detail, error);
   res.json({ errors: [ { message: pyError.message }]}, pyError.status);
