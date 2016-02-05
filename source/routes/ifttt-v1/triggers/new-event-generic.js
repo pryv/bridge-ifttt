@@ -72,7 +72,7 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
     //-- skip
     if (filterLike.limit === 0) {
       console.log('limit === 0');
-      res.send({data : []});
+      return res.send({data : []});
     }
 
 
