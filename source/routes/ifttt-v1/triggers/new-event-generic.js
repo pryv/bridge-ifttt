@@ -82,6 +82,9 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
 
       // -- get the streamsMap for the names
       cache.getStreamsMap(req.pryvConnection, function (error, streamMap) {
+        if (error) {
+          return next(PYError.internalError('Failed fetching streams from cache', error));
+        }
 
         var data = [];  // will be sent
 
