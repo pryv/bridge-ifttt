@@ -43,13 +43,13 @@ module.exports = function setup(app) {
             },
             'new-photo' : {
               streamId: testData.streamId,
-              attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png',
+              attachmentUrl: 'http://api.pryv.com/assets/images/logo-256-black.png',
               description: 'New photo added to "Camera Roll"',
               tags: 'IFTTT, iOS Photos'
             },
             'new-file' : {
               streamId: testData.streamId,
-              attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png',
+              attachmentUrl: 'http://api.pryv.com/assets/images/logo-256-black.png',
               description: 'New photo saved as file',
               tags: 'IFTTT, File',
               filename: 'logoPryvX.png'
