@@ -5,7 +5,7 @@ var db = require('../storage/database.js');
 var pryv = require('pryv');
 var config = require('../utils/config');
 
-var testData = require('../../test/test-data');
+//var testData = require('../../test/test-data');
 
 var channelApiKey = config.get('ifttt:channelApiKey');
 
@@ -45,7 +45,7 @@ module.exports =  function (req, res, next) {
 
     db.getSet(oauthToken, function (error, credentials) {
       if (error) {
-        return next(PYError.internalError('Database error'));
+        return next(PYError.internalError('Database error', '', error));
       }
       if (!credentials || !credentials.username) {
         return next(PYError.invalidToken());

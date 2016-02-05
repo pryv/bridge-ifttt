@@ -78,7 +78,7 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
 
     // -- fetch the events
     req.pryvConnection.events.get(filterLike, function (error, eventsArray) {
-      if (error) { return next(PYError.internalError('Failed fetching events')); }
+      if (error) { return next(PYError.internalError('Failed fetching events', error)); }
 
       // -- get the streamsMap for the names
       cache.getStreamsMap(req.pryvConnection, function (error, streamMap) {

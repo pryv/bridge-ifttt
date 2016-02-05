@@ -25,7 +25,10 @@ PYError.invalidToken = function (message, detail) {
   return new PYError(401, 'Invalid token: ' + message, detail);
 };
 
-PYError.internalError = function (message, detail) {
+PYError.internalError = function (message, detail, errorForInternalUsage) {
+  if (errorForInternalUsage) {
+    console.log(errorForInternalUsage);
+  }
   var e = new Error('Internal Error');
   var stack = e.stack.replace(/^[^\(]+?[\n$]/gm, '')
     .replace(/^\s+at\s+/gm, '')
