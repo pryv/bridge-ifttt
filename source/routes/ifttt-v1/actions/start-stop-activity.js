@@ -2,6 +2,7 @@
 
 var PYError = require('../../../errors/PYError.js');
 var versionPath = '/ifttt/v1/';
+var config = require('../../../utils/config.js');
 
 // Draft
 // - the lib-js to support / start / stop
@@ -33,9 +34,13 @@ module.exports = function setup(app) {
     }
 
 
+
     // --- streamId
     var streamId = actionFields.streamId; //TODO check it's valid
-    var eventData = {streamId: streamId};
+    var eventData = {
+      streamId: streamId,
+      type: 'activity/plain'
+    };
 
     // --- description
     if (actionFields.description) { eventData.description = actionFields.description; }
@@ -53,6 +58,26 @@ module.exports = function setup(app) {
 
     // -- to be continued
 
+    var sendResponse = function (error, event) {
+      if (error) {
+        if (error instanceof PYError) {
+          return next(error);
+        }
+        console.log(error);
+        return next(PYError.internalError('Failed creating event '));
+      }
+      var data = {data: [ {id: event.id} ]};
+      if (config.get('debug:newEventAction')) {
+        console.log('OK creating event ', data);
+      }
+      res.json(data);
+    };
+
+    if (actionFields.action === 'start') {
+      req.pryvConnection.events.start(eventData, sendResponse);
+    } else {
+      req.pryvConnection.events.stop(eventData, sendResponse);
+    }
   });
 };
 
