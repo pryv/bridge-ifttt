@@ -35,8 +35,8 @@ describe('oauth2', function () {
     it('GET /authorise should redirect to access.html page', function (done) {
       request.get(serverBasePath + '/oauth2/authorise?' + queryString)
         .redirects(0)
-        .end(function (res) {
-          res.should.have.status(302);
+        .end(function (err, res) {
+          res.statusCode.should.equal(302);
           should.exist(res.headers.location);
 
           done();
@@ -71,9 +71,9 @@ describe('oauth2', function () {
       request.post(serverBasePath + '/oauth2' + secretPath + '/token')
         .send(parameters)
         .redirects(0)
-        .end(function (res) {
+        .end(function (err, res) {
           //console.log(res.status);
-          res.should.have.status(200);
+          res.statusCode.should.equal(200);
           res.body.token_type.should.eql('Bearer');
           res.body.should.have.property('access_token');
           res.body.should.not.have.property('refresh_token');
@@ -94,9 +94,9 @@ describe('oauth2', function () {
       request.post(serverBasePath + '/oauth2' + secretPath + '/token')
         .send(parameters)
         .redirects(0)
-        .end(function (res) {
+        .end(function (err, res) {
           //console.log(res.status);
-          res.should.have.status(401);
+          res.statusCode.should.equal(401);
           done();
         });
     });

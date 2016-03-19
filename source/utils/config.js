@@ -62,12 +62,13 @@ nconf.defaults({
   },
   debug: {
     middlewareDebug : false,
-    oauth: true,
+    oauth: false,
     fieldsStreams: false,
     newEventTrigger: false,
     newEventAction: false
   },
   airbrake: {
+    disable: true,
     key: 'eae70e8971791110a3f13fb8fcea3d6b' // bridge-ifttt
   }
 });

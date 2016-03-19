@@ -12,8 +12,8 @@ module.exports = function handleError(error, req, res, next) {
   if (error instanceof PYError) {
     pyError = error;
   } else {
-    pyError = PYError.internalError(' xx', '', error);
+    pyError = PYError.internalError('UnamedPYError', '', error);
   }
-  logger.error(pyError, pyError.detail, error);
-  res.json({ errors: [ { message: pyError.message }]}, pyError.status);
+  //logger.error(pyError, pyError.detail, error);
+  res.status(pyError.status).json({ errors: [ { message: pyError.message }]});
 };

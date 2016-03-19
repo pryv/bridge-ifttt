@@ -1,6 +1,6 @@
 {
   "name": "pryv-bridge-ifttt",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "private": true,
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "mocha": "latest",
-    "should": "3.3.1",
+    "should": "latest",
     "superagent": "latest"
   }
 }

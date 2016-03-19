@@ -8,8 +8,8 @@ exports.inspect = function inspect() {
   } catch (e) {
     line = e.stack.split(' at ')[2].trim();
   }
-  util.print('\n * dump at: ' + line);
+  console.log('\n * dump at: ' + line);
   for (var i = 0; i < arguments.length; i++) {
-    util.print('\n' + i + ' ' + util.inspect(arguments[i], true, 10, true) + '\n');
+    console.log('\n' + i + ' ' + util.inspect(arguments[i], true, 10, true) + '\n');
   }
 };
