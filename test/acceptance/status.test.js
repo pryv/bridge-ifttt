@@ -3,7 +3,7 @@ var config = require('../../source/utils/config'),
   request = require('superagent');
 
 
-require('should');
+var should = require('should');
 require('../../source/server');
 
 
@@ -20,12 +20,12 @@ describe('status', function () {
       .set('Accept-Charset', 'utf-8')
       .set('Accept-Encoding', 'gzip, deflate')
       .set('Content-Type', 'application/json')
-      .end(function (res) {
-        res.should.have.status(200);
+      .end(function (err, res) {
+        should.exist(res);
+        res.statusCode.should.equal(200);
         done();
       });
   });
-
 
   it('invalid auth should fail', function (done) {
     request.get(serverBasePath + '/ifttt/v1/status')
@@ -34,8 +34,8 @@ describe('status', function () {
       .set('Accept-Charset', 'utf-8')
       .set('Accept-Encoding', 'gzip, deflate')
       .set('Content-Type', 'application/json')
-      .end(function (res) {
-        res.should.have.status(401);
+      .end(function (err, res) {
+        res.statusCode.should.equal(401);
         done();
       });
   });

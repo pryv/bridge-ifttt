@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser  = require('body-parser');
 
 module.exports = function () {
 
@@ -21,7 +22,7 @@ module.exports = function () {
   });
 
 
-  app.use(express.bodyParser());
+  app.use(bodyParser.json());
   app.use(app.router);
   app.use(require('./middleware/errors.js'));
 

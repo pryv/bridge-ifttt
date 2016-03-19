@@ -61,7 +61,8 @@ nconf.defaults({
     port : 7379
   },
   debug: {
-    middlewareDebug : false,
+    shushReqUrlLog: true,
+    middlewareDebug: false,
     oauth: false,
     fieldsStreams: false,
     newEventTrigger: false,
