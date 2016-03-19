@@ -79,8 +79,10 @@ exports.setup = function setup(app, route, mapFunction) {
         if (error instanceof PYError) {
           return next(error);
         }
-        console.log(error);
-        return next(PYError.internalError('Failed creating event ' + detailMsg));
+        if (config.get('debug:newEventAction')) {
+          console.log(error);
+        }
+        return next(PYError.internalError('Failed creating event ', detailMsg, error));
       }
       var data = {data: [ {id: event.id} ]};
       if (config.get('debug:newEventAction')) {

@@ -1,5 +1,7 @@
 var util = require('util');
 
+var SHUSHLOG = require('../../source/utils/config').get('debug:shushPYInternalErrorLog');
+
 /**
  * The constructor to use for all errors within the API.
  *
@@ -26,15 +28,14 @@ PYError.invalidToken = function (message, detail) {
 };
 
 PYError.internalError = function (message, detail, errorForInternalUsage) {
-  if (errorForInternalUsage) {
-    console.log(errorForInternalUsage);
-  }
   var e = new Error('Internal Error');
   var stack = e.stack.replace(/^[^\(]+?[\n$]/gm, '')
     .replace(/^\s+at\s+/gm, '')
     .replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@')
     .split('\n');
-  console.log(stack);
+  if (! SHUSHLOG) {
+    console.log(errorForInternalUsage, message, detail, stack);
+  }
   return new PYError(500, 'Internal Error: ' + message, detail);
 };
 

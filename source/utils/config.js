@@ -61,6 +61,7 @@ nconf.defaults({
     port : 7379
   },
   debug: {
+    shushPYInternalErrorLog: true,
     shushReqUrlLog: true,
     middlewareDebug: false,
     oauth: false,
