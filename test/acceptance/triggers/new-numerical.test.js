@@ -26,8 +26,8 @@ describe('/triggers/new-numerical/', function () {
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-numerical/fields/streamId/options')
         .set('Authorization', 'Bearer ' + testData.oauthToken)
-        .end(function (res) {
-          res.should.have.status(200);
+        .end(function (err, res) {
+          res.statusCode.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           done();
@@ -40,8 +40,8 @@ describe('/triggers/new-numerical/', function () {
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-numerical/fields/eventType/options')
         .set('Authorization', 'Bearer ' + testData.oauthToken)
-        .end(function (res) {
-          res.should.have.status(200);
+        .end(function (err, res) {
+          res.statusCode.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           //console.log(res.body.data);
@@ -59,8 +59,8 @@ describe('/triggers/new-numerical/', function () {
             streamId: testData.streamId
           }
         })
-        .end(function (res) {
-          res.should.have.status(400);
+        .end(function (err, res) {
+          res.statusCode.should.equal(400);
           done();
         });
     });
@@ -73,8 +73,8 @@ describe('/triggers/new-numerical/', function () {
             eventType: 'mass/kg'
           }
         })
-        .end(function (res) {
-          res.should.have.status(200);
+        .end(function (err, res) {
+          res.statusCode.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
 

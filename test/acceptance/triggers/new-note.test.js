@@ -25,8 +25,8 @@ describe('/triggers/new-note/', function () {
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-note/fields/streamId/options')
         .set('Authorization', 'Bearer ' + testData.oauthToken)
-        .end(function (res) {
-          res.should.have.status(200);
+        .end(function (err, res) {
+          res.statusCode.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].value.should.equal(constants.ANY_STREAMS);
@@ -41,11 +41,11 @@ describe('/triggers/new-note/', function () {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-note')
         .set('Authorization', 'Bearer ' + testData.oauthToken).send({
           triggerFields : {
-            streamId: 'diary'
+            streamId: testData.streamId
           }
         })
-        .end(function (res) {
-          res.should.have.status(200);
+        .end(function (err, res) {
+          res.statusCode.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
 
@@ -76,8 +76,8 @@ describe('/triggers/new-note/', function () {
             streamId: constants.ANY_STREAMS
           }
         })
-        .end(function (res) {
-          res.should.have.status(200);
+        .end(function (err, res) {
+          res.statusCode.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
 
