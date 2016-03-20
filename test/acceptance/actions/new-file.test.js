@@ -31,8 +31,8 @@ describe('/actions/new-file/', function () {
           filename: 'logoPry$à/v2.png',
           tags: 'IFTTT, File'
         }
-        }).end(function (res) {
-          res.should.have.status(200);
+        }).end(function (err, res) {
+          res.statusCode.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');

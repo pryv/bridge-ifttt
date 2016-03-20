@@ -30,8 +30,8 @@ describe('/actions/new-photo/', function () {
           streamId: testData.streamId,
           tags: 'IFTTT, Photo'
         }
-        }).end(function (res) {
-          res.should.have.status(200);
+        }).end(function (err, res) {
+          res.statusCode.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');

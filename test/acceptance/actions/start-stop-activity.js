@@ -32,8 +32,8 @@ describe('/actions/start-stop-activity', function () {
           action: 'start',
           tags: 'IFTTT'
         }
-        }).end(function (res) {
-          res.should.have.status(200);
+        }).end(function (err, res) {
+          res.statusCode.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');
@@ -50,8 +50,8 @@ describe('/actions/start-stop-activity', function () {
           action: 'stop',
           tags: 'IFTTT'
         }
-        }).end(function (res) {
-          res.should.have.status(200);
+        }).end(function (err, res) {
+          res.statusCode.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');

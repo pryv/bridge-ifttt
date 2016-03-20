@@ -38,8 +38,8 @@ describe('/actions/new-numerical-*', function () {
           streamId: testData.streamId,
           tags: 'Test'
         }
-        }).end(function (res) {
-          res.should.have.status(200);
+        }).end(function (err, res) {
+          res.statusCode.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');
@@ -57,8 +57,8 @@ describe('/actions/new-numerical-*', function () {
           streamId: testData.streamId,
           tags: 'Test'
         }
-        }).end(function (res) {
-          res.should.have.status(400);
+        }).end(function (err, res) {
+          res.statusCode.should.equal(400);
           res.body.should.not.have.property('data');
           done();
         });
@@ -74,8 +74,8 @@ describe('/actions/new-numerical-*', function () {
           streamId: testData.streamId,
           tags: 'Test'
         }
-        }).end(function (res) {
-          res.should.have.status(400);
+        }).end(function (err, res) {
+          res.statusCode.should.equal(400);
           res.body.should.not.have.property('data');
           done();
         });
@@ -91,8 +91,8 @@ describe('/actions/new-numerical-*', function () {
           streamId: testData.streamId,
           tags: 'Test'
         }
-        }).end(function (res) {
-          res.should.have.status(400);
+        }).end(function (err, res) {
+          res.statusCode.should.equal(400);
           res.body.should.not.have.property('data');
           done();
         });
@@ -107,8 +107,8 @@ function testEventTypeOption(slug) {
   it(slug + '/fields/eventType/options', function (done) {
     request.post(serverBasePath + '/ifttt/v1/actions/' + slug + '/fields/eventType/options')
       .set('Authorization', 'Bearer ' + testData.oauthToken)
-      .end(function (res) {
-        res.should.have.status(200);
+      .end(function (err, res) {
+        res.statusCode.should.equal(200);
         res.body.should.have.property('data');
         res.body.data.should.be.an.instanceof(Array);
         done();
