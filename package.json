@@ -12,22 +12,22 @@
     "lodash": "4.6.x",
     "winston": "2.2.x",
     "nconf": "0.8.x",
-    "redis": "~0.10.1",
+    "redis": "2.5.x",
     "readyness": "~0.1.0",
     "semver": "5.1.x",
     "async": "1.5.x",
-    "request-json": "~0.4.8",
+    "request-json": "0.5.x",
     "hat": "0.0.3",
-    "nock": "~0.27.2",
     "pryv": "git+ssh://git@github.com:pryv/lib-javascript.git#master",
-    "request": "~2.34.0",
+    "request": "2.68.x",
     "html-md": "~3.0.2",
     "marked": "~0.3.2",
-    "airbrake": "~0.3.8"
+    "airbrake": "0.4.x"
   },
   "devDependencies": {
     "mocha": "latest",
     "should": "latest",
-    "superagent": "latest"
+    "superagent": "latest",
+    "nock": "~0.27.2"
   }
 }

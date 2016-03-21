@@ -63,7 +63,6 @@ module.exports = function setup(app) {
         if (error instanceof PYError) {
           return next(error);
         }
-        console.log(error);
         return next(PYError.internalError('Failed creating event '));
       }
       var data = {data: [ {id: event.id} ]};

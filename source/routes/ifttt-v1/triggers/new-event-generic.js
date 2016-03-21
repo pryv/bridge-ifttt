@@ -14,7 +14,6 @@ var config = require('../../../utils/config.js');
  */
 exports.addOption = function (app, optionKey, route, doFunction) {
   var optionPath = versionPath + 'triggers/' + route + '/fields/' + optionKey + '/options';
-  console.log(optionPath);
   app.post(optionPath, doFunction);
 };
 

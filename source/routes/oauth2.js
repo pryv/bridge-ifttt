@@ -5,7 +5,7 @@ var request = require('request-json');
 var hat = require('hat');
 
 
-var access = request.newClient(config.get('pryv:access'));
+var access = request.createClient(config.get('pryv:access'));
 
 var secretPath = config.get('oauth:secretPath');
 
