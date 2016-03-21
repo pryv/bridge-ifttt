@@ -23,12 +23,11 @@ module.exports = function () {
 
 
   app.use(bodyParser.json());
-  app.use(app.router);
-  app.use(require('./middleware/errors.js'));
 
   //middleware
   app.all('*', require('./middleware/debug.js'));
   app.all('*', require('./middleware/bearerAuth.js'));
+
 
 
   // routes
@@ -51,6 +50,7 @@ module.exports = function () {
   //require('./routes/ifttt-v1/actions/start-stop-activity.js')(app);
 
   // error handler
+  app.use(require('./middleware/errors.js'));
 
 
   return app;

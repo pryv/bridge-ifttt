@@ -7,7 +7,7 @@
     "url": "git://github.com/pryv/bridge-ifttt.git"
   },
   "dependencies": {
-    "express": "3.20.x",
+    "express": "4.13.x",
     "body-parser": "1.15.0",
     "lodash": "4.6.x",
     "winston": "2.2.x",
