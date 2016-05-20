@@ -18,7 +18,7 @@
     "async": "1.5.x",
     "request-json": "0.5.x",
     "hat": "0.0.3",
-    "pryv": "git+ssh://git@github.com:pryv/lib-javascript.git#master",
+    "pryv": "https://github.com/pryv/lib-javascript.git#master",
     "request": "2.68.x",
     "html-md": "~3.0.2",
     "marked": "~0.3.2",
