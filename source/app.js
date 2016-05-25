@@ -21,7 +21,7 @@ module.exports = function () {
     next();
   });
 
-
+  app.use(bodyParser.urlencoded());
   app.use(bodyParser.json());
 
   //middleware
