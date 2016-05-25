@@ -26,16 +26,16 @@ module.exports = function setup(app) {
       oauthState: req.query.state
     };
 
-    request.post(accessUrl + '/access').send(parameters).end(function (error, response) {
+    request.post(accessUrl).send(parameters).end(function (error, response) {
+      if (! error && response.status !== 201) {
+        error = new Error('Failed requesting access from register invalid statusCode:' +
+          response.status + ' body:' + body);
+      }
+      if (! error && ! body.url) {
+        error = new Error('Invalid response, missing url:' + body);
+      }
       if (error) {
         return next(error); // TODO forge a JSON error
-      }
-      if (response.status !== 201) {
-        error = new Error('Failed requesting access from register invalid statusCode:' +
-          response.status + ' body:' + response.body);
-      }
-      if (! response.body.url) {
-        error = new Error('Invalid response, missing url:' + response.body);
       }
 
       res.redirect(response.body.url);
@@ -86,7 +86,7 @@ module.exports = function setup(app) {
      * 2- get username / token from access
      */
 
-    request.get(accessUrl + '/access/' + code).end(function (error, response) {
+    request.get(accessUrl + '/' + code).end(function (error, response) {
       if (response.body.status === 'ACCEPTED') {
 
         if (! response.body.username || ! response.body.token) {
