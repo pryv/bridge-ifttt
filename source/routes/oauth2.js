@@ -28,10 +28,10 @@ module.exports = function setup(app) {
     request.post(accessUrl).send(parameters).end(function (error, response) {
       if (! error && response.status !== 201) {
         error = new Error('Failed requesting access from register invalid statusCode:' +
-          response.status + ' body:' + body);
+          response.status + ' body:' + response.body);
       }
-      if (! error && ! body.url) {
-        error = new Error('Invalid response, missing url:' + body);
+      if (! error && ! responsebody.url) {
+        error = new Error('Invalid response, missing url:' + response.body);
       }
       if (error) {
         return next(error); // TODO forge a JSON error
