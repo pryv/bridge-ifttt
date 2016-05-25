@@ -27,9 +27,9 @@ module.exports = function setup(app) {
     };
 
     request.post(accessUrl + '/access').send(parameters).end(function (error, res) {
-      if (! error && response.statusCode !== 201) {
+      if (! error && res.statusCode !== 201) {
         error = new Error('Failed requesting access from register invalid statusCode:' +
-          response.statusCode + ' body:' + res.body);
+          res.statusCode + ' body:' + res.body);
       }
       if (! error && ! res.body.url) {
         error = new Error('Invalid response, missing url:' + res.body);

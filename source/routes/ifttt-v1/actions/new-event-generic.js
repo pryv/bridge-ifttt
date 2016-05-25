@@ -181,35 +181,6 @@ function fetchAttachment(actionFields, done) {
       filename : filename,
       data : response.body
     });
-  /*
-  request(requestSettings,  function (error, response, body) {
-    if (error) { done(error); }
-
-    var type = null;
-    if (! res) {
-      console.log('<WARNING> attachment fetching response is null', actionFields.attachmentUrl);
-    } else if (! response.headers) {
-      console.log('<WARNING> attachment fetching response.headers is null', actionFields.attachmentUrl);
-    } else {
-      type = res.headers['content-type'];
-    }
-
-    // try to guess filename
-    var filename = requestSettings.url.split('/').pop().split('?')[0] || 'attachment0';
-
-    if (actionFields.filename) {
-      var filenameFromUser = actionFields.filename.trim().replace(/[^a-zA-Z0-9.\-]/gi, '_');
-      if (filenameFromUser.length > 5) {
-        filename = filenameFromUser;
-      }
-    }
-
-    done(null, {
-      type : type,
-      filename : filename,
-      data : body
-    });
-    */
   });
 }
 
