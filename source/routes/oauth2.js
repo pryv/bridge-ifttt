@@ -26,18 +26,18 @@ module.exports = function setup(app) {
       oauthState: req.query.state
     };
 
-    request.poost(accessUrl + '/access').send(parameters).end(function (error, res) {
+    request.post(accessUrl + '/access').send(parameters).end(function (error, res) {
       if (! error && response.statusCode !== 201) {
         error = new Error('Failed requesting access from register invalid statusCode:' +
-          response.statusCode + ' body:' + body);
+          response.statusCode + ' body:' + res.body);
       }
-      if (! error && ! body.url) {
-        error = new Error('Invalid response, missing url:' + body);
+      if (! error && ! res.body.url) {
+        error = new Error('Invalid response, missing url:' + res.body);
       }
       if (error) {
         return next(error); // TODO forge a JSON error
       }
-      res.redirect(body.url);
+      res.redirect(res.body.url);
     });
     /*
     access.post('/access', parameters,
