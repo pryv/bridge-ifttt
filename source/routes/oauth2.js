@@ -30,7 +30,7 @@ module.exports = function setup(app) {
         error = new Error('Failed requesting access from register invalid statusCode:' +
           response.status + ' body:' + response.body);
       }
-      if (! error && ! responsebody.url) {
+      if (! error && ! response.body.url) {
         error = new Error('Invalid response, missing url:' + response.body);
       }
       if (error) {
