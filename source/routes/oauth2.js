@@ -27,16 +27,17 @@ module.exports = function setup(app) {
     };
 
     request.post(accessUrl + '/access').send(parameters).end(function (error, response) {
-      if (! error && response.statusCode !== 201) {
-        error = new Error('Failed requesting access from register invalid statusCode:' +
-          response.statusCode + ' body:' + response.body);
-      }
-      if (! error && ! response.body.url) {
-        error = new Error('Invalid response, missing url:' + response.body);
-      }
       if (error) {
         return next(error); // TODO forge a JSON error
       }
+      if (response.status !== 201) {
+        error = new Error('Failed requesting access from register invalid statusCode:' +
+          response.status + ' body:' + response.body);
+      }
+      if (! response.body.url) {
+        error = new Error('Invalid response, missing url:' + response.body);
+      }
+
       res.redirect(response.body.url);
     });
     /*
