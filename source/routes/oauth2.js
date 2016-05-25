@@ -26,18 +26,18 @@ module.exports = function setup(app) {
       oauthState: req.query.state
     };
 
-    request.post(accessUrl + '/access').send(parameters).end(function (error, res) {
-      if (! error && res.statusCode !== 201) {
+    request.post(accessUrl + '/access').send(parameters).end(function (error, response) {
+      if (! error && response.statusCode !== 201) {
         error = new Error('Failed requesting access from register invalid statusCode:' +
-          res.statusCode + ' body:' + res.body);
+          response.statusCode + ' body:' + response.body);
       }
-      if (! error && ! res.body.url) {
-        error = new Error('Invalid response, missing url:' + res.body);
+      if (! error && ! response.body.url) {
+        error = new Error('Invalid response, missing url:' + response.body);
       }
       if (error) {
         return next(error); // TODO forge a JSON error
       }
-      res.redirect(res.body.url);
+      res.redirect(response.body.url);
     });
     /*
     access.post('/access', parameters,
@@ -85,14 +85,14 @@ module.exports = function setup(app) {
      * 2- get username / token from access
      */
 
-    request.get(accessUrl + '/access/' + code).end(function (error, res) {
-      if (res.body.status === 'ACCEPTED') {
+    request.get(accessUrl + '/access/' + code).end(function (error, response) {
+      if (response.body.status === 'ACCEPTED') {
 
-        if (! res.body.username || ! res.body.token) {
+        if (! response.body.username || ! response.body.token) {
           return next(PYError.internalError('token from access'));
         }
 
-        var credentials = { username: res.body.username, pryvToken: res.body.token};
+        var credentials = { username: response.body.username, pryvToken: response.body.token};
         var oauthToken = hat();
 
         db.setSet(oauthToken, credentials);
