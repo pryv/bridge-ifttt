@@ -179,7 +179,7 @@ function fetchAttachment(actionFields, done) {
     done(null, {
       type : type,
       filename : filename,
-      data : res.body
+      data : response.body
     });
   /*
   request(requestSettings,  function (error, response, body) {
