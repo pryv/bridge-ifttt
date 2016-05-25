@@ -63,11 +63,11 @@ nconf.defaults({
   debug: {
     shushPYInternalErrorLog: true,
     shushReqUrlLog: true,
-    middlewareDebug: false,
-    oauth: false,
-    fieldsStreams: false,
-    newEventTrigger: false,
-    newEventAction: false
+    middlewareDebug: true,
+    oauth: true,
+    fieldsStreams: true,
+    newEventTrigger: true,
+    newEventAction: true
   },
   airbrake: {
     disable: true,

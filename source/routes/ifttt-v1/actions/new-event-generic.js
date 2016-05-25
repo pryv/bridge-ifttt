@@ -2,7 +2,7 @@ var pryv = require('pryv');
 
 
 var PYError = require('../../../errors/PYError.js');
-var request = require('request');
+var request = require('superagent');
 var versionPath = '/ifttt/v1/';
 var config = require('../../../utils/config.js');
 
@@ -154,16 +154,44 @@ function fetchAttachment(actionFields, done) {
   if (config.get('debug:newEventAction')) {
     console.log(requestSettings);
   }
+  request.get(actionFields.attachmentUrl).end(function (err, res) {
+    if (err) {
+      return done(err);
+    }
+    var type = null;
+    if (! res) {
+      console.log('<WARNING> attachment fetching response is null', actionFields.attachmentUrl);
+    } else if (! response.headers) {
+      console.log('<WARNING> attachment fetching response.headers is null', actionFields.attachmentUrl);
+    } else {
+      type = res.headers['content-type'];
+    }
+    var filename = actionFields.attachmentUrl.split('/').pop().split('?')[0] || 'attachment0';
+
+
+    if (actionFields.filename) {
+      var filenameFromUser = actionFields.filename.trim().replace(/[^a-zA-Z0-9.\-]/gi, '_');
+      if (filenameFromUser.length > 5) {
+        filename = filenameFromUser;
+      }
+    }
+
+    done(null, {
+      type : type,
+      filename : filename,
+      data : body
+    });
+  /*
   request(requestSettings,  function (error, response, body) {
     if (error) { done(error); }
 
     var type = null;
-    if (! response) {
-      console.log('<WARNING> attachment fetching response is null', requestSettings);
+    if (! res) {
+      console.log('<WARNING> attachment fetching response is null', actionFields.attachmentUrl);
     } else if (! response.headers) {
-      console.log('<WARNING> attachment fetching response.headers is null', requestSettings);
+      console.log('<WARNING> attachment fetching response.headers is null', actionFields.attachmentUrl);
     } else {
-      type = response.headers['content-type'];
+      type = res.headers['content-type'];
     }
 
     // try to guess filename
@@ -181,6 +209,7 @@ function fetchAttachment(actionFields, done) {
       filename : filename,
       data : body
     });
+    */
   });
 }
 
