@@ -5,7 +5,6 @@ var request = require('superagent');
 var hat = require('hat');
 
 
-//var access = request.createClient(config.get('pryv:access'));
 var accessUrl = config.get('pryv:access');
 
 var secretPath = config.get('oauth:secretPath');
@@ -40,23 +39,6 @@ module.exports = function setup(app) {
 
       res.redirect(response.body.url);
     });
-    /*
-    access.post('/access', parameters,
-      function (error, response, body) {
-
-        if (! error && response.statusCode !== 201) {
-          error = new Error('Failed requesting access from register invalid statusCode:' +
-            response.statusCode + ' body:' + body);
-        }
-        if (! error && ! body.url) {
-          error = new Error('Invalid response, missing url:' + body);
-        }
-        if (error) {
-          return next(error); // TODO forge a JSON error
-        }
-        res.redirect(body.url);
-      }
-    );*/
   });
 
 
@@ -102,27 +84,6 @@ module.exports = function setup(app) {
 
       return next(PYError.invalidToken());
     });
-    /*
-    access.get('/access/' + code,
-      function (error, response, body) {
-
-        if (body.status === 'ACCEPTED') {
-
-          if (! body.username || ! body.token) {
-            return next(PYError.internalError('token from access'));
-          }
-
-          var credentials = { username: body.username, pryvToken: body.token};
-          var oauthToken = hat();
-
-          db.setSet(oauthToken, credentials);
-          return res.json({token_type: 'Bearer', access_token: oauthToken});
-        }
-
-        return next(PYError.invalidToken());
-      }
-    );
-    */
 
   });
 };
