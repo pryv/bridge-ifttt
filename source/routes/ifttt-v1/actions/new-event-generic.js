@@ -154,17 +154,17 @@ function fetchAttachment(actionFields, done) {
   if (config.get('debug:newEventAction')) {
     console.log(requestSettings);
   }
-  request.get(actionFields.attachmentUrl).end(function (err, res) {
+  request.get(actionFields.attachmentUrl).end(function (err, response) {
     if (err) {
       return done(err);
     }
     var type = null;
-    if (! res) {
+    if (! response) {
       console.log('<WARNING> attachment fetching response is null', actionFields.attachmentUrl);
     } else if (! response.headers) {
       console.log('<WARNING> attachment fetching response.headers is null', actionFields.attachmentUrl);
     } else {
-      type = res.headers['content-type'];
+      type = response.headers['content-type'];
     }
     var filename = actionFields.attachmentUrl.split('/').pop().split('?')[0] || 'attachment0';
 
