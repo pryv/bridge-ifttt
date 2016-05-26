@@ -61,13 +61,13 @@ nconf.defaults({
     port : 7379
   },
   debug: {
-    shushPYInternalErrorLog: true,
-    shushReqUrlLog: true,
-    middlewareDebug: true,
-    oauth: true,
-    fieldsStreams: true,
-    newEventTrigger: true,
-    newEventAction: true
+    shushPYInternalErrorLog: false,
+    shushReqUrlLog: false,
+    middlewareDebug: false,
+    oauth: false,
+    fieldsStreams: false,
+    newEventTrigger: false,
+    newEventAction: false
   },
   airbrake: {
     disable: true,
