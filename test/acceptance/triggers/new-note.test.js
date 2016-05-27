@@ -26,7 +26,7 @@ describe('/triggers/new-note/', function () {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-note/fields/streamId/options')
         .set('Authorization', 'Bearer ' + testData.oauthToken)
         .end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].value.should.equal(constants.ANY_STREAMS);
@@ -45,7 +45,7 @@ describe('/triggers/new-note/', function () {
           }
         })
         .end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
 
@@ -77,7 +77,7 @@ describe('/triggers/new-note/', function () {
           }
         })
         .end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
 

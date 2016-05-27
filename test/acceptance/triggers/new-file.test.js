@@ -26,7 +26,7 @@ describe('/triggers/new-file/', function () {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-file/fields/streamId/options')
         .set('Authorization', 'Bearer ' + testData.oauthToken)
         .end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           done();
@@ -44,7 +44,7 @@ describe('/triggers/new-file/', function () {
           }
         })
         .end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
 

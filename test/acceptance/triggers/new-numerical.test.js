@@ -27,7 +27,7 @@ describe('/triggers/new-numerical/', function () {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-numerical/fields/streamId/options')
         .set('Authorization', 'Bearer ' + testData.oauthToken)
         .end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           done();
@@ -41,7 +41,7 @@ describe('/triggers/new-numerical/', function () {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-numerical/fields/eventType/options')
         .set('Authorization', 'Bearer ' + testData.oauthToken)
         .end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           //console.log(res.body.data);
@@ -60,7 +60,7 @@ describe('/triggers/new-numerical/', function () {
           }
         })
         .end(function (err, res) {
-          res.statusCode.should.equal(400);
+          res.status.should.equal(400);
           done();
         });
     });
@@ -74,7 +74,7 @@ describe('/triggers/new-numerical/', function () {
           }
         })
         .end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
 

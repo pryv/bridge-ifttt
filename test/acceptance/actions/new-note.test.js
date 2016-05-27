@@ -26,7 +26,7 @@ describe('/actions/new-note/', function () {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note/fields/streamId/options')
         .set('Authorization', 'Bearer ' + testData.oauthToken)
         .end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].value.should.not.equal(constants.ANY_STREAMS);
@@ -42,7 +42,7 @@ describe('/actions/new-note/', function () {
         .set('Authorization', 'Bearer ' + testData.oauthToken).send(
         { action: 'dumb'
         }).end(function (err, res) {
-          res.statusCode.should.equal(400);
+          res.status.should.equal(400);
           res.body.should.have.property('errors');
           done();
         });
@@ -58,7 +58,7 @@ describe('/actions/new-note/', function () {
           tags: 'IFTTT, Twitter'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(400);
+          res.status.should.equal(400);
           done();
         });
     });
@@ -73,7 +73,7 @@ describe('/actions/new-note/', function () {
           tags: 'IFTTT, Twitter'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(400);
+          res.status.should.equal(400);
           done();
         });
     });
@@ -88,7 +88,7 @@ describe('/actions/new-note/', function () {
           streamId: testData.streamId
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(400);
+          res.status.should.equal(400);
           done();
         });
     });
@@ -104,7 +104,7 @@ describe('/actions/new-note/', function () {
           tags: 'IFTTT, Twitter'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');
@@ -124,7 +124,7 @@ describe('/actions/new-note/', function () {
           tags: 'IFTTT, Twitter'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');
@@ -142,7 +142,7 @@ describe('/actions/new-note/', function () {
           tags: 'IFTTT, Twitter'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(500);
+          res.status.should.equal(500);
           res.body.should.have.property('errors');
           done();
         });
@@ -164,13 +164,31 @@ describe('/actions/new-note/', function () {
           tags: 'Les histoires du jeu vidéo d\'AHL : l\'Atari 2600'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');
           done();
         });
     });
+
+    it('POST  new note empty string', function (done) {
+      request.post(serverBasePath + '/ifttt/v1/actions/new-note')
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        { actionFields:
+        { description: 'an event with an empty content',
+          streamId: testData.streamId,
+          contentText: '',
+          tags: 'Les histoires du jeu vidéo d\'AHL : l\'Atari 2600'
+        }
+        }).end(function (err, res) {
+        res.status.should.equal(200);
+        res.body.should.have.property('data');
+        res.body.data.should.be.an.instanceof(Array);
+        res.body.data[0].should.have.property('id');
+        done();
+      });
+    })
 
   });
 });

@@ -32,7 +32,7 @@ describe('/actions/new-file/', function () {
           tags: 'IFTTT, File'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');

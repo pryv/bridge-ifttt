@@ -30,7 +30,7 @@ describe('userinfo', function () {
         .set('Accept-Encoding', 'gzip, deflate')
         .timeout(5000)
         .end(function (err, res) {
-          res.statusCode.should.equal(401);
+          res.status.should.equal(401);
           res.body.should.have.property('errors');
           done();
         });
@@ -44,7 +44,7 @@ describe('userinfo', function () {
         .set('Accept-Encoding', 'gzip, deflate')
         .timeout(5000)
         .end(function (err, res) {
-          res.statusCode.should.equal(400);
+          res.status.should.equal(400);
           res.body.should.have.property('errors');
           done();
         });
@@ -58,7 +58,7 @@ describe('userinfo', function () {
         .set('Accept-Encoding', 'gzip, deflate')
         .timeout(5000)
         .end(function (err, res) {
-          res.statusCode.should.equal(400);
+          res.status.should.equal(400);
           res.body.should.have.property('errors');
           done();
         });
@@ -72,7 +72,7 @@ describe('userinfo', function () {
         .set('Accept-Encoding', 'gzip, deflate')
         .timeout(5000)
         .end(function (err, res) {
-          res.statusCode.should.equal(401);
+          res.status.should.equal(401);
           done();
         });
     });
@@ -84,7 +84,7 @@ describe('userinfo', function () {
         .set('Authorization', 'Bearer ' + testData.oauthToken)
         .timeout(5000)
         .end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.header['content-type'].should.eql('application/json; charset=utf-8');
           res.body.should.have.property('data');
           res.body.data.should.have.property('name');

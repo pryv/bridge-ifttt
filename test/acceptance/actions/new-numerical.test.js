@@ -39,7 +39,7 @@ describe('/actions/new-numerical-*', function () {
           tags: 'Test'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');
@@ -58,7 +58,7 @@ describe('/actions/new-numerical-*', function () {
           tags: 'Test'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(400);
+          res.status.should.equal(400);
           res.body.should.not.have.property('data');
           done();
         });
@@ -75,7 +75,7 @@ describe('/actions/new-numerical-*', function () {
           tags: 'Test'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(400);
+          res.status.should.equal(400);
           res.body.should.not.have.property('data');
           done();
         });
@@ -92,7 +92,7 @@ describe('/actions/new-numerical-*', function () {
           tags: 'Test'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(400);
+          res.status.should.equal(400);
           res.body.should.not.have.property('data');
           done();
         });
@@ -108,7 +108,7 @@ function testEventTypeOption(slug) {
     request.post(serverBasePath + '/ifttt/v1/actions/' + slug + '/fields/eventType/options')
       .set('Authorization', 'Bearer ' + testData.oauthToken)
       .end(function (err, res) {
-        res.statusCode.should.equal(200);
+        res.status.should.equal(200);
         res.body.should.have.property('data');
         res.body.data.should.be.an.instanceof(Array);
         done();

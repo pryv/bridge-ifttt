@@ -33,7 +33,7 @@ describe('/actions/start-stop-activity', function () {
           tags: 'IFTTT'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');
@@ -51,7 +51,7 @@ describe('/actions/start-stop-activity', function () {
           tags: 'IFTTT'
         }
         }).end(function (err, res) {
-          res.statusCode.should.equal(200);
+          res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');

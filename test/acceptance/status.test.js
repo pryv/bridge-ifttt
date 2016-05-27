@@ -22,7 +22,7 @@ describe('status', function () {
       .set('Content-Type', 'application/json')
       .end(function (err, res) {
         should.exist(res);
-        res.statusCode.should.equal(200);
+        res.status.should.equal(200);
         done();
       });
   });
@@ -35,7 +35,7 @@ describe('status', function () {
       .set('Accept-Encoding', 'gzip, deflate')
       .set('Content-Type', 'application/json')
       .end(function (err, res) {
-        res.statusCode.should.equal(401);
+        res.status.should.equal(401);
         done();
       });
   });

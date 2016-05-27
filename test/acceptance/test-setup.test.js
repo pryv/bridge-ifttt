@@ -19,7 +19,7 @@ describe('userinfo', function () {
       .set('Content-Type', 'application/json')
       .set('Content-Length', 0)
       .end(function (err, res) {
-        res.statusCode.should.equal(200);
+        res.status.should.equal(200);
         res.body.should.have.property('data');
         res.body.data.should.have.property('samples');
         res.body.data.should.have.property('accessToken');
