@@ -26,7 +26,7 @@ describe('/actions/new-file/', function () {
         .set('Authorization', 'Bearer ' + testData.oauthToken).send(
         { actionFields: {
           description: 'File upload test',
-          attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png?125126',
+          attachmentUrl: 'http://pryv.com/wp-content/uploads/2014/05/integration-osx-icon315-315x315.png',
           streamId: testData.streamId,
           filename: 'logoPry$à/v2.png',
           tags: 'IFTTT, File'

@@ -26,11 +26,14 @@ describe('/actions/new-photo/', function () {
         .set('Authorization', 'Bearer ' + testData.oauthToken).send(
         { actionFields: {
           description: 'Tweet by iftttpryv',
-          attachmentUrl: 'http://w.pryv.com/wp-content/uploads/2013/12/logoPryv.png',
+          attachmentUrl: 'http://pryv.com/wp-content/uploads/2014/05/integration-osx-icon315-315x315.png',
           streamId: testData.streamId,
           tags: 'IFTTT, Photo'
         }
         }).end(function (err, res) {
+        if (err) {
+          return done(err);
+        }
           res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
