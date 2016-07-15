@@ -4,7 +4,7 @@ var md = require('html-md');
 module.exports = function setup(app) {
   require('./new-event-generic').setup(app, 'new-note', function (event, actionFields, done) {
     if (! actionFields.contentText) {
-      return done(PYError.contentError('Cannot find actionFields.attachmentUrl'));
+      return done(PYError.contentError('Cannot find actionFields.contentText'));
     }
 
     event.type = 'note/txt';
