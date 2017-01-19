@@ -5,11 +5,8 @@ var db = require('../storage/database.js');
 var pryv = require('pryv');
 var config = require('../utils/config');
 
-//var testData = require('../../test/test-data');
-
 var channelApiKey = config.get('ifttt:channelApiKey');
-
-var staging = config.get('pryv:staging');
+var domain = config.get('pryv:domain');
 
 module.exports =  function (req, res, next) {
 
@@ -34,13 +31,6 @@ module.exports =  function (req, res, next) {
       return next(PYError.authentificationRequired('Authorization header bad content'));
     }
 
-    var doIstage = staging;
-    //-- in testing scheme mode , switch to pryv.in
-    /*if (oauthToken === testData.oauthToken) {
-      // doIstage = true;
-      // Not anymore (since dec 2015 no staging operational)
-    } */
-
     //--- end of test related part
 
     db.getSet(oauthToken, function (error, credentials) {
@@ -55,7 +45,7 @@ module.exports =  function (req, res, next) {
       req.pryvConnection = new pryv.Connection({
         username: req.pryvCredentials.username,
         auth: req.pryvCredentials.pryvToken,
-        staging: doIstage
+        domain: domain
       });
 
       next();
