@@ -182,13 +182,11 @@ describe('/actions/new-note/', function () {
           tags: 'Les histoires du jeu vidéo d\'AHL : l\'Atari 2600'
         }
         }).end(function (err, res) {
-        res.status.should.equal(200);
-        res.body.should.have.property('data');
-        res.body.data.should.be.an.instanceof(Array);
-        res.body.data[0].should.have.property('id');
-        done();
-      });
-    })
+          res.status.should.equal(400);
+          res.body.should.have.property('errors');
+          done();
+        });
+    });
 
   });
 });
