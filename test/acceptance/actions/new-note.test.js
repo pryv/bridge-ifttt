@@ -187,6 +187,24 @@ describe('/actions/new-note/', function () {
           done();
         });
     });
+    
+    it('POST strip tag if too long', function (done) {
+      request.post(serverBasePath + '/ifttt/v1/actions/new-note')
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        { actionFields: {
+          description: 'Note with long tag',
+          contentText: 'Hello I have very long tag',
+          streamId: testData.streamId,
+          tags: new Array(600).join('a');
+        }
+        }).end(function (err, res) {
+          res.status.should.equal(200);
+          res.body.should.have.property('data');
+          res.body.data.should.be.an.instanceof(Array);
+          res.body.data[0].should.have.property('id');
+          done();
+        });
+    });
 
   });
 });
