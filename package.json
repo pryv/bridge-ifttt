@@ -33,6 +33,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
+    "eslint-plugin-flowtype": "^2.35.1",
     "flow-bin": "^0.55.0",
     "flow-typed": "^2.1.5",
     "mocha": "^3.5.3",
