@@ -1,3 +1,5 @@
+// @flow
+
 var extras = require('../assets/event-extras.json');
 //var eventTypes = require('../assets/event-types.json');
 
@@ -16,12 +18,12 @@ function buildFromSets(compiledSetKey, selectedSets) {
     }
     var types = extras.sets[setKey].types;
     Object.keys(types).forEach(function (typeKey) {
-      var typeName = null;
+      let typeName = null;
       var extrasData = extras.extras[typeKey];
       if (extrasData && extrasData.name) {
         typeName = extrasData.name.en;
       }
-      typeName = typeName || typeKey;
+      typeName = typeName || typeKey;
 
 
       types[typeKey].forEach(function (formatKey) {
@@ -36,7 +38,7 @@ function buildFromSets(compiledSetKey, selectedSets) {
           formatSymbol = '';
         }
 
-        var formatLabel = typeName + ' - ' + formatName +  formatSymbol;
+        var formatLabel = (typeName || 'n/a') + ' - ' + formatName +  formatSymbol;
 
         typesListUnordered[formatLabel] = typeKey + '/' + formatKey;
 
@@ -64,7 +66,7 @@ buildFromSets('common', ['generic-medical', 'generic-measurements-metric',
 
 // TODO money & all
 
-exports.basic = function (req, res /*, next*/) {
+exports.basic = function (req: express$Request, res: express$Response /*, next*/) {
   res.json(compiledSets.basic);
 };
 
