@@ -45,7 +45,7 @@ if [[ ! -d $REDIS_BASE_FOLDER/$REDIS_NAME ]]; then
   echo ""
   cd $REDIS_BASE_FOLDER
   EXIT_CODE=0
-  curl -o "$REDIS_NAME.tar.gz" http://redis.googlecode.com/files/$REDIS_NAME.tar.gz
+  curl -o "$REDIS_NAME.tar.gz" http://download.redis.io/releases/$REDIS_NAME.tar.gz
   EXIT_CODE=`expr ${EXIT_CODE} + $?`
   tar -xzf $REDIS_NAME.tar.gz
   EXIT_CODE=`expr ${EXIT_CODE} + $?`
