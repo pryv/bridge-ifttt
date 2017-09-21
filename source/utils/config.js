@@ -61,7 +61,7 @@ nconf.defaults({
   },
   debug: {
     shushPYInternalErrorLog: false,
-    shushReqUrlLog: false,
+    shushReqUrlLog: true,
     middlewareDebug: false,
     oauth: false,
     fieldsStreams: false,
