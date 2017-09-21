@@ -21,7 +21,9 @@ module.exports = function () {
     next();
   });
 
-  app.use(bodyParser.urlencoded());
+  // See documentation at https://github.com/expressjs/body-parser
+  app.use(bodyParser.urlencoded({ 
+    extended: false }));
   app.use(bodyParser.json());
 
   //middleware
