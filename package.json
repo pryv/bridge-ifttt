@@ -1,7 +1,9 @@
 {
   "name": "pryv-bridge-ifttt",
   "version": "0.1.1",
-  "engines" : { "node" : "0.12.7" },
+  "engines": {
+    "node": "0.12.7"
+  },
   "private": true,
   "repository": {
     "type": "git",
@@ -11,25 +13,27 @@
     "test": "./node_modules/mocha/bin/mocha test/**/*.test.js"
   },
   "dependencies": {
-    "express": "4.13.x",
-    "body-parser": "1.15.0",
-    "lodash": "4.6.x",
-    "winston": "2.2.x",
-    "nconf": "0.8.x",
-    "redis": "2.5.x",
-    "readyness": "~0.1.0",
-    "semver": "5.1.x",
+    "airbrake": "~2.1",
     "async": "1.5.x",
-    "superagent": "~1.7.2",
+    "body-parser": "1.15.0",
+    "express": "4.13.x",
     "hat": "0.0.3",
-    "pryv": "https://github.com/pryv/lib-javascript.git#master",
-    "to-markdown": "~3.1",
+    "lodash": "4.6.x",
     "marked": "~0.3.6",
-    "airbrake": "~2.1"
+    "nconf": "0.8.x",
+    "pryv": "https://github.com/pryv/lib-javascript.git#master",
+    "readyness": "~0.1.0",
+    "redis": "2.5.x",
+    "semver": "5.1.x",
+    "superagent": "~1.7.2",
+    "to-markdown": "~3.1",
+    "winston": "2.2.x"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
     "mocha": "latest",
-    "should": "latest",
-    "nock": "~0.27.2"
+    "nock": "~0.27.2",
+    "should": "latest"
   }
 }
