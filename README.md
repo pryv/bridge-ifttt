@@ -7,6 +7,7 @@ IFTTT gateway
 Prerequisites: 
 
 * Redis 2.6.13
+* Node 8.X
 
 Run the server using 
 
