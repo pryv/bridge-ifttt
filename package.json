@@ -10,7 +10,8 @@
     "url": "git://github.com/pryv/bridge-ifttt.git"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test/**/*.test.js"
+    "test": "./node_modules/mocha/bin/mocha test/**/*.test.js",
+    "build": "babel src/ -d lib/"
   },
   "dependencies": {
     "airbrake": "~2.1",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.55.0",
     "mocha": "latest",
     "nock": "~0.27.2",
     "should": "latest"
