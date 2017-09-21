@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha test/**/*.test.js",
-    "build": "babel source/ -d lib/"
+    "build": "babel source/ -d lib/ --copy-files"
   },
   "dependencies": {
     "airbrake": "^2.1.0",
