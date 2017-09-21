@@ -65,7 +65,12 @@ exports.setup = function setup(app, route, mapFunction) {
     }
     var tags = [];
     actionFields.tags.split(',').forEach(function (tag) {
-      tags.push(tag.trim());
+      var limit = 500;
+      var cleanTag = tag.trim();
+      if(cleanTag.length>limit) {
+        cleanTag = cleanTag.substring(0,limit);
+      }
+      tags.push(cleanTag);
     });
     if (tags.length > 0) {
       eventData.tags = tags;

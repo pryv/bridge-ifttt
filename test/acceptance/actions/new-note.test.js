@@ -2,7 +2,8 @@
 var config = require('../../../source/utils/config'),
   db = require('../../../source/storage/database'),
   request = require('superagent'),
-  constants = require('../../../source/utils/constants');
+  constants = require('../../../source/utils/constants'),
+  pryv = require('pryv');
 
 var testData = require('../../test-data.js');
 
@@ -185,6 +186,39 @@ describe('/actions/new-note/', function () {
           res.status.should.equal(400);
           res.body.should.have.property('errors');
           done();
+        });
+    });
+    
+    it('POST strip tag if too long', function (done) {
+      var bigTag = new Array(600).join('a');
+      request.post(serverBasePath + '/ifttt/v1/actions/new-note')
+        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        { actionFields: {
+          description: 'Note with long tag',
+          contentText: 'Hello I have very long tag',
+          streamId: testData.streamId,
+          tags: bigTag
+        }
+        }).end(function (err, res) {
+          res.status.should.equal(200);
+          res.body.should.have.property('data');
+          res.body.data.should.be.an.instanceof(Array);
+          res.body.data[0].should.have.property('id');
+        
+          var connection = new pryv.Connection({
+            username: testData.userAccess.username,
+            auth: testData.userAccess.pryvToken,
+            domain: config.get('pryv:domain')
+          });
+          
+          var filter = new pryv.Filter({id: res.body.data[0].id});
+          connection.events.get(filter, function (err, events) {
+            should.not.exist(err);
+            should.exist(events[0]);
+            should.exist(events[0].tags);
+            should(events[0].tags[0]).be.equal(bigTag.substring(0,500));
+            done();
+          });
         });
     });
 
