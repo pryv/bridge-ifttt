@@ -12,5 +12,18 @@ Prerequisites:
 Run the server using 
 
     $ node source/server.js
-    
 after starting redis. 
+
+## Hacking
+
+Useful commands while working with this project: 
+
+| Command                  | Purpose                         |
+| ------------------------ | ------------------------------- |
+| `node lib/server.js`     | Runs the IFTTT server           |
+| `node_modules/.bin/flow` | Runs the flow type checker      |
+| `yarn run publish`       | Compiles Flow code to JS (/lib) |
+
+
+
+
