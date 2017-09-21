@@ -1,13 +1,13 @@
 /*global describe, before, it */
-var config = require('../../../source/utils/config'),
-  db = require('../../../source/storage/database'),
+var config = require('../../../lib/utils/config'),
+  db = require('../../../lib/storage/database'),
   request = require('superagent');
 
 
 var testData = require('../../test-data.js');
 
 
-require('../../../source/server');
+require('../../../lib/server');
 
 require('readyness/wait/mocha');
 
