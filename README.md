@@ -1,16 +1,15 @@
-bridge-ifttt
-============
-
+# bridge-ifttt
 
 IFTTT gateway
 
-# Setup
+## Setup
 
-run
-```
- scripts/setup-dev-environment.bash
- npm install
-```
+Prerequisites: 
 
-before running app with `node source/server.js` start the database with
-`db/start-database.sh`
+* Redis 2.6.13
+
+Run the server using 
+
+    $ node source/server.js
+    
+after starting redis. 
