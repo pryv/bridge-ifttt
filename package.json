@@ -2,7 +2,7 @@
   "name": "pryv-bridge-ifttt",
   "version": "0.1.1",
   "engines": {
-    "node": "0.12.7"
+    "node": ">=8.0.0"
   },
   "private": true,
   "repository": {
