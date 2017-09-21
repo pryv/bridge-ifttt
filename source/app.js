@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser  = require('body-parser');
 
-module.exports = function () {
+module.exports = function () {
 
   // init app
 
