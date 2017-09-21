@@ -1,9 +1,7 @@
 // @flow
 
-var extras = require('../assets/event-extras.json');
-//var eventTypes = require('../assets/event-types.json');
-
-var dataTypesUtils =  require('../assets/data-types-utils.js');
+const extras = require('../assets/event-extras.json');
+const dataTypesUtils =  require('../assets/data-types-utils.js');
 
 var compiledSets = {};
 
@@ -11,7 +9,7 @@ var compiledSets = {};
 function buildFromSets(compiledSetKey, selectedSets) {
 
   var typesListUnordered = {};
-
+  
   selectedSets.forEach(function (setKey) {
     if (! extras.sets[setKey]) {
       throw new Error('Cannot find set: ' + setKey);
@@ -70,6 +68,6 @@ exports.basic = function (req: express$Request, res: express$Response /*, next*/
   res.json(compiledSets.basic);
 };
 
-exports.common = function (req, res /*, next*/) {
+exports.common = function (req: express$Request, res: express$Response /*, next*/) {
   res.json(compiledSets.basic);
 };
