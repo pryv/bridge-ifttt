@@ -34,6 +34,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
     "flow-bin": "^0.55.0",
+    "flow-typed": "^2.1.5",
     "mocha": "latest",
     "nock": "~0.27.2",
     "should": "latest"
