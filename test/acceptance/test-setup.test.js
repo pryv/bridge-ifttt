@@ -1,10 +1,10 @@
 /*global describe, it */
-var config = require('../../lib/utils/config'),
+var config = require('../../source/utils/config'),
   request = require('superagent');
 
 
 require('should');
-require('../../lib/server');
+require('../../source/server');
 
 
 require('readyness/wait/mocha');
