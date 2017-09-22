@@ -1,35 +1,45 @@
 {
   "name": "pryv-bridge-ifttt",
   "version": "0.1.1",
-  "engines" : { "node" : "0.12.7" },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/pryv/bridge-ifttt.git"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test/**/*.test.js"
+    "test": "node_modules/.bin/mocha --compilers js:babel-register 'test/**/*.test.js'",
+    "build": "babel source/ -d lib/ --copy-files"
   },
   "dependencies": {
-    "express": "4.13.x",
-    "body-parser": "1.15.0",
-    "lodash": "4.6.x",
-    "winston": "2.2.x",
-    "nconf": "0.8.x",
-    "redis": "2.5.x",
-    "readyness": "~0.1.0",
-    "semver": "5.1.x",
+    "airbrake": "^2.1.0",
     "async": "1.5.x",
-    "superagent": "~1.7.2",
+    "body-parser": "1.15.0",
+    "express": "^4.15.4",
     "hat": "0.0.3",
+    "lodash": "^4.17.4",
+    "marked": "~0.3.6",
+    "nconf": "0.8.x",
     "pryv": "https://github.com/pryv/lib-javascript.git#master",
-    "to-markdown": "1.3.0",
-    "marked": "~0.3.2",
-    "airbrake": "0.4.x"
+    "readyness": "~0.1.0",
+    "redis": "2.5.x",
+    "semver": "5.1.x",
+    "superagent": "^3.6.0",
+    "to-markdown": "~3.1",
+    "winston": "2.2.x"
   },
   "devDependencies": {
-    "mocha": "latest",
-    "should": "latest",
-    "nock": "~0.27.2"
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.0",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^4.7.1",
+    "eslint-plugin-flowtype": "^2.35.1",
+    "flow-bin": "^0.55.0",
+    "flow-typed": "^2.1.5",
+    "mocha": "^3.5.3",
+    "nock": "~0.27.2",
+    "should": "^13.1.0"
   }
 }

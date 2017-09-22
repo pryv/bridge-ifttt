@@ -56,12 +56,11 @@ nconf.defaults({
     ip: '0.0.0.0' // interface to bind,
   },
   redis: {
-    password: 'MyRecordedLife',
     port : 7379
   },
   debug: {
     shushPYInternalErrorLog: false,
-    shushReqUrlLog: false,
+    shushReqUrlLog: true,
     middlewareDebug: false,
     oauth: false,
     fieldsStreams: false,
