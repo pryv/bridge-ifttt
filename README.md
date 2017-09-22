@@ -8,11 +8,14 @@ Prerequisites:
 
 * Redis 2.6.13
 * Node 8.X
+* Yarn 0.27.X
+
+Fetch the dependencies using `yarn install`
 
 Run the server using 
 
-    $ node source/server.js
-after starting redis. 
+    $ node lib/server.js
+after starting redis and compiling the Flow code to JS.  
 
 ## Hacking
 
