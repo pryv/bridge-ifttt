@@ -69,7 +69,7 @@ nconf.defaults({
   },
   airbrake: {
     disable: true,
-    key: 'eae70e8971791110a3f13fb8fcea3d6b' // bridge-ifttt
+    key: 'changeme' // bridge-ifttt
   }
 });
 
