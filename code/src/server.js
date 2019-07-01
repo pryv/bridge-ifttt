@@ -1,6 +1,6 @@
 var config = require('./utils/config'),
     logger = require('winston'),
-    version = require('../package.json').version;
+    version = require('../../package.json').version;
 
 // send crashes to Airbrake service
 if (config.get('airbrake:disable') !== true) {

@@ -1,6 +1,6 @@
 var util = require('util');
 
-var SHUSHLOG = require('../../source/utils/config').get('debug:shushPYInternalErrorLog');
+var SHUSHLOG = require('../../src/utils/config').get('debug:shushPYInternalErrorLog');
 
 /**
  * The constructor to use for all errors within the API.

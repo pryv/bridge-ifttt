@@ -12,22 +12,16 @@ Prerequisites:
 
 Fetch the dependencies using `yarn install`
 
-Run the server using 
-
-    $ node lib/server.js
-after starting redis and compiling the Flow code to JS.  
-
 ## Hacking
 
 Useful commands while working with this project: 
 
 | Command                           | Purpose                           |
 | --------------------------------- | --------------------------------- |
-| `node lib/server.js`              | Runs the IFTTT server             |
-| `redis-server --port 7379`        | Runs the redis server (port 7379) |
-| `node_modules/.bin/flow`          | Runs the flow type checker        |
+| `yarn watch`                      | Transpiles code into dist         |
+| `yarn database`                   | Runs the redis server (port 7379) |
+| `yarn start`                      | Runs the IFTTT server             |
 | `node_modules/.bin/eslint source` | ESLint check all of source        |
-| `yarn run publish`                | Compiles Flow code to JS (/lib)   |
 
 Here are two aliases that might be useful during the work on this project: 
 

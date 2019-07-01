@@ -10,8 +10,12 @@
     "url": "git://github.com/pryv/bridge-ifttt.git"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha --compilers js:babel-register 'test/**/*.test.js'",
-    "build": "babel source/ -d lib/ --copy-files"
+    "start": "node dist/src/server.js",
+    "test": "node_modules/.bin/mocha 'dist/test/**/*.test.js'",
+    "build": "babel source/ -d lib/ --copy-files",
+    "setup": "./scripts/setup-dev-environment.bash",
+    "watch": "node_modules/.bin/babel --watch=./code --out-dir=./dist --copy-files",
+    "database": "./scripts/start-database.sh "
   },
   "dependencies": {
     "airbrake": "^2.1.0",

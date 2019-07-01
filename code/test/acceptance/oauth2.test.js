@@ -1,11 +1,11 @@
 /*global describe, before, it */
 var should = require('should'),
-  config = require('../../source/utils/config'),
+  config = require('../../src/utils/config'),
   request = require('superagent'),
   querystring = require('querystring');
 
 
-require('../../source/server');
+require('../../src/server');
 
 var nock = require('nock');
 
