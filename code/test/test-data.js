@@ -1,5 +1,8 @@
 module.exports = {
-  userAccess : {username: 'ifttttest', pryvToken: 'ciijzuln2057akdq3bv3vhjya'},
+  userAccess: {
+    username: 'ifttttest', 
+    pryvToken: 'cjxokdnpq00081ftuoz1gvyv3'
+  },
   oauthToken : 'OI2O98AHF9A',
-  streamId : 'chtisiuo4000c0i43ys0czem0'
+  streamId : 'diary'
 };
