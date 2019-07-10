@@ -40,8 +40,8 @@ if (configFile) {
 // Set default values
 nconf.defaults({
   pryv: {
-    domain : 'pryv.me',
-    access : 'https://reg.pryv.me/access'
+    domain : 'pryv.li',
+    access : 'https://reg.pryv.li/access'
   },
   ifttt: {
     clientId: 'ifttt-all',
