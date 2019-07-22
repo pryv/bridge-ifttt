@@ -18,13 +18,13 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 describe('/triggers/new-photo/', function () {
   this.timeout(5000);
   before(function () {
-    db.setSet(testData.oauthToken, testData.userAccess);
+    db.setSet(testData.userAccess.oauthToken, testData.userAccess);
   });
 
   describe('fields/streamId/options', function () {
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-photo/fields/streamId/options')
-        .set('Authorization', 'Bearer ' + testData.oauthToken)
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken)
         .end(function (err, res) {
           res.status.should.equal(200);
           res.body.should.have.property('data');
@@ -38,7 +38,7 @@ describe('/triggers/new-photo/', function () {
 
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-photo')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send({
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send({
           triggerFields : {
             streamId: testData.streamId
           }
@@ -58,9 +58,6 @@ describe('/triggers/new-photo/', function () {
             event.should.have.property('Tags');
             event.should.have.property('ImageURL'); // TODO eventually check url
           });
-
-
-          //console.log(res.body.data);
           done();
         });
     });

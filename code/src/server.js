@@ -1,20 +1,20 @@
-var config = require('./utils/config'),
-    logger = require('winston'),
-    version = require('../../package.json').version;
+const config = require('./utils/config');
+const logger = require('winston');
+const version = require('../../package.json').version;
 
 // send crashes to Airbrake service
 if (config.get('airbrake:disable') !== true) {
-  var airbrake = require('airbrake').createClient(config.get('airbrake:key'));
+  const airbrake = require('airbrake').createClient(config.get('airbrake:key'));
   airbrake.handleExceptions();
 }
 
-var ready = require('readyness');
+const ready = require('readyness');
 ready.setLogger(logger.info);
 
-var app = require('./app')(),
-    server = require('http').createServer(app);
+const app = require('./app')();
+const server = require('http').createServer(app);
 
-var appListening = ready.waitFor('IFTTT Bridge v' + version + ' in ' + app.settings.env +
+const appListening = ready.waitFor('IFTTT Bridge v' + version + ' in ' + app.settings.env +
   ' mode listening on:' + config.get('http:ip') + ':' + config.get('http:port'));
 
 

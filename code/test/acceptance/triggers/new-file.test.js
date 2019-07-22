@@ -18,13 +18,13 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 describe('/triggers/new-file/', function () {
   this.timeout(5000);
   before(function () {
-    db.setSet(testData.oauthToken, testData.userAccess);
+    db.setSet(testData.userAccess.oauthToken, testData.userAccess);
   });
 
   describe('fields/streamId/options', function () {
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-file/fields/streamId/options')
-        .set('Authorization', 'Bearer ' + testData.oauthToken)
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken)
         .end(function (err, res) {
           res.status.should.equal(200);
           res.body.should.have.property('data');
@@ -38,7 +38,7 @@ describe('/triggers/new-file/', function () {
 
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-file')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send({
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send({
           triggerFields : {
             streamId: testData.streamId
           }

@@ -16,7 +16,7 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 describe('/actions/new-photo/', function () {
   this.timeout(5000);
   before(function () {
-    db.setSet(testData.oauthToken, testData.userAccess);
+    db.setSet(testData.userAccess.oauthToken, testData.userAccess);
   });
 
   describe('/', function () {

@@ -8,6 +8,7 @@ var hat = require('hat');
 var accessUrl = config.get('pryv:access');
 
 var secretPath = config.get('oauth:secretPath');
+const domain = config.get('pryv:domain');
 
 module.exports = function setup(app) {
 
@@ -71,11 +72,14 @@ module.exports = function setup(app) {
     request.get(accessUrl + '/' + code).end(function (error, response) {
       if (response.body.status === 'ACCEPTED') {
 
-        if (! response.body.username || ! response.body.token) {
+        const username = response.body.username;
+        const pryvToken = response.body.token;
+
+        if (! response.body.username || ! response.body.token) {
           return next(PYError.internalError('token from access'));
         }
 
-        var credentials = { username: response.body.username, pryvToken: response.body.token};
+        var credentials = { urlEndpoint: buildUrl(username, domain), pryvToken: pryvToken};
         var oauthToken = hat();
 
         db.setSet(oauthToken, credentials);
@@ -87,3 +91,7 @@ module.exports = function setup(app) {
 
   });
 };
+
+function buildUrl(username, domain) {
+  return 'https://' + username + '.' + domain;
+}

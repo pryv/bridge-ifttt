@@ -208,7 +208,7 @@ exports.doOnKeysValuesMatching = doOnKeysValuesMatching;
 
 //------------------ access management ------------//
 
-exports.setJSONCachedValue = function setJSONCachedValue(key, value, ttl, callback) {
+exports.setJSONCachedValue = function (key, value, ttl, callback) {
   var multi = redis.multi();
   var dbkey = key;
   multi.set(dbkey, JSON.stringify(value));

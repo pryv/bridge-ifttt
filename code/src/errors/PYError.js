@@ -34,7 +34,7 @@ PYError.internalError = function (message, detail, errorForInternalUsage) {
     .replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@')
     .split('\n');
   if (! SHUSHLOG) {
-    console.log(errorForInternalUsage, message, detail, stack);
+    // console.log(errorForInternalUsage, message, detail, stack);
   }
   return new PYError(500, 'Internal Error: ' + message, detail);
 };

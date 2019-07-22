@@ -1,31 +1,30 @@
 /*global describe, before, it */
-var should = require('should'),
-  config = require('../../src/utils/config'),
-  request = require('superagent'),
-  querystring = require('querystring');
-
+const should = require('should');
+const config = require('../../src/utils/config');
+const request = require('superagent');
+const querystring = require('querystring');
 
 require('../../src/server');
 
-var nock = require('nock');
+const nock = require('nock');
 
 require('readyness/wait/mocha');
 
-var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port'),
-  secretPath =  config.get('oauth:secretPath'),
-  channelSlug = 'pryv',  // set on ifttt used in   https://ifttt.com/channels/{{channel-slug}}/
-  clientId = config.get('ifttt:clientId'),
-  secret = config.get('ifttt:secret');
+const serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
+const secretPath =  config.get('oauth:secretPath');
+const channelSlug = 'pryv';  // set on ifttt used in   https://ifttt.com/channels/{{channel-slug}}/
+const clientId = config.get('ifttt:clientId');
+const secret = config.get('ifttt:secret');
 
-
-var accessUrl =  config.get('pryv:access');
+const accessUrl =  config.get('pryv:access');
 
 // https://ifttt.com/developers/docs/protocol_reference#authentication-flow
+// https://platform.ifttt.com/docs/api_reference#service-authentication
 describe('oauth2', function () {
 
   describe('/authorize', function () {
 
-    var queryString = querystring.stringify(
+    const queryString = querystring.stringify(
       { client_id: clientId,
         response_type: 'code',
         scope: 'ifttt',
@@ -59,7 +58,7 @@ describe('oauth2', function () {
 
     it('POST /token : Valid Token exchange', function (done) {
       this.timeout(5000);
-      var parameters = {
+      const parameters = {
         grant_type: 'authorization_code',
         code: 'EeZiDfLkTPJJ7l3o',
         client_id: clientId,
@@ -83,7 +82,7 @@ describe('oauth2', function () {
 
     it('POST /token : Invalid Token exchange', function (done) {
       this.timeout(20000);
-      var parameters = {
+      const parameters = {
         grant_type: 'authorization_code',
         code: 'EeZiDfLkTPJJ7l3o',
         client_id: clientId,

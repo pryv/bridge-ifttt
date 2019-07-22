@@ -1,12 +1,13 @@
 
-var PYError = require('../errors/PYError.js');
-var db = require('../storage/database.js');
+const PYError = require('../errors/PYError.js');
+const db = require('../storage/database.js');
 
-var pryv = require('pryv');
-var config = require('../utils/config');
+const url = require('url');
+const config = require('../utils/config');
+const pryv = require('pryv');
 
-var channelApiKey = config.get('ifttt:channelApiKey');
-var domain = config.get('pryv:domain');
+const channelApiKey = config.get('ifttt:channelApiKey');
+const domain = config.get('pryv:domain');
 
 module.exports =  function (req, res, next) {
 
@@ -37,16 +38,24 @@ module.exports =  function (req, res, next) {
       if (error) {
         return next(PYError.internalError('Database error', '', error));
       }
-      if (!credentials || !credentials.username) {
+      if (
+        credentials == null ||
+        (credentials.username == null && credentials.urlEndpoint == null)
+      ) {
         return next(PYError.invalidToken());
+      }
+      
+      if (credentials.urlEndpoint != null) {
+        const url = credentials.urlEndpoint;
+        credentials.username = url.substring(8, url.length - domain.length + 1);
       }
 
       req.pryvCredentials = credentials;
-      req.pryvConnection = new pryv.Connection({
-        username: req.pryvCredentials.username,
-        auth: req.pryvCredentials.pryvToken,
-        domain: domain
-      });
+      
+      req.pryvConnection = {
+        urlEndpoint: credentials.urlEndpoint || 'https://' + credentials.username + '.' + domain,
+        auth: credentials.pryvToken
+      };
 
       next();
     });

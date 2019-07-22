@@ -1,21 +1,29 @@
-var PYError = require('../../errors/PYError.js');
+const PYError = require('../../errors/PYError.js');
 
-var config = require('../../utils/config');
-var domain =  '.';
-domain += (config.get('pryv:domain') === 'pryv.in') ? 'pryv.li' : 'pryv.me';
+const config = require('../../utils/config');
+const domain = config.get('pryv:domain');
 
 module.exports = function setup(app) {
 
 // Return the user info
   app.get('/ifttt/v1/user/info', function (req, res, next) {
-    if (!req.pryvCredentials) {
+    const pryvCredentials = req.pryvCredentials;
+    if (! pryvCredentials) {
       return next(PYError.contentError('No authorization token'));
     } else {
-      return res.json({ data : {
-        name: req.pryvCredentials.username,
-        id: req.pryvCredentials.username,
-        url: 'https://' + req.pryvCredentials.username + domain
-      }});
+      if (pryvCredentials.urlEndpoint != null) {
+        return res.json({
+          name: pryvCredentials.urlEndpoint,
+          id: pryvCredentials.urlEndpoint,
+          url: pryvCredentials.urlEndpoint,
+        });
+      } else {
+        return res.json({
+          name: pryvCredentials.username,
+          id: pryvCredentials.username,
+          url: 'https://' + pryvCredentials.username + '.' + domain
+        });
+      }
     }
   });
 };

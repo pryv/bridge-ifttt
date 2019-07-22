@@ -3,8 +3,8 @@
  * Error route handling.
  */
 
-var PYError = require('../errors/PYError');
-var logger = require('winston');
+const PYError = require('../errors/PYError');
+const logger = require('winston');
 
 
 module.exports = function handleError(error, req, res, next) {

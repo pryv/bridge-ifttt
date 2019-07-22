@@ -1,29 +1,32 @@
 /*global describe, before, it */
-var config = require('../../src/utils/config'),
-  db = require('../../src/storage/database'),
-  request = require('superagent');
+const config = require('../../src/utils/config');
+const db = require('../../src/storage/database');
+const request = require('superagent');
+const assert = require('chai').assert;
+const _ = require('lodash');
 
-
-var testData = require('../test-data.js');
+const testData = require('../test-data.js');
 
 require('../../src/server');
-
 require('readyness/wait/mocha');
-
 require('should');
 
-var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
+const serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
+const userInfoPath = serverBasePath + '/ifttt/v1/user/info';
 
 describe('userinfo', function () {
 
+  const user1 = testData.userAccess;
+  const user2 = testData.endpointAccess;
   before(function () {
-    db.setSet(testData.oauthToken, testData.userAccess);
+    db.setSet(user1.oauthToken, _.pick(user1, ['username', 'pryvToken']));
+    db.setSet(user2.oauthToken, _.pick(user2, ['urlEndpoint', 'pryvToken']));
   });
 
   describe('/ifttt/v1/user/info', function () {
 
     it('GET /ifttt/v1/user/info - No Authorization header', function (done) {
-      request.get(serverBasePath + '/ifttt/v1/user/info')
+      request.get(userInfoPath)
         .set('Authorization', 'Bearer')
         .set('Accept', 'application/json')
         .set('Accept-Charset', 'utf-8')
@@ -35,6 +38,43 @@ describe('userinfo', function () {
           done();
         });
     });
+
+    describe('old user', function () {
+      it('GET /iftttt/v1/user/info', async function () {
+        
+        const res = await request
+          .get(userInfoPath)
+          .set('Authorization', 'Bearer ' + user1.oauthToken);
+        const status = res.status;
+        const body = res.body;
+
+        assert.equal(status, 200);
+        assert.deepEqual(body, _.pick(user1, [
+          'id',
+          'name',
+          'url'
+        ]));
+      });
+    });
+
+    describe('new user', function() {
+      
+      it('GET /iftttt/v1/user/info', async function() {
+        const res = await request
+          .get(userInfoPath)
+          .set('Authorization', 'Bearer ' + user2.oauthToken);
+        const status = res.status;
+        const body = res.body;
+
+        assert.equal(status, 200);
+        assert.deepEqual(body, _.pick(user2, [
+          'id',
+          'name',
+          'url'
+        ]));
+      });
+    });
+    
     /**
     it('GET /ifttt/v1/user/info - Empty Authorization header', function (done) {
       request.get(serverBasePath + '/ifttt/v1/user/info')

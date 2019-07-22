@@ -1,6 +1,6 @@
 
-var debug = require('../utils/debug.js');
-var config = require('../utils/config.js');
+const debug = require('../utils/debug.js');
+const config = require('../utils/config.js');
 /**
  * Tiny middleware to monitor queries.
  */

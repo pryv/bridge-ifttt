@@ -4,8 +4,6 @@ var config = require('../../../src/utils/config'),
   request = require('superagent'),
   testData = require('../../test-data.js');
 
-var testData = require('../../test-data.js');
-
 require('../../../src/server');
 
 require('readyness/wait/mocha');
@@ -18,10 +16,8 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 describe('/actions/new-numerical-*', function () {
 
   before(function () {
-    db.setSet(testData.oauthToken, testData.userAccess);
+    db.setSet(testData.userAccess.oauthToken, testData.userAccess);
   });
-
-
 
   describe('basic', function () {
 

@@ -15,12 +15,12 @@ module.exports = function setup(app) {
       return next(PYError.authentificationRequired('Auth key missing or invalid'));
     }
 
-    db.setSet(testData.oauthToken, testData.userAccess);
+    db.setSet(testData.userAccess.oauthToken, testData.userAccess);
 
 
     var response = {
       data: {
-        accessToken: testData.oauthToken,
+        accessToken: testData.userAccess.oauthToken,
         samples: {
           triggers : {
             'new-note' : {

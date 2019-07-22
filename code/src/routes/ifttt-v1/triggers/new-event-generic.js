@@ -1,9 +1,11 @@
-var PYError = require('../../../errors/PYError.js');
-var constants = require('../../../utils/constants.js');
-var cache = require('../../../storage/cache.js');
-var logger = require('winston');
-var versionPath = '/ifttt/v1/';
-var config = require('../../../utils/config.js');
+const PYError = require('../../../errors/PYError.js');
+const constants = require('../../../utils/constants.js');
+const cache = require('../../../storage/cache.js');
+const logger = require('winston');
+const versionPath = '/ifttt/v1/';
+const config = require('../../../utils/config.js');
+
+const request = require('superagent');
 
 /**
  * Generic extraOption Handler
@@ -13,7 +15,7 @@ var config = require('../../../utils/config.js');
  * @param {Function} doFunction function(req, res, next)
  */
 exports.addOption = function (app, optionKey, route, doFunction) {
-  var optionPath = versionPath + 'triggers/' + route + '/fields/' + optionKey + '/options';
+  const optionPath = versionPath + 'triggers/' + route + '/fields/' + optionKey + '/options';
   app.post(optionPath, doFunction);
 };
 
@@ -25,8 +27,8 @@ exports.addOption = function (app, optionKey, route, doFunction) {
  * @param {String | Function} dataType 'note/txt', if function it will return the required DataType
  * @param {Function} map function(event, eventData)
  */
-exports.setup = function setup(app, route, dataType, mapFunction) {
-  var triggerPath = versionPath + 'triggers/' + route;
+exports.setup = function (app, route, dataType, mapFunction) {
+  const triggerPath = versionPath + 'triggers/' + route;
 
   app.post(triggerPath + '/fields/streamId/options', require('../../../fields/stream').options);
 
@@ -36,8 +38,8 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
 
     //---- construct the filter
 
-    var filterLike = {
-      limit: 50
+    const filterLike = {
+      limit: 50
     };
     if (req.body.limit || req.body.limit === 0) {
       filterLike.limit = req.body.limit;
@@ -48,9 +50,11 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
       return next(PYError.contentError('No triggerFields'));
     }
 
+    const triggerFields = req.body.triggerFields;
+
     if (typeof dataType === 'function') {
 
-      filterLike.types = dataType(req.body.triggerFields);
+      filterLike.types = dataType(triggerFields);
       if (! filterLike.types) {
         return next(PYError.contentError('Cannot determine dataType (eventType)'));
       }
@@ -58,14 +62,12 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
       filterLike.types = [dataType];
     }
 
-
-    if (! req.body.triggerFields.streamId) {
+    if ( triggerFields.streamId == null ) {
       return next(PYError.contentError('No StreamId'));
     }
 
-
-    if (req.body.triggerFields.streamId !== constants.ANY_STREAMS) {
-      filterLike.streams = [req.body.triggerFields.streamId];
+    if (triggerFields.streamId !== constants.ANY_STREAMS) {
+      filterLike.streams = [triggerFields.streamId];
     }
 
     //-- skip
@@ -74,43 +76,55 @@ exports.setup = function setup(app, route, dataType, mapFunction) {
       return res.send({data : []});
     }
 
-
+    const pyConn = req.pryvConnection;
     // -- fetch the events
-    req.pryvConnection.events.get(filterLike, function (error, eventsArray) {
-      if (error) { return next(PYError.internalError('Failed fetching events', error)); }
-
-      // -- get the streamsMap for the names
-      cache.getStreamsMap(req.pryvConnection, function (error, streamMap) {
-        if (error) {
-          return next(PYError.internalError('Failed fetching streams from cache', error));
+    //req.pryvConnection.events.get(filterLike, function (error, eventsArray) {
+    request.get(pyConn.urlEndpoint + '/events')
+      .set('Authorization', pyConn.auth)
+      .query(filterLike)
+      .end(function (error, response) {
+        
+        if (error) { 
+          return next(PYError.internalError('Failed fetching events', error)); 
         }
+  
+        const eventsArray = response.body.events;
 
-        var data = [];  // will be sent
-
-        eventsArray.forEach(function (event) {
-
-          if (filterLike.types.indexOf(event.type) < 0) {
-            logger.error('trigger ' + route + ' get an event with type : ' + event.type);
-          }  else {
-
-            var streamName =  event.streamId;
-            if (streamMap[event.streamId] && streamMap[event.streamId].name) {
-              streamName = streamMap[event.streamId].name;
-            }
-
-            var eventData = {
-              meta: {id : event.id, timestamp: Math.round(event.time)},
-              description : event.description || '',
-              Tags: event.tags ? event.tags.join(', ') : null,
-              StreamName: streamName,
-              AtTime: (new Date(event.time * 1000)).toIFTTTISOString()
-            };
-
-            //-- add extra informations
-            if (mapFunction(event, eventData, req.body.triggerFields)) {
-              data.push(eventData);
-            }
+        // -- get the streamsMap for the names
+        cache.getStreamsMap(req.pryvConnection, function (error, streamMap) {
+          if (error) {
+            return next(PYError.internalError('Failed fetching streams from cache', error));
           }
+
+          const data = [];  // will be sent
+
+          eventsArray.forEach(function (event) {
+
+            if (filterLike.types.indexOf(event.type) < 0) {
+              logger.error('trigger ' + route + ' get an event with type : ' + event.type);
+            }  else {
+
+              let streamName =  event.streamId;
+              if (streamMap[event.streamId] && streamMap[event.streamId].name) {
+                streamName = streamMap[event.streamId].name;
+              }
+
+              const eventData = {
+                meta: {id : event.id, timestamp: Math.round(event.time)},
+                description : event.description || '',
+                Tags: event.tags ? event.tags.join(', ') : null,
+                StreamName: streamName,
+                AtTime: (new Date(event.time * 1000)).toIFTTTISOString(),
+              };
+
+              event.pyConn = pyConn;
+
+              //-- add extra informations
+              mapFunction(event, eventData, triggerFields);
+              if (eventData.FileURL != null) {
+                data.push(eventData);
+              }
+            }
         });
         if (config.get('debug:newEventTrigger')) {
           console.log(data);

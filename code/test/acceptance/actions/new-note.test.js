@@ -1,11 +1,11 @@
 /*global describe, before, it */
-var config = require('../../../src/utils/config'),
-  db = require('../../../src/storage/database'),
-  request = require('superagent'),
-  constants = require('../../../src/utils/constants'),
-  pryv = require('pryv');
+const config = require('../../../src/utils/config');
+const db = require('../../../src/storage/database');
+const request = require('superagent');
+const constants = require('../../../src/utils/constants');
+const pryv = require('pryv');
 
-var testData = require('../../test-data.js');
+const testData = require('../../test-data.js');
 
 require('../../../src/server');
 
@@ -14,18 +14,18 @@ require('readyness/wait/mocha');
 require('should');
 
 
-var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
+const serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
 describe('/actions/new-note/', function () {
 
   before(function () {
-    db.setSet(testData.oauthToken, testData.userAccess);
+    db.setSet(testData.userAccess.oauthToken, testData.userAccess);
   });
 
   describe('fields/streamId/options', function () {
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note/fields/streamId/options')
-        .set('Authorization', 'Bearer ' + testData.oauthToken)
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken)
         .end(function (err, res) {
           res.status.should.equal(200);
           res.body.should.have.property('data');
@@ -40,7 +40,7 @@ describe('/actions/new-note/', function () {
 
     it('POST  new note with invalid content', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send(
         { action: 'dumb'
         }).end(function (err, res) {
           res.status.should.equal(400);
@@ -51,7 +51,7 @@ describe('/actions/new-note/', function () {
 
     it('POST invalid with missing streamId', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send(
         { actionFields:
         { description: '',
           contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
@@ -66,7 +66,7 @@ describe('/actions/new-note/', function () {
 
     it('POST invalid with missing description', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send(
         { actionFields:
         { contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
             'April 8, 2014\n\nApril 08, 2014 at 10:56PM',
@@ -81,7 +81,7 @@ describe('/actions/new-note/', function () {
 
     it('POST invalid with missing tags', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send(
         { actionFields:
         { description: 'sahshas',
           contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
@@ -97,7 +97,7 @@ describe('/actions/new-note/', function () {
 
     it('POST Valid new note', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send(
         { actionFields: {
           description: 'Tweet by iftttpryv',
           contentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
@@ -116,7 +116,7 @@ describe('/actions/new-note/', function () {
 
     it('POST Valid new note 2', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send(
         { actionFields:
         { description: 'Tweet by iftttpryv',
           contentText: 'toto\n\ntoto\n\nâ iftttpryv (@iftttpryv) ' +
@@ -135,7 +135,7 @@ describe('/actions/new-note/', function () {
 
     it('POST  new note with invalid stream id', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send(
         { actionFields: {
           description: 'Tweet by iftttpryv',
           contentText: 'hello Pryv\n\nhello Pryv\n\n iftttpryv (@iftttpryv) April 2',
@@ -151,7 +151,7 @@ describe('/actions/new-note/', function () {
 
     it('POST  new note valid long content', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send(
         { actionFields:
         { description: 'Les histoires du jeu vidéo d\'AHL : l\'Atari 2600',
           streamId: testData.streamId,
@@ -175,7 +175,7 @@ describe('/actions/new-note/', function () {
 
     it('POST  new note empty string', function (done) {
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send(
         { actionFields:
         { description: 'an event with an empty content',
           streamId: testData.streamId,
@@ -192,7 +192,7 @@ describe('/actions/new-note/', function () {
     it('POST strip tag if too long', function (done) {
       var bigTag = new Array(600).join('a');
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send(
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send(
         { actionFields: {
           description: 'Note with long tag',
           contentText: 'Hello I have very long tag',

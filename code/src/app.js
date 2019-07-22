@@ -1,15 +1,12 @@
-var express = require('express');
-var bodyParser  = require('body-parser');
+const express = require('express');
+const bodyParser  = require('body-parser');
 
 module.exports = function () {
 
   // init app
 
-  var app = express();
+  const app = express();
   app.disable('x-powered-by');
-
-
-
 
   // support empty application/json request
   app.use(function (req, res, next) {
@@ -29,7 +26,6 @@ module.exports = function () {
   //middleware
   app.all('*', require('./middleware/debug.js'));
   app.all('*', require('./middleware/bearerAuth.js'));
-
 
 
   // routes

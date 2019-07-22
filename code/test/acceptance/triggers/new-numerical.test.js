@@ -19,13 +19,13 @@ var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:
 describe('/triggers/new-numerical/', function () {
 
   before(function () {
-    db.setSet(testData.oauthToken, testData.userAccess);
+    db.setSet(testData.userAccess.oauthToken, testData.userAccess);
   });
 
   describe('fields/streamId/options', function () {
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-numerical/fields/streamId/options')
-        .set('Authorization', 'Bearer ' + testData.oauthToken)
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken)
         .end(function (err, res) {
           res.status.should.equal(200);
           res.body.should.have.property('data');
@@ -39,7 +39,7 @@ describe('/triggers/new-numerical/', function () {
   describe('fields/eventType/options', function () {
     it('POST Valid token', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-numerical/fields/eventType/options')
-        .set('Authorization', 'Bearer ' + testData.oauthToken)
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken)
         .end(function (err, res) {
           res.status.should.equal(200);
           res.body.should.have.property('data');
@@ -54,7 +54,7 @@ describe('/triggers/new-numerical/', function () {
 
     it('POST Missing dataType', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-numerical')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send({
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send({
           triggerFields : {
             streamId: testData.streamId
           }
@@ -67,7 +67,7 @@ describe('/triggers/new-numerical/', function () {
 
     it('POST Valid token and content', function (done) {
       request.post(serverBasePath + '/ifttt/v1/triggers/new-numerical')
-        .set('Authorization', 'Bearer ' + testData.oauthToken).send({
+        .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send({
           triggerFields : {
             streamId: testData.streamId,
             eventType: 'mass/kg'

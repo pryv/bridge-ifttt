@@ -1,4 +1,5 @@
-var db = require('./database.js');
+const request = require('superagent');
+const db = require('./database.js');
 
 /**
  * Get a map with stream by their StreamName
@@ -33,22 +34,33 @@ exports.getStreamsMap = getStreamsMap;
 function getStreams(pryvConnection, callback) {
   // -- check for cached streams on db
 
-  var key = pryvConnection.username + ':' + pryvConnection.auth + ':streams';
+  const key = pryvConnection.username + ':' + pryvConnection.auth + ':streams';
 
   db.getJSONCachedValue(key, function (error, cachedStreams) {
     if (error) { return callback(error, null); }
 
     if (cachedStreams) { return callback(null, cachedStreams); }
 
-    pryvConnection.streams.get(null, function (error, streamsArray) {
-      if (! error && streamsArray && streamsArray.length > 0) {
-        db.setJSONCachedValue(key, pryvConnection.streams.toJSON(streamsArray),
-          1 * 60, function () {
-            callback(error, streamsArray);
-          });
-      } else {
-        callback(error, []);
+    const pyConn = pryvConnection;
+
+    request.get(pyConn.urlEndpoint + '/streams')
+      .set('Authorization', pyConn.auth)
+      .end(function (error, res) {
+
+      if (error) {
+        return callback(error, []);
       }
+
+      const streamsArray = res.body.streams;
+
+      if (streamsArray.length == 0) {
+        return callback(null, []);
+      }
+      
+      db.setJSONCachedValue(key, streamsArray,
+        1 * 60, function () {
+          callback(error, streamsArray);
+        });
     });
   });
 
