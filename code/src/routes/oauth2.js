@@ -1,20 +1,20 @@
-var PYError = require('../errors/PYError.js');
-var db = require('../storage/database.js');
-var config = require('../utils/config');
-var request = require('superagent');
-var hat = require('hat');
+const PYError = require('../errors/PYError.js');
+const db = require('../storage/database.js');
+const config = require('../utils/config');
+const request = require('superagent');
+const hat = require('hat');
 
 
-var accessUrl = config.get('pryv:access');
+const accessUrl = config.get('pryv:access');
 
-var secretPath = config.get('oauth:secretPath');
+const secretPath = config.get('oauth:secretPath');
 const domain = config.get('pryv:domain');
 
 module.exports = function setup(app) {
 
   // Show them the "do you authorise xyz app to access your content?" page
   app.get('/oauth2/authorise', function (req, res, next) {
-    var parameters = {
+    const parameters = {
       //sso: req.signedCookies.sso,
       requestingAppId: req.query.client_id,
       requestedPermissions: [
@@ -27,14 +27,14 @@ module.exports = function setup(app) {
     };
 
     request.post(accessUrl).send(parameters).end(function (error, response) {
-      if (! error && response.status !== 201) {
+      if (error == null && response.status !== 201) {
         error = new Error('Failed requesting access from register invalid statusCode:' +
           response.status + ' body:' + response.body);
       }
-      if (! error && ! response.body.url) {
+      if ( error == null && response.body.url == null) {
         error = new Error('Invalid response, missing url:' + response.body);
       }
-      if (error) {
+      if (error != null) {
         return next(error); // TODO forge a JSON error
       }
 
@@ -45,21 +45,21 @@ module.exports = function setup(app) {
 
   // Show them the exchange the bearer for a real token
   app.post('/oauth2' + secretPath + '/token', function (req, res, next) {
-    var code = req.body.code;
-    var client_id = req.body.client_id;
-    var client_secret = req.body.client_secret;
-    var redirect_uri = req.body.redirect_uri;
+    const code = req.body.code;
+    const client_id = req.body.client_id;
+    const client_secret = req.body.client_secret;
+    const redirect_uri = req.body.redirect_uri;
 
-    if (!client_id || client_id !== config.get('ifttt:clientId')) {
+    if (client_id == null || client_id !== config.get('ifttt:clientId')) {
       return next(PYError.contentError('Bad secret'));
     }
-    if (!client_secret || client_secret !== config.get('ifttt:secret')) {
+    if (client_secret == null || client_secret !== config.get('ifttt:secret')) {
       return next(PYError.contentError('Bad secret'));
     }
-    if (!code) {
+    if (code == null) {
       return next(PYError.contentError('Code missing'));
     }
-    if (!redirect_uri) {
+    if (redirect_uri == null) {
       return next(PYError.contentError('code parameter missing'));
     }
 
@@ -75,12 +75,12 @@ module.exports = function setup(app) {
         const username = response.body.username;
         const pryvToken = response.body.token;
 
-        if (! response.body.username || ! response.body.token) {
+        if ( response.body.username == null || response.body.token == null ) {
           return next(PYError.internalError('token from access'));
         }
 
-        var credentials = { urlEndpoint: buildUrl(username, domain), pryvToken: pryvToken};
-        var oauthToken = hat();
+        const credentials = { urlEndpoint: buildUrl(username, domain), pryvToken: pryvToken};
+        const oauthToken = hat();
 
         db.setSet(oauthToken, credentials);
         return res.json({token_type: 'Bearer', access_token: oauthToken});

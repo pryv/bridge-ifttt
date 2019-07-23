@@ -38,8 +38,7 @@ module.exports =  function (req, res, next) {
       if (error) {
         return next(PYError.internalError('Database error', '', error));
       }
-      if (
-        credentials == null ||
+      if (credentials == null ||
         (credentials.username == null && credentials.urlEndpoint == null)
       ) {
         return next(PYError.invalidToken());
@@ -54,7 +53,8 @@ module.exports =  function (req, res, next) {
       
       req.pryvConnection = {
         urlEndpoint: credentials.urlEndpoint || 'https://' + credentials.username + '.' + domain,
-        auth: credentials.pryvToken
+        auth: credentials.pryvToken,
+        username: credentials.username // for retro-compatibility, see cache
       };
 
       next();

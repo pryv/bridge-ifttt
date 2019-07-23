@@ -66,12 +66,10 @@ describe('oauth2', function () {
         redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'
       };
 
-
       request.post(serverBasePath + '/oauth2' + secretPath + '/token')
         .send(parameters)
         .redirects(0)
         .end(function (err, res) {
-          //console.log(res.status);
           res.status.should.equal(200);
           res.body.token_type.should.eql('Bearer');
           res.body.should.have.property('access_token');
@@ -94,7 +92,6 @@ describe('oauth2', function () {
         .send(parameters)
         .redirects(0)
         .end(function (err, res) {
-          //console.log(res.status);
           res.status.should.equal(401);
           done();
         });

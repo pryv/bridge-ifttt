@@ -33,24 +33,25 @@ exports.setup = function (app, route, dataType, mapFunction) {
   app.post(triggerPath + '/fields/streamId/options', require('../../../fields/stream').options);
 
   app.post(triggerPath, function (req, res, next) {
+    
     if (! req.pryvConnection) { return next(PYError.authentificationRequired()); }
+    const pyConn = req.pryvConnection;
 
+    const body = req.body;
 
     //---- construct the filter
 
     const filterLike = {
       limit: 50
     };
-    if (req.body.limit || req.body.limit === 0) {
-      filterLike.limit = req.body.limit;
+    if (body.limit != null || body.limit === 0) {
+      filterLike.limit = body.limit;
     }
 
-
-    if (! req.body.triggerFields) {
+    if (! body.triggerFields) {
       return next(PYError.contentError('No triggerFields'));
     }
-
-    const triggerFields = req.body.triggerFields;
+    const triggerFields = body.triggerFields;
 
     if (typeof dataType === 'function') {
 
@@ -76,9 +77,7 @@ exports.setup = function (app, route, dataType, mapFunction) {
       return res.send({data : []});
     }
 
-    const pyConn = req.pryvConnection;
     // -- fetch the events
-    //req.pryvConnection.events.get(filterLike, function (error, eventsArray) {
     request.get(pyConn.urlEndpoint + '/events')
       .set('Authorization', pyConn.auth)
       .query(filterLike)
@@ -92,7 +91,7 @@ exports.setup = function (app, route, dataType, mapFunction) {
 
         // -- get the streamsMap for the names
         cache.getStreamsMap(req.pryvConnection, function (error, streamMap) {
-          if (error) {
+          if (error != null) {
             return next(PYError.internalError('Failed fetching streams from cache', error));
           }
 
@@ -104,8 +103,9 @@ exports.setup = function (app, route, dataType, mapFunction) {
               logger.error('trigger ' + route + ' get an event with type : ' + event.type);
             }  else {
 
-              let streamName =  event.streamId;
-              if (streamMap[event.streamId] && streamMap[event.streamId].name) {
+              let streamId =  event.streamId;
+              let streamName = '';
+              if (streamMap[streamId] && streamMap[streamId].name) {
                 streamName = streamMap[event.streamId].name;
               }
 
@@ -117,6 +117,7 @@ exports.setup = function (app, route, dataType, mapFunction) {
                 AtTime: (new Date(event.time * 1000)).toIFTTTISOString(),
               };
 
+              // we need `urlEndpoint` from this in mapFunction()
               event.pyConn = pyConn;
 
               //-- add extra informations
@@ -125,13 +126,13 @@ exports.setup = function (app, route, dataType, mapFunction) {
                 data.push(eventData);
               }
             }
+          });
+          if (config.get('debug:newEventTrigger')) {
+            console.log(data);
+          }
+          res.send({data : data});
         });
-        if (config.get('debug:newEventTrigger')) {
-          console.log(data);
-        }
-        res.send({data : data});
       });
-    });
   });
 };
 

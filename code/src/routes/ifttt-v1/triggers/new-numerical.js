@@ -7,7 +7,6 @@ var dataTypesUtils =  require('../../../assets/data-types-utils.js');
 
 module.exports = function setup(app) {
 
-
   generic.addOption(app, 'eventType', slug, dataTypesHandlers.basic);
 
   generic.setup(app, slug,
@@ -22,7 +21,7 @@ module.exports = function setup(app) {
       var res = dataTypesUtils.nameAndSymbolForDataType(event.type);
 
       map.UnitName = res[0];
-      map.UnitSymbol = res[1] || '';
+      map.UnitSymbol = res[1] || '';
       return true;
     });
 };
