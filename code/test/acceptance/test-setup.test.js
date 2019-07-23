@@ -1,6 +1,6 @@
 /*global describe, it */
-var config = require('../../src/utils/config'),
-  request = require('superagent');
+const config = require('../../src/utils/config');
+const request = require('superagent');
 
 
 require('should');
@@ -9,7 +9,7 @@ require('../../src/server');
 
 require('readyness/wait/mocha');
 
-var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
+const serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
 describe('userinfo', function () {
 
