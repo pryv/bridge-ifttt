@@ -1,12 +1,10 @@
 /*global require*/
 //handle the database
-var logger = require('winston');
-var config = require('../utils/config');
-var redis = require('redis').createClient(config.get('redis:port'));
-var async = require('async');
-var semver = require('semver');
-
-var exports = exports || {}; // just for IJ to present structure
+const logger = require('winston');
+const config = require('../utils/config');
+const redis = require('redis').createClient(config.get('redis:port'));
+const async = require('async');
+const semver = require('semver');
 
 //redis error management
 /**
@@ -14,11 +12,11 @@ var exports = exports || {}; // just for IJ to present structure
   logger.error('Redis: ' + err.message);
 });     **/
 
-var LASTEST_DB_VERSION = '0.0.1';
-var DBVERSION_KEY = 'dbversion';
-var dbversion = null;
+const LASTEST_DB_VERSION = '0.0.1';
+const DBVERSION_KEY = 'dbversion';
+let dbversion = null;
 
-var connectionChecked = require('readyness').waitFor('database');
+const connectionChecked = require('readyness').waitFor('database');
 
 
 //PASSWORD CHECKING
@@ -74,50 +72,49 @@ function checkConnection() {
       nextStep();
     }
   ],
-    function (error) {
-      if (error) {
-        logger.error('DB not available: ', error);
-        throw error;
-      } else {
-        //-- check db structure
+  function (error) {
+    if (error) {
+      logger.error('DB not available: ', error);
+      throw error;
+    } else {
+      //-- check db structure
 
-        connectionChecked('Redis');
-      }
+      connectionChecked('Redis');
     }
-  );
+  });
 }
 
 
 /**
  * simply map redis.set
  */
-exports.set = function set(key, callback) {
+exports.set = function (key, callback) {
   redis.set(key, callback);
 };
 
 /**
  * simply map redis.get
  */
-exports.get = function get(key, callback) {
+exports.get = function (key, callback) {
   redis.get(key, callback);
 };
 
 /**
  * simply map redis.hgetall
  */
-exports.getSet = function getSet(key, callback) {
+exports.getSet = function (key, callback) {
   redis.hgetall(key, callback);
 };
 
 /**
  * simply map redis.hmset
  */
-exports.setSet = function getSet(key, callback) {
+exports.setSet = function (key, callback) {
   redis.hmset(key, callback);
 };
 
 
-function getJSON(key, callback) {
+exports.getJSON = function(key, callback) {
   redis.get(key, function (error, result) {
     var res_json = null;
     if (error) { logger.error('Redis getJSON: ' + key + ' e: ' + error, error); }
@@ -130,7 +127,7 @@ function getJSON(key, callback) {
     return callback(error, res_json);
   });
 }
-exports.getJSON = getJSON;
+
 
 
 
@@ -140,7 +137,7 @@ exports.getJSON = getJSON;
  * @param action function (key)
  * @param done function (error,count) called when done ..  with the count of "action" sent
  */
-function doOnKeysMatching(keyMask, action, done) {
+exports.doOnKeysMatching = function(keyMask, action, done) {
 
   redis.keys(keyMask, function (error, replies) {
     if (error) {
@@ -153,8 +150,7 @@ function doOnKeysMatching(keyMask, action, done) {
     }
     done(null, i);
   });
-}
-exports.doOnKeysMatching = doOnKeysMatching;
+};
 
 
 /**
@@ -163,27 +159,27 @@ exports.doOnKeysMatching = doOnKeysMatching;
  * @param valueMask .. a string for now.. TODO a regexp
  * @param done function (error, result_count) called when done ..
  */
-function doOnKeysValuesMatching(keyMask, valueMask, action, done) {
+exports.doOnKeysValuesMatching = function(keyMask, valueMask, action, done) {
 
-  var receivedCount = 0;
-  var actionThrown = 0;
-  var waitFor = -1;
-  var errors = [];
+  let receivedCount = 0;
+  let actionThrown = 0;
+  let waitFor = -1;
+  const errors = [];
 
-  var checkDone = function () {
+  function checkDone() {
     if (waitFor > 0 && waitFor === receivedCount) {
       if (done) {
         done(errors.length === 0 ? null : errors, receivedCount);
       }
     }
-  };
+  }
 
-  var doOnKeysMatchingDone = function (error, count) {
+  function doOnKeysMatchingDone(error, count) {
     waitFor = count;
     checkDone();
-  };
+  }
 
-  doOnKeysMatching(keyMask,
+  this.doOnKeysMatching(keyMask,
     function (key) {
       redis.get(key, function (error, result) {
         if (error) {
@@ -191,7 +187,7 @@ function doOnKeysValuesMatching(keyMask, valueMask, action, done) {
           logger.error('doOnKeysValuesMatching: ' + keyMask + ' ' + valueMask + ' e: ' + error,
             error);
         } else {
-          if (valueMask === '*' || valueMask === result) {
+          if (valueMask === '*' || valueMask === result) {
             action(key, result);
             actionThrown++;
           }
@@ -200,8 +196,7 @@ function doOnKeysValuesMatching(keyMask, valueMask, action, done) {
         checkDone();
       });
     }, doOnKeysMatchingDone);
-}
-exports.doOnKeysValuesMatching = doOnKeysValuesMatching;
+};
 
 
 //------------------- specific cache logic
@@ -209,8 +204,8 @@ exports.doOnKeysValuesMatching = doOnKeysValuesMatching;
 //------------------ access management ------------//
 
 exports.setJSONCachedValue = function (key, value, ttl, callback) {
-  var multi = redis.multi();
-  var dbkey = key;
+  const multi = redis.multi();
+  const dbkey = key;
   multi.set(dbkey, JSON.stringify(value));
   multi.expire(dbkey, ttl);
   multi.exec(function (error, result) {
@@ -221,7 +216,7 @@ exports.setJSONCachedValue = function (key, value, ttl, callback) {
   });
 };
 
-exports.getJSONCachedValue = function getJSONCachedValue(key, callback) {
-  getJSON(key, callback);
+exports.getJSONCachedValue = function (key, callback) {
+  this.getJSON(key, callback);
 };
 
