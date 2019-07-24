@@ -1,3 +1,5 @@
+// @flow
+
 const PYError = require('../errors/PYError.js');
 const db = require('../storage/database.js');
 const config = require('../utils/config');

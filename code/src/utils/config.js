@@ -40,14 +40,15 @@ if (configFile) {
 // Set default values
 nconf.defaults({
   pryv: {
-    domain : 'pryv.li',
-    access : 'https://reg.pryv.li/access'
+    domain: 'pryv.li',
+    access: 'https://reg.pryv.li/access'
   },
   ifttt: {
     clientId: 'ifttt-all',
     secret: 'setInHeadsetConfig',
     channelApiKey: 'setInHeadsetConfig',
     bridgeUrl: 'http://localhost', // override to https://ifttt.pryv.me
+    realtimeApiUrlEndpoint: 'https://realtime.ifttt.com/v1/notifications',
   },
   oauth: {
     secretPath: 'setElseWhere'
@@ -57,7 +58,7 @@ nconf.defaults({
     ip: '0.0.0.0' // interface to bind,
   },
   redis: {
-    port : 7379
+    port: 7379
   },
   debug: {
     shushPYInternalErrorLog: false,

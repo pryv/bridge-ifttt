@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node dist/src/server.js",
-    "test": "node_modules/.bin/mocha 'dist/test/**/*.test.js'",
+    "test": "env debug=false node_modules/.bin/mocha 'dist/test/**/*.test.js'",
     "build": "babel source/ -d lib/ --copy-files",
     "setup": "./scripts/setup-dev-environment.bash",
     "watch": "node_modules/.bin/babel --watch=./code --out-dir=./dist --copy-files",
@@ -45,7 +45,7 @@
     "flow-bin": "^0.55.0",
     "flow-typed": "^2.1.5",
     "mocha": "^3.5.3",
-    "nock": "~0.27.2",
+    "nock": "^10",
     "should": "^13.1.0"
   }
 }
