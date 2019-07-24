@@ -1,4 +1,5 @@
-/*global require*/
+// @flow
+
 //handle the database
 const logger = require('winston');
 const config = require('../utils/config');
@@ -12,9 +13,9 @@ const semver = require('semver');
   logger.error('Redis: ' + err.message);
 });     **/
 
-const LASTEST_DB_VERSION = '0.0.1';
-const DBVERSION_KEY = 'dbversion';
-let dbversion = null;
+const LASTEST_DB_VERSION: string = '0.0.1';
+const DBVERSION_KEY: string = 'dbversion';
+let dbversion: string = '';
 
 const connectionChecked = require('readyness').waitFor('database');
 
@@ -88,34 +89,34 @@ function checkConnection() {
 /**
  * simply map redis.set
  */
-exports.set = function (key, callback) {
+exports.set = function (key: string, callback: () => {}) {
   redis.set(key, callback);
 };
 
 /**
  * simply map redis.get
  */
-exports.get = function (key, callback) {
+exports.get = function (key: string, callback: () => {}) {
   redis.get(key, callback);
 };
 
 /**
  * simply map redis.hgetall
  */
-exports.getSet = function (key, callback) {
+exports.getSet = function (key: string, callback: () => {}) {
   redis.hgetall(key, callback);
 };
 
 /**
  * simply map redis.hmset
  */
-exports.setSet = function (key, callback) {
-  redis.hmset(key, callback);
+exports.setSet = function (key: string, value: {}, callback: () => {}) {
+  redis.hmset(key, value, callback);
 };
 
 
-exports.getJSON = function(key, callback) {
-  redis.get(key, function (error, result) {
+exports.getJSON = function(key: string, callback: () => {}) {
+  redis.get(key, function (error: {}, result: string) {
     var res_json = null;
     if (error) { logger.error('Redis getJSON: ' + key + ' e: ' + error, error); }
     if (! result) { return callback(error, res_json); }
@@ -137,9 +138,9 @@ exports.getJSON = function(key, callback) {
  * @param action function (key)
  * @param done function (error,count) called when done ..  with the count of "action" sent
  */
-exports.doOnKeysMatching = function(keyMask, action, done) {
+exports.doOnKeysMatching = function (keyMask: string, action: (Array<{}>) => {}, done: (err: ?{}, {}) => {}) {
 
-  redis.keys(keyMask, function (error, replies) {
+  redis.keys(keyMask, function (error: {}, replies: Array<{}>) {
     if (error) {
       logger.error('Redis getAllKeysMatchingValue: ' + keyMask + ' e: ' + error, error);
       return  done(error, 0);

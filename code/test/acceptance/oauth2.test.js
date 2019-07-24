@@ -21,7 +21,6 @@ const secret = config.get('ifttt:secret');
 
 const accessUrl =  config.get('pryv:access');
 
-// https://ifttt.com/developers/docs/protocol_reference#authentication-flow
 // https://platform.ifttt.com/docs/api_reference#service-authentication
 describe('oauth2', function () {
 
