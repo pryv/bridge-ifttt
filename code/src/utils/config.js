@@ -46,7 +46,8 @@ nconf.defaults({
   ifttt: {
     clientId: 'ifttt-all',
     secret: 'setInHeadsetConfig',
-    channelApiKey: 'setInHeadsetConfig'
+    channelApiKey: 'setInHeadsetConfig',
+    bridgeUrl: 'http://localhost', // override to https://ifttt.pryv.me
   },
   oauth: {
     secretPath: 'setElseWhere'

@@ -9,6 +9,7 @@ const accessUrl = config.get('pryv:access');
 
 const secretPath = config.get('oauth:secretPath');
 const domain = config.get('pryv:domain');
+const bridgeUrl = config.get('ifttt:bridgeUrl');
 
 module.exports = function setup(app) {
 
@@ -44,7 +45,7 @@ module.exports = function setup(app) {
 
 
   // Show them the exchange the bearer for a real token
-  app.post('/oauth2' + secretPath + '/token', function (req, res, next) {
+  app.post('/oauth2' + secretPath + '/token', async function (req, res, next) {
     const code = req.body.code;
     const client_id = req.body.client_id;
     const client_secret = req.body.client_secret;
@@ -69,25 +70,44 @@ module.exports = function setup(app) {
      * 2- get username / token from access
      */
 
-    request.get(accessUrl + '/' + code).end(function (error, response) {
-      if (response.body.status === 'ACCEPTED') {
+    let response;
+    try {
+      response = await request.get(accessUrl + '/' + code);
 
-        const username = response.body.username;
-        const pryvToken = response.body.token;
+      const username = response.body.username;
+      const pryvToken = response.body.token;
 
-        if ( response.body.username == null || response.body.token == null ) {
-          return next(PYError.internalError('token from access'));
-        }
-
-        const credentials = { urlEndpoint: buildUrl(username, domain), pryvToken: pryvToken};
-        const oauthToken = hat();
-
-        db.setSet(oauthToken, credentials);
-        return res.json({token_type: 'Bearer', access_token: oauthToken});
+      if (response.body.username == null || response.body.token == null) {
+        return next(PYError.internalError('token from access'));
       }
 
-      return next(PYError.invalidToken());
-    });
+      const urlEndpoint = buildUrl(username, domain);
+
+      const credentials = { urlEndpoint: urlEndpoint, pryvToken: pryvToken };
+      const oauthToken = hat();
+
+      response = await request.post(urlEndpoint + '/webhooks')
+        .set('Authorization', pryvToken)
+        .set('Content-Type', 'application/json')
+        .send({
+          url: bridgeUrl + '/webhooks?iftttToken=' + oauthToken
+        });
+
+
+      db.setSet(oauthToken, credentials);
+
+      return res.json({ token_type: 'Bearer', access_token: oauthToken });
+    } catch (error) {
+      if (
+        error.response != null &&
+        error.response.body != null &&
+        error.response.body.status != 'ACCEPTED'
+      ) {
+        return next(PYError.invalidToken());
+      }
+
+      return next(PYError.internalError('Error while talking with Pryv.io', '', error));
+    }
 
   });
 };

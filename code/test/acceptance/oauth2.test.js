@@ -4,12 +4,15 @@ const querystring = require('querystring');
 const assert = require('chai').assert;
 const url = require('url');
 const nock = require('nock');
+const bluebird = require('bluebird');
 
 const config = require('../../src/utils/config');
+const db = require('../../src/storage/database');
 
 require('../../src/server');
 require('readyness/wait/mocha');
 
+const domain = config.get('pryv:domain');
 const serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 const secretPath =  config.get('oauth:secretPath');
 const channelSlug = 'pryv';  // set on ifttt used in   https://ifttt.com/channels/{{channel-slug}}/
@@ -58,18 +61,28 @@ describe('oauth2', function () {
 
     describe('Valid token exchange', function () {
 
+      const pryvToken = 'chsow0uiu003dwxwko726x731';
+      const username = 'perkikiki';
+
+      let webhookUrl;
       before(function () {
         nock(accessUrl)
           .get('/access/EeZiDfLkTPJJ7l3o')
           .reply(200, {
             status: 'ACCEPTED',
-            username: 'perkikiki',
-            token: 'chsow0uiu003dwxwko726x731',
+            username: username,
+            token: pryvToken,
             code: 200
+          });
+        nock(buildUrl(username))
+          .post('/webhooks')
+          .reply(200, function (uri, reqBody) {
+            webhookUrl = JSON.parse(reqBody).url;
+            return {ok:1};
           });
       });
 
-      let res;
+      let res, iftttToken;
       before(function (done) {
         this.timeout(5000);
         const parameters = {
@@ -94,11 +107,35 @@ describe('oauth2', function () {
         assert.equal(res.body.token_type, 'Bearer');
         assert.exists(res.body['access_token']);
         assert.notExists(res.body['refresh_token']);
+        iftttToken = res.body['access_token'];
+      });
+      it('should store the IFTTT and Pryv tokens', async () => {
+        const creds = await bluebird.fromCallback(cb => db.getSet(iftttToken, cb ));
+        assert.exists(creds);
+        assert.equal(creds.urlEndpoint, buildUrl('perkikiki'));
+        assert.equal(creds.pryvToken, 'chsow0uiu003dwxwko726x731');
+      });
+      it('should create a webhook', function () {
+        assert.exists(webhookUrl);
+        assert.include(webhookUrl, iftttToken);
       });
     });
 
+    function buildUrl(username) {
+      return 'https://' + username + '.' + domain;
+    }
 
     describe('Invalid Token exchange', function () {
+
+      before(function () {
+        nock(accessUrl)
+          .get('/access/EeZiDfLkTPJJ7l3o')
+          .reply(403, {
+            status: 'REFUSED',
+            reasonID: 'nevermind',
+            message: 'doesntmatter',
+          });
+      });
 
       let res;
       before( function (done) {
