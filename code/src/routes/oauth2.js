@@ -75,10 +75,8 @@ module.exports = function setup(app) {
     let response;
     try {
       response = await request.get(accessUrl + '/' + code);
-
       const username = response.body.username;
       const pryvToken = response.body.token;
-
       if (response.body.username == null || response.body.token == null) {
         return next(PYError.internalError('token from access'));
       }
@@ -95,7 +93,6 @@ module.exports = function setup(app) {
           url: bridgeUrl + '/webhooks?iftttToken=' + oauthToken
         });
 
-
       db.setSet(oauthToken, credentials);
 
       return res.json({ token_type: 'Bearer', access_token: oauthToken });
@@ -107,7 +104,6 @@ module.exports = function setup(app) {
       ) {
         return next(PYError.invalidToken());
       }
-
       return next(PYError.internalError('Error while talking with Pryv.io', '', error));
     }
 

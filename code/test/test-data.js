@@ -11,6 +11,7 @@ module.exports = {
     id: 'ifttttest'
   },
   endpointAccess: {
+    username: 'ifttttest2',
     urlEndpoint: makeUrl('ifttttest2', domain),
     pryvToken: 'cjy8nr1xd00153xtul5acmfhh',
     oauthToken: 'OI2O98AHF9B',

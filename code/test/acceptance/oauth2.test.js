@@ -20,6 +20,12 @@ const clientId = config.get('ifttt:clientId');
 const secret = config.get('ifttt:secret');
 
 const accessUrl =  config.get('pryv:access');
+const accessURL = new url.URL(accessUrl);
+const accessHostname = accessURL.origin;
+const accessPath = accessURL.pathname;
+const code = 'EeZiDfLkTPJJ7l3o';
+
+const testData = require('../test-data');
 
 // https://platform.ifttt.com/docs/api_reference#service-authentication
 describe('oauth2', function () {
@@ -60,24 +66,18 @@ describe('oauth2', function () {
 
     describe('Valid token exchange', function () {
 
-      const pryvToken = 'chsow0uiu003dwxwko726x731';
-      const username = 'perkikiki';
+      const pryvToken = testData.endpointAccess.pryvToken;
+      const username = testData.endpointAccess.username;
+      const userEndpoint = testData.endpointAccess.urlEndpoint;
 
-      let webhookUrl;
       before(function () {
-        nock(accessUrl)
-          .get('/access/EeZiDfLkTPJJ7l3o')
+        nock(accessHostname)
+          .get(accessPath + '/' + code)
           .reply(200, {
             status: 'ACCEPTED',
             username: username,
             token: pryvToken,
             code: 200
-          });
-        nock(buildUrl(username))
-          .post('/webhooks')
-          .reply(200, function (uri, reqBody) {
-            webhookUrl = JSON.parse(reqBody).url;
-            return {ok:1};
           });
       });
 
@@ -86,7 +86,7 @@ describe('oauth2', function () {
         this.timeout(5000);
         const parameters = {
           grant_type: 'authorization_code',
-          code: 'EeZiDfLkTPJJ7l3o',
+          code: code,
           client_id: clientId,
           client_secret: secret,
           redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'
@@ -111,28 +111,30 @@ describe('oauth2', function () {
       it('should store the IFTTT and Pryv tokens', async () => {
         const creds = await bluebird.fromCallback(cb => db.getSet(iftttToken, cb ));
         assert.exists(creds);
-        assert.equal(creds.urlEndpoint, buildUrl('perkikiki'));
-        assert.equal(creds.pryvToken, 'chsow0uiu003dwxwko726x731');
+        assert.equal(creds.urlEndpoint, testData.endpointAccess.urlEndpoint);
+        assert.equal(creds.pryvToken, testData.endpointAccess.pryvToken);
       });
-      it('should create a webhook', function () {
-        assert.exists(webhookUrl);
-        assert.include(webhookUrl, iftttToken);
+      it('should create a webhook with the IFTTT token in URL query params', async function () {
+        const res = await request.get(userEndpoint + '/webhooks')
+          .set('Authorization', pryvToken);
+        const webhooks = res.body.webhooks;
+        let found = false;
+        webhooks.forEach(w => {
+          if (w.url.indexOf(iftttToken) > 0) found = true;
+        });
+        assert.isTrue(found);
       });
     });
-
-    function buildUrl(username) {
-      return 'https://' + username + '.' + domain;
-    }
 
     describe('Invalid Token exchange', function () {
 
       before(function () {
-        nock(accessUrl)
-          .get('/access/EeZiDfLkTPJJ7l3o')
+        nock(accessHostname)
+          .get(accessPath + '/' + code)
           .reply(403, {
             status: 'REFUSED',
             reasonID: 'nevermind',
-            message: 'doesntmatter',
+            message: 'doesntmatter'
           });
       });
 
@@ -141,7 +143,7 @@ describe('oauth2', function () {
         this.timeout(20000);
         const parameters = {
           grant_type: 'authorization_code',
-          code: 'EeZiDfLkTPJJ7l3o',
+          code: code,
           client_id: clientId,
           client_secret: secret,
           redirect_uri: 'https://ifttt.com/channels/' + channelSlug + '/authorize'
