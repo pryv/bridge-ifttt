@@ -8,7 +8,7 @@ var config = require('../../../utils/config.js');
 // - the lib-js to support / start / stop
 // - stream list should display singleActivities indicators
 
-
+// TODO include in next release
 module.exports = function setup(app) {
   var actionPath = versionPath + 'actions/start-stop-activity';
 

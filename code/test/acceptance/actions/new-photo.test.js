@@ -1,9 +1,9 @@
 /*global describe, before, it */
-var config = require('../../../src/utils/config'),
-  db = require('../../../src/storage/database'),
-  request = require('superagent');
+const config = require('../../../src/utils/config');
+const db = require('../../../src/storage/database');
+const request = require('superagent');
 
-var testData = require('../../test-data.js');
+const testData = require('../../test-data.js');
 
 require('../../../src/server');
 
@@ -11,7 +11,7 @@ require('readyness/wait/mocha');
 
 require('should');
 
-var serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
+const serverBasePath = 'http://' + config.get('http:ip') + ':' + config.get('http:port');
 
 describe('/actions/new-photo/', function () {
   this.timeout(5000);

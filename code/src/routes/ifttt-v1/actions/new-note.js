@@ -1,5 +1,5 @@
-var PYError = require('../../../errors/PYError.js');
-var md = require('to-markdown');
+const PYError = require('../../../errors/PYError.js');
+const md = require('to-markdown');
 
 module.exports = function setup(app) {
   require('./new-event-generic').setup(app, 'new-note', function (event, actionFields, done) {

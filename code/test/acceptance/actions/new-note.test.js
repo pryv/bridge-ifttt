@@ -190,7 +190,7 @@ describe('/actions/new-note/', function () {
     });
     
     it('POST strip tag if too long', function (done) {
-      var bigTag = new Array(600).join('a');
+      const bigTag = new Array(600).join('a');
       request.post(serverBasePath + '/ifttt/v1/actions/new-note')
         .set('Authorization', 'Bearer ' + testData.userAccess.oauthToken).send(
         { actionFields: {
@@ -205,13 +205,13 @@ describe('/actions/new-note/', function () {
           res.body.data.should.be.an.instanceof(Array);
           res.body.data[0].should.have.property('id');
         
-          var connection = new pryv.Connection({
+          const connection = new pryv.Connection({
             username: testData.userAccess.username,
             auth: testData.userAccess.pryvToken,
             domain: config.get('pryv:domain')
           });
           
-          var filter = new pryv.Filter({id: res.body.data[0].id});
+          const filter = new pryv.Filter({id: res.body.data[0].id});
           connection.events.get(filter, function (err, events) {
             should.not.exist(err);
             should.exist(events[0]);

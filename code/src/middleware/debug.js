@@ -1,10 +1,10 @@
-
+// @flow
 const debug = require('../utils/debug.js');
 const config = require('../utils/config.js');
 /**
  * Tiny middleware to monitor queries.
  */
-module.exports = function (req, res, next) {
+module.exports = function (req: express$Request, res: express$Response, next: express$NextFunction) {
 
   if (! config.get('debug:shushReqUrlLog')) {
     console.log(new Date().toString(), req.url);

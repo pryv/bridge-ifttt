@@ -10,13 +10,9 @@ const PYError = require('../errors/PYError');
 const channelServiceKey: string = config.get('ifttt:channelApiKey');
 const realtimeApiEndpoint: string = config.get('ifttt:realtimeApiUrlEndpoint');
 
-type Credentials = {
-  username: string,
-  urlEndpoint: string,
-  pryvToken: string
-};
+import type { Credentials } from '../types';
 
-module.exports = function setup(app) {
+module.exports = function setup(app: express$Application) {
 
   app.post('/webhooks', async (req, res, next) => {
 
@@ -54,10 +50,10 @@ module.exports = function setup(app) {
   });
 };
 
-function missingToken(req) {
+function missingToken(req: express$Request) {
   return req.query == null || req.query.iftttToken == null;
 }
-function invalidType(token) {
+function invalidType(token: string) {
   if (typeof token != 'string') return true;
   if (token.length < 1 || token.length > 128) return true;
   return false;

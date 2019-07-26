@@ -1,7 +1,7 @@
 
-var PYError = require('../../../errors/PYError.js');
-var generic = require('./new-event-generic');
-var dataTypesHandlers = require('../../../fields/data-type');
+const PYError = require('../../../errors/PYError.js');
+const generic = require('./new-event-generic');
+const dataTypesHandlers = require('../../../fields/data-type');
 
 module.exports = function setup(app) {
   addStaticRoute(app, 'new-numerical-basic', dataTypesHandlers.basic);

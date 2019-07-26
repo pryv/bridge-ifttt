@@ -1,3 +1,5 @@
+// @flow
+
 const express = require('express');
 const bodyParser  = require('body-parser');
 
@@ -5,11 +7,11 @@ module.exports = function () {
 
   // init app
 
-  const app = express();
+  const app: express$Application = express();
   app.disable('x-powered-by');
 
   // support empty application/json request
-  app.use(function (req, res, next) {
+  app.use(function (req: express$Request, res: express$Response, next: express$NextFunction) {
     if (req.headers['content-type'] === 'application/json') {
       if (+req.headers['content-length'] === 0) {
         req._body = true; // skip body parser

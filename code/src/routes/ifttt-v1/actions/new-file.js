@@ -1,4 +1,4 @@
-var PYError = require('../../../errors/PYError.js');
+const PYError = require('../../../errors/PYError.js');
 
 module.exports = function setup(app) {
   require('./new-event-generic').setup(app, 'new-file', function (event, actionFields, done) {

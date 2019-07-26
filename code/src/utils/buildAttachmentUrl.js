@@ -1,14 +1,12 @@
+// @flow
+
 const url = require('url');
 
-module.exports = function (pyConn, event, attachment) {
+import type { PryvConnection, Event, Attachment } from '../types';
+
+module.exports = function(pyConn: PryvConnection, event: Event, attachment: Attachment) {
   return url.resolve(
-    'https://',
-    pyConn.urlEndpoint,
-    '/events/',
-    event.id,
-    '/',
-    attachment.id,
-    '?readToken=',
-    attachment.readToken
+    'https://' + pyConn.urlEndpoint,
+    '/events/' + event.id + '/' + attachment.id + '?readToken=' + attachment.readToken
   );
 };

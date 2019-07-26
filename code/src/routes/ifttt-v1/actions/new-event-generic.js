@@ -13,7 +13,7 @@ const createWithAttachment = require('../../../utils/createWithAttachment');
  * @param {Function} doFunction function(req, res, next)
  */
 exports.addOption = function (app, optionKey, route, doFunction) {
-  var optionPath = versionPath + 'actions/' + route + '/fields/' + optionKey + '/options';
+  const optionPath = versionPath + 'actions/' + route + '/fields/' + optionKey + '/options';
   //console.log(optionPath);
   app.post(optionPath, doFunction);
 };
@@ -25,7 +25,7 @@ exports.addOption = function (app, optionKey, route, doFunction) {
  * @param {Function} map function(pryvConnection, responseBody)
  */
 exports.setup = function setup(app, route, mapFunction) {
-  var triggerPath = versionPath + 'actions/' + route;
+  const triggerPath = versionPath + 'actions/' + route;
 
   app.post(triggerPath + '/fields/streamId/options',
     require('../../../fields/stream').optionsStrict);

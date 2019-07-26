@@ -1,6 +1,10 @@
+// @flow
+
 const request = require('superagent');
 
-module.exports = function (pyConn, event, data, options, callback) {
+import type { PryvConnection, Event } from '../types'; 
+
+module.exports = function (pyConn: PryvConnection, event: Event, data: {}, options: {}, callback: () => void): void {
 
   request
     .post(pyConn.urlEndpoint + '/events')

@@ -1,3 +1,5 @@
+// @flow
+
 const config = require('./utils/config');
 const logger = require('winston');
 const version = require('../../package.json').version;
@@ -11,7 +13,7 @@ if (config.get('airbrake:disable') !== true) {
 const ready = require('readyness');
 ready.setLogger(logger.info);
 
-const app = require('./app')();
+const app: express$Application = require('./app')();
 const server = require('http').createServer(app);
 
 const appListening = ready.waitFor('IFTTT Bridge v' + version + ' in ' + app.settings.env +

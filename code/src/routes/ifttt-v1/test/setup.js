@@ -1,7 +1,7 @@
-var PYError = require('../../../errors/PYError.js');
+const PYError = require('../../../errors/PYError.js');
 
-var db = require('../../../storage/database');
-var testData = require('../../../../test/test-data.js');
+const db = require('../../../storage/database');
+const testData = require('../../../../test/test-data.js');
 
 /**
  * https://ifttt.com/developers/docs/channel_testing
@@ -18,7 +18,7 @@ module.exports = function setup(app) {
     db.setSet(testData.userAccess.oauthToken, testData.userAccess);
 
 
-    var response = {
+    const response = {
       data: {
         accessToken: testData.userAccess.oauthToken,
         samples: {

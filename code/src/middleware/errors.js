@@ -1,4 +1,5 @@
-/*jshint unused:false */
+// @flow
+
 /**
  * Error route handling.
  */
@@ -7,8 +8,8 @@ const PYError = require('../errors/PYError');
 const logger = require('winston');
 
 
-module.exports = function handleError(error, req, res, next) {
-  var pyError = null;
+module.exports = function handleError(error: Error, req: express$Request, res: express$Response, next: express$NextFunction) {
+  let pyError = null;
   if (error instanceof PYError) {
     pyError = error;
   } else {

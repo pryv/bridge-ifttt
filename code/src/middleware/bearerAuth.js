@@ -1,15 +1,14 @@
-
+// @flow
 const PYError = require('../errors/PYError.js');
 const db = require('../storage/database.js');
-
-const url = require('url');
 const config = require('../utils/config');
-const pryv = require('pryv');
 
-const channelApiKey = config.get('ifttt:channelApiKey');
-const domain = config.get('pryv:domain');
+const channelApiKey: string = config.get('ifttt:channelApiKey');
+const domain: string = config.get('pryv:domain');
 
-module.exports =  function (req, res, next) {
+import type { Credentials } from '../types';
+
+module.exports = function (req: express$Request, res: express$Response, next: express$NextFunction) {
 
   if (! req.get('Authorization')) {
     //---- test related part
@@ -21,11 +20,11 @@ module.exports =  function (req, res, next) {
     }
     return next();
   } else {
-    var authorizationHeader = req.get('Authorization').split(' ');
+    const authorizationHeader = req.get('Authorization').split(' ');
     if (authorizationHeader.length !== 2) {
       return next(PYError.authentificationRequired('Authorization header bad number of arguments'));
     }
-    var oauthToken = authorizationHeader[1];
+    const oauthToken = authorizationHeader[1];
 
 
     if (authorizationHeader[0] !== 'Bearer' || !oauthToken) {
@@ -34,7 +33,7 @@ module.exports =  function (req, res, next) {
 
     //--- end of test related part
 
-    db.getSet(oauthToken, function (error, credentials) {
+    db.getSet(oauthToken, function (error: Error, credentials: Credentials) {
       if (error) {
         return next(PYError.internalError('Database error', '', error));
       }

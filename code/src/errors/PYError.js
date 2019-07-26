@@ -1,6 +1,8 @@
-var util = require('util');
+// @flow
 
-var SHUSHLOG = require('../../src/utils/config').get('debug:shushPYInternalErrorLog');
+const util = require('util');
+
+const SHUSHLOG = require('../../src/utils/config').get('debug:shushPYInternalErrorLog');
 
 /**
  * The constructor to use for all errors within the API.
@@ -10,7 +12,7 @@ var SHUSHLOG = require('../../src/utils/config').get('debug:shushPYInternalError
  * @param {String} message
  * @param {Object} details
  */
-var PYError = module.exports = function (status, message, details) {
+const PYError = module.exports = function (status: number, message: string, details: string) {
   PYError.super_.call(this);
 
   this.status = status;
@@ -19,17 +21,17 @@ var PYError = module.exports = function (status, message, details) {
 
 };
 
-PYError.authentificationRequired = function (message, detail) {
+PYError.authentificationRequired = function (message: string, detail: string) {
   return new PYError(401, 'Authentification required: ' + message, detail);
 };
 
-PYError.invalidToken = function (message, detail) {
+PYError.invalidToken = function (message: string, detail: string) {
   return new PYError(401, 'Invalid token: ' + message, detail);
 };
 
-PYError.internalError = function (message, detail, errorForInternalUsage) {
-  var e = new Error('Internal Error');
-  var stack = e.stack.replace(/^[^\(]+?[\n$]/gm, '')
+PYError.internalError = function (message: string, detail: string, errorForInternalUsage: Error) {
+  const e: Error = new Error('Internal Error');
+  const stack = e.stack.replace(/^[^\(]+?[\n$]/gm, '')
     .replace(/^\s+at\s+/gm, '')
     .replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@')
     .split('\n');
@@ -39,7 +41,7 @@ PYError.internalError = function (message, detail, errorForInternalUsage) {
   return new PYError(500, 'Internal Error: ' + message, detail);
 };
 
-PYError.contentError = function (message, detail) {
+PYError.contentError = function (message: string, detail: string) {
   return new PYError(400, 'Content Error: ' + message, detail);
 };
 

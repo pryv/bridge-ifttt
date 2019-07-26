@@ -9,8 +9,8 @@ const semver = require('semver');
 
 //redis error management
 /**
- redis.on('error', function (err) {
-  logger.error('Redis: ' + err.message);
+ * redis.on('error', function (err) {
+ * logger.error('Redis: ' + err.message);
 });     **/
 
 const LASTEST_DB_VERSION: string = '0.0.1';
@@ -36,7 +36,7 @@ function checkConnection() {
   // do not remove, 'wactiv.server' is use by tests
   async.series([
     function (nextStep) { // check db exits
-      //var user = { id: 0, email: 'wactiv@pryv.io' };
+      //const user = { id: 0, email: 'wactiv@pryv.io' };
       //exports.setServerAndInfos('wactiv', config.get('dns:domain'), user, nextStep);
 
 
@@ -110,14 +110,14 @@ exports.getSet = function (key: string, callback: () => {}) {
 /**
  * simply map redis.hmset
  */
-exports.setSet = function (key: string, value: {}, callback: () => {}) {
+exports.setSet = function (key: string, value: {}, callback?: () => {}) {
   redis.hmset(key, value, callback);
 };
 
 
-exports.getJSON = function(key: string, callback: () => {}) {
+exports.getJSON = function(key: string, callback: (err: ?Error, res_json: ?{}) => {}) {
   redis.get(key, function (error: {}, result: string) {
-    var res_json = null;
+    let res_json: ?{} = null;
     if (error) { logger.error('Redis getJSON: ' + key + ' e: ' + error, error); }
     if (! result) { return callback(error, res_json); }
     try {
@@ -140,12 +140,12 @@ exports.getJSON = function(key: string, callback: () => {}) {
  */
 exports.doOnKeysMatching = function (keyMask: string, action: (Array<{}>) => {}, done: (err: ?{}, {}) => {}) {
 
-  redis.keys(keyMask, function (error: {}, replies: Array<{}>) {
+  redis.keys(keyMask, function (error: ?Error, replies: Array<{}>) {
     if (error) {
       logger.error('Redis getAllKeysMatchingValue: ' + keyMask + ' e: ' + error, error);
       return  done(error, 0);
     }
-    var i, len;
+    let i, len;
     for (i = 0, len = replies.length; i < len; i++) {
       action(replies[i]);
     }

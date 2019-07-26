@@ -7,16 +7,16 @@ const request = require('superagent');
 const hat = require('hat');
 
 
-const accessUrl = config.get('pryv:access');
+const accessUrl: string = config.get('pryv:access');
 
-const secretPath = config.get('oauth:secretPath');
-const domain = config.get('pryv:domain');
-const bridgeUrl = config.get('ifttt:bridgeUrl');
+const secretPath: string = config.get('oauth:secretPath');
+const domain: string = config.get('pryv:domain');
+const bridgeUrl: string = config.get('ifttt:bridgeUrl');
 
-module.exports = function setup(app) {
+module.exports = function setup(app: express$Application) {
 
   // Show them the "do you authorise xyz app to access your content?" page
-  app.get('/oauth2/authorise', function (req, res, next) {
+  app.get('/oauth2/authorise', function (req: express$Request, res: express$Response, next: express$NextFunction) {
     const parameters = {
       //sso: req.signedCookies.sso,
       requestingAppId: req.query.client_id,
@@ -47,7 +47,7 @@ module.exports = function setup(app) {
 
 
   // Show them the exchange the bearer for a real token
-  app.post('/oauth2' + secretPath + '/token', async function (req, res, next) {
+  app.post('/oauth2' + secretPath + '/token', async function (req: express$Request, res: express$Response, next: express$NextFunction) {
     const code = req.body.code;
     const client_id = req.body.client_id;
     const client_secret = req.body.client_secret;
@@ -110,6 +110,6 @@ module.exports = function setup(app) {
   });
 };
 
-function buildUrl(username, domain) {
+function buildUrl(username: string, domain: string) {
   return 'https://' + username + '.' + domain;
 }

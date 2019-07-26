@@ -1,22 +1,15 @@
-// Dependencies
+// @flow
 
-var logger = require('winston');
-var fs = require('fs');
-var nconf = require('nconf');
-
-// Exports
+const logger = require('winston');
+const fs = require('fs');
+const nconf = require('nconf');
 
 module.exports = nconf;
-
-
-//Setup nconf to use (in-order): 
-//1. Command-line arguments
-//2. Environment variables
 
 nconf.argv()
   .env();
 
-var  configFile = null;
+let configFile: ?string = null;
 
 /// /3. A file located at ..
 if (typeof(nconf.get('config')) !== 'undefined') {
@@ -24,16 +17,16 @@ if (typeof(nconf.get('config')) !== 'undefined') {
 }
 
 
-if (fs.existsSync(configFile)) {
+if (configFile != null && fs.existsSync(configFile) != null) {
   configFile = fs.realpathSync(configFile);
   logger.info('using custom config file: ' + configFile);
 } else {
-  if (configFile) {
+  if (configFile != null) {
     logger.error('Cannot find custom config file: ' + configFile);
   }
 }
 
-if (configFile) {
+if (configFile != null) {
   nconf.file({ file: configFile});
 }
 
