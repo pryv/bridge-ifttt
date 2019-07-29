@@ -12,7 +12,7 @@ nconf.argv()
 let configFile: ?string = null;
 
 /// /3. A file located at ..
-if (typeof(nconf.get('config')) !== 'undefined') {
+if (nconf.get('config') != null) {
   configFile = nconf.get('config');
 }
 

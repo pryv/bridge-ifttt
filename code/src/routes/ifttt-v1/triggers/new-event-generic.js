@@ -73,7 +73,6 @@ exports.setup = function (app, route, dataType, mapFunction) {
 
     //-- skip
     if (filterLike.limit === 0) {
-      console.log('limit === 0');
       return res.send({data : []});
     }
 
@@ -83,7 +82,7 @@ exports.setup = function (app, route, dataType, mapFunction) {
       .query(filterLike)
       .end(function (error, response) {
         
-        if (error) { 
+        if (error != null) { 
           return next(PYError.internalError('Failed fetching events', error)); 
         }
   
@@ -121,10 +120,8 @@ exports.setup = function (app, route, dataType, mapFunction) {
               event.pyConn = pyConn;
 
               //-- add extra informations
-              mapFunction(event, eventData, triggerFields);
-              if (eventData.FileURL != null) {
-                data.push(eventData);
-              }
+              mapFunction(event, eventData);
+              data.push(eventData);
             }
           });
           if (config.get('debug:newEventTrigger')) {

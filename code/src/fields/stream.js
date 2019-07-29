@@ -49,7 +49,7 @@ function streams(req: express$Request, res: express$Response, next: express$Next
     addStreams(0, streamsArray);
 
     if (config.get('debug:fieldsStreams') != null) {
-      console.log(result);
+      //console.log(result);
     }
     res.json(result);
   });

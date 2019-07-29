@@ -4,6 +4,7 @@ const db = require('../../../src/storage/database');
 const request = require('superagent');
 const constants = require('../../../src/utils/constants');
 const _ = require('lodash');
+const assert = require('chai').assert;
 
 const testData = require('../../test-data.js');
 
@@ -57,11 +58,13 @@ describe('/triggers/new-note/', function () {
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
 
+          const data = res.body.data;
+          assert.isAbove(data.length, 0);
+
           res.body.data.forEach(function (event) {
             event.should.have.property('meta');
             event.meta.should.have.property('id');
             event.meta.should.have.property('timestamp');
-
             event.should.have.property('StreamName');
             event.should.have.property('AtTime'); // TODO test iso format
             event.should.have.property('Tags');
@@ -83,6 +86,9 @@ describe('/triggers/new-note/', function () {
           res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
+
+          const data = res.body.data;
+          assert.isAbove(data.length, 0);
 
           res.body.data.forEach(function (event) {
             event.should.have.property('meta');
@@ -110,6 +116,9 @@ describe('/triggers/new-note/', function () {
           res.status.should.equal(200);
           res.body.should.have.property('data');
           res.body.data.should.be.an.instanceof(Array);
+
+          const data = res.body.data;
+          assert.isAbove(data.length, 0);
 
           res.body.data.forEach(function (event) {
             event.should.have.property('meta');

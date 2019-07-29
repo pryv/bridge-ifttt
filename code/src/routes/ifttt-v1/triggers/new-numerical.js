@@ -11,7 +11,9 @@ module.exports = function setup(app) {
 
   generic.setup(app, slug,
     function (triggerFields) { //--- dataType
-      if (triggerFields.eventType && typeof triggerFields.eventType === 'string') {
+      if (
+        triggerFields.eventType != null && 
+        typeof triggerFields.eventType === 'string') {
         return [triggerFields.eventType];
       }
       return null;
@@ -22,7 +24,6 @@ module.exports = function setup(app) {
 
       map.UnitName = res[0];
       map.UnitSymbol = res[1] || '';
-      return true;
     });
 };
 

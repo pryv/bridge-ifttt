@@ -3,6 +3,7 @@ const config = require('../../../src/utils/config');
 const db = require('../../../src/storage/database');
 const request = require('superagent');
 const testData = require('../../test-data.js');
+const assert = require('chai').assert;
 
 require('../../../src/server');
 
@@ -39,8 +40,11 @@ describe('/triggers/new-numerical/', function () {
         .end(function (err, res) {
           res.status.should.equal(200);
           res.body.should.have.property('data');
-          res.body.data.should.be.an.instanceof(Array);
-          //console.log(res.body.data);
+
+          const data = res.body.data;
+          data.should.be.an.instanceof(Array);
+          assert.isAbove(data.length, 0);
+          
           done();
         });
     });
@@ -72,7 +76,9 @@ describe('/triggers/new-numerical/', function () {
         .end(function (err, res) {
           res.status.should.equal(200);
           res.body.should.have.property('data');
-          res.body.data.should.be.an.instanceof(Array);
+          const data = res.body.data;
+          data.should.be.an.instanceof(Array);
+          assert.isAbove(data.length, 0);
 
           res.body.data.forEach(function (event) {
             event.should.have.property('meta');
@@ -89,8 +95,6 @@ describe('/triggers/new-numerical/', function () {
             event.UnitName.should.eql('Kilograms');
 
           });
-
-          //console.log(res.body.data);
           done();
         });
     });
