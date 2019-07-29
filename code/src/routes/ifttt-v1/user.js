@@ -13,15 +13,19 @@ module.exports = function setup(app) {
     } else {
       if (pryvCredentials.urlEndpoint != null) {
         return res.json({
-          name: pryvCredentials.urlEndpoint,
-          id: pryvCredentials.urlEndpoint,
-          url: pryvCredentials.urlEndpoint,
+          data: {
+            name: pryvCredentials.urlEndpoint,
+            id: pryvCredentials.urlEndpoint,
+            url: pryvCredentials.urlEndpoint,
+          }
         });
       } else {
         return res.json({
-          name: pryvCredentials.username,
-          id: pryvCredentials.username,
-          url: 'https://' + pryvCredentials.username + '.' + domain
+          data: {
+            name: pryvCredentials.username,
+            id: pryvCredentials.username,
+            url: 'https://' + pryvCredentials.username + '.' + domain
+          }
         });
       }
     }

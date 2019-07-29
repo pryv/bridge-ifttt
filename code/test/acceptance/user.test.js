@@ -46,10 +46,10 @@ describe('userinfo', function () {
           .get(userInfoPath)
           .set('Authorization', 'Bearer ' + user1.oauthToken);
         const status = res.status;
-        const body = res.body;
+        const user = res.body.data;
 
         assert.equal(status, 200);
-        assert.deepEqual(body, _.pick(user1, [
+        assert.deepEqual(user, _.pick(user1, [
           'id',
           'name',
           'url'
@@ -64,10 +64,10 @@ describe('userinfo', function () {
           .get(userInfoPath)
           .set('Authorization', 'Bearer ' + user2.oauthToken);
         const status = res.status;
-        const body = res.body;
+        const user = res.body.data;
 
         assert.equal(status, 200);
-        assert.deepEqual(body, _.pick(user2, [
+        assert.deepEqual(user, _.pick(user2, [
           'id',
           'name',
           'url'
