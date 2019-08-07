@@ -1,4 +1,4 @@
-const PYError = require('../../errors/PYError.js');
+const errors = require('../../errors/factory');
 
 const config = require('../../utils/config');
 const domain = config.get('pryv:domain');
@@ -9,7 +9,7 @@ module.exports = function setup(app) {
   app.get('/ifttt/v1/user/info', function (req, res, next) {
     const pryvCredentials = req.pryvCredentials;
     if (! pryvCredentials) {
-      return next(PYError.contentError('No authorization token'));
+      return next(errors.contentError('No authorization token'));
     } else {
       if (pryvCredentials.urlEndpoint != null) {
         return res.json({

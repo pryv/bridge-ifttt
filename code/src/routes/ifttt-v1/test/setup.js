@@ -1,7 +1,7 @@
-const PYError = require('../../../errors/PYError.js');
+const errors = require('../../../errors/factory');
 
 const db = require('../../../storage/database');
-const testData = require('../../../../test/test-data.js');
+const testData = require('../../../../test/test-data');
 
 /**
  * https://ifttt.com/developers/docs/channel_testing
@@ -12,7 +12,7 @@ module.exports = function setup(app) {
   // Show the current server status
   app.post('/ifttt/v1/test/setup', function (req, res, next) {
     if (!req.iftttAuthorized) {
-      return next(PYError.authentificationRequired('Auth key missing or invalid'));
+      return next(errors.authentificationRequired('Auth key missing or invalid'));
     }
 
     db.setSet(testData.userAccess.oauthToken, testData.userAccess);

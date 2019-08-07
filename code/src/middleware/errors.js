@@ -4,17 +4,18 @@
  * Error route handling.
  */
 
+const errors = require('../errors/factory');
 const PYError = require('../errors/PYError');
 const logger = require('winston');
 
 
-module.exports = function handleError(error: Error, req: express$Request, res: express$Response, next: express$NextFunction) {
-  let pyError = null;
+module.exports = function handleError(error: Error, req: express$Request, res: express$Response, next: ?express$NextFunction) {
+  let errs = null;
   if (error instanceof PYError) {
-    pyError = error;
+    errs = error;
   } else {
-    pyError = PYError.internalError('UnamedPYError', '', error);
+    errs = errors.internalError('Unamed PYError', '', error);
   }
-  //logger.error(pyError, pyError.detail, error);
-  res.status(pyError.status).json({ errors: [ { message: pyError.message }]});
+  //logger.error(errors, errors.detail, error);
+  res.status(errs.status).json({ errors: [ { message: errs.message }]});
 };

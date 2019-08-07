@@ -1,9 +1,9 @@
 // @flow
 
-const PYError = require('../errors/PYError.js');
-const cache = require('../storage/cache.js');
-const constants =  require('../utils/constants.js');
-const config = require('../utils/config.js');
+const errors = require('../errors/factory');
+const cache = require('../storage/cache');
+const constants =  require('../utils/constants');
+const config = require('../utils/config');
 
 import type { Stream } from '../types';
 
@@ -25,7 +25,7 @@ exports.optionsStrict = function (req: express$Request, res: express$Response, n
 function streams(req: express$Request, res: express$Response, next: express$NextFunction, all: boolean) {
   all = all || false;
 
-  if (! req.pryvConnection) { return next(PYError.authentificationRequired()); }
+  if (! req.pryvConnection) { return next(errors.authentificationRequired()); }
 
   const result = { data : [ ] };
   if (all) {
@@ -44,7 +44,7 @@ function streams(req: express$Request, res: express$Response, next: express$Next
 
   cache.getStreams(req.pryvConnection, function (error: ?Error, streamsArray: ?Array<Stream>): void {
     if (error != null) {
-      return next(PYError.internalError('Failed fetching streams', '', error));
+      return next(errors.internalError('Failed fetching streams', '', error));
     }
     addStreams(0, streamsArray);
 

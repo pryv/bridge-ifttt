@@ -1,4 +1,4 @@
-const PYError = require('../../errors/PYError.js');
+const errors = require('../../errors/factory');
 
 
 module.exports = function setup(app) {
@@ -8,7 +8,7 @@ module.exports = function setup(app) {
   app.get('/ifttt/v1/status', function (req, res, next) {
 
     if (!req.iftttAuthorized) {
-      return next(PYError.authentificationRequired('Auth key missing or invalid'));
+      return next(errors.authentificationRequired('Auth key missing or invalid'));
     }
 
     res.send('');

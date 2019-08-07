@@ -1,9 +1,9 @@
-const PYError = require('../../../errors/PYError.js');
-const constants = require('../../../utils/constants.js');
-const cache = require('../../../storage/cache.js');
+const errors = require('../../../errors/factory');
+const constants = require('../../../utils/constants');
+const cache = require('../../../storage/cache');
 const logger = require('winston');
 const versionPath = '/ifttt/v1/';
-const config = require('../../../utils/config.js');
+const config = require('../../../utils/config');
 
 const request = require('superagent');
 
@@ -34,7 +34,7 @@ exports.setup = function (app, route, dataType, mapFunction) {
 
   app.post(triggerPath, function (req, res, next) {
     
-    if (! req.pryvConnection) { return next(PYError.authentificationRequired()); }
+    if (! req.pryvConnection) { return next(errors.authentificationRequired()); }
     const pyConn = req.pryvConnection;
 
     const body = req.body;
@@ -49,7 +49,7 @@ exports.setup = function (app, route, dataType, mapFunction) {
     }
 
     if (! body.triggerFields) {
-      return next(PYError.contentError('No triggerFields'));
+      return next(errors.contentError('No triggerFields'));
     }
     const triggerFields = body.triggerFields;
 
@@ -57,14 +57,14 @@ exports.setup = function (app, route, dataType, mapFunction) {
 
       filterLike.types = dataType(triggerFields);
       if (! filterLike.types) {
-        return next(PYError.contentError('Cannot determine dataType (eventType)'));
+        return next(errors.contentError('Cannot determine dataType (eventType)'));
       }
     } else {
       filterLike.types = [dataType];
     }
 
     if ( triggerFields.streamId == null ) {
-      return next(PYError.contentError('No StreamId'));
+      return next(errors.contentError('No StreamId'));
     }
 
     if (triggerFields.streamId !== constants.ANY_STREAMS) {
@@ -83,7 +83,7 @@ exports.setup = function (app, route, dataType, mapFunction) {
       .end(function (error, response) {
         
         if (error != null) { 
-          return next(PYError.internalError('Failed fetching events', error)); 
+          return next(errors.internalError('Failed fetching events', error)); 
         }
   
         const eventsArray = response.body.events;
@@ -91,7 +91,7 @@ exports.setup = function (app, route, dataType, mapFunction) {
         // -- get the streamsMap for the names
         cache.getStreamsMap(req.pryvConnection, function (error, streamMap) {
           if (error != null) {
-            return next(PYError.internalError('Failed fetching streams from cache', error));
+            return next(errors.internalError('Failed fetching streams from cache', error));
           }
 
           const data = [];  // will be sent

@@ -1,5 +1,5 @@
 
-const PYError = require('../../../errors/PYError.js');
+const errors = require('../../../errors/factory');
 const generic = require('./new-event-generic');
 const dataTypesHandlers = require('../../../fields/data-type');
 
@@ -14,18 +14,18 @@ function addStaticRoute(app, route, dataTypesHandler) {
 
   generic.setup(app, route, function (event, actionFields, done) {
     if (! actionFields.eventType) {
-      return done(PYError.contentError('missing actionFields.eventType'));
+      return done(errors.contentError('missing actionFields.eventType'));
     }
     event.type = actionFields.eventType;
 
     if (typeof actionFields.numericalValue === 'undefined') {
-      return done(PYError.contentError('missing numericalValue'));
+      return done(errors.contentError('missing numericalValue'));
     }
 
     // cast string to number
     event.content = actionFields.numericalValue * 1;
     if (isNaN(event.content)) {
-      return done(PYError.contentError('cannot cast value : "' + actionFields.numericalValue +
+      return done(errors.contentError('cannot cast value : "' + actionFields.numericalValue +
         '" to number'));
     }
 

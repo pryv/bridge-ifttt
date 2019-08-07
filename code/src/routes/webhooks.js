@@ -3,9 +3,9 @@ const bluebird = require('bluebird');
 const uuidv1 = require('uuid/v1');
 const request = require('superagent');
 
-const db = require('../storage/database.js');
+const db = require('../storage/database');
 const config = require('../utils/config');
-const PYError = require('../errors/PYError');
+const errors = require('../errors/factory');
 
 const channelServiceKey: string = config.get('ifttt:channelApiKey');
 const realtimeApiEndpoint: string = config.get('ifttt:realtimeApiUrlEndpoint');
@@ -17,16 +17,16 @@ module.exports = function setup(app: express$Application) {
   app.post('/webhooks', async (req, res, next) => {
 
     if (missingToken((req))) {
-      return next(PYError.authentificationRequired('eorrr'));
+      return next(errors.authentificationRequired('eorrr'));
     }
     const iftttToken: string = req.query.iftttToken;
     if (invalidType(iftttToken)) {
-      return next(PYError.invalidToken('awdnaiwn'));
+      return next(errors.invalidToken('awdnaiwn'));
     }
 
     const credentials: Credentials = await bluebird.fromCallback(cb => db.getSet(iftttToken, cb));
     if (credentials == null) {
-      return next(PYError.invalidToken('awdnaiwn'));
+      return next(errors.invalidToken('awdnaiwn'));
     }
 
     const payload = {

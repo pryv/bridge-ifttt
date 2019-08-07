@@ -1,10 +1,10 @@
-const PYError = require('../../../errors/PYError.js');
+const errors = require('../../../errors/factory');
 const md = require('to-markdown');
 
 module.exports = function setup(app) {
   require('./new-event-generic').setup(app, 'new-note', function (event, actionFields, done) {
     if (! actionFields.contentText) {
-      return done(PYError.contentError('Cannot find actionFields.contentText'));
+      return done(errors.contentError('Cannot find actionFields.contentText'));
     }
 
     event.type = 'note/txt';

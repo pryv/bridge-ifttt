@@ -1,6 +1,6 @@
 // @flow
-const PYError = require('../errors/PYError.js');
-const db = require('../storage/database.js');
+const errors = require('../errors/factory');
+const db = require('../storage/database');
 const config = require('../utils/config');
 
 const channelApiKey: string = config.get('ifttt:channelApiKey');
@@ -14,7 +14,7 @@ module.exports = function (req: express$Request, res: express$Response, next: ex
     //---- test related part
     if (req.get('IFTTT-Channel-Key')) {
       if (req.get('IFTTT-Channel-Key') !== channelApiKey) { //-- route /ifttt/v1/test/setup
-        return next(PYError.authentificationRequired('IFTTT-Channel-Key header bad content'));
+        return next(errors.authentificationRequired('IFTTT-Channel-Key header bad content'));
       }
       req.iftttAuthorized = true;
     }
@@ -22,25 +22,25 @@ module.exports = function (req: express$Request, res: express$Response, next: ex
   } else {
     const authorizationHeader = req.get('Authorization').split(' ');
     if (authorizationHeader.length !== 2) {
-      return next(PYError.authentificationRequired('Authorization header bad number of arguments'));
+      return next(errors.authentificationRequired('Authorization header bad number of arguments'));
     }
     const oauthToken = authorizationHeader[1];
 
 
     if (authorizationHeader[0] !== 'Bearer' || !oauthToken) {
-      return next(PYError.authentificationRequired('Authorization header bad content'));
+      return next(errors.authentificationRequired('Authorization header bad content'));
     }
 
     //--- end of test related part
 
     db.getSet(oauthToken, function (error: Error, credentials: Credentials) {
       if (error) {
-        return next(PYError.internalError('Database error', '', error));
+        return next(errors.internalError('Database error', '', error));
       }
       if (credentials == null ||
         (credentials.username == null && credentials.urlEndpoint == null)
       ) {
-        return next(PYError.invalidToken());
+        return next(errors.invalidToken());
       }
       
       if (credentials.urlEndpoint != null) {

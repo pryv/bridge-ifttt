@@ -1,7 +1,8 @@
-const PYError = require('../../../errors/PYError.js');
+const errors = require('../../../errors/factory');
+const PYError = require('../../../errors/PYError');
 const request = require('superagent');
 const versionPath = '/ifttt/v1/';
-const config = require('../../../utils/config.js');
+const config = require('../../../utils/config');
 
 const createWithAttachment = require('../../../utils/createWithAttachment');
 
@@ -32,17 +33,17 @@ exports.setup = function setup(app, route, mapFunction) {
 
   app.post(triggerPath, function (req, res, next) {
 
-    if (! req.pryvConnection) { return next(PYError.authentificationRequired()); }
+    if (! req.pryvConnection) { return next(errors.authentificationRequired()); }
     const pyConn = req.pryvConnection;
 
     if (! req.body.actionFields) {
-      return next(PYError.contentError('Cannot find actionFields'));
+      return next(errors.contentError('Cannot find actionFields'));
     }
 
     const actionFields = req.body.actionFields;
 
     if (! actionFields.streamId) {
-      return next(PYError.contentError('Cannot find actionFields.streamId'));
+      return next(errors.contentError('Cannot find actionFields.streamId'));
     }
 
 
@@ -52,7 +53,7 @@ exports.setup = function setup(app, route, mapFunction) {
 
     // --- description
     if (typeof actionFields.description === 'undefined') {
-      return next(PYError.contentError('Cannot find actionFields.description'));
+      return next(errors.contentError('Cannot find actionFields.description'));
     }
     actionFields.description = actionFields.description.trim();
     if (actionFields.description.length > 0) {
@@ -61,7 +62,7 @@ exports.setup = function setup(app, route, mapFunction) {
 
     // --- tags
     if (typeof actionFields.tags === 'undefined') {
-      return next(PYError.contentError('Cannot find actionFields.tags'));
+      return next(errors.contentError('Cannot find actionFields.tags'));
     }
     const tags = [];
     actionFields.tags.split(',').forEach(function (tag) {
@@ -129,7 +130,7 @@ exports.setup = function setup(app, route, mapFunction) {
         if (config.get('debug:newEventAction')) {
           console.log(error);
         }
-        return next(PYError.internalError('Failed creating event ', detailMsg, error));
+        return next(errors.internalError('Failed creating event ', detailMsg, error));
       }
       const event = response.body.event;
       const data = { data: [{ id: event.id }] };

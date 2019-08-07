@@ -116,7 +116,7 @@ exports.setSet = function (key: string, value: {}, callback?: () => {}) {
 
 
 exports.getJSON = function(key: string, callback: (err: ?Error, res_json: ?{}) => {}) {
-  redis.get(key, function (error: {}, result: string) {
+  redis.get(key, function (error: Error, result: string) {
     let res_json: ?{} = null;
     if (error) { logger.error('Redis getJSON: ' + key + ' e: ' + error, error); }
     if (! result) { return callback(error, res_json); }

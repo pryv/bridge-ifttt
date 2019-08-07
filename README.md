@@ -21,6 +21,7 @@ Useful commands while working with this project:
 | `yarn watch`                      | Transpiles code into dist         |
 | `yarn database`                   | Runs the redis server (port 7379) |
 | `yarn start`                      | Runs the IFTTT server             |
+| `yarn test`                       | Runs the test suite               |
 | `node_modules/.bin/eslint source` | ESLint check all of source        |
 
 Here are two aliases that might be useful during the work on this project: 

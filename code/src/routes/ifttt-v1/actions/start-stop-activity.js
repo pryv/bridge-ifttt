@@ -1,36 +1,37 @@
-//var pryv = require('pryv');
+// @flow
 
-var PYError = require('../../../errors/PYError.js');
+var errors = require('../../../errors/factory');
+const PYError = require('../../../errors/PYError');
 var versionPath = '/ifttt/v1/';
-var config = require('../../../utils/config.js');
+var config = require('../../../utils/config');
 
 // Draft
 // - the lib-js to support / start / stop
 // - stream list should display singleActivities indicators
 
 // TODO include in next release
-module.exports = function setup(app) {
+module.exports = function setup(app: Express$Application) {
   var actionPath = versionPath + 'actions/start-stop-activity';
 
   app.post(actionPath + '/fields/streamId/options',
     require('../../../fields/stream').optionsStrict);
 
   app.post(actionPath, function (req, res, next) {
-    if (! req.pryvConnection) { return next(PYError.authentificationRequired()); }
+    if (! req.pryvConnection) { return next(errors.authentificationRequired()); }
 
     if (! req.body.actionFields) {
-      return next(PYError.contentError('Cannot find actionFields'));
+      return next(errors.contentError('Cannot find actionFields'));
     }
 
     var actionFields = req.body.actionFields;
 
     if (! actionFields.streamId) {
-      return next(PYError.contentError('Cannot find actionFields.streamId'));
+      return next(errors.contentError('Cannot find actionFields.streamId'));
     }
 
 
     if (! actionFields.action || ['start', 'stop'].indexOf(actionFields.action) < 0) {
-      return next(PYError.contentError('Cannot find (or invalid) actionFields.action'));
+      return next(errors.contentError('Cannot find (or invalid) actionFields.action'));
     }
 
 
@@ -68,7 +69,7 @@ module.exports = function setup(app) {
         if (error instanceof PYError) {
           return next(error);
         }
-        return next(PYError.internalError('Failed creating event '));
+        return next(errors.internalError('Failed creating event '));
       }
       var data = {data: [ {id: event.id} ]};
       if (config.get('debug:newEventAction')) {

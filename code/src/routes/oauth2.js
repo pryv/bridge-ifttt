@@ -1,7 +1,7 @@
 // @flow
 
-const PYError = require('../errors/PYError.js');
-const db = require('../storage/database.js');
+const errors = require('../errors/factory');
+const db = require('../storage/database');
 const config = require('../utils/config');
 const request = require('superagent');
 const hat = require('hat');
@@ -54,16 +54,16 @@ module.exports = function setup(app: express$Application) {
     const redirect_uri = req.body.redirect_uri;
 
     if (client_id == null || client_id !== config.get('ifttt:clientId')) {
-      return next(PYError.contentError('Bad secret'));
+      return next(errors.contentError('Bad secret'));
     }
     if (client_secret == null || client_secret !== config.get('ifttt:secret')) {
-      return next(PYError.contentError('Bad secret'));
+      return next(errors.contentError('Bad secret'));
     }
     if (code == null) {
-      return next(PYError.contentError('Code missing'));
+      return next(errors.contentError('Code missing'));
     }
     if (redirect_uri == null) {
-      return next(PYError.contentError('code parameter missing'));
+      return next(errors.contentError('code parameter missing'));
     }
 
     /**
@@ -78,7 +78,7 @@ module.exports = function setup(app: express$Application) {
       const username = response.body.username;
       const pryvToken = response.body.token;
       if (response.body.username == null || response.body.token == null) {
-        return next(PYError.internalError('token from access'));
+        return next(errors.internalError('token from access'));
       }
 
       const urlEndpoint = buildUrl(username, domain);
@@ -102,9 +102,9 @@ module.exports = function setup(app: express$Application) {
         error.response.body != null &&
         error.response.body.status != 'ACCEPTED'
       ) {
-        return next(PYError.invalidToken());
+        return next(errors.invalidToken());
       }
-      return next(PYError.internalError('Error while talking with Pryv.io', '', error));
+      return next(errors.internalError('Error while talking with Pryv.io', '', error));
     }
 
   });
