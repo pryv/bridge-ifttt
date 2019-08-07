@@ -14,19 +14,19 @@ import type { Credentials } from '../types';
 
 module.exports = function setup(app: express$Application) {
 
-  app.post('/webhooks', async (req, res, next) => {
+  app.post('/webhooks', async (req: express$Request, res: express$Response, next: express$NextFunction) => {
 
     if (missingToken((req))) {
-      return next(errors.authentificationRequired('eorrr'));
+      return next(errors.authentificationRequired('missing IFTTT bearer auth token in query parameters', req.query));
     }
     const iftttToken: string = req.query.iftttToken;
     if (invalidType(iftttToken)) {
-      return next(errors.invalidToken('awdnaiwn'));
+      return next(errors.invalidToken('invalid token format', iftttToken));
     }
 
     const credentials: Credentials = await bluebird.fromCallback(cb => db.getSet(iftttToken, cb));
     if (credentials == null) {
-      return next(errors.invalidToken('awdnaiwn'));
+      return next(errors.invalidToken('cannot find credentials associated with provided IFTTT bearer token', iftttToken));
     }
 
     const payload = {
@@ -46,7 +46,9 @@ module.exports = function setup(app: express$Application) {
     } catch (error) {
       next(error);
     }
-    res.status(200).json({ok:1});
+    // response to Pryv webhooks service
+    // must be 2xx status, body does not matter
+    res.status(200).json({ok:1}); 
   });
 };
 

@@ -3,6 +3,7 @@ const domain = config.get('pryv:domain');
 
 module.exports = {
   userAccess: {
+    // old user
     username: 'ifttttest',
     pryvToken: 'cjxokdnpq00081ftuoz1gvyv3',
     oauthToken: 'OI2O98AHF9A',
@@ -11,6 +12,7 @@ module.exports = {
     id: 'ifttttest'
   },
   endpointAccess: {
+    // new user
     username: 'ifttttest2',
     urlEndpoint: makeUrl('ifttttest2', domain),
     pryvToken: 'cjy8nr1xd00153xtul5acmfhh',

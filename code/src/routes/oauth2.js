@@ -6,11 +6,11 @@ const config = require('../utils/config');
 const request = require('superagent');
 const hat = require('hat');
 
-
 const accessUrl: string = config.get('pryv:access');
+const domain: string = config.get('pryv:domain');
 
 const secretPath: string = config.get('oauth:secretPath');
-const domain: string = config.get('pryv:domain');
+
 const bridgeUrl: string = config.get('ifttt:bridgeUrl');
 
 module.exports = function setup(app: express$Application) {
@@ -46,24 +46,31 @@ module.exports = function setup(app: express$Application) {
   });
 
 
-  // Show them the exchange the bearer for a real token
+  /**
+   * 1. Verifies IFTTT's client_id and secret
+   * 2. Makes oAuth call to access/${code}
+   * 3. Retrieves Pryv.io credentials
+   * 4. Stores them as: new IFTTTtoken: credentials (urlEndpoint, pryvToken)
+   * 5. Create webhook with IFTTTtoken in query
+   * 6. Reply to IFTTT with new token
+   */
   app.post('/oauth2' + secretPath + '/token', async function (req: express$Request, res: express$Response, next: express$NextFunction) {
-    const code = req.body.code;
-    const client_id = req.body.client_id;
-    const client_secret = req.body.client_secret;
-    const redirect_uri = req.body.redirect_uri;
+    const code: number = req.body.code;
+    const client_id: string = req.body.client_id;
+    const client_secret: string = req.body.client_secret;
+    const redirect_uri: string = req.body.redirect_uri;
 
     if (client_id == null || client_id !== config.get('ifttt:clientId')) {
-      return next(errors.contentError('Bad secret'));
+      return next(errors.contentError('Bad or missing client_id', client_id));
     }
     if (client_secret == null || client_secret !== config.get('ifttt:secret')) {
-      return next(errors.contentError('Bad secret'));
+      return next(errors.contentError('Bad or missing client_secret', client_secret));
     }
     if (code == null) {
-      return next(errors.contentError('Code missing'));
+      return next(errors.contentError('Missing code'));
     }
     if (redirect_uri == null) {
-      return next(errors.contentError('code parameter missing'));
+      return next(errors.contentError('Missing redirect_uri'));
     }
 
     /**
@@ -75,16 +82,16 @@ module.exports = function setup(app: express$Application) {
     let response;
     try {
       response = await request.get(accessUrl + '/' + code);
-      const username = response.body.username;
-      const pryvToken = response.body.token;
+      const username: string = response.body.username;
+      const pryvToken: string = response.body.token;
       if (response.body.username == null || response.body.token == null) {
         return next(errors.internalError('token from access'));
       }
 
-      const urlEndpoint = buildUrl(username, domain);
+      const urlEndpoint: string = buildUrl(username, domain);
 
       const credentials = { urlEndpoint: urlEndpoint, pryvToken: pryvToken };
-      const oauthToken = hat();
+      const oauthToken: string = hat();
 
       response = await request.post(urlEndpoint + '/webhooks')
         .set('Authorization', pryvToken)
@@ -102,7 +109,7 @@ module.exports = function setup(app: express$Application) {
         error.response.body != null &&
         error.response.body.status != 'ACCEPTED'
       ) {
-        return next(errors.invalidToken());
+        return next(errors.invalidToken(error.response.body.message));
       }
       return next(errors.internalError('Error while talking with Pryv.io', '', error));
     }
@@ -110,6 +117,6 @@ module.exports = function setup(app: express$Application) {
   });
 };
 
-function buildUrl(username: string, domain: string) {
+function buildUrl(username: string, domain: string): string {
   return 'https://' + username + '.' + domain;
 }

@@ -7,6 +7,8 @@ const redis = require('redis').createClient(config.get('redis:port'));
 const async = require('async');
 const semver = require('semver');
 
+import type { Credentials } from '../types';
+
 //redis error management
 /**
  * redis.on('error', function (err) {
@@ -103,7 +105,7 @@ exports.get = function (key: string, callback: () => {}) {
 /**
  * simply map redis.hgetall
  */
-exports.getSet = function (key: string, callback: () => {}) {
+exports.getSet = function (key: string, callback: (err: ?Error, creds: ?Credentials) => {}) {
   redis.hgetall(key, callback);
 };
 

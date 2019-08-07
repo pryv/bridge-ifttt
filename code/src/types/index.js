@@ -3,8 +3,9 @@
 
 export type Credentials = {
   username: string,
-    urlEndpoint: string,
-      pryvToken: string
+  urlEndpoint: string,
+  pryvToken: string,
+  id: string, // IFTTT id: username for old, urlEndpoint for new
 };
 
 export type Stream = {

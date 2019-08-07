@@ -1,34 +1,18 @@
-const errors = require('../../errors/factory');
+// @flow
 
-const config = require('../../utils/config');
-const domain = config.get('pryv:domain');
+import type { Credentials } from '../../types';
 
-module.exports = function setup(app) {
+module.exports = function setup(app: express$Application) {
 
-// Return the user info
-  app.get('/ifttt/v1/user/info', function (req, res, next) {
-    const pryvCredentials = req.pryvCredentials;
-    if (! pryvCredentials) {
-      return next(errors.contentError('No authorization token'));
-    } else {
-      if (pryvCredentials.urlEndpoint != null) {
-        return res.json({
-          data: {
-            name: pryvCredentials.urlEndpoint,
-            id: pryvCredentials.urlEndpoint,
-            url: pryvCredentials.urlEndpoint,
-          }
-        });
-      } else {
-        return res.json({
-          data: {
-            name: pryvCredentials.username,
-            id: pryvCredentials.username,
-            url: 'https://' + pryvCredentials.username + '.' + domain
-          }
-        });
+  app.get('/ifttt/v1/user/info', function (req: express$Request, res: express$Response, next: express$NextFunction) {
+    const pryvCredentials: Credentials = req.pryvCredentials;
+    return res.json({
+      data: {
+        name: pryvCredentials.id,
+        id: pryvCredentials.id,
+        url: pryvCredentials.urlEndpoint
       }
-    }
+    });
   });
 };
 

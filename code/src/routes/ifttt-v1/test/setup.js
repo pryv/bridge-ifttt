@@ -11,7 +11,7 @@ module.exports = function setup(app) {
 
   // Show the current server status
   app.post('/ifttt/v1/test/setup', function (req, res, next) {
-    if (!req.iftttAuthorized) {
+    if (req.iftttAuthorized == null) {
       return next(errors.authentificationRequired('Auth key missing or invalid'));
     }
 

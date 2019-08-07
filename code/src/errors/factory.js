@@ -8,11 +8,11 @@ const PYError = require('./PYError');
 const factory = {};
 module.exports = factory;
 
-factory.authentificationRequired = (message: string, detail: string): PYError => {
+factory.authentificationRequired = (message: string, detail: ?string): PYError => {
   return new PYError(401, 'Authentification required: ' + message, detail);
 };
 
-factory.invalidToken = (message: string, detail: string): Error => {
+factory.invalidToken = (message: string, detail: ?string): Error => {
   return new PYError(401, 'Invalid token: ' + message, detail);
 };
 
