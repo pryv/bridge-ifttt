@@ -59,6 +59,5 @@ module.exports = function () {
   // error handler
   app.use(require('./middleware/errors'));
 
-
   return app;
 };

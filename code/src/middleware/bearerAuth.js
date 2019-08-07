@@ -11,7 +11,7 @@ import type { Credentials } from '../types';
  * 1. check Bearer IFTTT token in authorization header
  * 2. retrieve credentials based on IFTTT token key
  * 3. build urlEndpoint or username, wether it is one or the other
- * 4. save those in: req.pryvCredentials and req.pryvConnection
+ * 4. save those in: req.pryvCredentials
  */
 module.exports = function (req: express$Request, res: express$Response, next: express$NextFunction) {
 
