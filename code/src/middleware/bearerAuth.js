@@ -3,7 +3,6 @@ const errors = require('../errors/factory');
 const db = require('../storage/database');
 const config = require('../utils/config');
 
-const channelApiKey: string = config.get('ifttt:channelApiKey');
 const domain: string = config.get('pryv:domain');
 
 import type { Credentials } from '../types';
@@ -17,23 +16,11 @@ import type { Credentials } from '../types';
 module.exports = function (req: express$Request, res: express$Response, next: express$NextFunction) {
 
   const authHeader: ?string = req.get('Authorization');
-  
-  //---- test related part
-  if (authHeader == null) {    
-    const iftttChanelKey: ?string = req.get('IFTTT-Channel-Key');
-    if (iftttChanelKey == null) { //-- route /ifttt/v1/test/setup
-      return next();
-    }
-    if (iftttChanelKey !== channelApiKey) { 
-      return next(errors.authentificationRequired('IFTTT-Channel-Key header bad content'));
-    }
-    
-    req.iftttAuthorized = true;
-    return next();
+
+  // it was already checked
+  if (authHeader == null) {
+    return next(errors.authentificationRequired('Missing Authorization header'));
   }
-  //--- end of test related part
-
-
 
   const authParts: Array<string> = authHeader.split(' ');
   if (authParts.length !== 2) {

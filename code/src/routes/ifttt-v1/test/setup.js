@@ -17,7 +17,6 @@ module.exports = function setup(app) {
 
     db.setSet(testData.userAccess.oauthToken, testData.userAccess);
 
-
     const response = {
       data: {
         accessToken: testData.userAccess.oauthToken,

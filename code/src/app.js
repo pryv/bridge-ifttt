@@ -25,33 +25,39 @@ module.exports = function () {
     extended: false }));
   app.use(bodyParser.json());
 
-  //middleware
-  app.all('*', require('./middleware/debug.js'));
-  app.all('*', require('./middleware/bearerAuth.js'));
+  app.all('*', require('./middleware/debug'));
 
+  // no auth needed
+  require('./routes/oauth2')(app);
 
-  // routes
+  // implements own auth
   require('./routes/webhooks')(app);
-  require('./routes/oauth2.js')(app);
-  require('./routes/ifttt-v1/status.js')(app);
-  require('./routes/ifttt-v1/user.js')(app);
-  require('./routes/ifttt-v1/test/setup.js')(app);
 
+  // routes with IFTTT channel key auth auth
+  app.all('*', require('./middleware/iftttChannelKeyAuth'));
+  require('./routes/ifttt-v1/test/setup')(app);
+  require('./routes/ifttt-v1/status')(app);
+
+  // bearer auth header auth
+  app.all('*', require('./middleware/bearerAuth'));
+
+  require('./routes/ifttt-v1/user')(app);
+  
   // triggers
-  require('./routes/ifttt-v1/triggers/new-photo.js')(app);
-  require('./routes/ifttt-v1/triggers/new-note.js')(app);
-  require('./routes/ifttt-v1/triggers/new-numerical.js')(app);
-  require('./routes/ifttt-v1/triggers/new-file.js')(app);
+  require('./routes/ifttt-v1/triggers/new-photo')(app);
+  require('./routes/ifttt-v1/triggers/new-note')(app);
+  require('./routes/ifttt-v1/triggers/new-numerical')(app);
+  require('./routes/ifttt-v1/triggers/new-file')(app);
 
   // actions
-  require('./routes/ifttt-v1/actions/new-note.js')(app);
-  require('./routes/ifttt-v1/actions/new-photo.js')(app);
-  require('./routes/ifttt-v1/actions/new-numerical.js')(app);
-  require('./routes/ifttt-v1/actions/new-file.js')(app);
+  require('./routes/ifttt-v1/actions/new-note')(app);
+  require('./routes/ifttt-v1/actions/new-photo')(app);
+  require('./routes/ifttt-v1/actions/new-numerical')(app);
+  require('./routes/ifttt-v1/actions/new-file')(app);
   //require('./routes/ifttt-v1/actions/start-stop-activity.js')(app);
 
   // error handler
-  app.use(require('./middleware/errors.js'));
+  app.use(require('./middleware/errors'));
 
 
   return app;
