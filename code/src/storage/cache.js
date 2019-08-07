@@ -3,16 +3,16 @@
 const request = require('superagent');
 const db = require('./database.js');
 
-import type { Stream, PryvConnection } from '../types';
+import type { Stream, Credentials } from '../types';
 
 /**
  * Get a map with stream by their Stream ID
- * @param pryvConnection
+ * @param pryvCredentials
  * @param callback
  */
-function getStreamsMap(pryvConnection: PryvConnection, callback: (err: ?Error, map: ?{}) => {}) {
+function getStreamsMap(pryvCredentials: Credentials, callback: (err: ?Error, map: ?{}) => {}) {
 
-  getStreams(pryvConnection, function (error: ?Error, streamsArray: ?Array<Stream>) {
+  getStreams(pryvCredentials, function (error: ?Error, streamsArray: ?Array<Stream>) {
     if (error != null) { return callback(error, null); }
 
     const map = {};
@@ -33,21 +33,19 @@ exports.getStreamsMap = getStreamsMap;
 
 /**
  * "get Streams on connection and cache them"
- * @param pryvConnection
+ * @param pryvCredentials
  */
-function getStreams(pryvConnection: PryvConnection, callback: (err: ?Error, streams: ?Array<Stream>) => {}) {
+function getStreams(pryvCredentials: Credentials, callback: (err: ?Error, streams: ?Array<Stream>) => {}) {
   // -- check for cached streams on db
 
-  const pyConn: PryvConnection = pryvConnection;
-
-  const key: string = pyConn.username + ':' + pyConn.auth + ':streams';
+  const key: string = pryvCredentials.username + ':' + pryvCredentials.pryvToken + ':streams';
 
   db.getJSONCachedValue(key, function (error: ?Error, cachedStreams: ?Array<Stream>) {
     if (error != null) { return callback(error, null); }
     if (cachedStreams != null) { return callback(null, cachedStreams); }
 
-    request.get(pyConn.urlEndpoint + '/streams')
-      .set('Authorization', pyConn.auth)
+    request.get(pryvCredentials.urlEndpoint + '/streams')
+      .set('Authorization', pryvCredentials.pryvToken)
       .end(function (error, res) {
 
         if (error != null) {

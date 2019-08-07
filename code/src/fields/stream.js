@@ -5,7 +5,7 @@ const cache = require('../storage/cache');
 const constants =  require('../utils/constants');
 const config = require('../utils/config');
 
-import type { Stream } from '../types';
+import type { Stream, Credentials } from '../types';
 
 /**
  * output the streams options {data, value} array for this connection
@@ -25,7 +25,7 @@ exports.optionsStrict = function (req: express$Request, res: express$Response, n
 function streams(req: express$Request, res: express$Response, next: express$NextFunction, all: boolean) {
   all = all || false;
 
-  if (! req.pryvConnection) { return next(errors.authentificationRequired()); }
+  const pryvCredentials: Credentials = req.pryvCredentials;
 
   const result = { data : [ ] };
   if (all) {
@@ -42,7 +42,7 @@ function streams(req: express$Request, res: express$Response, next: express$Next
     });
   }
 
-  cache.getStreams(req.pryvConnection, function (error: ?Error, streamsArray: ?Array<Stream>): void {
+  cache.getStreams(pryvCredentials, function (error: ?Error, streamsArray: ?Array<Stream>): void {
     if (error != null) {
       return next(errors.internalError('Failed fetching streams', '', error));
     }

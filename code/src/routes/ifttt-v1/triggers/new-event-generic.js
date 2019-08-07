@@ -1,3 +1,5 @@
+// @flow
+
 const errors = require('../../../errors/factory');
 const constants = require('../../../utils/constants');
 const cache = require('../../../storage/cache');
@@ -7,6 +9,8 @@ const config = require('../../../utils/config');
 
 const request = require('superagent');
 
+import type { Credentials } from '../../../types';
+
 /**
  * Generic extraOption Handler
  * @param app
@@ -14,8 +18,8 @@ const request = require('superagent');
  * @param {String} route 'new-note'
  * @param {Function} doFunction function(req, res, next)
  */
-exports.addOption = function (app, optionKey, route, doFunction) {
-  const optionPath = versionPath + 'triggers/' + route + '/fields/' + optionKey + '/options';
+exports.addOption = function (app: express$Application, optionKey: string, route: string, doFunction: () => {}) {
+  const optionPath: string = versionPath + 'triggers/' + route + '/fields/' + optionKey + '/options';
   app.post(optionPath, doFunction);
 };
 
@@ -27,15 +31,14 @@ exports.addOption = function (app, optionKey, route, doFunction) {
  * @param {String | Function} dataType 'note/txt', if function it will return the required DataType
  * @param {Function} map function(event, eventData)
  */
-exports.setup = function (app, route, dataType, mapFunction) {
-  const triggerPath = versionPath + 'triggers/' + route;
+exports.setup = function (app: express$Application, route: string, dataType: string | () => {}, mapFunction: () => {}) {
+  const triggerPath: string = versionPath + 'triggers/' + route;
 
   app.post(triggerPath + '/fields/streamId/options', require('../../../fields/stream').options);
 
   app.post(triggerPath, function (req, res, next) {
     
-    if (! req.pryvConnection) { return next(errors.authentificationRequired()); }
-    const pyConn = req.pryvConnection;
+    const pryvCredentials: Credentials = req.pryvCredentials;
 
     const body = req.body;
 
@@ -48,7 +51,7 @@ exports.setup = function (app, route, dataType, mapFunction) {
       filterLike.limit = body.limit;
     }
 
-    if (! body.triggerFields) {
+    if (body.triggerFields == null) {
       return next(errors.contentError('No triggerFields'));
     }
     const triggerFields = body.triggerFields;
@@ -77,8 +80,8 @@ exports.setup = function (app, route, dataType, mapFunction) {
     }
 
     // -- fetch the events
-    request.get(pyConn.urlEndpoint + '/events')
-      .set('Authorization', pyConn.auth)
+    request.get(pryvCredentials.urlEndpoint + '/events')
+      .set('Authorization', pryvCredentials.pryvToken)
       .query(filterLike)
       .end(function (error, response) {
         
@@ -89,7 +92,7 @@ exports.setup = function (app, route, dataType, mapFunction) {
         const eventsArray = response.body.events;
 
         // -- get the streamsMap for the names
-        cache.getStreamsMap(req.pryvConnection, function (error, streamMap) {
+        cache.getStreamsMap(pryvCredentials, function (error, streamMap) {
           if (error != null) {
             return next(errors.internalError('Failed fetching streams from cache', error));
           }
@@ -102,8 +105,8 @@ exports.setup = function (app, route, dataType, mapFunction) {
               logger.error('trigger ' + route + ' get an event with type : ' + event.type);
             }  else {
 
-              let streamId =  event.streamId;
-              let streamName = '';
+              let streamId: string =  event.streamId;
+              let streamName: string = '';
               if (streamMap[streamId] && streamMap[streamId].name) {
                 streamName = streamMap[event.streamId].name;
               }
@@ -117,7 +120,7 @@ exports.setup = function (app, route, dataType, mapFunction) {
               };
 
               // we need `urlEndpoint` from this in mapFunction()
-              event.pyConn = pyConn;
+              event.pryvCredentials = pryvCredentials;
 
               //-- add extra informations
               mapFunction(event, eventData);

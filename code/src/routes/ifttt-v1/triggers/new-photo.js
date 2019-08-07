@@ -8,9 +8,9 @@ module.exports = function setup(app) {
       console.log('Skipping event ' + event.id + ' missing attachment data');
       return;
     }
-    const pyConn = event.pyConn;
+    const pryvCredentials = event.pryvCredentials;
     const attachment = event.attachments[0];
-    map.ImageURL = map.FileURL = buildAttachmentUrl(pyConn, event, attachment);
+    map.ImageURL = map.FileURL = buildAttachmentUrl(pryvCredentials, event, attachment);
   });
 };
 

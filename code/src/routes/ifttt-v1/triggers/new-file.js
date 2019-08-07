@@ -7,10 +7,10 @@ module.exports = function setup(app) {
       return;
     }
 
-    const pyConn = event.pyConn;
+    const pryvCredentials = event.pryvCredentials;
     const attachment = event.attachments[0];
 
-    map.FileURL = buildAttachmentUrl(pyConn, event, attachment);
+    map.FileURL = buildAttachmentUrl(pryvCredentials, event, attachment);
     map.FileName = event.attachments[0].fileName;
   });
 };

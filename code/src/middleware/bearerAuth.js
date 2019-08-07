@@ -21,10 +21,10 @@ module.exports = function (req: express$Request, res: express$Response, next: ex
   //---- test related part
   if (authHeader == null) {    
     const iftttChanelKey: ?string = req.get('IFTTT-Channel-Key');
-    if (iftttChanelKey == null) {
+    if (iftttChanelKey == null) { //-- route /ifttt/v1/test/setup
       return next();
     }
-    if (iftttChanelKey !== channelApiKey) { //-- route /ifttt/v1/test/setup
+    if (iftttChanelKey !== channelApiKey) { 
       return next(errors.authentificationRequired('IFTTT-Channel-Key header bad content'));
     }
     
@@ -70,12 +70,6 @@ module.exports = function (req: express$Request, res: express$Response, next: ex
     }
 
     req.pryvCredentials = credentials;
-    
-    req.pryvConnection = {
-      urlEndpoint: credentials.urlEndpoint,
-      auth: credentials.pryvToken,
-      username: credentials.username // for retro-compatibility, see cache
-    };
 
     next();
   });

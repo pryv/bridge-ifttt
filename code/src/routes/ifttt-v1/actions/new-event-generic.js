@@ -1,3 +1,5 @@
+// @flow
+
 const errors = require('../../../errors/factory');
 const PYError = require('../../../errors/PYError');
 const request = require('superagent');
@@ -6,6 +8,8 @@ const config = require('../../../utils/config');
 
 const createWithAttachment = require('../../../utils/createWithAttachment');
 
+import type { Credentials } from '../../../types';
+
 /**
  * Generic extraOption Handler
  * @param app
@@ -13,7 +17,7 @@ const createWithAttachment = require('../../../utils/createWithAttachment');
  * @param {String} route 'new-note'
  * @param {Function} doFunction function(req, res, next)
  */
-exports.addOption = function (app, optionKey, route, doFunction) {
+exports.addOption = function (app: express$Application, optionKey: string, route: string, doFunction: () => {}) {
   const optionPath = versionPath + 'actions/' + route + '/fields/' + optionKey + '/options';
   //console.log(optionPath);
   app.post(optionPath, doFunction);
@@ -23,33 +27,31 @@ exports.addOption = function (app, optionKey, route, doFunction) {
  * Generic wrapper for simple event-type based Triggers
  * @param app
  * @param {String} route 'new-note'
- * @param {Function} map function(pryvConnection, responseBody)
+ * @param {Function} map function(pryvCredentials, responseBody)
  */
-exports.setup = function setup(app, route, mapFunction) {
+exports.setup = function setup(app: express$Application, route: string, mapFunction: () => {}) {
   const triggerPath = versionPath + 'actions/' + route;
 
   app.post(triggerPath + '/fields/streamId/options',
     require('../../../fields/stream').optionsStrict);
 
-  app.post(triggerPath, function (req, res, next) {
+  app.post(triggerPath, function (req: express$Request, res: express$Response, next: express$NextFunction) {
 
-    if (! req.pryvConnection) { return next(errors.authentificationRequired()); }
-    const pyConn = req.pryvConnection;
+    const pryvCredentials: Credentials = req.pryvCredentials;    
 
-    if (! req.body.actionFields) {
+    const actionFields = req.body.actionFields;
+    if (actionFields == null) {
       return next(errors.contentError('Cannot find actionFields'));
     }
 
-    const actionFields = req.body.actionFields;
-
-    if (! actionFields.streamId) {
+    if (actionFields.streamId == null) {
       return next(errors.contentError('Cannot find actionFields.streamId'));
     }
 
 
     // --- streamId
-    const streamId = actionFields.streamId; //TODO check it's valid
-    const eventData = {streamId: streamId};
+    const streamId: string = actionFields.streamId; //TODO check it's valid
+    const eventData: {} = {streamId: streamId};
 
     // --- description
     if (typeof actionFields.description === 'undefined') {
@@ -64,7 +66,7 @@ exports.setup = function setup(app, route, mapFunction) {
     if (typeof actionFields.tags === 'undefined') {
       return next(errors.contentError('Cannot find actionFields.tags'));
     }
-    const tags = [];
+    const tags: Array<string> = [];
     actionFields.tags.split(',').forEach(function (tag) {
       const limit = 500;
       let cleanTag = tag.trim();
@@ -78,11 +80,11 @@ exports.setup = function setup(app, route, mapFunction) {
     }
 
     const event = eventData;
-    let detailMsg = '';
+    let detailMsg: string = '';
 
     // --- attachment (only supporting 1 for now)
     fetchAttachment(actionFields, function (error, toAttach) {
-      if (error) {
+      if (error != null) {
         detailMsg = ', cannot fetch attachment';
         return sendResponse(error);
       }
@@ -94,7 +96,7 @@ exports.setup = function setup(app, route, mapFunction) {
         if (toAttach != null) {
           detailMsg = 'with attachment';
 
-          const options = {
+          const options: {} = {
             contentType: toAttach.type,
             filename: toAttach.filename
           };
@@ -104,15 +106,15 @@ exports.setup = function setup(app, route, mapFunction) {
             console.log('creating event with attachment and data:', event);
           }
           
-          createWithAttachment(pyConn, event, data, options, sendResponse);
+          createWithAttachment(pryvCredentials, event, data, options, sendResponse);
 
         } else {
           if (config.get('debug:newEventAction')) {
             console.log('creating event with data:', event);
           }
 
-          request.post(pyConn.urlEndpoint + '/events')
-            .set('Authorization', pyConn.auth)
+          request.post(pryvCredentials.urlEndpoint + '/events')
+            .set('Authorization', pryvCredentials.pryvToken)
             .set('Content-type', 'application/json')
             .send(event)
             .end(sendResponse);
@@ -123,7 +125,7 @@ exports.setup = function setup(app, route, mapFunction) {
 
     // requires access to the express middleware's `res` Express$Response object.
     function sendResponse(error, response) {
-      if (error) {
+      if (error != null) {
         if (error instanceof PYError) {
           return next(error);
         }

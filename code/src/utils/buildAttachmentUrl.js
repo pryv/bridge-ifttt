@@ -2,11 +2,11 @@
 
 const url = require('url');
 
-import type { PryvConnection, Event, Attachment } from '../types';
+import type { Credentials, Event, Attachment } from '../types';
 
-module.exports = function(pyConn: PryvConnection, event: Event, attachment: Attachment) {
+module.exports = function (pryvCredentials: Credentials, event: Event, attachment: Attachment) {
   return url.resolve(
-    'https://' + pyConn.urlEndpoint,
+    'https://' + pryvCredentials.urlEndpoint,
     '/events/' + event.id + '/' + attachment.id + '?readToken=' + attachment.readToken
   );
 };
