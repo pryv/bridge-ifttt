@@ -69,8 +69,8 @@ module.exports = function setup(app: express$Application) {
         }
         return next(errors.internalError('Failed creating event '));
       }
-      const data = {data: [ {id: event.id} ]};
-      if (config.get('debug:newEventAction') != null) {
+      const data = {data: [ {id: event.id} ]};
+      if (config.get('debug:logNewEventAction') != null) {
         console.log('OK creating event ', data);
       }
       res.json(data);

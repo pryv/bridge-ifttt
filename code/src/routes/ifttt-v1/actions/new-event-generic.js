@@ -102,14 +102,14 @@ exports.setup = function setup(app: express$Application, route: string, mapFunct
           };
           const data = toAttach.data;
 
-          if (config.get('debug:newEventAction')) {
+          if (config.get('debug:logNewEventAction')) {
             console.log('creating event with attachment and data:', event);
           }
           
           createWithAttachment(pryvCredentials, event, data, options, sendResponse);
 
         } else {
-          if (config.get('debug:newEventAction')) {
+          if (config.get('debug:logNewEventAction')) {
             console.log('creating event with data:', event);
           }
 
@@ -129,14 +129,14 @@ exports.setup = function setup(app: express$Application, route: string, mapFunct
         if (error instanceof PYError) {
           return next(error);
         }
-        if (config.get('debug:newEventAction')) {
+        if (config.get('debug:logNewEventAction')) {
           console.log(error);
         }
         return next(errors.internalError('Failed creating event ', detailMsg, error));
       }
       const event = response.body.event;
       const data = { data: [{ id: event.id }] };
-      if (config.get('debug:newEventAction')) {
+      if (config.get('debug:logNewEventAction')) {
         console.log('OK creating event ' + detailMsg, data);
       }
       res.json(data);
@@ -163,7 +163,7 @@ function fetchAttachment(actionFields, done) {
     strictSSL: false
   };
 
-  if (config.get('debug:newEventAction')) {
+  if (config.get('debug:logNewEventAction')) {
     console.log(requestSettings);
   }
   request.get(actionFields.attachmentUrl).end(function (err, response) {

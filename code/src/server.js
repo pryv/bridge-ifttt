@@ -5,7 +5,7 @@ const logger = require('winston');
 const version = require('../../package.json').version;
 
 // send crashes to Airbrake service
-if (config.get('airbrake:disable') !== true) {
+if (config.get('airbrake:active')) {
   const airbrake = require('airbrake').createClient(config.get('airbrake:key'));
   airbrake.handleExceptions();
 }

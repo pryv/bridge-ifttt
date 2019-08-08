@@ -1,7 +1,7 @@
 // @flow
 
-const SHUSHLOG = require('../../src/utils/config').get(
-  'debug:shushPYInternalErrorLog'
+const logInternalError = require('../../src/utils/config').get(
+  'debug:PYInternalErrorLog'
 );
 const PYError = require('./PYError');
 
@@ -22,8 +22,8 @@ factory.internalError = (message: string, detail: ?string, errorForInternalUsage
     .replace(/^\s+at\s+/gm, '')
     .replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@')
     .split('\n');
-  if (!SHUSHLOG) {
-    // console.log(errorForInternalUsage, message, detail, stack);
+  if (logInternalError) {
+    console.log(errorForInternalUsage, message, detail, stack);
   }
   return new PYError(500, 'Internal Error: ' + message, detail);
 };

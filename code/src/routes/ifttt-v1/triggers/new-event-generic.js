@@ -127,7 +127,7 @@ exports.setup = function (app: express$Application, route: string, dataType: str
               data.push(eventData);
             }
           });
-          if (config.get('debug:newEventTrigger')) {
+          if (config.get('debug:logNewEventTrigger')) {
             console.log(data);
           }
           res.send({data : data});

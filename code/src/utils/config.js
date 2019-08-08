@@ -41,7 +41,7 @@ nconf.defaults({
     secret: 'setInHeadsetConfig',
     channelApiKey: 'setInHeadsetConfig',
     bridgeUrl: 'http://localhost', // override to https://ifttt.pryv.me
-    realtimeApiUrlEndpoint: 'https://realtime.ifttt.com/v1/notifications',
+    realtimeApiUrlEndpoint: 'https://realtime.ifttt.com/v1/notifications'
   },
   oauth: {
     secretPath: 'setElseWhere'
@@ -54,16 +54,16 @@ nconf.defaults({
     port: 7379
   },
   debug: {
-    shushPYInternalErrorLog: false,
-    shushReqUrlLog: true,
-    middlewareDebug: false,
-    oauth: false,
-    fieldsStreams: false,
-    newEventTrigger: false,
-    newEventAction: false
+    PYInternalErrorLog: false,
+    logReqUrl: false,
+    logFullRequest: false,
+    logOAuth: false,
+    logFieldsStreams: false,
+    logNewEventTrigger: false,
+    logNewEventAction: false
   },
   airbrake: {
-    disable: true,
+    active: false,
     key: 'changeme' // bridge-ifttt
   }
 });
