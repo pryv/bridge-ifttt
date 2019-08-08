@@ -12,9 +12,9 @@ Prerequisites:
 
 Fetch the dependencies using `yarn install`
 
-## Hacking
+## Usage
 
-Useful commands while working with this project: 
+Useful commands while working with this project:
 
 | Command                           | Purpose                           |
 | --------------------------------- | --------------------------------- |
