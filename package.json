@@ -12,10 +12,11 @@
   "scripts": {
     "start": "node dist/src/server.js",
     "test": "env debug=false node_modules/.bin/mocha 'dist/test/**/*.test.js'",
-    "build": "babel source/ -d lib/ --copy-files",
     "setup": "./scripts/setup-dev-environment.bash",
+    "release": "node_modules/.bin/babel code/ -d dist/ --copy-files",
     "watch": "node_modules/.bin/babel --watch=./code --out-dir=./dist --copy-files",
-    "database": "./scripts/start-database.sh "
+    "database": "./scripts/start-database.sh",
+    "lint": "node_modules/.bin/eslint code"
   },
   "dependencies": {
     "airbrake": "^2.1.0",
