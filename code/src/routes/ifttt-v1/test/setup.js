@@ -3,15 +3,11 @@ const errors = require('../../../errors/factory');
 const db = require('../../../storage/database');
 const config = require('../../../utils/config');
 
-let testData;
-if (config.get('pryv:domain') == 'pryv.li') {
-  testData = require('../../../../test/test-data');
-} else {
-  testData = {
-    urlEndpoint: 'https://ifttttest.pryv.me', // password = testuser
-    pryvToken: 'cjz4a7s84000j1hzrgew0d34g',
-    oauthToken: 'OI2O98JFOJAWEAHF9B'
-  };
+let testData = require('../../../../test/test-data');
+if (config.get('pryv:domain') != 'pryv.li') {
+  testData.userAccess.urlEndpoint = 'https://ifttttest.pryv.me'; // password = testuser
+  testData.userAccess.pryvToken = 'cjz4a7s84000j1hzrgew0d34g';
+  testData.userAccess.oauthToken = 'OI2O98JFOJAWEAHF9B';
 }
 
 /**
