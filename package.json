@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "node dist/src/server.js",
+    "start-prod": "./node_modules/.bin/forever dist/src/server.js --config /var/pryv/bridge-ifttt-pryv.me-config.json",
     "test": "env debug=false node_modules/.bin/mocha 'dist/test/**/*.test.js'",
     "setup": "./scripts/setup-dev-environment.bash",
     "release": "node_modules/.bin/babel code/ -d dist/ --copy-files",
@@ -24,6 +25,7 @@
     "bluebird": "^3.5.5",
     "body-parser": "1.15.0",
     "express": "^4.15.4",
+    "forever": "^3.0.2",
     "hat": "0.0.3",
     "lodash": "^4.17.4",
     "marked": "~0.3.6",
