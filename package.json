@@ -28,7 +28,7 @@
     "forever": "^3.0.2",
     "hat": "0.0.3",
     "lodash": "^4.17.4",
-    "marked": "~0.3.6",
+    "marked": "~0.3.18",
     "nconf": "0.8.x",
     "pryv": "https://github.com/pryv/lib-javascript.git#master",
     "readyness": "~0.1.0",
