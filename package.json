@@ -27,7 +27,7 @@
     "express": "^4.15.4",
     "forever": "^3.0.2",
     "hat": "0.0.3",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "marked": "~0.3.6",
     "nconf": "0.8.x",
     "pryv": "https://github.com/pryv/lib-javascript.git#master",
